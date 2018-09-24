@@ -1,0 +1,19 @@
+{
+    "name": "faizalami/laravel-mager",
+    "description": "Laravel Package for Design and Generate Ready to Use Application",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Faizal Amiruddin",
+            "email": "f.a.faizal.amiruddin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Faizalami\\LaravelMager\\": "src/"
+        }
+    }
+}

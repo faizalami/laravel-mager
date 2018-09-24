@@ -1,0 +1,36 @@
+.main-header .sidebar-toggle:before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f0c9";
+}
+
+
+/* Dashboard */
+.dashboard-logo {
+    width: 100%;
+}
+
+.dashboard-greeting {
+    margin-top: 0;
+}
+
+.dashboard-menu-icon {
+    margin-top: 30px;
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+    color: #fb503b;
+}
+
+.dashboard-menu-link {
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: medium;
+    color: #777;
+}
