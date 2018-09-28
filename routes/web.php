@@ -10,9 +10,40 @@ $namespace = 'Faizalami\LaravelMager\Http\Controllers';
 
 Route::group([
     'namespace' => $namespace,
-    'prefix' => config('laravel-mager.base_url'),
+    'prefix' => config('mager.base_url'),
+    'as' => 'mager.'
 ], function () {
 
-    Route::get('/', 'DashboardController@index');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    Route::group([
+        'prefix' => 'pages',
+        'as' => 'pages.'
+    ], function () {
+        Route::get('/', 'PagesManagerController@index')->name('index');
+    });
+
+    Route::group([
+        'prefix' => 'configuration',
+        'as' => 'configuration.'
+    ], function () {
+        Route::get('/theme', 'ProjectConfigurationController@theme')->name('theme');
+        Route::get('/navbar', 'ProjectConfigurationController@navbar')->name('navbar');
+        Route::get('/sidebar', 'ProjectConfigurationController@sidebar')->name('sidebar');
+    });
+
+    Route::group([
+        'prefix' => 'rest',
+        'as' => 'rest.'
+    ], function () {
+        Route::get('/', 'RestManagerController@index')->name('index');
+    });
+
+    Route::group([
+        'prefix' => 'database',
+        'as' => 'database.'
+    ], function () {
+        Route::get('/', 'DatabaseManagerController@index')->name('index');
+    });
 });
+

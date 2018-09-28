@@ -40,7 +40,7 @@ class LaravelMagerServiceProvider extends ServiceProvider
      */
     public function register() {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/laravel-mager.php', 'laravel-mager'
+            __DIR__.'/../config/laravel-mager.php', 'mager'
         );
     }
 

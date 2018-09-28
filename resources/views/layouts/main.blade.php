@@ -6,7 +6,22 @@
  * Time: 11:43
  */
 
-$breadcrumb = '';
+$activeMenu = [
+    'mager.pages.index' => '',
+    'mager.configuration.theme' => '',
+    'mager.configuration.navbar' => '',
+    'mager.configuration.sidebar' => '',
+    'mager.rest.index' => '',
+    'mager.database.index' => '',
+];
+
+$activeTree = '';
+
+if(strpos(Request::route()->getName(), 'mager.configuration.') !== false) {
+    $activeTree = 'active menu-open';
+}
+
+$activeMenu[Request::route()->getName()] = 'active';
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +36,8 @@ $breadcrumb = '';
     <title>@yield('title') | Laravel Mager</title>
 
     <!-- STYLES -->
-    @foreach(config('laravel-mager.css_assets') as $css_file)
-        <link rel="stylesheet" href="{{ asset(config('laravel-mager.public_path').$css_file) }}">
+    @foreach(config('mager.css_assets') as $css_file)
+        <link rel="stylesheet" href="{{ asset(config('mager.public_path').$css_file) }}">
     @endforeach
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,7 +64,7 @@ $breadcrumb = '';
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{ route('mager.dashboard') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>L</b>M</span>
             <!-- logo for regular state and mobile devices -->
@@ -90,8 +105,12 @@ $breadcrumb = '';
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
-                <li><a href="#"><i class="far fa-copy"></i> <span>Pages Manager</span></a></li>
-                <li class="treeview">
+                <li class="{{ $activeMenu['mager.pages.index'] }}">
+                    <a href="{{ route('mager.pages.index') }}">
+                        <i class="far fa-copy"></i> <span>Pages Manager</span>
+                    </a>
+                </li>
+                <li class="treeview {{ $activeTree }}">
                     <a href="#">
                         <i class="fas fa-cogs"></i> <span>Project Configuration</span>
                         <span class="pull-right-container">
@@ -99,13 +118,23 @@ $breadcrumb = '';
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="far fa-circle"></i> Theme</a></li>
-                        <li><a href="#"><i class="far fa-circle"></i> Navbar</a></li>
-                        <li><a href="#"><i class="far fa-circle"></i> Sidebar</a></li>
+                        <li class="{{ $activeMenu['mager.configuration.theme'] }}">
+                            <a href="{{ route('mager.configuration.theme') }}"><i class="far fa-circle"></i> Theme</a>
+                        </li>
+                        <li class="{{ $activeMenu['mager.configuration.navbar'] }}">
+                            <a href="{{ route('mager.configuration.navbar') }}"><i class="far fa-circle"></i> Navbar</a>
+                        </li>
+                        <li class="{{ $activeMenu['mager.configuration.sidebar'] }}">
+                            <a href="{{ route('mager.configuration.sidebar') }}"><i class="far fa-circle"></i> Sidebar</a>
+                        </li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="fas fa-server"></i> <span>REST Manager</span></a></li>
-                <li><a href="#"><i class="fas fa-database"></i> <span>Database Manager</span></a></li>
+                <li class="{{ $activeMenu['mager.rest.index'] }}">
+                    <a href="{{ route('mager.rest.index') }}"><i class="fas fa-server"></i> <span>REST Manager</span></a>
+                </li>
+                <li class="{{ $activeMenu['mager.database.index'] }}">
+                    <a href="{{ route('mager.database.index') }}"><i class="fas fa-database"></i> <span>Database Manager</span></a>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -121,7 +150,7 @@ $breadcrumb = '';
                 @yield('title')
             </h1>
             <ol class="breadcrumb">
-                @if($breadcrumb != '')
+                @if(isset($breadcrumb))
                     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                     <li class="active">{{ $breadcrumb }}</li>
                 @else
@@ -150,8 +179,8 @@ $breadcrumb = '';
 
 
 <!-- SCRIPTS -->
-@foreach(config('laravel-mager.js_assets') as $js_file)
-    <script src="{{ asset(config('laravel-mager.public_path').$js_file) }}"></script>
+@foreach(config('mager.js_assets') as $js_file)
+    <script src="{{ asset(config('mager.public_path').$js_file) }}"></script>
 @endforeach
 <!-- /SCRIPTS -->
 <!--Custom scripts-->

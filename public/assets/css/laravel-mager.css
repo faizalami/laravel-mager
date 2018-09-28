@@ -1,3 +1,4 @@
+/* Global */
 .main-header .sidebar-toggle:before {
     display: inline-block;
     font-style: normal;
@@ -10,12 +11,14 @@
 }
 
 
-/* Dashboard */
-.dashboard-logo {
+/* Dashboard and Coming Soon */
+.dashboard-logo,
+.coming-soon-logo{
     width: 100%;
 }
 
-.dashboard-greeting {
+.dashboard-greeting,
+.coming-soon-greeting{
     margin-top: 0;
 }
 
@@ -33,4 +36,21 @@
     display: block;
     font-size: medium;
     color: #777;
+}
+
+.coming-soon-header {
+    margin-top: 25px;
+}
+
+/* Pages Manager */
+.btn-new-controller:hover {
+    background-color: #367fa9 !important;
+}
+
+.box-list-controller>.box-default>.box-header {
+    background-color: #f7f7f7;
+}
+
+.box-list-controller>.box-default>.panel-collapse>.list-group>.list-group-item.controller-action {
+    background-color: #fafafa;
 }

@@ -15,7 +15,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-2 col-md-offset-5 col-xs-12">
-        <img class="dashboard-logo" src="{{ asset(config('laravel-mager.public_path').'assets/img/laravel-mager-logo.png') }}" alt="">
+        <img class="dashboard-logo" src="{{ asset(config('mager.public_path').'assets/img/laravel-mager-logo.png') }}" alt="">
     </div>
     <div class="col-md-12 col-xs-12">
         <h3 class="text-center dashboard-greeting">Welcome to Laravel Mager</h3>
