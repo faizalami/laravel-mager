@@ -15,4 +15,8 @@ class PagesManagerController extends Controller
     public function index() {
         return view('mager::pages.pages-manager.index');
     }
+
+    public function guiBuilder() {
+        return view('mager::pages.pages-manager.gui-builder');
+    }
 }

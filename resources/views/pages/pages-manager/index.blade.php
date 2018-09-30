@@ -66,7 +66,7 @@
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="#">New Page <i class="far fa-file"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
                                         </span>
                                     </li>
                                 </ul>
@@ -114,7 +114,7 @@
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="#">New Page <i class="far fa-file"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
                                         </span>
                                     </li>
                                 </ul>
@@ -162,7 +162,7 @@
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="#">New Page <i class="far fa-file"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
                                         </span>
                                     </li>
                                 </ul>

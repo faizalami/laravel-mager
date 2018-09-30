@@ -9,7 +9,7 @@
     font-weight: 900;
     content: "\f0c9";
 }
-
+/* END Global*/
 
 /* Dashboard and Coming Soon */
 .dashboard-logo,
@@ -41,6 +41,7 @@
 .coming-soon-header {
     margin-top: 25px;
 }
+/* END Dashboard & Coming Soon*/
 
 /* Pages Manager */
 .btn-new-controller:hover {
@@ -54,3 +55,121 @@
 .box-list-controller>.box-default>.panel-collapse>.list-group>.list-group-item.controller-action {
     background-color: #fafafa;
 }
+/* END Pages Manager */
+
+/* GUI Builder */
+.component-sidebar,
+.property-sidebar {
+    position: fixed;
+    width: 230px;
+    height: 100%;
+    top: 0;
+    padding: 50px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #222d32;
+    color: #b8c7ce;
+    z-index: 500;
+}
+
+.component-sidebar {
+    left: -230px;
+    transition: left .3s ease-in-out;
+}
+
+.component-sidebar.active {
+    left: 0;
+}
+
+.property-sidebar {
+    right: -230px;
+    transition: right .3s ease-in-out;
+}
+
+.property-sidebar.active {
+    right: 0;
+}
+
+.gui-builder-sidebar-heading {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0 10px 15px;
+    margin-bottom: 10px;
+}
+
+.sidebar-item {
+    padding: 12px 5px 12px 15px;
+    width: 100%;
+}
+
+.sidebar-item:hover {
+    background-color: #1e282c;
+}
+
+.property-sidebar .form-horizontal .control-label {
+    font-weight: normal;
+    text-align: left !important;
+}
+
+.property-sidebar .form-group {
+    margin-bottom: 0 !important;
+}
+
+.drawing-container {
+    height: 100%;
+    padding: 10px 15px 15px 15px;
+    border-radius: 10px;
+    background-color: #404446;
+}
+
+.drawing-area {
+    width: 100%;
+    min-height: 350px;
+    padding: 5px 0;
+    background-color: #ffffff;
+}
+
+.drawing-area-header {
+    margin-bottom: 10px;
+}
+
+.page-name {
+    color: #ffffff;
+}
+
+.page-name,
+.page-control {
+    display: inline-block;
+}
+
+.page-control .control-circle {
+    width: 10px;
+    height: 10px;
+    margin: 0 1px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dropped-component,
+.place
+{
+    display: block;
+    opacity: 1;
+    padding: 0 5px;
+}
+
+.dropped-component.preview {
+    opacity: 0.5;
+}
+
+.dropped-component.hide {
+    display: none;
+}
+
+.sidebar-item.ui-draggable.ui-draggable-dragging {
+    color: #ffffff;
+    width: 100px;
+    z-index: 1000;
+    background-color: #1e282c;
+}
+/* END GUI Builder*/

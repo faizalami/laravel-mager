@@ -24,41 +24,9 @@ if(strpos(Request::route()->getName(), 'mager.configuration.') !== false) {
 $activeMenu[Request::route()->getName()] = 'active';
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+@extends('mager::layouts.html-base')
 
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
-    <title>@yield('title') | Laravel Mager</title>
-
-    <!-- STYLES -->
-    @foreach(config('mager.css_assets') as $css_file)
-        <link rel="stylesheet" href="{{ asset(config('mager.public_path').$css_file) }}">
-    @endforeach
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-    <!-- Custom Style -->
-    <style>
-
-    </style>
-    <!-- /Custom Style -->
-</head>
-<!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
-<!-- the fixed layout is not compatible with sidebar-mini -->
-<body class="hold-transition skin-red fixed sidebar-mini @yield('page-id')">
+@section('body')
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -144,6 +112,7 @@ $activeMenu[Request::route()->getName()] = 'active';
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -167,26 +136,7 @@ $activeMenu[Request::route()->getName()] = 'active';
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2018 <a href="https://github.com/faizalami/laravel-mager">Laravel-Mager</a>.</strong> All rights
-        reserved.
-    </footer>
+    @include('mager::layouts.footer')
 </div>
 <!-- ./wrapper -->
-
-
-<!-- SCRIPTS -->
-@foreach(config('mager.js_assets') as $js_file)
-    <script src="{{ asset(config('mager.public_path').$js_file) }}"></script>
-@endforeach
-<!-- /SCRIPTS -->
-<!--Custom scripts-->
-<script>
-
-</script>
-<!--/Custom scripts-->
-</body>
-</html>
+@endsection
