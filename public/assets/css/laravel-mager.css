@@ -151,26 +151,26 @@
     display: inline-block;
 }
 
-.dropped-component,
-.place
+.component-container {
+    transition: width,opacity .3s ease-in-out;
+}
+
+.drag-component,
+.place-component
 {
     display: block;
-    opacity: 1;
     padding: 0 5px;
 }
 
-.dropped-component.preview {
+.place-component {
+    opacity: 1 !important;
+    width: 100% !important;
+    background-color: unset !important;
+}
+
+.drag-component {
     opacity: 0.5;
-}
-
-.dropped-component.hide {
-    display: none;
-}
-
-.sidebar-item.ui-draggable.ui-draggable-dragging {
-    color: #ffffff;
-    width: 100px;
-    z-index: 1000;
-    background-color: #1e282c;
+    width: 200px;
+    background-color: #ffffff;
 }
 /* END GUI Builder*/
