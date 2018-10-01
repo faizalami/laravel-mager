@@ -25,19 +25,19 @@ $(document).ready(function () {
         helper: 'clone',
         containment: 'body',
         appendTo: 'body',
-        drag: function () {
-            var $clone = $('.sidebar-item.ui-draggable.ui-draggable-dragging');
-            if(checkCloneOver($clone, dropArea)) {
-                console.log('masuk');
-                $('.dropped-component').html($('#'+$(this).data('type')).html()).removeClass('hide').addClass('preview');
+        start: function(event, ui) {
+            $('.dropped-component').html($('#template-'+$(ui.helper).data('type')).html());
+        },
+        drag: function (event, ui) {
+            console.log('dragging');
+            if(checkCloneOver(ui.helper, dropArea)) {
+                $('.dropped-component').removeClass('hide').addClass('preview');
             } else {
-                console.log('keluar');
                 $('.dropped-component').removeClass('preview').addClass('hide');
             }
         },
-        stop: function () {
-            var $clone = $('.sidebar-item.ui-draggable.ui-draggable-dragging');
-            if(checkCloneOver($clone, dropArea)) {
+        stop: function (event, ui) {
+            if(checkCloneOver(ui.helper, dropArea)) {
                 console.log('tampil');
                 $('.dropped-component')
                     .addClass('place')

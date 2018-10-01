@@ -124,9 +124,10 @@
 
 .drawing-area {
     width: 100%;
-    min-height: 350px;
+    height: 65vh;
     padding: 5px 0;
     background-color: #ffffff;
+    overflow-y: auto;
 }
 
 .drawing-area-header {

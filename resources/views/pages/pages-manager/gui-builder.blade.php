@@ -32,23 +32,23 @@
 
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{ route('mager.pages.index') }}"><i class="fas fa-arrow-left"> Back</i></a>
+                        <a href="{{ route('mager.pages.index') }}"><i class="fas fa-arrow-left"></i> Back</a>
                     </li>
                     <li>
-                        <a href="#" id="open-component-sidebar"><i class="fas fa-cogs"> Components</i></a>
+                        <a href="#" id="open-component-sidebar"><i class="fas fa-list-alt"></i> Components</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fas fa-cogs"> Page Property</i></a>
+                        <a href="#"><i class="fas fa-wrench"></i> Page Property</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fas fa-eye"> Page Preview</i></a>
+                        <a href="#"><i class="fas fa-eye"></i> Page Preview</a>
                     </li>
                 </ul>
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#" id="open-property-sidebar"><i class="fas fa-cogs"> Properties</i></a>
+                            <a href="#" id="open-property-sidebar"><i class="fas fa-cogs"></i> Properties</a>
                         </li>
                     </ul>
                 </div>
@@ -67,8 +67,8 @@
                             <div class="drawing-area-header">
                                 <div class="page-name">Page Name</div>
                                 <div class="page-control pull-right">
-                                    <div class="control-circle bg-yellow"></div>
                                     <div class="control-circle bg-green"></div>
+                                    <div class="control-circle bg-yellow"></div>
                                     <div class="control-circle bg-red"></div>
                                 </div>
                             </div>
@@ -140,39 +140,39 @@
     <div class="dropped-component hide"></div>
 </template>
 
-<template id="label">
+<template id="template-label">
     <label>Label Text</label>
 </template>
 
-<template id="textbox">
+<template id="template-textbox">
     <div class="form-group">
         <label for="textbox">Textbox Label</label>
         <input type="text" class="form-control" id="textbox" placeholder="Textbox placeholder">
     </div>
 </template>
 
-<template id="numberbox">
+<template id="template-numberbox">
     <div class="form-group">
         <label for="numberbox">Numberbox Label</label>
         <input type="number" class="form-control" id="numberbox" placeholder="Numberbox placeholder">
     </div>
 </template>
 
-<template id="emailbox">
+<template id="template-emailbox">
     <div class="form-group">
         <label for="emailbox">Emailbox Label</label>
         <input type="email" class="form-control" id="emailbox" placeholder="Emailbox placeholder">
     </div>
 </template>
 
-<template id="passwordbox">
+<template id="template-passwordbox">
     <div class="form-group">
         <label for="passwordbox">Passwordbox Label</label>
         <input type="email" class="form-control" id="passwordbox" placeholder="Passwordbox placeholder">
     </div>
 </template>
 
-<template id="button">
+<template id="template-button">
     <div class="form-group">
         <button class="btn btn-default">Button</button>
     </div>
