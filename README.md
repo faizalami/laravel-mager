@@ -24,3 +24,11 @@ $ composer require faizalami/laravel-mager
 ```bash
 $ php artisan vendor:publish --provider="Faizalami\LaravelMager\LaravelMagerServiceProvider"
 ```
+
+#### Run the laravel project
+```bash
+$ php artisan serve
+```
+
+#### Open Laravel-Mager
+`http://host:port/laravel-mager`
