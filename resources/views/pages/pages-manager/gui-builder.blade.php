@@ -13,7 +13,7 @@
 @section('page-id', 'gui-builder')
 
 @section('additional-styles')
-    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'jquery-ui-1.12.1.draggable-only/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
 @endsection
 
 @section('body')
@@ -63,8 +63,8 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-8 col-md-offset-2 drawing-container">
-                            <div class="drawing-area-header">
+                        <div class="col-md-10 col-md-offset-1 drawing-container">
+                            <div class="drawing-area-header" id="page">
                                 <div class="page-name">Page Name</div>
                                 <div class="page-control pull-right">
                                     <div class="control-circle bg-green"></div>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="drawing-area">
-                                <div class="dropped-component hide"></div>
+
                             </div>
                         </div>
                     </div>
@@ -102,81 +102,16 @@
     <!-- .property-sidebar -->
     <aside class="property-sidebar active">
         <h3 class="gui-builder-sidebar-heading">General Properties</h3>
-        <form class="form-horizontal">
-            <div class="sidebar-item">
-                <div class="form-group">
-                    <label for="inputId" class="col-sm-6 control-label">ID</label>
-
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="inputId" placeholder="ID">
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar-item">
-                <div class="form-group">
-                    <label for="inputMinLength" class="col-sm-6 control-label">Min Length</label>
-
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" id="inputMinLength" placeholder="Min Length">
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar-item">
-                <div class="form-group">
-                    <label for="inputMaxLength" class="col-sm-6 control-label">Max Length</label>
-
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" id="inputMaxLength" placeholder="Max Length">
-                    </div>
-                </div>
-            </div>
+        <form class="form-horizontal" id="properties-form">
         </form>
     </aside>
     <!-- /.property-sidebar -->
 </div>
 <!-- ./wrapper -->
 
-<template id="template-component">
-    <div class="drag-component component-container"></div>
-</template>
+@include('mager::layouts.component-templates')
 
-<template id="template-label">
-    <label>Label Text</label>
-</template>
-
-<template id="template-textbox">
-    <div class="form-group">
-        <label for="textbox">Textbox Label</label>
-        <input type="text" class="form-control" id="textbox" placeholder="Textbox placeholder">
-    </div>
-</template>
-
-<template id="template-numberbox">
-    <div class="form-group">
-        <label for="numberbox">Numberbox Label</label>
-        <input type="number" class="form-control" id="numberbox" placeholder="Numberbox placeholder">
-    </div>
-</template>
-
-<template id="template-emailbox">
-    <div class="form-group">
-        <label for="emailbox">Emailbox Label</label>
-        <input type="email" class="form-control" id="emailbox" placeholder="Emailbox placeholder">
-    </div>
-</template>
-
-<template id="template-passwordbox">
-    <div class="form-group">
-        <label for="passwordbox">Passwordbox Label</label>
-        <input type="email" class="form-control" id="passwordbox" placeholder="Passwordbox placeholder">
-    </div>
-</template>
-
-<template id="template-button">
-    <div class="form-group">
-        <button class="btn btn-default">Button</button>
-    </div>
-</template>
+@include('mager::layouts.properties-template')
 
 @endsection
 

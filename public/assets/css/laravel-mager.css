@@ -132,6 +132,7 @@
 
 .drawing-area-header {
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .page-name {
@@ -166,11 +167,28 @@
     opacity: 1 !important;
     width: 100% !important;
     background-color: unset !important;
+    transition: background-color .3s ease-in-out;
+}
+
+.place-component:hover {
+    cursor: move;
+    background-color: #f3f3f3 !important;
 }
 
 .drag-component {
     opacity: 0.5;
     width: 200px;
     background-color: #ffffff;
+}
+
+.component-buttons {
+    position: absolute;
+    right: 20px;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.place-component:hover .component-buttons {
+    opacity: 1;
 }
 /* END GUI Builder*/
