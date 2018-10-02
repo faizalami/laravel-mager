@@ -116,6 +116,8 @@
 @endsection
 
 @section('additional-scripts')
+    <script src="{{ asset(config('mager.public_path').'sugarjs/sugar.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'jquerymy/jquerymy.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'assets/js/gui-builder.js') }}"></script>
 @endsection

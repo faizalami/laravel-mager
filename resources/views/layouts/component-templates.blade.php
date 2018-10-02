@@ -18,39 +18,39 @@
 </template>
 
 <template id="template-label">
-    <label>Label Text</label>
+    <label class="component-label">Label Text</label>
 </template>
 
 <template id="template-textbox">
     <div class="form-group">
-        <label>Textbox Label</label>
-        <input type="text" class="form-control" placeholder="Textbox placeholder">
+        <label class="component-label">Textbox Label</label>
+        <input type="text" class="form-control component-input" placeholder="Textbox placeholder">
     </div>
 </template>
 
 <template id="template-numberbox">
     <div class="form-group">
-        <label>Numberbox Label</label>
-        <input type="number" class="form-control" placeholder="Numberbox placeholder">
+        <label class="component-label">Numberbox Label</label>
+        <input type="number" class="form-control component-input" placeholder="Numberbox placeholder">
     </div>
 </template>
 
 <template id="template-emailbox">
     <div class="form-group">
-        <label>Emailbox Label</label>
-        <input type="email" class="form-control" placeholder="Emailbox placeholder">
+        <label class="component-label">Emailbox Label</label>
+        <input type="email" class="form-control component-input" placeholder="Emailbox placeholder">
     </div>
 </template>
 
 <template id="template-passwordbox">
     <div class="form-group">
-        <label>Passwordbox Label</label>
-        <input type="password" class="form-control" placeholder="Passwordbox placeholder">
+        <label class="component-label">Passwordbox Label</label>
+        <input type="password" class="form-control component-input" placeholder="Passwordbox placeholder">
     </div>
 </template>
 
 <template id="template-button">
     <div class="form-group">
-        <button class="btn btn-default">Button</button>
+        <button class="btn btn-default component-button">Button</button>
     </div>
 </template>
