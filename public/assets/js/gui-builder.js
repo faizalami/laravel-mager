@@ -6,7 +6,8 @@ const componentProperties = {
         },
         text: {
             label: 'Text',
-            type: 'textbox'
+            type: 'textbox',
+            default: 'Page Name'
         },
     },
     label: {
@@ -16,13 +17,19 @@ const componentProperties = {
         },
         text: {
             label: 'Text',
-            type: 'textarea'
+            type: 'textarea',
+            default: 'Label Text'
         },
     },
     textbox: {
         id: {
             label: 'ID',
             type: 'textbox'
+        },
+        label: {
+            label: 'Label',
+            type: 'textbox',
+            default: 'Textbox Label'
         },
         name: {
             label: 'Name',
@@ -48,6 +55,11 @@ const componentProperties = {
             label: 'ID',
             type: 'textbox'
         },
+        label: {
+            label: 'Label',
+            type: 'textbox',
+            default: 'Numberbox Label'
+        },
         name: {
             label: 'Name',
             type: 'textbox'
@@ -72,6 +84,11 @@ const componentProperties = {
             label: 'ID',
             type: 'textbox'
         },
+        label: {
+            label: 'Label',
+            type: 'textbox',
+            default: 'Emailbox Label'
+        },
         name: {
             label: 'Name',
             type: 'textbox'
@@ -95,6 +112,11 @@ const componentProperties = {
         id: {
             label: 'ID',
             type: 'textbox'
+        },
+        label: {
+            label: 'Label',
+            type: 'textbox',
+            default: 'Passwordbox Label'
         },
         name: {
             label: 'Name',
@@ -122,7 +144,8 @@ const componentProperties = {
         },
         text: {
             label: 'Text',
-            type: 'textbox'
+            type: 'textbox',
+            default: 'Button'
         },
     },
 };
@@ -130,7 +153,7 @@ const componentProperties = {
 $(document).ready(function () {
     var defaultIds = {};
 
-    displayProperties(componentProperties.page, '#page', 'page');
+    displayProperties(componentProperties.page, 'page', 'page');
 
     $('#open-component-sidebar').click(function () {
         $('.component-sidebar').toggleClass('active');
@@ -195,7 +218,7 @@ $(document).ready(function () {
     });
 
     $('.drawing-area-header').click(function () {
-        displayProperties(componentProperties.page, '#page', 'page');
+        displayProperties(componentProperties.page, 'page', 'page');
     });
 
     function displayProperties(component, object, type) {
@@ -206,12 +229,23 @@ $(document).ready(function () {
             'type': type
         }).html('');
 
+        var model = {}, binding = {}, ids = [];
+
         _.forEach(component, function (item, key) {
             var $loadTemplate = $($('#template-property-input').html());
 
             var $loadInput = $($('#template-property-'+item.type).html());
 
             var value = item.default !== undefined ? item.default : '';
+
+            if(key === 'id') {
+                value = object;
+            }
+
+            model[key] = value;
+
+            binding['#'+key] = key;
+            ids.push('#'+key);
 
             $loadInput.prop({
                 'id': key,
@@ -227,5 +261,67 @@ $(document).ready(function () {
 
             $properties.append($loadTemplate);
         });
+
+        switch (type) {
+            case 'page':
+                binding['#' + object] = {
+                    bind: function (data, value, $control) {
+                        $control.prop('id', data.id)
+                            .find('.page-name').html(data.text);
+                    },
+                    watch: ids.join(', ')
+                };
+                break;
+            case 'label':
+                binding['#' + object] = {
+                    bind: function (data, value, $control) {
+                        $control.prop('id', data.id)
+                            .find('.component-label').html(data.text);
+                    },
+                    watch: ids.join(', ')
+                };
+                break;
+            case 'textbox':
+            case 'numberbox':
+            case 'emailbox':
+            case 'passwordbox':
+                binding['#' + object] = {
+                    bind: function (data, value, $control) {
+                        $control.prop('id', data.id);
+                        $control.find('.component-label')
+                            .html(data.label);
+                        $control.find('.component-input')
+                            .prop({
+                                'name': data.name,
+                                'placeholder': data.label,
+                                'minlength': data.minLength,
+                                'maxlength': data.maxLength,
+                            }).val(data.value);
+                    },
+                    watch: ids.join(', ')
+                };
+                break;
+            case 'button':
+                binding['#' + object] = {
+                    bind: function (data, value, $control) {
+                        $control.prop('id', data.id)
+                            .find('.component-button').html(data.text);
+                    },
+                    watch: ids.join(', ')
+                };
+                break;
+            default:
+                binding['#' + object] = {
+                    bind: function (data, value, $control) {
+                        console.log(data);
+                    },
+                    watch: ids.join(', ')
+                };
+                break;
+        }
+
+        var $guiBuilder = $('.gui-builder');
+        $guiBuilder.my('remove');
+        $guiBuilder.my({ui: binding}, model);
     }
 });
