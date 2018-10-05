@@ -1,0 +1,5 @@
+# All public files
+public/*
+
+# Except assets directory
+!public/assets/*
