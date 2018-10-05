@@ -4,10 +4,10 @@ const componentProperties = {
             label: 'ID',
             type: 'textbox'
         },
-        text: {
+        title: {
             label: 'Text',
             type: 'textbox',
-            default: 'Page Name'
+            value: 'Page Name'
         },
     },
     label: {
@@ -18,7 +18,7 @@ const componentProperties = {
         text: {
             label: 'Text',
             type: 'textarea',
-            default: 'Label Text'
+            value: 'Label Text'
         },
     },
     textbox: {
@@ -29,7 +29,7 @@ const componentProperties = {
         label: {
             label: 'Label',
             type: 'textbox',
-            default: 'Textbox Label'
+            value: 'Textbox Label'
         },
         name: {
             label: 'Name',
@@ -42,12 +42,12 @@ const componentProperties = {
         minLength: {
             label: 'Min Length',
             type: 'numberbox',
-            default: 0
+            value: 0
         },
         maxLength: {
             label: 'Max Length',
             type: 'numberbox',
-            default: 255
+            value: 255
         },
     },
     numberbox: {
@@ -58,7 +58,7 @@ const componentProperties = {
         label: {
             label: 'Label',
             type: 'textbox',
-            default: 'Numberbox Label'
+            value: 'Numberbox Label'
         },
         name: {
             label: 'Name',
@@ -71,12 +71,12 @@ const componentProperties = {
         minLength: {
             label: 'Min Length',
             type: 'numberbox',
-            default: 0
+            value: 0
         },
         maxLength: {
             label: 'Max Length',
             type: 'numberbox',
-            default: 255
+            value: 255
         },
     },
     emailbox: {
@@ -87,7 +87,7 @@ const componentProperties = {
         label: {
             label: 'Label',
             type: 'textbox',
-            default: 'Emailbox Label'
+            value: 'Emailbox Label'
         },
         name: {
             label: 'Name',
@@ -100,12 +100,12 @@ const componentProperties = {
         minLength: {
             label: 'Min Length',
             type: 'numberbox',
-            default: 0
+            value: 0
         },
         maxLength: {
             label: 'Max Length',
             type: 'numberbox',
-            default: 255
+            value: 255
         },
     },
     passwordbox: {
@@ -116,7 +116,7 @@ const componentProperties = {
         label: {
             label: 'Label',
             type: 'textbox',
-            default: 'Passwordbox Label'
+            value: 'Passwordbox Label'
         },
         name: {
             label: 'Name',
@@ -129,12 +129,12 @@ const componentProperties = {
         minLength: {
             label: 'Min Length',
             type: 'numberbox',
-            default: 0
+            value: 0
         },
         maxLength: {
             label: 'Max Length',
             type: 'numberbox',
-            default: 255
+            value: 255
         },
     },
     button: {
@@ -145,9 +145,15 @@ const componentProperties = {
         text: {
             label: 'Text',
             type: 'textbox',
-            default: 'Button'
+            value: 'Button'
         },
     },
+};
+
+var savedProperties = {
+    id: 'page',
+    title: 'Page Name',
+    components: []
 };
 
 $(document).ready(function () {
@@ -218,7 +224,11 @@ $(document).ready(function () {
     });
 
     $('.drawing-area-header').click(function () {
-        displayProperties(componentProperties.page, 'page', 'page');
+        displayProperties(componentProperties.page, $(this).prop('id'), 'page');
+    });
+
+    $('.property-sidebar').on('focus', 'input[type=text], input[type=number], textarea', function () {
+        $(this).select();
     });
 
     function displayProperties(component, object, type) {
@@ -231,12 +241,24 @@ $(document).ready(function () {
 
         var model = {}, binding = {}, ids = [];
 
+        if(type === 'page') {
+            component.id.value = savedProperties.id;
+            component.title.value = savedProperties.title;
+        } else {
+            var objectProperties = savedProperties.components[object];
+            if(objectProperties !== undefined) {
+                _.forEach(component, function (item, key) {
+                    item.value = objectProperties[key];
+                })
+            }
+        }
+
         _.forEach(component, function (item, key) {
             var $loadTemplate = $($('#template-property-input').html());
 
             var $loadInput = $($('#template-property-'+item.type).html());
 
-            var value = item.default !== undefined ? item.default : '';
+            var value = item.value !== undefined ? item.value : '';
 
             if(key === 'id') {
                 value = object;
@@ -266,8 +288,11 @@ $(document).ready(function () {
             case 'page':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        $control.prop('id', data.id)
-                            .find('.page-name').html(data.text);
+                        savedProperties.id = data.id;
+                        savedProperties.title = data.title;
+
+                        $control.data('id', data.id)
+                            .find('.page-name').html(data.title);
                     },
                     watch: ids.join(', ')
                 };
@@ -275,7 +300,15 @@ $(document).ready(function () {
             case 'label':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        $control.prop('id', data.id)
+                        if(savedProperties.components[object] === undefined) {
+                            savedProperties.components[object] = {};
+                        }
+
+                        _.forEach(data, function (item, key) {
+                            savedProperties.components[object][key] = item;
+                        });
+
+                        $control.data('id', data.id)
                             .find('.component-label').html(data.text);
                     },
                     watch: ids.join(', ')
@@ -287,7 +320,15 @@ $(document).ready(function () {
             case 'passwordbox':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        $control.prop('id', data.id);
+                        if(savedProperties.components[object] === undefined) {
+                            savedProperties.components[object] = {};
+                        }
+
+                        _.forEach(data, function (item, key) {
+                            savedProperties.components[object][key] = item;
+                        });
+
+                        $control.data('id', data.id);
                         $control.find('.component-label')
                             .html(data.label);
                         $control.find('.component-input')
@@ -304,7 +345,15 @@ $(document).ready(function () {
             case 'button':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        $control.prop('id', data.id)
+                        if(savedProperties.components[object] === undefined) {
+                            savedProperties.components[object] = {};
+                        }
+
+                        _.forEach(data, function (item, key) {
+                            savedProperties.components[object][key] = item;
+                        });
+
+                        $control.data('id', data.id)
                             .find('.component-button').html(data.text);
                     },
                     watch: ids.join(', ')
@@ -312,7 +361,15 @@ $(document).ready(function () {
                 break;
             default:
                 binding['#' + object] = {
-                    bind: function (data, value, $control) {
+                    bind: function (data) {
+                        if(savedProperties.components[object] === undefined) {
+                            savedProperties.components[object] = {};
+                        }
+
+                        _.forEach(data, function (item, key) {
+                            savedProperties.components[object][key] = item;
+                        });
+
                         console.log(data);
                     },
                     watch: ids.join(', ')

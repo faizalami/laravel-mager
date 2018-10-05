@@ -33,6 +33,10 @@ class LaravelMagerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../public' => public_path('faizalami/laravel-mager'),
         ], 'public');
+
+        $this->publishes([
+            __DIR__ . '/../mager-data' => base_path('mager-data'),
+        ], 'vendor-data');
     }
 
     /**

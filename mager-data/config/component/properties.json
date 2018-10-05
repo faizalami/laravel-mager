@@ -1,0 +1,151 @@
+{
+  "page":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"text":{
+	  "label":"Text",
+	  "type":"textbox",
+	  "default":"Page Name"
+	}
+  },
+  "label":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"text":{
+	  "label":"Text",
+	  "type":"textarea",
+	  "default":"Label Text"
+	}
+  },
+  "textbox":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"label":{
+	  "label":"Label",
+	  "type":"textbox",
+	  "default":"Textbox Label"
+	},
+	"name":{
+	  "label":"Name",
+	  "type":"textbox"
+	},
+	"value":{
+	  "label":"Value",
+	  "type":"textbox"
+	},
+	"minLength":{
+	  "label":"Min Length",
+	  "type":"numberbox",
+	  "default":0
+	},
+	"maxLength":{
+	  "label":"Max Length",
+	  "type":"numberbox",
+	  "default":255
+	}
+  },
+  "numberbox":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"label":{
+	  "label":"Label",
+	  "type":"textbox",
+	  "default":"Numberbox Label"
+	},
+	"name":{
+	  "label":"Name",
+	  "type":"textbox"
+	},
+	"value":{
+	  "label":"Value",
+	  "type":"textbox"
+	},
+	"minLength":{
+	  "label":"Min Length",
+	  "type":"numberbox",
+	  "default":0
+	},
+	"maxLength":{
+	  "label":"Max Length",
+	  "type":"numberbox",
+	  "default":255
+	}
+  },
+  "emailbox":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"label":{
+	  "label":"Label",
+	  "type":"textbox",
+	  "default":"Emailbox Label"
+	},
+	"name":{
+	  "label":"Name",
+	  "type":"textbox"
+	},
+	"value":{
+	  "label":"Value",
+	  "type":"textbox"
+	},
+	"minLength":{
+	  "label":"Min Length",
+	  "type":"numberbox",
+	  "default":0
+	},
+	"maxLength":{
+	  "label":"Max Length",
+	  "type":"numberbox",
+	  "default":255
+	}
+  },
+  "passwordbox":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"label":{
+	  "label":"Label",
+	  "type":"textbox",
+	  "default":"Passwordbox Label"
+	},
+	"name":{
+	  "label":"Name",
+	  "type":"textbox"
+	},
+	"value":{
+	  "label":"Value",
+	  "type":"textbox"
+	},
+	"minLength":{
+	  "label":"Min Length",
+	  "type":"numberbox",
+	  "default":0
+	},
+	"maxLength":{
+	  "label":"Max Length",
+	  "type":"numberbox",
+	  "default":255
+	}
+  },
+  "button":{
+	"id":{
+	  "label":"ID",
+	  "type":"textbox"
+	},
+	"text":{
+	  "label":"Text",
+	  "type":"textbox",
+	  "default":"Button"
+	}
+  }
+}

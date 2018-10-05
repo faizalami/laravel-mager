@@ -10,6 +10,7 @@
 return [
     'base_url' => 'laravel-mager',
     'public_path' => 'faizalami/laravel-mager/',
+    'data' => 'mager-data/',
     'css_assets' => [
         'bootstrap' => 'bootstrap-3.3.7-dist/css/bootstrap.min.css',
         'adminlte' => 'adminLTE-2.4.5/css/AdminLTE.min.css',

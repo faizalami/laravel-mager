@@ -21,7 +21,8 @@ Route::group([
         'as' => 'pages.'
     ], function () {
         Route::get('/', 'PagesManagerController@index')->name('index');
-        Route::get('/gui-builder', 'PagesManagerController@guiBuilder')->name('gui-builder');
+        Route::get('/gui-builder', 'GuiBuilderController@guiBuilder')->name('gui-builder');
+        Route::get('/config/component', 'GuiBuilderController@getComponentConfiguration')->name('component-configuration');
     });
 
     Route::group([
