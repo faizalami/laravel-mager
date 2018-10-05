@@ -1,5 +1,5 @@
 # All public files
-public/*
+public/*  linguist-vendored
 
 # Except assets directory
-!public/assets/*
+!public/assets/*  linguist-vendored
