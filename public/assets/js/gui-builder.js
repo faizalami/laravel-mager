@@ -153,7 +153,7 @@ const componentProperties = {
 var savedProperties = {
     id: 'page',
     title: 'Page Name',
-    components: []
+    components: {}
 };
 
 $(document).ready(function () {
@@ -239,7 +239,7 @@ $(document).ready(function () {
             'type': type
         }).html('');
 
-        var model = {}, binding = {}, ids = [];
+        var model = {}, binding = {};
 
         if(type === 'page') {
             component.id.value = savedProperties.id;
@@ -260,14 +260,13 @@ $(document).ready(function () {
 
             var value = item.value !== undefined ? item.value : '';
 
-            if(key === 'id') {
+            if(key === 'id' && value === '') {
                 value = object;
             }
 
             model[key] = value;
 
             binding['#'+key] = key;
-            ids.push('#'+key);
 
             $loadInput.prop({
                 'id': key,
@@ -283,6 +282,12 @@ $(document).ready(function () {
 
             $properties.append($loadTemplate);
         });
+
+        prepareBinding(object, type, binding, model);
+    }
+
+    function prepareBinding(object, type, binding, model) {
+        var ids = Object.keys(binding);
 
         switch (type) {
             case 'page':
@@ -300,13 +305,7 @@ $(document).ready(function () {
             case 'label':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        if(savedProperties.components[object] === undefined) {
-                            savedProperties.components[object] = {};
-                        }
-
-                        _.forEach(data, function (item, key) {
-                            savedProperties.components[object][key] = item;
-                        });
+                        saveProperties(object, data);
 
                         $control.data('id', data.id)
                             .find('.component-label').html(data.text);
@@ -320,13 +319,7 @@ $(document).ready(function () {
             case 'passwordbox':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        if(savedProperties.components[object] === undefined) {
-                            savedProperties.components[object] = {};
-                        }
-
-                        _.forEach(data, function (item, key) {
-                            savedProperties.components[object][key] = item;
-                        });
+                        saveProperties(object, data);
 
                         $control.data('id', data.id);
                         $control.find('.component-label')
@@ -345,13 +338,7 @@ $(document).ready(function () {
             case 'button':
                 binding['#' + object] = {
                     bind: function (data, value, $control) {
-                        if(savedProperties.components[object] === undefined) {
-                            savedProperties.components[object] = {};
-                        }
-
-                        _.forEach(data, function (item, key) {
-                            savedProperties.components[object][key] = item;
-                        });
+                        saveProperties(object, data);
 
                         $control.data('id', data.id)
                             .find('.component-button').html(data.text);
@@ -362,13 +349,7 @@ $(document).ready(function () {
             default:
                 binding['#' + object] = {
                     bind: function (data) {
-                        if(savedProperties.components[object] === undefined) {
-                            savedProperties.components[object] = {};
-                        }
-
-                        _.forEach(data, function (item, key) {
-                            savedProperties.components[object][key] = item;
-                        });
+                        saveProperties(object, data);
 
                         console.log(data);
                     },
@@ -380,5 +361,15 @@ $(document).ready(function () {
         var $guiBuilder = $('.gui-builder');
         $guiBuilder.my('remove');
         $guiBuilder.my({ui: binding}, model);
+    }
+
+    function saveProperties(object, data) {
+        if(savedProperties.components[object] === undefined) {
+            savedProperties.components[object] = {};
+        }
+
+        _.forEach(data, function (item, key) {
+            savedProperties.components[object][key] = item;
+        });
     }
 });
