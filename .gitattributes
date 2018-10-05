@@ -1,5 +1,1 @@
-# All public files
 public/*  linguist-vendored
-
-# Except assets directory
-!public/assets/*  linguist-vendored
