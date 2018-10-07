@@ -13,7 +13,7 @@
 @section('page-id', 'gui-builder')
 
 @section('additional-styles')
-    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
 @endsection
 
 @section('body')
@@ -38,7 +38,10 @@
                         <a href="#" id="open-component-sidebar"><i class="fas fa-list-alt"></i> Components</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fas fa-wrench"></i> Page Property</a>
+                        <a href="#"><i class="fas fa-save"></i> Save</a>
+                    </li>
+                    <li>
+                        <a href="#" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
                     </li>
                     <li>
                         <a href="#"><i class="fas fa-eye"></i> Page Preview</a>
@@ -116,8 +119,9 @@
 @endsection
 
 @section('additional-scripts')
-    <script src="{{ asset(config('mager.public_path').'sugarjs/sugar.min.js') }}"></script>
-    <script src="{{ asset(config('mager.public_path').'jquerymy/jquerymy.min.js') }}"></script>
-    <script src="{{ asset(config('mager.public_path').'jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'plugins/sugarjs/sugar.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'plugins/jquerymy/jquerymy.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'plugins/axios/dist/axios.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'assets/js/gui-builder.js') }}"></script>
 @endsection

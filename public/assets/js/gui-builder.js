@@ -161,6 +161,10 @@ $(document).ready(function () {
 
     displayProperties(componentProperties.page, 'page', 'page');
 
+    $('#show-page-properties').click(function () {
+        displayProperties(componentProperties.page, 'page', 'page');
+    });
+
     $('#open-component-sidebar').click(function () {
         $('.component-sidebar').toggleClass('active');
     });
