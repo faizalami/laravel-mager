@@ -49,6 +49,9 @@
 @yield('body')
 
 <!-- SCRIPTS -->
+<script>
+    const baseUrl = '{{ URL::to("/") }}/{{ config('mager.base_url') }}/';
+</script>
 @foreach(config('mager.js_assets') as $js_file)
     <script src="{{ asset(config('mager.public_path').$js_file) }}"></script>
 @endforeach
