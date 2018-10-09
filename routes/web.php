@@ -22,7 +22,10 @@ Route::group([
     ], function () {
         Route::get('/', 'PagesManagerController@index')->name('index');
         Route::get('/gui-builder', 'GuiBuilderController@guiBuilder')->name('gui-builder');
-        Route::get('/config/component', 'GuiBuilderController@getComponentConfiguration')->name('component-configuration');
+        Route::get('/config/component', 'GuiBuilderController@loadComponentConfiguration')->name('load-component-configuration');
+        Route::get('/config/page', 'GuiBuilderController@loadPropertiesTemplate')->name('load-properties-template');
+        Route::get('/config/page/{controllerName}/{pageName}', 'GuiBuilderController@loadProperties')->name('load-properties');
+        Route::post('/config/page/save/{controllerName}/{pageName}', 'GuiBuilderController@saveProperties')->name('save-properties');
     });
 
     Route::group([

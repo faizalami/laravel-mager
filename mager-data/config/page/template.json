@@ -1,0 +1,10 @@
+{
+    "id": "page",
+    "title": "Page Name",
+    "controller": "controllername",
+    "type": "form",
+    "httpMethod": "post",
+    "controllerMethod": "page",
+    "route": "page/index",
+    "components": {}
+}

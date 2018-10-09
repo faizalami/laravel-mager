@@ -1,16 +1,20 @@
-const reqComponentProperties = async function () {
+const controllerName = 'controllername';
+const pageName = 'pagename';
+
+const reqComponentConfiguration = async function () {
     return await axios.get(baseUrl + 'pages/config/component');
 };
 
-(async function() {
-    const getComponentProperties = await reqComponentProperties();
-    const componentProperties = getComponentProperties.data;
+const reqProperties = async function () {
+    return await axios.get(baseUrl + 'pages/config/page/' + controllerName + '/' + pageName);
+};
 
-    var savedProperties = {
-        id: 'page',
-        title: 'Page Name',
-        components: {}
-    };
+(async function() {
+    const getComponentConfiguration = await reqComponentConfiguration();
+    const componentConfiguration = getComponentConfiguration.data;
+
+    const getProperties = await reqProperties();
+    var savedProperties = getProperties.data;
 
     $(document).ready(function () {
         var defaultIds = {};
@@ -19,6 +23,18 @@ const reqComponentProperties = async function () {
 
         $('#show-page-properties').click(function () {
             displayProperties('page', 'page');
+        });
+
+        $('#save-page-properties').click(function () {
+            axios.post(baseUrl + 'pages/config/page/save/controllername/pagename', savedProperties)
+                .then(function (response) {
+                    const data = response.data;
+                    if(data.status) {
+                        swal("Success", data.message, "success");
+                    } else {
+                        swal("Error", data.message, "warning");
+                    }
+                });
         });
 
         $('#open-component-sidebar').click(function () {
@@ -92,7 +108,7 @@ const reqComponentProperties = async function () {
         });
 
         function displayProperties(componentId, object) {
-            const component = componentProperties[componentId];
+            const component = componentConfiguration[componentId];
 
             var $properties = $('#properties-form');
 

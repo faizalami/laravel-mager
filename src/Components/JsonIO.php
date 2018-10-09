@@ -43,10 +43,10 @@ class JsonIO
         $path = base_path(config('mager.data').$path);
 
         $explodedPath = explode('/', $path);
-        $pathString = '';
+        $pathString = '/';
         foreach($explodedPath as $key => $directory) {
             if($key != count($explodedPath) - 1) {
-                $pathString .= $directory;
+                $pathString .= $directory . '/';
 
                 if (!is_dir($pathString)) {
                     mkdir($pathString);
@@ -54,7 +54,7 @@ class JsonIO
             }
         }
 
-        file_put_contents($path, $this->jsonString);
+        return file_put_contents($path, $this->jsonString) !== false;
     }
 
     public function toObject() {

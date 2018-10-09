@@ -38,7 +38,7 @@
                         <a href="#" id="open-component-sidebar"><i class="fas fa-list-alt"></i> Components</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fas fa-save"></i> Save</a>
+                        <a href="#" id="save-page-properties"><i class="fas fa-save"></i> Save</a>
                     </li>
                     <li>
                         <a href="#" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
@@ -122,6 +122,7 @@
     <script src="{{ asset(config('mager.public_path').'plugins/sugarjs/sugar.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'plugins/jquerymy/jquerymy.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset(config('mager.public_path').'plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'plugins/axios/dist/axios.min.js') }}"></script>
     <script src="{{ asset(config('mager.public_path').'assets/js/gui-builder.js') }}"></script>
 @endsection
