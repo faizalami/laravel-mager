@@ -8,7 +8,7 @@
 ?>
 
 <template id="template-component">
-    <div class="drag-component component-container">
+    <div class="drag-component component-container col-md-4">
         <div class="component-buttons btn-group" role="group">
             <button class="config-button button-property btn btn-primary btn-xs" data-toggle="tooltip" title="Properties"><i class="fas fa-wrench"></i></button>
             <button class="config-button button-remove btn btn-danger btn-xs" data-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt"></i></button>

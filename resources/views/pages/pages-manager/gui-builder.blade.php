@@ -75,7 +75,7 @@
                                     <div class="control-circle bg-red"></div>
                                 </div>
                             </div>
-                            <div class="drawing-area">
+                            <div class="row drawing-area">
 
                             </div>
                         </div>

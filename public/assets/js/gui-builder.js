@@ -84,7 +84,10 @@ const reqProperties = async function () {
         });
 
         $('.drawing-area').sortable({
-            revert: true
+            revert: true,
+            stop: function(event, ui) {
+                $(ui.item).css('width', '');
+            }
         });
 
         $('.drawing-area').on('click', '.button-remove', function () {
