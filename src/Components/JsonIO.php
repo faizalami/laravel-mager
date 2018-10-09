@@ -25,6 +25,38 @@ class JsonIO
         return $this;
     }
 
+    public function setJsonFromString($jsonString, $prettify = false) {
+        $this->jsonObject =  json_decode($jsonString);
+        $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
+
+        return $this;
+    }
+
+    public function setJsonFromObject($jsonObject, $prettify = false) {
+        $this->jsonObject = $jsonObject;
+        $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
+
+        return $this;
+    }
+
+    public function saveJsonFile($path) {
+        $path = base_path(config('mager.data').$path);
+
+        $explodedPath = explode('/', $path);
+        $pathString = '';
+        foreach($explodedPath as $key => $directory) {
+            if($key != count($explodedPath) - 1) {
+                $pathString .= $directory;
+
+                if (!is_dir($pathString)) {
+                    mkdir($pathString);
+                }
+            }
+        }
+
+        file_put_contents($path, $this->jsonString);
+    }
+
     public function toObject() {
         return $this->jsonObject;
     }
