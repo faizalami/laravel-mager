@@ -184,4 +184,8 @@
 .place-component:hover .component-buttons {
     opacity: 1;
 }
+
+.component-separator {
+    height: 0;
+}
 /* END GUI Builder*/

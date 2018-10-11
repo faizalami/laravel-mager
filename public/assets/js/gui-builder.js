@@ -72,7 +72,7 @@ const reqProperties = async function () {
                     }
                     var componentId = type + defaultIds[type];
 
-                    $('.drag-component')
+                    ui.helper
                         .addClass('place-component')
                         .removeClass('drag-component')
                         .data('id', componentId)
@@ -86,7 +86,7 @@ const reqProperties = async function () {
         $('.drawing-area').sortable({
             revert: true,
             stop: function(event, ui) {
-                $(ui.item).css('width', '');
+                ui.item.css('width', '');
             }
         });
 
