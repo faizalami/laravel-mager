@@ -8,7 +8,7 @@
 ?>
 
 <template id="template-component">
-    <div class="drag-component component-container col-md-4">
+    <div class="drag-component component-container full-width">
         <div class="component-buttons btn-group" role="group">
             <button class="config-button button-property btn btn-primary btn-xs" data-toggle="tooltip" title="Properties"><i class="fas fa-wrench"></i></button>
             <button class="config-button button-remove btn btn-danger btn-xs" data-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt"></i></button>
@@ -19,6 +19,30 @@
 
 <template id="template-label">
     <label class="component-label">Label Text</label>
+</template>
+
+<template id="template-row">
+    <div class="drag-component component-row full-width">
+        <div class="component-buttons btn-group" role="group">
+            <button class="config-button button-property btn btn-primary btn-xs" data-toggle="tooltip" title="Properties"><i class="fas fa-wrench"></i></button>
+            <button class="config-button button-remove btn btn-danger btn-xs" data-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div class="row nested-sortable">
+
+        </div>
+    </div>
+</template>
+
+<template id="template-col">
+    <div class="col-md-4 drag-component component-col">
+        <div class="component-buttons btn-group" role="group">
+            <button class="config-button button-property btn btn-primary btn-xs" data-toggle="tooltip" title="Properties"><i class="fas fa-wrench"></i></button>
+            <button class="config-button button-remove btn btn-danger btn-xs" data-toggle="tooltip" title="Remove"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div class="col-container nested-sortable">
+
+        </div>
+    </div>
 </template>
 
 <template id="template-textbox">

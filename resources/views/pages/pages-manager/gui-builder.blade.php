@@ -98,6 +98,8 @@
         <div class="sidebar-item" data-type="emailbox">Emailbox</div>
         <div class="sidebar-item" data-type="passwordbox">Passwordbox</div>
         <div class="sidebar-item" data-type="button">Button</div>
+        <div class="sidebar-item" data-type="row">Row Panel</div>
+        <div class="sidebar-item" data-type="col">Column Panel</div>
     </aside>
     <!-- /.component-sidebar -->
 
