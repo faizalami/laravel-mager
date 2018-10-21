@@ -55,12 +55,22 @@ const reqProperties = async function () {
             revert: 'invalid',
             helper: function() {
                 var type = $(this).data('type');
-                var $dragComponent = $($('#template-component').html());
-                $dragComponent.find('.button-property').data('type', type);
-                $dragComponent.children('.component-body').html($('#template-'+type).html());
+                var $dragComponent = null;
+
+                if (type !== 'row' && type !== 'col') {
+                    $dragComponent = $($('#template-component').html());
+                    $dragComponent.find('.button-property').data('type', type);
+                    $dragComponent.children('.component-body').html($('#template-' + type).html());
+                } else {
+                    $dragComponent = $($('#template-' + type).html());
+                }
                 return $dragComponent;
             },
+            drag: function(event, ui) {
+                $('.nested-sortable').parent().css('border', 'solid 1px #5f5f5f');
+            },
             stop: function(event, ui) {
+                $('.nested-sortable').parent().css('border', '');
                 if(ui.helper.is('.ui-sortable-helper')) {
                     var type = $(this).data('type');
 
@@ -85,14 +95,27 @@ const reqProperties = async function () {
 
         $('.drawing-area').sortable({
             revert: true,
+            connectWith: '.nested-sortable',
+            sort: function(event, ui) {
+                $('.nested-sortable').parent().css('border', 'solid 1px #5f5f5f');
+            },
             stop: function(event, ui) {
                 ui.item.css('width', '');
+                $('.nested-sortable').parent().css('border', '');
+            },
+            receive: function(event, ui) {
+                $('.nested-sortable').css('height', '');
+                $('.nested-sortable').parent().prop('style', '');
+                $('.nested-sortable').sortable({
+                    revert: true,
+                    connectWith: '.drawing-area'
+                });
             }
         });
 
         $('.drawing-area').on('click', '.button-remove', function () {
             $(this).tooltip('hide');
-            $(this).parents('.place-component').slideUp('slow', function () {
+            $(this).parent().parent().slideUp('slow', function () {
                 $(this).remove();
             });
         });
@@ -108,6 +131,14 @@ const reqProperties = async function () {
 
         $('.property-sidebar').on('focus', 'input[type=text], input[type=number], textarea', function () {
             $(this).select();
+        });
+
+        $('.drawing-area').on('mouseenter', '.component-row.place-component, .component-col.place-component', function () {
+            $('.nested-sortable').parent().css('border', 'solid 1px #5f5f5f');
+        });
+
+        $('.drawing-area').on('mouseleave', '.component-row.place-component, .component-col.place-component', function () {
+            $('.nested-sortable').parent().css('border', '');
         });
 
         function displayProperties(componentId, object) {
