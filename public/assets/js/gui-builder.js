@@ -268,11 +268,12 @@ const reqProperties = async function () {
                     binding['#' + object] = {
                         bind: function (data, value, $control) {
                             var md = 4;
-                            if(savedProperties.components[object]) {
+                            if(savedProperties.components[object] !== undefined) {
                                 md = savedProperties.components[object].md;
                             }
                             saveProperties(object, data);
 
+                            $control.css('border', 'solid 1px #5f5f5f');
                             $control.removeClass('col-md-' + md).addClass('col-md-' + data.md);
                         },
                         watch: ids.join(', ')
