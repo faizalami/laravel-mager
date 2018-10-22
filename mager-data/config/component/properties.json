@@ -147,5 +147,12 @@
             "type":"textbox",
             "value":"Button"
         }
+    },
+    "col":{
+        "md":{
+            "label":"Choose col-md",
+            "type":"md",
+            "value":4
+        }
     }
 }

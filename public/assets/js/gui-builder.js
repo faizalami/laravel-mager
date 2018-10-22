@@ -63,6 +63,7 @@ const reqProperties = async function () {
                     $dragComponent.children('.component-body').html($('#template-' + type).html());
                 } else {
                     $dragComponent = $($('#template-' + type).html());
+                    $dragComponent.find('.button-property').data('type', type);
                 }
                 return $dragComponent;
             },
@@ -122,7 +123,12 @@ const reqProperties = async function () {
 
         $('.drawing-area').on('click', '.button-property', function () {
             $(this).tooltip('hide');
-            displayProperties($(this).data('type'), $(this).parents('.component-container').prop('id'));
+            var type = $(this).data('type');
+            if(type !== 'row' && type !== 'col') {
+                displayProperties(type, $(this).parents('.component-container').prop('id'));
+            } else {
+                displayProperties(type, $(this).parents('.component-' + type).prop('id'));
+            }
         });
 
         $('.drawing-area-header').click(function () {
@@ -258,12 +264,26 @@ const reqProperties = async function () {
                         watch: ids.join(', ')
                     };
                     break;
+                case 'col':
+                    binding['#' + object] = {
+                        bind: function (data, value, $control) {
+                            var md = 4;
+                            if(savedProperties.components[object]) {
+                                md = savedProperties.components[object].md;
+                            }
+                            saveProperties(object, data);
+
+                            $control.removeClass('col-md-' + md).addClass('col-md-' + data.md);
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
                 default:
                     binding['#' + object] = {
                         bind: function (data) {
                             saveProperties(object, data);
 
-                            console.log(data);
+                            console.log(data, type);
                         },
                         watch: ids.join(', ')
                     };
