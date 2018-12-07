@@ -28,6 +28,11 @@ Route::group([
         Route::post('/config/page/save/{controllerName}/{pageName}', 'GuiBuilderController@saveProperties')->name('save-properties');
     });
 
+//    Route::group([
+//        'prefix' => 'json',
+//        'as' => 'json.'
+//    ]);
+
     Route::group([
         'prefix' => 'configuration',
         'as' => 'configuration.'

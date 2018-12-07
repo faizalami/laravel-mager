@@ -15,7 +15,7 @@ describe('supports http with nodejs', function () {
       server = null;
     }
     if (proxy) {
-      proxy.close()
+      proxy.close();
       proxy = null;
     }
     if (process.env.http_proxy) {

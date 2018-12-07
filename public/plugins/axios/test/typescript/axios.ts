@@ -150,7 +150,7 @@ axios.patch<User>('/user', { foo: 'bar' })
 
 const handleStringResponse = (response: string) => {
   console.log(response)
-}
+};
 
 axios.get<User, string>('/user?id=12345')
   .then(handleStringResponse)

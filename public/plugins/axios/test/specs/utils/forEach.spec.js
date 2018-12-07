@@ -52,7 +52,7 @@ describe('utils::forEach', function () {
   it('should handle non object prototype gracefully', function () {
     var count = 0;
     var data = Object.create(null);
-    data.foo = 'bar'
+    data.foo = 'bar';
 
     forEach(data, function () {
       count++;
