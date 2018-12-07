@@ -4,7 +4,7 @@ var loadFiles = [
     'assets/js/components/gui-builder-sortable-config',
 ];
 
-define(loadFiles, function ($, dragableConfig, sortableConfig) {
+define(loadFiles, function ($, draggableConfig, sortableConfig) {
     require(['jqueryui']);
 
     var guiBuildePage = {
@@ -19,7 +19,7 @@ define(loadFiles, function ($, dragableConfig, sortableConfig) {
 
             $drawingArea.on('mouseenter mouseleave', '.component-row.place-component, .component-col.place-component', guiBuildePage.containerComponentHover);
 
-            $('.component-sidebar .sidebar-item').draggable(dragableConfig().config);
+            $('.component-sidebar .sidebar-item').draggable(draggableConfig().config);
 
             $drawingArea.sortable(sortableConfig().config);
         },

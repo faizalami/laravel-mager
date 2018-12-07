@@ -1,6 +1,6 @@
 define(['jquery', 'jqueryui'], function ($) {
 
-    var dragableConfig = function ($sortableComponent = null) {
+    var draggableConfig = function ($sortableComponent = null) {
         var $nestedSortable = (function () {
             if($sortableComponent === null) {
                 return $('.nested-sortable');
@@ -86,5 +86,5 @@ define(['jquery', 'jqueryui'], function ($) {
         };
     };
 
-    return dragableConfig;
+    return draggableConfig;
 });
