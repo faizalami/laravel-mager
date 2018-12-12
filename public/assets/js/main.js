@@ -8,7 +8,7 @@ requirejs.config({
             deps: ['jquery']
         },
         jquerymy: {
-            deps: ['jquery']
+            deps: ['sugarjs', 'jquery']
         },
         adminlte: {
             deps: ['jquery']
@@ -31,9 +31,9 @@ requirejs.config({
         lodash: 'plugins/lodash/lodash.min',
         slimscroll: 'plugins/jQuery-slimScroll-1.3.8/jquery.slimscroll.min',
         jqueryui: 'plugins/jquery-ui-1.12.1.custom/jquery-ui.min',
-        jquerymy: 'plugins/jquerymy/jqueymy.min',
-        sugarjs: 'plugins/sugar.min',
-        sweetalert: 'plugins/sweetalert.min',
+        jquerymy: 'plugins/jquerymy/jquerymy.min',
+        sugarjs: 'plugins/sugarjs/sugar.min',
+        sweetalert: 'plugins/sweetalert/sweetalert.min',
         laravelmager: 'assets/js/components/laravel-mager'
     }
 });

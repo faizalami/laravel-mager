@@ -74,7 +74,7 @@ define(['jquery', 'jqueryui'], function ($) {
                         .prop('id', componentId);
 
                     // todo aktifkan kalo display properties beres
-                    // displayProperties(type, componentId);
+                    $( ".component-sidebar .sidebar-item").trigger( "dragstop", [ type, componentId ] );
                 }
             }
         };
