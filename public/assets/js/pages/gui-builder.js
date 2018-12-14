@@ -10,10 +10,12 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
 
     var propertySidebar = ComponentPropertySidebar;
 
+    var $drawingArea = $('.drawing-area');
+
     var guiBuildePage = {
         init: function() {
             guiBuildePage.initDrawingArea();
-            
+
             var $sidebarItem = $('.component-sidebar .sidebar-item');
 
             propertySidebar.displayProperties('page', 'page');
@@ -31,10 +33,9 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             });
             $sidebarItem.draggable(ComponentDragableConfig().config);
 
-
+            $drawingArea.sortable(ComponentSortableConfig().config);
         },
         initDrawingArea: function () {
-            var $drawingArea = $('.drawing-area');
 
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);
 
@@ -50,7 +51,6 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
                 }
             });
 
-            $drawingArea.sortable(ComponentSortableConfig().config);
         },
         toggleSidebar: function (event) {
             $('.' + event.data.sidebarName + '-sidebar').toggleClass('active');

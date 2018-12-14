@@ -23,7 +23,7 @@ define(['jquery', 'jqueryui'], function ($) {
             receive: function () {
                 $nestedSortable.css('height', '');
                 $nestedSortableParent.prop('style', '');
-                $nestedSortable.sortable({
+                $('.nested-sortable').sortable({
                     revert: true,
                     connectWith: '.drawing-area'
                 });
