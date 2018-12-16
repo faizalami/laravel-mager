@@ -8,7 +8,30 @@ define(['jquery', 'jqueryui'], function ($) {
             }
         })();
 
+        var defaultIds = [];
+
         var $nestedSortableParent = $nestedSortable.parent();
+
+        var getComponentId = function (type) {
+            if (defaultIds[type] !== undefined) {
+                defaultIds[type]++;
+            } else {
+                defaultIds[type] = 1;
+            }
+
+            return type + defaultIds[type];
+        };
+
+        var getParentId = function (item) {
+            var parentId = 'page';
+            var itemParent = item.parent();
+
+            if(itemParent.is('.row') || itemParent.is('.col-container')) {
+                parentId = itemParent.parent().attr('id');
+            }
+
+            return parentId;
+        };
 
         var config = {
             revert: true,
@@ -19,11 +42,30 @@ define(['jquery', 'jqueryui'], function ($) {
             stop: function (event, ui) {
                 ui.item.css('width', '');
                 $nestedSortableParent.css('border', '');
+
+                var type = ui.item.data('type');
+                var componentId = getComponentId(type);
+
+                ui.item
+                    .addClass('place-component')
+                    .removeClass('drag-component')
+                    .data('id', componentId)
+                    .attr('id', componentId);
+
+                var data = {
+                    type: type,
+                    id: componentId,
+                    parent: getParentId(ui.item),
+                    index: ui.item.index()
+                };
+
+                $( ".component-sidebar .sidebar-item").trigger( "dragstop", [ ui, data ] );
             },
             receive: function () {
-                $nestedSortable.css('height', '');
-                $nestedSortableParent.prop('style', '');
-                $('.nested-sortable').sortable({
+                var $sortable = $('.nested-sortable');
+                $sortable.css('height', '');
+                $sortable.parent().prop('style', '');
+                $sortable.sortable({
                     revert: true,
                     connectWith: '.drawing-area'
                 });

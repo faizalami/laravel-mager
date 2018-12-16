@@ -5,6 +5,12 @@
  * Date: 02/10/18
  * Time: 4:56
  */
+
+$options = '';
+for ($i = 1; $i <= 12; $i++) {
+    $options .= '<option value="' . $i . '">' . $i . '</option>';
+}
+
 ?>
 
 <template id="template-property-input">
@@ -31,19 +37,10 @@
     <textarea rows="3" class="form-control"></textarea>
 </template>
 
-<template id="template-property-md">
+@foreach(['xs', 'sm', 'md', 'lg'] as $col)
+<template id="template-property-{{ $col }}">
     <select class="form-control">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
+        {!! $options !!}
     </select>
 </template>
+@endforeach

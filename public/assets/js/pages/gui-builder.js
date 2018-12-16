@@ -14,26 +14,13 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
 
     var guiBuildePage = {
         init: function() {
+            var sidebarItem = '.component-sidebar .sidebar-item';
+
             guiBuildePage.initDrawingArea();
 
-            var $sidebarItem = $('.component-sidebar .sidebar-item');
+            guiBuildePage.initSidebar();
 
-            propertySidebar.displayProperties('page', 'page');
-
-            $('#open-property-sidebar').on('click', {sidebarName: 'property'}, guiBuildePage.toggleSidebar);
-
-            $('#open-component-sidebar').on('click', {sidebarName: 'component'}, guiBuildePage.toggleSidebar);
-
-            $('#show-page-properties').on('click', {type: 'page', id: 'page'}, function (event) {
-                propertySidebar.displayProperties(event.data.type, event.data.id);
-            });
-
-            $sidebarItem.on('dragstop', function (event, type, id) {
-                propertySidebar.displayProperties(type, id);
-            });
-            $sidebarItem.draggable(ComponentDragableConfig().config);
-
-            $drawingArea.sortable(ComponentSortableConfig().config);
+            guiBuildePage.initDragAndDrop(sidebarItem);
         },
         initDrawingArea: function () {
 
@@ -44,13 +31,51 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             $drawingArea.on('click', '.button-property', function () {
                 guiBuildePage.hideTooltip();
                 var type = $(this).data('type');
+                var data = {
+                    type: type
+                };
+
+                var $targetComponent = $(this).parents('.component-' + type);
                 if(type !== 'row' && type !== 'col') {
-                    propertySidebar.displayProperties(type, $(this).parents('.component-container').prop('id'));
-                } else {
-                    propertySidebar.displayProperties(type, $(this).parents('.component-' + type).prop('id'));
+                    $targetComponent = $(this).parents('.component-container');
                 }
+
+                // todo: jadi komponen parent
+                data.parent = 'page';
+                var itemParent = $targetComponent.parent();
+
+                if(itemParent.is('.row') || itemParent.is('.col-container')) {
+                    data.parent = itemParent.parent().attr('id');
+                }
+
+                data.id = $targetComponent.prop('id');
+                data.index = $targetComponent.index();
+
+                propertySidebar.displayProperties(data);
             });
 
+        },
+        initSidebar: function () {
+
+            $('#open-property-sidebar').on('click', {sidebarName: 'property'}, guiBuildePage.toggleSidebar);
+
+            $('#open-component-sidebar').on('click', {sidebarName: 'component'}, guiBuildePage.toggleSidebar);
+
+            propertySidebar.displayProperties({type: 'page', id: 'page'});
+
+            $('#show-page-properties').on('click', {type: 'page', id: 'page'}, function (event) {
+                propertySidebar.displayProperties(event.data);
+            });
+        },
+        initDragAndDrop: function (sidebarItem) {
+            var $sidebarItem = $(sidebarItem);
+
+            $sidebarItem.draggable(ComponentDragableConfig().config);
+            $drawingArea.sortable(ComponentSortableConfig().config);
+
+            $sidebarItem.on('dragstop', function (event, comp, data) {
+                propertySidebar.displayProperties(data);
+            });
         },
         toggleSidebar: function (event) {
             $('.' + event.data.sidebarName + '-sidebar').toggleClass('active');

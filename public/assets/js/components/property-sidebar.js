@@ -17,21 +17,20 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
         var modelConfig= ServiceModelConfig('coba').config;
         var controllerConfig= ServiceControllerConfig('coba').config;
         var $propertiesForm=$('#properties-form');
-        var currentType;
-        var currentId;
+        var current;
 
         const currentComponent = function () {
-            var component = componentTemplate[currentType];
+            var component = componentTemplate[current.type]['property'];
 
-            if(currentType === 'page') {
+            if(current.type === 'page') {
                 component.id.value = viewConfig.id;
                 component.title.value = viewConfig.title;
             } else {
-                var objectProperties = viewConfig.components[currentId];
+                var objectProperties = viewConfig.components[current.id];
                 if(objectProperties !== undefined) {
                     _.forEach(component, function (item, key) {
                         item.value = objectProperties[key];
-                    })
+                    });
                 }
             }
 
@@ -57,23 +56,25 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
             $propertiesForm.append($template);
         };
 
-        const displayProperties= function (type, id) {
-            currentType = type;
-            currentId = id;
-            $propertiesForm.data({
-                'component': id,
-                'type': type
-            }).html('');
+        const displayProperties= function (data) {
+            if(data) {
+                current = data;
+                $propertiesForm.data({
+                    'component': current.id,
+                    'type': current.type
+                }).html('');
 
-            _.forEach(currentComponent(), function (item, key) {
-                var value = item.value !== undefined ? item.value : '';
+                var components = currentComponent();
+                _.forEach(components, function (item, key) {
+                    var value = item.value !== undefined ? item.value : '';
 
-                if(key === 'id' && value === '') {
-                    value = id;
-                }
+                    if(key === 'id' && value === '') {
+                        value = current.id;
+                    }
 
-                drawForm(key, item, value);
-            });
+                    drawForm(key, item, value);
+                });
+            }
         };
 
         return {

@@ -9,8 +9,6 @@ define(['jquery', 'jqueryui'], function ($) {
             }
         })();
 
-        var defaultIds = [];
-
         var getDragComponent = function (type) {
             var containerType = 'component';
             if (type === 'row' || type === 'col') {
@@ -25,16 +23,6 @@ define(['jquery', 'jqueryui'], function ($) {
             }
 
             return $dragComponent;
-        };
-
-        var getComponentId = function (type) {
-            if (defaultIds[type] !== undefined) {
-                defaultIds[type]++;
-            } else {
-                defaultIds[type] = 1;
-            }
-
-            return type + defaultIds[type];
         };
 
         var containerBorder = function (display = true) {
@@ -58,30 +46,17 @@ define(['jquery', 'jqueryui'], function ($) {
                 var type = $(this).data('type');
                 return getDragComponent(type);
             },
-            drag: function () {
+            drag: function (event, ui) {
                 containerBorder();
+                ui.helper.data('type', $(this).data('type'));
             },
             stop: function (event, ui) {
                 containerBorder(false);
-                if (ui.helper.is('.ui-sortable-helper')) {
-                    var type = $(this).data('type');
-                    var componentId = getComponentId(type);
-
-                    ui.helper
-                        .addClass('place-component')
-                        .removeClass('drag-component')
-                        .data('id', componentId)
-                        .prop('id', componentId);
-
-                    // todo aktifkan kalo display properties beres
-                    $( ".component-sidebar .sidebar-item").trigger( "dragstop", [ type, componentId ] );
-                }
             }
         };
 
         return {
             $nestedSortable: $nestedSortable,
-            defaultIds: defaultIds,
             config: config
         };
     };
