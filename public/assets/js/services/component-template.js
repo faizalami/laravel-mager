@@ -194,12 +194,12 @@ define([], function () {
                     "xs":{
                         "label":"Choose col-xs",
                         "type":"xs",
-                        "value":4
+                        "value":6
                     },
                     "sm":{
                         "label":"Choose col-sm",
                         "type":"sm",
-                        "value":4
+                        "value":6
                     },
                     "md":{
                         "label":"Choose col-md",

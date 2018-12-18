@@ -9,8 +9,9 @@
 namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Faizalami\LaravelMager\Components\JsonIO;
 
-class JsonConfigController extends Controller
+class JsonIOController extends Controller
 {
     public function loadJson() {
 

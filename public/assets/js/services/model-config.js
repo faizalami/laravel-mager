@@ -7,10 +7,6 @@ define([], function () {
             "table":"TableName",
             "timestamp":true,
             "columns":{
-                "id":{
-                    "type":"increment",
-                    "size":null
-                },
                 "name":{
                     "type":"string",
                     "size":255

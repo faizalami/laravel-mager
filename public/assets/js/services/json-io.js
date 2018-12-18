@@ -1,17 +1,25 @@
-define(['axios'], function () {
-    var baseGuiBuilder = function (url) {
+define(['axios'], function (axios) {
+    var jsonIO = async function (url) {
         const reqJson = async function () {
             return axios.get(url);
         };
 
-        (async function() {
-            const getJson = await reqJson();
+        const getJson = await reqJson();
 
-            baseGuiBuilder.data = getJson.data;
-        })();
+        var data = getJson.data;
 
-        return this;
+        const updateJson = async function (updateData) {
+            var response = await axios.post(url, updateData);
+
+            data = response.data;
+        };
+
+        return {
+            url: url,
+            data: data,
+            updateJson: updateJson
+        };
     };
 
-    return baseGuiBuilder;
+    return jsonIO;
 });
