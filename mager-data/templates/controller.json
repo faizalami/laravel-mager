@@ -1,0 +1,10 @@
+{
+    "page": "PageName",
+    "name": "NameController",
+    "namespace": "App\\Http\\Controllers",
+    "url": "name",
+    "defaultPage": "index",
+    "web": true,
+    "rest": true,
+    "pages": {}
+}

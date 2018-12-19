@@ -1,0 +1,7 @@
+{
+    "page": "PageName",
+    "name": "ModelName",
+    "table": "TableName",
+    "timestamp": true,
+    "columns": {}
+}

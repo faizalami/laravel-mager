@@ -1,0 +1,8 @@
+{
+    "page": "PageName",
+    "id": "page-id",
+    "name": "ViewName",
+    "title": "PageTitle",
+    "routes": [],
+    "components": {}
+}
