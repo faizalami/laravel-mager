@@ -1,5 +1,6 @@
 define(['axios'], function (axios) {
     var jsonIO = async function (url) {
+        url = localStorage.getItem('baseUrl')+'json/'+url;
         const reqJson = async function () {
             return axios.get(url);
         };

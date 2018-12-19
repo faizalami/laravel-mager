@@ -11,7 +11,7 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
 
     var propertySidebar = (function () {
 
-        const componentTemplate= ServiceComponentTemplate.config;
+        var componentTemplate= ServiceComponentTemplate().config;
         var viewConfig= ServiceViewConfig('create').config;
         var modelConfig= ServiceModelConfig('coba').config;
         var $propertiesForm=$('#properties-form');

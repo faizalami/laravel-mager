@@ -1,7 +1,8 @@
-define([], function () {
-    var componentTemplate = (function () {
-        var url = '/component-template.json';
-        var config = {
+define(['assets/js/services/json-io'], function (ServiceJsonIO) {
+    var componentTemplate = function () {
+        var url = 'template/component';
+
+        const config = {
             "page":{
                 "property": {
                     "id":{
@@ -214,16 +215,16 @@ define([], function () {
                         "label":"Choose col-lg",
                         "type":"lg",
                         "value":4
-                    },
+                    }
                 }
             }
         };
 
         return {
             url: url,
-            config: config,
+            config: config
         }
-    })();
+    };
 
     return componentTemplate;
 });

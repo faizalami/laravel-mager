@@ -28,14 +28,7 @@ Route::group([
         Route::post('/config/page/save/{controllerName}/{pageName}', 'GuiBuilderController@saveProperties')->name('save-properties');
     });
 
-    Route::match(['get', 'post'],'/json/{type}/{param1}/{param2}/{param3?}', function($type, $param1, $param2, $param3 = null) {
-        if (Request::isMethod('post')) {
-            // ... this is POST method
-        }
-        if (Request::isMethod('get')) {
-            // ... this is GET method
-        }
-    });
+    Route::match(['get', 'post'],'/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');
 
     Route::group([
         'prefix' => 'configuration',

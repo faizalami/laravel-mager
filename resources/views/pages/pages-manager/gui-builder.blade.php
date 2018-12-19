@@ -123,17 +123,10 @@
         require(['bootstrap']);
         require(['laravelmager']);
 
+        localStorage.setItem('baseUrl', '{{ url(config('mager.base_url')) }}/');
+
         require(['assets/js/pages/gui-builder']);
     });
 </script>
 
 @endsection
-
-{{--@section('additional-scripts')--}}
-    {{--<script src="{{ asset(config('mager.public_path').'plugins/sugarjs/sugar.min.js') }}"></script>--}}
-    {{--<script src="{{ asset(config('mager.public_path').'plugins/jquerymy/jquerymy.min.js') }}"></script>--}}
-    {{--<script src="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>--}}
-    {{--<script src="{{ asset(config('mager.public_path').'plugins/sweetalert/sweetalert.min.js') }}"></script>--}}
-    {{--<script src="{{ asset(config('mager.public_path').'plugins/axios/dist/axios.min.js') }}"></script>--}}
-    {{--<script src="{{ asset(config('mager.public_path').'assets/js/gui-builder.js') }}"></script>--}}
-{{--@endsection--}}
