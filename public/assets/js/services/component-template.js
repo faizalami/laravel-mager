@@ -17,7 +17,7 @@ define([], function () {
             },
             "label":{
                 "property": {
-                    "id":{
+                    "data-id":{
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -30,7 +30,7 @@ define([], function () {
             },
             "textbox":{
                 "property": {
-                    "id":{
+                    "data-id":{
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -65,7 +65,7 @@ define([], function () {
             },
             "numberbox":{
                 "property": {
-                    "id":{
+                    "data-id":{
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -100,7 +100,7 @@ define([], function () {
             },
             "emailbox":{
                 "property": {
-                    "id":{
+                    "data-id":{
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -135,7 +135,7 @@ define([], function () {
             },
             "passwordbox":{
                 "property": {
-                    "id":{
+                    "data-id":{
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -170,7 +170,7 @@ define([], function () {
             },
             "button":{
                 "property": {
-                    "id": {
+                    "data-id": {
                         "label":"ID",
                         "type":"textbox"
                     },
@@ -183,7 +183,7 @@ define([], function () {
             },
             "row": {
                 "property": {
-                    "id": {
+                    "data-id": {
                         "label":"ID",
                         "type":"textbox"
                     }
@@ -191,6 +191,10 @@ define([], function () {
             },
             "col":{
                 "property": {
+                    "data-id": {
+                        "label":"ID",
+                        "type":"textbox"
+                    },
                     "xs":{
                         "label":"Choose col-xs",
                         "type":"xs",

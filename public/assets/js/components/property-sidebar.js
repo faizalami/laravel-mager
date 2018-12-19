@@ -4,18 +4,16 @@ var loadFiles = [
     'assets/js/services/component-template',
     'assets/js/services/view-config',
     'assets/js/services/model-config',
-    'assets/js/services/controller-config',
     'jquerymy'
 ];
 
-define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig, ServiceControllerConfig) {
+define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig) {
 
     var propertySidebar = (function () {
 
         const componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig('create').config;
         var modelConfig= ServiceModelConfig('coba').config;
-        var controllerConfig= ServiceControllerConfig('coba').config;
         var $propertiesForm=$('#properties-form');
         var current;
 
@@ -41,10 +39,11 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
             var $template = $($('#template-property-input').html());
             var $input = $($('#template-property-'+item.type).html());
 
-            $input.prop({
+            $input.attr({
                 'id': id,
-                'placeholder': item.label
-            }).val(value);
+                'placeholder': item.label,
+                'value': value
+            });
 
             $template.find('.property-label')
                 .prop('for', '#'+id)
@@ -61,7 +60,7 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
             _.forEach(components, function (item, key) {
                 var value = item.value !== undefined ? item.value : '';
 
-                if(key === 'id' && value === '') {
+                if(['data-id', 'name'].includes(key) && value === '') {
                     value = current.id;
                 }
 
@@ -86,21 +85,18 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
 
                             $control.data('id', data.id)
                                 .find('.page-name').html(data.title);
-
-                            console.log(viewConfig);
                         },
                         watch: ids.join(', ')
                     };
                     break;
                 case 'label':
+                case 'button':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
-                            setProperties(current.id, data);
+                            setProperties(data);
 
                             $control.data('id', data.id)
-                                .find('.component-label').html(data.text);
-
-                            console.log(viewConfig);
+                                .find('.component-'+current.type).html(data.text);
                         },
                         watch: ids.join(', ')
                     };
@@ -111,34 +107,26 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
                 case 'passwordbox':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
-                            setProperties(current.id, data);
+                            setProperties(data);
 
-                            $control.data('id', data.id);
                             $control.find('.component-label')
                                 .html(data.label);
-                            $control.find('.component-input')
-                                .attr({
-                                    'name': data.name,
-                                    'placeholder': data.label,
-                                    'minlength': data.minlength,
-                                    'maxlength': data.maxlength,
-                                    'value': data.value
-                                });
+                            var $input = $control.find('.component-input');
 
-                            console.log(viewConfig);
-                        },
-                        watch: ids.join(', ')
-                    };
-                    break;
-                case 'button':
-                    binding['#' + current.id] = {
-                        bind: function (data, value, $control) {
-                            setProperties(current.id, data);
+                            if(modelConfig.columns[$input.attr('name')]) {
+                                delete modelConfig.columns[$input.attr('name')];
+                            }
 
-                            $control.data('id', data.id)
-                                .find('.component-button').html(data.text);
+                            modelConfig.columns[data.name] = componentTemplate[current.type].db;
 
-                            console.log(viewConfig);
+                            var attr = {};
+                            _.forEach(data, function (value, key) {
+                                if(key !== 'label') {
+                                    attr[key] = value;
+                                }
+                            });
+
+                            $input.attr(attr);
                         },
                         watch: ids.join(', ')
                     };
@@ -153,10 +141,10 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
                                 lg: 4
                             };
                             _.forEach(colSize, function (size, colName) {
-                                setProperties(current.id, data);
+                                setProperties(data);
 
-                                $control.css('border', 'solid 1px #5f5f5f');
-                                $control.removeClass('col-' + colName + '-' + size)
+                                $control.css('border', 'solid 1px #5f5f5f')
+                                    .removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
                             });
 
@@ -168,7 +156,7 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
                 default:
                     binding['#' + current.id] = {
                         bind: function (data) {
-                            setProperties(current.id, data);
+                            setProperties(data);
 
                             console.log(data, current.type);
                         },
@@ -182,14 +170,17 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
             $guiBuilder.my({ui: binding}, current.bind.model);
         };
 
-        const setProperties = function (object, data) {
-            if(viewConfig.components[object] === undefined) {
-                viewConfig.components[object] = {};
+        const setProperties = function (data) {
+            if(viewConfig.components[current.id] === undefined) {
+                viewConfig.components[current.id] = {};
             }
 
             _.forEach(data, function (item, key) {
-                viewConfig.components[object][key] = item;
+                viewConfig.components[current.id][key] = item;
             });
+
+            viewConfig.components[current.id]['parent'] = current.parent;
+            viewConfig.components[current.id]['index'] = current.index;
         };
 
         const displayProperties= function (data) {
