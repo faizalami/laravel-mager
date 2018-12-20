@@ -1,0 +1,37 @@
+{
+  "name": "requirejs-promise",
+  "description": "plugin for Require.JS that allows modules to resolve asynchronously via Promises",
+  "version": "1.2.0",
+  "homepage": "https://github.com/jokeyrhyme/requirejs-promise",
+  "author": {
+    "name": "Ron Waldon",
+    "email": "jokeyrhyme@gmail.com",
+    "url": "http://jokeyrhy.me/"
+  },
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jokeyrhyme/requirejs-promise.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jokeyrhyme/requirejs-promise/issues"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/jokeyrhyme/requirejs-promise/blob/master/LICENSE"
+    }
+  ],
+  "main": "requirejs-promise.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "~1.9",
+    "jquery": "~2.1",
+    "mocha": "~1.18",
+    "q": "~1.0",
+    "requirejs": "~2.1",
+    "rsvp": "~3.0"
+  },
+  "peerDependencies": {},
+  "keywords": ["requirejs", "deferred", "promise"]
+}

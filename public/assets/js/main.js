@@ -34,6 +34,7 @@ requirejs.config({
         jquerymy: 'plugins/jquerymy/jquerymy.min',
         sugarjs: 'plugins/sugarjs/sugar.min',
         sweetalert: 'plugins/sweetalert/sweetalert.min',
+        promise: 'plugins/requirejs-promise/requirejs-promise',
         laravelmager: 'assets/js/components/laravel-mager'
     }
 });

@@ -1,0 +1,13 @@
+.DS_Store
+
+# output files
+test/tests.min.js
+
+# temporary dependencies
+bower_components
+node_modules
+
+# IDE files
+.project
+/.idea/workspace.xml
+/.idea/dictionaries

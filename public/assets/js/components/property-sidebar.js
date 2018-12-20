@@ -1,7 +1,7 @@
 var loadFiles = [
     'jquery',
     'lodash',
-    'assets/js/services/component-template',
+    'promise!assets/js/services/component-template',
     'assets/js/services/view-config',
     'assets/js/services/model-config',
     'jquerymy'
@@ -11,7 +11,7 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
 
     var propertySidebar = (function () {
 
-        var componentTemplate= ServiceComponentTemplate().config;
+        var componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig('create').config;
         var modelConfig= ServiceModelConfig('coba').config;
         var $propertiesForm=$('#properties-form');
