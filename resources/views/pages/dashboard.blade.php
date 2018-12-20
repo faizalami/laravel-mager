@@ -22,20 +22,28 @@
     </div>
     <div class="col-md-2 col-md-offset-2 col-xs-12">
         <i class="far fa-copy dashboard-menu-icon"></i>
-        <a class="dashboard-menu-link" href="#">Pages Manager</a>
+        <a class="dashboard-menu-link" href="{{ route('mager.pages.index') }}">Pages Manager</a>
     </div>
     <div class="col-md-2">
         <i class="fas fa-cogs dashboard-menu-icon"></i>
-        <a class="dashboard-menu-link" href="#">Project Configuration</a>
+        <a class="dashboard-menu-link" href="{{ route('mager.configuration.theme') }}">Project Configuration</a>
     </div>
     <div class="col-md-2">
         <i class="fas fa-server dashboard-menu-icon"></i>
-        <a class="dashboard-menu-link" href="#">REST Manager</a>
+        <a class="dashboard-menu-link" href="{{ route('mager.rest.index') }}">REST Manager</a>
     </div>
     <div class="col-md-2">
         <i class="fas fa-database dashboard-menu-icon"></i>
-        <a class="dashboard-menu-link" href="#">Database Manager</a>
+        <a class="dashboard-menu-link" href="{{ route('mager.database.index') }}">Database Manager</a>
     </div>
 </div>
+
+<script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
+<script>
+    require(['main'], function () {
+        require(['adminlte']);
+        require(['laravelmager']);
+    });
+</script>
 @endsection
 

@@ -120,7 +120,7 @@
 <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
 <script>
     require(['main'], function () {
-        require(['bootstrap']);
+        require(['adminlte']);
         require(['laravelmager']);
 
         localStorage.setItem('baseUrl', '{{ url(config('mager.base_url')) }}/');
