@@ -1,0 +1,6 @@
+{
+    "page": "PageName",
+    "controllerConfig": "controllername",
+    "modelConfig": "modelname",
+    "viewConfig": []
+}

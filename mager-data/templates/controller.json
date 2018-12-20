@@ -1,8 +1,7 @@
 {
-    "page": "PageName",
     "name": "NameController",
     "namespace": "App\\Http\\Controllers",
-    "url": "name",
+    "url": "controllerUrl",
     "defaultPage": "index",
     "web": true,
     "rest": true,
