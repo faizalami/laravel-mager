@@ -16,7 +16,6 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
         localStorage.setItem('model', 'modelname');
         localStorage.setItem('view', 'form');
 
-        console.log(ServiceViewConfig, ServiceModelConfig)
         var componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig.config;
         var modelConfig= ServiceModelConfig.config;
@@ -189,6 +188,11 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
             viewConfig.components[current.id]['index'] = current.index;
         };
 
+        const saveProperties = function () {
+            ServiceViewConfig.update(viewConfig);
+            ServiceModelConfig.update(modelConfig);
+        };
+
         const displayProperties= function (data) {
             if(data) {
                 current = data;
@@ -210,7 +214,8 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
         };
 
         return {
-            displayProperties: displayProperties
+            displayProperties: displayProperties,
+            saveProperties: saveProperties
         };
     })();
 

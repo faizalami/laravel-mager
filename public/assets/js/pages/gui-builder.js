@@ -21,6 +21,10 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             guiBuildePage.initSidebar();
 
             guiBuildePage.initDragAndDrop(sidebarItem);
+
+            $('#save-page-properties').click(function () {
+                propertySidebar.saveProperties();
+            });
         },
         initDrawingArea: function () {
 

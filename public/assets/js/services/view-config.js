@@ -3,7 +3,7 @@ define(['assets/js/services/json-io'], function (ServiceJsonIO) {
         const controller = localStorage.getItem('controller');
         const view = localStorage.getItem('view');
 
-        var url = 'view/' + controller + '/' + view;
+        var url = 'page/view/' + controller + '/' + view;
 
         const jsonIO = await ServiceJsonIO(url);
 

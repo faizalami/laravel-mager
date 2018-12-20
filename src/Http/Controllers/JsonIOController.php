@@ -92,14 +92,12 @@ class JsonIOController extends Controller
         if($jsonObject) {
             return [
                 'status' => true,
-                'message' => 'Save properties success.',
-                'data' => $jsonObject
+                'message' => 'Save properties success.'
             ];
         } else {
             return [
                 'status' => false,
-                'message' => 'Save properties failed.',
-                'data' => null
+                'message' => 'Save properties failed.'
             ];
         }
     }
