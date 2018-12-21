@@ -1,20 +1,21 @@
-// todo: dummy
-localStorage.setItem('controller', 'controllername');
-localStorage.setItem('model', 'modelname');
-localStorage.setItem('view', 'form');
-
 var loadFiles = [
     'jquery',
     'lodash',
+    'sweetalert',
     'promise!assets/js/services/component-template',
     'promise!assets/js/services/view-config',
     'promise!assets/js/services/model-config',
     'jquerymy'
 ];
 
-define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig) {
+define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig) {
 
     var propertySidebar = (function () {
+
+        // todo: dummy
+        localStorage.setItem('controller', 'controllername');
+        localStorage.setItem('model', 'modelname');
+        localStorage.setItem('view', 'form');
 
         var componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig.config;
@@ -189,8 +190,26 @@ define(loadFiles, function ($, _, ServiceComponentTemplate, ServiceViewConfig, S
         };
 
         const saveProperties = function () {
-            ServiceViewConfig.update(viewConfig);
-            ServiceModelConfig.update(modelConfig);
+            Promise.all([ServiceViewConfig.update(viewConfig), ServiceModelConfig.update(modelConfig)]).then(function (data) {
+                var status = 'success';
+                var message = '';
+                var errorCount = 0;
+
+                _.forEach(data, function (item) {
+                    message += item.message + '\n';
+                    if(!item.status) {
+                        errorCount++;
+                    }
+                });
+
+                if(errorCount === data.length) {
+                    status = 'error';
+                } else if(errorCount > 0 && errorCount < data.length) {
+                    status = 'warning';
+                }
+
+                swal(status.toUpperCase(), message, status);
+            });
         };
 
         const displayProperties= function (data) {

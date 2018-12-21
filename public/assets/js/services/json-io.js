@@ -13,6 +13,8 @@ define(['axios'], function (axios) {
             var response = await axios.post(url, updateData);
 
             data = response.data;
+
+            return data;
         };
 
         return {

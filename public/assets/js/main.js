@@ -7,6 +7,9 @@ requirejs.config({
         jqueyui: {
             deps: ['jquery']
         },
+        waitme: {
+            deps: ['jquery']
+        },
         jquerymy: {
             deps: ['sugarjs', 'jquery']
         },
@@ -34,6 +37,7 @@ requirejs.config({
         jquerymy: 'plugins/jquerymy/jquerymy.min',
         sugarjs: 'plugins/sugarjs/sugar.min',
         sweetalert: 'plugins/sweetalert/sweetalert.min',
+        waitme: 'plugins/waitMe/waitMe.min',
         promise: 'plugins/requirejs-promise/requirejs-promise',
         laravelmager: 'assets/js/components/laravel-mager'
     }

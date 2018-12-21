@@ -65,6 +65,7 @@ class JsonIOController extends Controller
     private function writeJson($type, array $param) {
         $jsonIO = new JsonIO();
         $jsonObject = $jsonIO->setJsonFromObject($this->request->all(), true);
+        $message = '';
 
         switch ($type) {
             case 'page':
@@ -92,12 +93,12 @@ class JsonIOController extends Controller
         if($jsonObject) {
             return [
                 'status' => true,
-                'message' => 'Save properties success.'
+                'message' => 'Save ' . $type . ' ' . $param[0] . ' success.'
             ];
         } else {
             return [
                 'status' => false,
-                'message' => 'Save properties failed.'
+                'message' => 'Save ' . $type . ' ' . $param[0] . ' failed.'
             ];
         }
     }

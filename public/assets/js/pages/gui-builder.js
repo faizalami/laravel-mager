@@ -3,10 +3,10 @@ var loadFiles = [
     'assets/js/components/gui-builder-dragable-config',
     'assets/js/components/gui-builder-sortable-config',
     'assets/js/components/property-sidebar',
+    'jqueryui'
 ];
 
 define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
-    require(['jqueryui']);
 
     var propertySidebar = ComponentPropertySidebar;
 
@@ -27,7 +27,6 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             });
         },
         initDrawingArea: function () {
-
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);
 
             $drawingArea.on('mouseenter mouseleave', '.component-row.place-component, .component-col.place-component', guiBuildePage.containerComponentHover);

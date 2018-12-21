@@ -14,6 +14,7 @@
 
 @section('additional-styles')
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/waitMe/waitMe.min.css') }}">
 @endsection
 
 @section('body')
@@ -120,12 +121,9 @@
 <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
 <script>
     require(['main'], function () {
-        require(['adminlte']);
-        require(['laravelmager']);
-
         localStorage.setItem('baseUrl', '{{ url(config('mager.base_url')) }}/');
 
-        require(['assets/js/pages/gui-builder']);
+        require(['adminlte', 'laravelmager', 'assets/js/pages/gui-builder']);
     });
 </script>
 
