@@ -19,7 +19,11 @@ class JsonIO
      * @return $this
      */
     public function loadJsonFile($path) {
-        $this->jsonString = file_get_contents(base_path(config('mager.data').$path));
+        try {
+            $this->jsonString = file_get_contents(base_path(config('mager.data').$path));
+        } catch (\Exception $e) {
+            $this->jsonString = "null";
+        }
         $this->jsonObject = json_decode($this->jsonString);
 
         return $this;

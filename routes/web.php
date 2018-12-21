@@ -6,8 +6,19 @@
  * Time: 11:30
  */
 
+use Faizalami\LaravelMager\Components\JsonIO;
+
 $namespace = 'Faizalami\LaravelMager\Http\Controllers';
 
+// Load custom route files
+$jsonIO = new JsonIO();
+$routes = $jsonIO->loadJsonFile('configs/routes.json')->toArray();
+foreach ($routes as $route) {
+    Route::prefix($route)
+        ->group(base_path('routes/app/' . $route . '.php'));
+}
+
+// Laravel Mager routes
 Route::group([
     'namespace' => $namespace,
     'prefix' => config('mager.base_url'),
@@ -22,10 +33,6 @@ Route::group([
     ], function () {
         Route::get('/', 'PagesManagerController@index')->name('index');
         Route::get('/gui-builder', 'GuiBuilderController@guiBuilder')->name('gui-builder');
-        Route::get('/config/component', 'GuiBuilderController@loadComponentConfiguration')->name('load-component-configuration');
-        Route::get('/config/page', 'GuiBuilderController@loadPropertiesTemplate')->name('load-properties-template');
-        Route::get('/config/page/{controllerName}/{pageName}', 'GuiBuilderController@loadProperties')->name('load-properties');
-        Route::post('/config/page/save/{controllerName}/{pageName}', 'GuiBuilderController@saveProperties')->name('save-properties');
     });
 
     Route::match(['get', 'post'],'/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');

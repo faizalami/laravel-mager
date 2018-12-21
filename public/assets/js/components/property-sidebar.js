@@ -185,6 +185,7 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
                 viewConfig.components[current.id][key] = item;
             });
 
+            viewConfig.components[current.id]['type'] = current.type;
             viewConfig.components[current.id]['parent'] = current.parent;
             viewConfig.components[current.id]['index'] = current.index;
         };

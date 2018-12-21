@@ -1,9 +1,11 @@
 {
-    "name": "NameController",
-    "namespace": "App\\Http\\Controllers",
-    "url": "controllerUrl",
-    "defaultPage": "index",
-    "web": true,
-    "rest": true,
+    "id": "name",
+    "name":"NameController",
+    "namespace":"App\\Http\\Controllers",
+    "url":"name",
+    "defaultPage":"index",
+    "model": "modelname",
+    "web":true,
+    "rest":true,
     "pages": {}
 }
