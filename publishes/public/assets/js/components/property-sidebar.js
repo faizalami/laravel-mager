@@ -1,3 +1,8 @@
+// todo: dummy
+localStorage.setItem('controller', 'demo');
+localStorage.setItem('model', 'demo');
+localStorage.setItem('view', 'form');
+
 var loadFiles = [
     'jquery',
     'lodash',
@@ -11,11 +16,6 @@ var loadFiles = [
 define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig) {
 
     var propertySidebar = (function () {
-
-        // todo: dummy
-        localStorage.setItem('controller', 'controllername');
-        localStorage.setItem('model', 'modelname');
-        localStorage.setItem('view', 'form');
 
         var componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig.config;

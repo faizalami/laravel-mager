@@ -1,0 +1,10 @@
+{
+    "page": "Demo Page",
+    "controllerConfig": "demo",
+    "modelConfig": "demo",
+    "viewConfig": [
+        {
+            "config": "form"
+        }
+    ]
+}

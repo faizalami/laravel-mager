@@ -69,6 +69,10 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             $('#show-page-properties').on('click', {type: 'page', id: 'page'}, function (event) {
                 propertySidebar.displayProperties(event.data);
             });
+
+            $('.property-sidebar').on('focus', 'input[type=text], input[type=number], textarea', function () {
+                $(this).select();
+            });
         },
         initDragAndDrop: function (sidebarItem) {
             var $sidebarItem = $(sidebarItem);

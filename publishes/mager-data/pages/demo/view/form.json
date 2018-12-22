@@ -1,0 +1,7 @@
+{
+    "controller": "demo",
+    "id": "demo",
+    "name": "demo",
+    "title": "Demo Page",
+    "components": {}
+}

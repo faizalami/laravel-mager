@@ -1,0 +1,64 @@
+{
+    "name":"DemoController",
+    "namespace":"App\\Http\\Controllers",
+    "url":"demo",
+    "defaultPage":"index",
+    "model": "Demo",
+    "web":true,
+    "rest":true,
+    "pages":{
+        "index":{
+            "web":true,
+            "rest":true,
+            "resource": "index",
+            "methods":[
+                "get"
+            ],
+            "url":"index",
+            "view":"index"
+        },
+        "view":{
+            "web":true,
+            "rest":true,
+            "resource": "show",
+            "methods":[
+                "get"
+            ],
+            "url":"view",
+            "view":"detail"
+        },
+        "create":{
+            "web":true,
+            "rest":true,
+            "resource": "create",
+            "methods":[
+                "get",
+                "post"
+            ],
+            "url":"create",
+            "view":"form"
+        },
+        "update":{
+            "web":true,
+            "rest":true,
+            "resource": "edit",
+            "methods":[
+                "get",
+                "post"
+            ],
+            "url":"update",
+            "view":"form"
+        },
+        "delete":{
+            "web":true,
+            "rest":true,
+            "resource": "destroy",
+            "methods":[
+                "post",
+                "delete"
+            ],
+            "url":"delete",
+            "view":null
+        }
+    }
+}

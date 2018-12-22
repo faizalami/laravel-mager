@@ -51,13 +51,10 @@ $activeMenu[Request::route()->getName()] = 'active';
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fas fa-cogs"></i></a>
+                        <a href="#" data-toggle="control-sidebar"><i class="fas fa-file-download"></i> Generate Project</a>
                     </li>
                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fas fa-cogs"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fas fa-cogs"></i></a>
+                        <a href="#" data-toggle="control-sidebar"><i class="fab fa-android"></i> Export Android Project</a>
                     </li>
                 </ul>
             </div>

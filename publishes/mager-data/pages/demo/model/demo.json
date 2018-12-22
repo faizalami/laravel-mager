@@ -1,0 +1,6 @@
+{
+    "name": "Demo",
+    "table": "demo",
+    "timestamp": true,
+    "columns": {}
+}
