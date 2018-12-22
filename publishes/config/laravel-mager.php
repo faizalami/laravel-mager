@@ -22,9 +22,6 @@ return [
         'jquery' => 'plugins/jquery-3.3.1/jquery-3.3.1.min.js',
         'bootstrap' => 'plugins/bootstrap-3.3.7-dist/js/bootstrap.min.js',
         'slimscroll' => 'plugins/jQuery-slimScroll-1.3.8/jquery.slimscroll.min.js',
-        'lodash' => 'plugins/lodash/lodash.min.js',
-        'axios' => 'plugins/axios/dist/axios.js',
-        'adminlte' => 'plugins/adminLTE-2.4.5/js/adminlte.min.js',
-        'laravel-mager' => 'assets/js/laravel-mager.js',
+        'adminlte' => 'plugins/adminLTE-2.4.5/js/adminlte.min.js'
     ],
 ];

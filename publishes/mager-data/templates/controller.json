@@ -1,5 +1,4 @@
 {
-    "id": "name",
     "name":"NameController",
     "namespace":"App\\Http\\Controllers",
     "url":"name",

@@ -36,12 +36,13 @@
                 "type":"textbox",
                 "value":"Textbox Label"
             },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Textbox"
+            },
             "name":{
                 "label":"Name",
-                "type":"textbox"
-            },
-            "value":{
-                "label":"Value",
                 "type":"textbox"
             },
             "minLength":{
@@ -71,12 +72,13 @@
                 "type":"textbox",
                 "value":"Numberbox Label"
             },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Numberbox"
+            },
             "name":{
                 "label":"Name",
-                "type":"textbox"
-            },
-            "value":{
-                "label":"Value",
                 "type":"textbox"
             },
             "minLength":{
@@ -106,12 +108,13 @@
                 "type":"textbox",
                 "value":"Emailbox Label"
             },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Emailbox"
+            },
             "name":{
                 "label":"Name",
-                "type":"textbox"
-            },
-            "value":{
-                "label":"Value",
                 "type":"textbox"
             },
             "minLength":{
@@ -141,12 +144,13 @@
                 "type":"textbox",
                 "value":"Passwordbox Label"
             },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Passwordbox"
+            },
             "name":{
                 "label":"Name",
-                "type":"textbox"
-            },
-            "value":{
-                "label":"Value",
                 "type":"textbox"
             },
             "minLength":{

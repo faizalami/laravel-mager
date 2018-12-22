@@ -5,3 +5,6 @@
  * Date: 21/12/18
  * Time: 16:27
  */
+?>
+
+<label id="{{ $dataId }}">{{ $text }}</label>

@@ -5,3 +5,8 @@
  * Date: 21/12/18
  * Time: 16:26
  */
+?>
+
+<div class="row" id="{{ $dataId }}">
+    {{ $content }}
+</div>

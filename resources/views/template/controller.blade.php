@@ -16,8 +16,18 @@ namespace {{ $namespace }};
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\{{ $model }};
 
 class {{ $name }} extends Controller {
+    $isApi = false;
+
+    public function __construct(Request $request)
+    {
+        if ($request->is('api/*')) {
+            $this->isApi = true;
+        }
+    }
+
     /**
     * Display a listing of the resource.
     *
@@ -26,31 +36,35 @@ class {{ $name }} extends Controller {
     public function index()
     {
         ${{ $modelObject }} = {{ $model }}::all();
-        return view('{{ $id . '.' . $pages->index->view }}', compact('{{ $modelObject }}'));
+
+        if($this->isApi) {
+            return ${{ $modelObject }};
+        } else {
+            return view('{{ $url . '.' . $pages['index']['view'] }}', compact('{{ $modelObject }}'));
+        }
     }
 
     /**
     * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function create()
-    {
-        return view('{{ $id . '.' . $pages->create->view }}');
-    }
-
-    /**
     * Store a newly created resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        ${{ $modelObject }} = new {{ $model }}($request->all());
-        ${{ $modelObject }}->save();
+        if (Request::isMethod('get')) {
+            return view('{{ $url . '.' . $pages['create']['view'] }}');
+        } elseif (Request::isMethod('post')) {
+            ${{ $modelObject }} = new {{ $model }}($request->all());
+            ${{ $modelObject }}->save();
 
-        return redirect(route('{{ $url . '.' . $pages->show->url }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been added');
+            if($this->isApi) {
+                return ${{ $modelObject }};
+            } else {
+                return redirect(route('{{ $url . '.' . $pages['show']['url'] }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been added');
+            }
+        }
     }
 
     /**
@@ -63,35 +77,40 @@ class {{ $name }} extends Controller {
     {
         ${{ $modelObject }} = {{ $model }}::find($id);
 
-        return view('{{ $id . '.' . $pages->show->view }}', compact('{{ $modelObject }}'));
+        if($this->isApi) {
+            return ${{ $modelObject }};
+        } else {
+            return view('{{ $url . '.' . $pages['show']['view'] }}', compact('{{ $modelObject }}'));
+        }
     }
 
     /**
     * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function edit($id)
-    {
-        ${{ $modelObject }} = {{ $model }}::find($id);
-
-        return view('{{ $id . '.' . $pages->edit->view }}', compact('{{ $modelObject }}'));
-    }
-
-    /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         ${{ $modelObject }} = {{ $model }}::find($id);
-        ${{ $modelObject }}->fill($request->all());
 
-        return redirect(route('{{ $url . '.' . $pages->show->url }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been updated');
+        if (Request::isMethod('get')) {
+            if($this->isApi) {
+                return ${{ $modelObject }};
+            } else {
+                return view('{{ $url . '.' . $pages['edit']['view'] }}', compact('{{ $modelObject }}'));
+            }
+        } elseif (Request::isMethod('post')) {
+            ${{ $modelObject }}->fill($request->all());
+
+            if($this->isApi) {
+                return ${{ $modelObject }};
+            } else {
+                return redirect(route('{{ $url . '.' . $pages['show']['url'] }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been updated');
+            }
+        }
     }
 
     /**
@@ -105,6 +124,10 @@ class {{ $name }} extends Controller {
         ${{ $modelObject }} = {{ $model }}::find($id);
         ${{ $modelObject }}->delete();
 
-        return redirect(route('{{ $url . '.' . $pages->index->url }}'))->with('success', '{{ $model }} item has been deleted');
+        if($this->isApi) {
+            return true;
+        } else {
+            return redirect(route('{{ $url . '.' . $pages['index']['url'] }}'))->with('success', '{{ $model }} item has been deleted');
+        }
     }
 }

@@ -46,9 +46,23 @@
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
 
 <!-- the fixed layout is not compatible with sidebar-mini -->
-<body class="hold-transition skin-red fixed {{ isset($layout)?$layout:'' }} sidebar-mini @yield('page-id')">
+<body class="hold-transition skin-{{ isset($skin)?$skin:'blue' }} fixed {{ isset($layout)?$layout:'' }} sidebar-mini @yield('page-id')">
 
 @yield('body')
 
+<!-- SCRIPTS -->
+@foreach(config('mager.js_assets') as $js_file)
+    <script src="{{ asset(config('mager.public_path').$js_file) }}"></script>
+@endforeach
+@yield('additional-scripts')
+<script>
+    $(document).ready(function () {
+        $('body').tooltip({
+            selector: '[data-toggle="tooltip"]',
+            container: 'body'
+        });
+    });
+</script>
+<!-- /SCRIPTS -->
 </body>
 </html>

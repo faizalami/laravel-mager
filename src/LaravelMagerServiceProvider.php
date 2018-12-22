@@ -27,15 +27,19 @@ class LaravelMagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mager');
 
         $this->publishes([
-            __DIR__ . '/../config/laravel-mager.php' => config_path('laravel-mager.php'),
+            __DIR__ . '/../publishes/config/laravel-mager.php' => config_path('laravel-mager.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../public' => public_path('faizalami/laravel-mager'),
+            __DIR__.'/../publishes/public' => public_path('faizalami/laravel-mager'),
         ], 'public');
 
         $this->publishes([
-            __DIR__ . '/../mager-data' => base_path('mager-data'),
+            __DIR__.'/../publishes/views' => resource_path('views'),
+        ], 'view');
+
+        $this->publishes([
+            __DIR__ . '/../publishes/mager-data' => base_path('mager-data'),
         ], 'vendor-data');
     }
 
@@ -44,7 +48,7 @@ class LaravelMagerServiceProvider extends ServiceProvider
      */
     public function register() {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/laravel-mager.php', 'mager'
+            __DIR__.'/../publishes/config/laravel-mager.php', 'mager'
         );
     }
 
