@@ -45,12 +45,12 @@
                 "label":"Name",
                 "type":"textbox"
             },
-            "minLength":{
+            "minlength":{
                 "label":"Min Length",
                 "type":"numberbox",
                 "value":0
             },
-            "maxLength":{
+            "maxlength":{
                 "label":"Max Length",
                 "type":"numberbox",
                 "value":255
@@ -81,12 +81,12 @@
                 "label":"Name",
                 "type":"textbox"
             },
-            "minLength":{
+            "minlength":{
                 "label":"Min Length",
                 "type":"numberbox",
                 "value":0
             },
-            "maxLength":{
+            "maxlength":{
                 "label":"Max Length",
                 "type":"numberbox",
                 "value":255
@@ -117,12 +117,12 @@
                 "label":"Name",
                 "type":"textbox"
             },
-            "minLength":{
+            "minlength":{
                 "label":"Min Length",
                 "type":"numberbox",
                 "value":0
             },
-            "maxLength":{
+            "maxlength":{
                 "label":"Max Length",
                 "type":"numberbox",
                 "value":255
@@ -153,15 +153,60 @@
                 "label":"Name",
                 "type":"textbox"
             },
-            "minLength":{
+            "minlength":{
                 "label":"Min Length",
                 "type":"numberbox",
                 "value":0
             },
-            "maxLength":{
+            "maxlength":{
                 "label":"Max Length",
                 "type":"numberbox",
                 "value":255
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
+    "textarea":{
+        "property": {
+            "data-id":{
+                "label":"ID",
+                "type":"textbox"
+            },
+            "label":{
+                "label":"Label",
+                "type":"textbox",
+                "value":"Textarea Label"
+            },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Textarea"
+            },
+            "name":{
+                "label":"Name",
+                "type":"textbox"
+            },
+            "minlength":{
+                "label":"Min Length",
+                "type":"numberbox",
+                "value":0
+            },
+            "maxlength":{
+                "label":"Max Length",
+                "type":"numberbox",
+                "value":255
+            },
+            "rows": {
+                "label":"Rows",
+                "type":"numberbox",
+                "value": 3
+            },
+            "cols": {
+                "label":"Cols",
+                "type":"numberbox"
             }
         },
         "db": {

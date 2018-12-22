@@ -111,6 +111,7 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
                 case 'numberbox':
                 case 'emailbox':
                 case 'passwordbox':
+                case 'textarea':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
                             setProperties(data);

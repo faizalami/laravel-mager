@@ -98,6 +98,7 @@
         <div class="sidebar-item" data-type="numberbox">Numberbox</div>
         <div class="sidebar-item" data-type="emailbox">Emailbox</div>
         <div class="sidebar-item" data-type="passwordbox">Passwordbox</div>
+        <div class="sidebar-item" data-type="textarea">Textarea</div>
         <div class="sidebar-item" data-type="button">Button</div>
         <div class="sidebar-item" data-type="row">Row Panel</div>
         <div class="sidebar-item" data-type="col">Column Panel</div>

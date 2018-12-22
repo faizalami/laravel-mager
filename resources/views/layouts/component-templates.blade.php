@@ -73,6 +73,13 @@
     </div>
 </template>
 
+<template id="template-textarea">
+    <div class="form-group">
+        <label class="component-label">Textarea Label</label>
+        <textarea class="form-control component-input" placeholder="Textarea placeholder" rows="3"></textarea>
+    </div>
+</template>
+
 <template id="template-button">
     <div class="form-group">
         <button class="btn btn-default component-button">Button</button>
