@@ -204,6 +204,10 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             } else {
                 viewConfig.components[current.id]['level'] = viewConfig.components[current.parent]['level'] + 1;
             }
+
+            _.forEach($('#' + current.id).siblings(), function (sibling) {
+                viewConfig.components[$(sibling).data('id')]['index'] = $(sibling).index();
+            })
         };
 
         const deleteProperties = function (id) {

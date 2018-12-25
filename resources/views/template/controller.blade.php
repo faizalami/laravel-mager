@@ -106,6 +106,7 @@ class {{ $name }} extends Controller {
             }
         } elseif ($request->isMethod('post')) {
             ${{ $modelObject }}->fill($request->all());
+            ${{ $modelObject }}->save();
 
             if($this->isApi) {
                 return response()->json(${{ $modelObject }});

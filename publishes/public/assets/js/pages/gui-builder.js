@@ -81,15 +81,18 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
                 switch (config.type) {
                     case 'label':
                     case 'button':
-                        $component.data('id', config['data-id'])
-                            .find('.component-'+config.type).html(config.text);
+                        $component.data({
+                            'id': config['data-id'],
+                            'type': config.type
+                        }).find('.component-'+config.type).html(config.text);
                         break;
                     case 'textbox':
                     case 'numberbox':
                     case 'emailbox':
                     case 'passwordbox':
                     case 'textarea':
-                        $component.find('.component-label')
+                        $component.data('type', config.type)
+                            .find('.component-label')
                             .html(config.label);
                         var $input = $component.find('.component-input');
 
@@ -103,6 +106,7 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
                         $input.attr(attr);
                         break;
                     case 'col':
+                        $component.data('type', config.type);
                         var colSize = {
                             xs: 6,
                             sm: 6,
@@ -116,6 +120,7 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
                         });
                         break;
                     default:
+                        $component.data('type', config.type);
                         console.log(config);
                         break;
                 }
@@ -129,7 +134,10 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
 
             $('.nested-sortable').sortable({
                 revert: true,
-                connectWith: '.drawing-area'
+                connectWith: '.drawing-area',
+                stop: function (event, ui) {
+                    ComponentSortableConfig(savedConfig).sortStopConfig(ui);
+                }
             });
         },
         // todo: jadikan 1 komponen

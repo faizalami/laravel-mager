@@ -39,33 +39,44 @@ define(['jquery', 'lodash', 'jqueryui'], function ($, _) {
             return parentId;
         };
 
+        var sortStopConfig = function (ui) {
+            ui.item.css('width', '');
+            $nestedSortableParent.css('border', '');
+
+            var type = ui.item.data('type');
+            var componentId = ui.item.attr('id');
+
+            if(componentId === undefined) {
+                componentId = getComponentId(type);
+            }
+
+            ui.item
+                .addClass('place-component')
+                .removeClass('drag-component')
+                .data('id', componentId)
+                .attr('id', componentId);
+
+            var data = {
+                type: type,
+                id: componentId,
+                parent: getParentId(ui.item),
+                index: ui.item.index()
+            };
+
+            $( '.component-sidebar .sidebar-item').trigger( 'dragstop', [ ui, data ] );
+        };
+
         var config = {
             revert: true,
             connectWith: '.nested-sortable',
             sort: function () {
                 $nestedSortableParent.css('border', 'solid 1px #5f5f5f');
             },
+            change: function () {
+                console.log('change');
+            },
             stop: function (event, ui) {
-                ui.item.css('width', '');
-                $nestedSortableParent.css('border', '');
-
-                var type = ui.item.data('type');
-                var componentId = getComponentId(type);
-
-                ui.item
-                    .addClass('place-component')
-                    .removeClass('drag-component')
-                    .data('id', componentId)
-                    .attr('id', componentId);
-
-                var data = {
-                    type: type,
-                    id: componentId,
-                    parent: getParentId(ui.item),
-                    index: ui.item.index()
-                };
-
-                $( ".component-sidebar .sidebar-item").trigger( "dragstop", [ ui, data ] );
+                sortStopConfig(ui);
             },
             receive: function () {
                 var $sortable = $('.nested-sortable');
@@ -73,13 +84,17 @@ define(['jquery', 'lodash', 'jqueryui'], function ($, _) {
                 $sortable.parent().prop('style', '');
                 $sortable.sortable({
                     revert: true,
-                    connectWith: '.drawing-area'
+                    connectWith: '.drawing-area',
+                    stop: function (event, ui) {
+                        sortStopConfig(ui);
+                    }
                 });
             }
         };
 
         return {
             $nestedSortable: $nestedSortable,
+            sortStopConfig: sortStopConfig,
             config: config
         };
     };
