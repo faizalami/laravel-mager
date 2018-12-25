@@ -5,6 +5,16 @@
  * Date: 21/12/18
  * Time: 16:34
  */
+
+function pageUrl($pageUrl, $params) {
+    if(count($params) > 0) {
+        foreach ($params as $param) {
+            $pageUrl .= '/{' . $param . '}';
+        }
+    }
+
+    return $pageUrl;
+}
 ?>
 
 {{ '<?'.'php' }}
@@ -18,10 +28,10 @@ Route::group([
         'as' => '{{ $url }}.'
     ], function () {
     @foreach($pages as $pageName => $page)
-        @if(count($page['methods']) > 1)
-        Route::{{ $page['methods'][0] }}();
+        @if(count($page->methods) > 1)
+        Route::match({{ str_replace('"', '\'', json_encode($page->methods)) }}, '/{{ pageUrl($page->url, $page->params) }}', '{{ $name . '@' . $page->resource }}')->name('{{ $page->url }}');
         @else
-        Route::match({{ str_replace('"', '\'', json_encode($page['methods'])) }}, '/{{ $page['url'] }}', '{{ $name . '@' . $page['resource'] }}');
+        Route::{{ $page->methods[0] }}('/{{ pageUrl($page->url, $page->params) }}', '{{ $name . '@' . $page->resource }}')->name('{{ $page->url }}');
         @endif
     @endforeach
     });
@@ -32,10 +42,10 @@ Route::group([
         'as' => '{{ $url }}.api.'
     ], function () {
     @foreach($pages as $pageName => $page)
-        @if(count($page['methods']) > 1)
-        Route::{{ $page['methods'][0] }}();
+        @if(count($page->methods) > 1)
+        Route::match({{ str_replace('"', '\'', json_encode($page->methods)) }}, '/{{ pageUrl($page->url, $page->params) }}', '{{ $name . '@' . $page->resource }}')->name('{{ $page->url }}');
         @else
-        Route::match({{ str_replace('"', '\'', json_encode($page['methods'])) }}, '/{{ $page['url'] }}', '{{ $name . '@' . $page['resource'] }}');
+        Route::{{ $page->methods[0] }}('/{{ pageUrl($page->url, $page->params) }}', '{{ $name . '@' . $page->resource }}')->name('{{ $page->url }}');
         @endif
     @endforeach
     });

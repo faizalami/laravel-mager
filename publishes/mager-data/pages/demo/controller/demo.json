@@ -15,6 +15,7 @@
                 "get"
             ],
             "url":"index",
+            "params": [],
             "view":"index"
         },
         "view":{
@@ -25,7 +26,8 @@
                 "get"
             ],
             "url":"view",
-            "view":"detail"
+            "params": [ "id" ],
+            "view":"show"
         },
         "create":{
             "web":true,
@@ -36,6 +38,7 @@
                 "post"
             ],
             "url":"create",
+            "params": [],
             "view":"form"
         },
         "update":{
@@ -47,6 +50,7 @@
                 "post"
             ],
             "url":"update",
+            "params": [ "id" ],
             "view":"form"
         },
         "delete":{
@@ -58,6 +62,7 @@
                 "delete"
             ],
             "url":"delete",
+            "params": [ "id" ],
             "view":null
         }
     }

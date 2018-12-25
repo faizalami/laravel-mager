@@ -9,10 +9,10 @@
 
 <div class="form-group">
     <label>{{ $label }}</label>
-    <textarea class="form-control"  id="{{ $dataId }}" name="{{ $name }}"
+    <textarea class="form-control"  id="{{ $id }}" name="{{ $name }}"
               placeholder="{{ $placeholder }}"
               minlength="{{ $minlength }}"
-              maxlength="{{ $minlength }}"
+              maxlength="{{ $maxlength }}"
               rows="{{ $rows }}"
-              cols="{{ $cols }}">{{ '{{$' . $name . '}' . '}' }}</textarea>
+              cols="{{ $cols }}">{{ '{{$' . $model . '->' . $name . '}' . '}' }}</textarea>
 </div>

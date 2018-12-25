@@ -9,44 +9,30 @@
 namespace Faizalami\LaravelMager\Components;
 
 
+use Faizalami\LaravelMager\Components\Generators\ControllerGenerator;
+use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
+use Faizalami\LaravelMager\Components\Generators\ModelGenerator;
+use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
+use Faizalami\LaravelMager\Components\Generators\ViewGenerator;
+
 class Generator
 {
-    private $config;
-    private $type;
-    private $outputDir;
-    private $outputFile;
-    private $outputString;
-
-    public function __construct($type, $config) {
-        $this->config = $config;
-        $this->type = $type;
-
-        if($type == 'view') {
-            foreach ($this->config['pages'] as $key => $page) {
-                $this->config['pages'][$key]['dataId'] = $this->config['pages'][$key]['data-id'];
-                unset($this->config['pages'][$key]['data-id']);
-            }
-        }
-    }
-
-    public function generate() {
-        switch ($this->type) {
-            case 'model':
-                $this->outputDir = app_path('Models');
-                $this->outputFile = $this->config['name'] . '.php';
-                break;
+    public static function init($type, $config) {
+        switch ($type) {
             case 'migration':
-                $this->outputDir = base_path('database/migrations');
-                $this->outputFile = date('Y_m_d_His_') . 'create_' . $this->config['table'] . '_table.php';
+                return new MigrationGenerator($config);
+                break;
+            case 'model':
+                return new ModelGenerator($config);
                 break;
             case 'controller':
-                $namespaceDir = array_slice(explode('\\', $this->config['namespace']), 1);
-                $this->outputDir = base_path(implode('/', $namespaceDir));
-                $this->outputFile = $this->config['name'] . '.php';
+                return new ControllerGenerator($config);
+                break;
+            case 'route':
+                return new RouteGenerator($config);
                 break;
             case 'view':
-                $this->outputDir = resource_path('views/'.$this->config['controller']);
-                $this->outputFile = $this->config['name'] . '.php';
+                return new ViewGenerator($config);
                 break;
         }
     }

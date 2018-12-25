@@ -7,6 +7,6 @@
  */
 ?>
 
-<div class="col-xs- col-sm- col-md- col-lg-" id="{{ $dataId }}">
+<div class="row" id="{{ $id }}">
     {{ $content }}
 </div>

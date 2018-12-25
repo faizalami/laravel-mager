@@ -9,6 +9,7 @@
 namespace Faizalami\LaravelMager;
 
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -22,6 +23,8 @@ class LaravelMagerServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot() {
+        Schema::defaultStringLength(191);
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mager');

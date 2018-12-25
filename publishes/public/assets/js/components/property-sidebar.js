@@ -23,8 +23,16 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
         var $propertiesForm=$('#properties-form');
         var current;
 
+        const defaultComponent = function () {
+            var component = {};
+            _.forEach(componentTemplate[current.type]['property'], function (property, name) {
+                component[name] = {...property};
+            });
+            return component;
+        };
+
         const currentComponent = function () {
-            var component = componentTemplate[current.type]['property'];
+            var component = defaultComponent();
 
             if(current.type === 'page') {
                 component.id.value = viewConfig.id;
@@ -41,7 +49,7 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
             return component;
         };
 
-        var drawForm = function (id, item, value) {
+        const drawForm = function (id, item, value) {
             var $template = $($('#template-property-input').html());
             var $input = $($('#template-property-'+item.type).html());
 
@@ -64,10 +72,12 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
         const initComponent = function () {
             var components = currentComponent();
             _.forEach(components, function (item, key) {
-                var value = item.value !== undefined ? item.value : '';
+                var value = '';
 
-                if(['data-id', 'name'].includes(key) && value === '') {
-                    value = current.id;
+                if(['data-id', 'name'].includes(key)) {
+                    value = item.value !== undefined ? item.value : current.id;
+                } else {
+                    value = item.value !== undefined ? item.value : '';
                 }
 
                 current.bind.model[key] = value;
@@ -125,6 +135,7 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
                             }
 
                             modelConfig.columns[data.name] = componentTemplate[current.type].db;
+                            modelConfig.columns[data.name]['label'] = data.label;
 
                             var attr = {};
                             _.forEach(data, function (value, key) {
@@ -154,8 +165,6 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
                                     .removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
                             });
-
-                            console.log(viewConfig);
                         },
                         watch: ids.join(', ')
                     };
@@ -189,6 +198,12 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
             viewConfig.components[current.id]['type'] = current.type;
             viewConfig.components[current.id]['parent'] = current.parent;
             viewConfig.components[current.id]['index'] = current.index;
+
+            if(current.parent === 'page') {
+                viewConfig.components[current.id]['level'] = 1;
+            } else {
+                viewConfig.components[current.id]['level'] = viewConfig.components[current.parent]['level'] + 1;
+            }
         };
 
         const saveProperties = function () {

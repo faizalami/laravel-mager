@@ -13,5 +13,8 @@
 {{ '@' }}section('page-id', '{{ $title }}')
 
 {{ '@' }}section('content')
+<form method="post">
+    {{ '@' }}csrf
     {{ $content }}
+</form>
 {{ '@' }}endsection

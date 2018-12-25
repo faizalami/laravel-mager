@@ -4,6 +4,12 @@
     "modelConfig": "demo",
     "viewConfig": [
         {
+            "config": "index"
+        },
+        {
+            "config": "show"
+        },
+        {
             "config": "form"
         }
     ]

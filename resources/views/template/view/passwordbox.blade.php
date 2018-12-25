@@ -9,8 +9,8 @@
 
 <div class="form-group">
     <label>{{ $label }}</label>
-    <input type="number" class="form-control" id="{{ $dataId }}" name="{{ $name }}"
-           value="{{ '{{$' . $name . '}' . '}' }}"
+    <input type="password" class="form-control" id="{{ $id }}" name="{{ $name }}"
+           value="{{ '{{$' . $model . '->' . $name . '}' . '}' }}"
            placeholder="{{ $placeholder }}"
            minlength="{{ $minlength }}"
            maxlength="{{ $maxlength }}">

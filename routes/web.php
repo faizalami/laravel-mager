@@ -12,10 +12,14 @@ $namespace = 'Faizalami\LaravelMager\Http\Controllers';
 
 // Load custom route files
 $jsonIO = new JsonIO();
+
 $routes = $jsonIO->loadJsonFile('configs/routes.json')->toArray();
 foreach ($routes as $route) {
-    Route::prefix($route)
-        ->group(base_path('routes/app/' . $route . '.php'));
+    $routeFile = base_path('routes/app/' . $route . '.php');
+    if(file_exists($routeFile)) {
+        Route::prefix('/')
+            ->group($routeFile);
+    }
 }
 
 // Laravel Mager routes
@@ -36,6 +40,8 @@ Route::group([
     });
 
     Route::match(['get', 'post'],'/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');
+
+    Route::get('/generate', 'GeneratorController@generate');
 
     Route::group([
         'prefix' => 'configuration',

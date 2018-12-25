@@ -8,5 +8,5 @@
 ?>
 
 <div class="form-group">
-    <button type="submit" class="btn btn-default" id="{{ $dataId }}">{{ $text }}</button>
+    <button type="submit" class="btn btn-default" id="{{ $id }}">{{ $text }}</button>
 </div>

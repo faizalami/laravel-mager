@@ -15,9 +15,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class {{ $name }} extends Model
 {
+    protected $table = '{{ $table }}';
+
     protected $fillable = [
         @foreach($columns as $columnName => $column)
         '{{ $columnName }}',
+        @endforeach
+    ];
+
+    public static $columnLabels = [
+        'id' => 'ID',
+        @foreach($columns as $columnName => $column)
+        '{{ $columnName }}' => '{{ $column->label }}',
         @endforeach
     ];
 }

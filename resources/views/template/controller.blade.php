@@ -7,7 +7,6 @@
  */
 
 $modelObject = lcfirst($model);
-
 ?>
 
 {{ '<?'.'php' }}
@@ -19,7 +18,7 @@ use App\Http\Controllers\Controller;
 use App\Models\{{ $model }};
 
 class {{ $name }} extends Controller {
-    $isApi = false;
+    private $isApi = false;
 
     public function __construct(Request $request)
     {
@@ -36,11 +35,12 @@ class {{ $name }} extends Controller {
     public function index()
     {
         ${{ $modelObject }} = {{ $model }}::all();
+        $columnLabels =  {{ $model }}::$columnLabels;
 
         if($this->isApi) {
-            return ${{ $modelObject }};
+            return response()->json(${{ $modelObject }});
         } else {
-            return view('{{ $url . '.' . $pages['index']['view'] }}', compact('{{ $modelObject }}'));
+            return view('{{ $url . '.' . $pages->index->view }}', compact('{{ $modelObject }}', 'columnLabels'));
         }
     }
 
@@ -53,16 +53,17 @@ class {{ $name }} extends Controller {
     */
     public function create(Request $request)
     {
-        if (Request::isMethod('get')) {
-            return view('{{ $url . '.' . $pages['create']['view'] }}');
-        } elseif (Request::isMethod('post')) {
+        if ($request->isMethod('get')) {
+            ${{ $modelObject }} = new {{ $model }}();
+            return view('{{ $url . '.' . $pages->create->view }}', compact('{{ $modelObject }}'));
+        } elseif ($request->isMethod('post')) {
             ${{ $modelObject }} = new {{ $model }}($request->all());
             ${{ $modelObject }}->save();
 
             if($this->isApi) {
-                return ${{ $modelObject }};
+                return response()->json(${{ $modelObject }});
             } else {
-                return redirect(route('{{ $url . '.' . $pages['show']['url'] }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been added');
+                return redirect(route('{{ $url . '.' . $pages->view->url }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been added');
             }
         }
     }
@@ -76,11 +77,12 @@ class {{ $name }} extends Controller {
     public function show($id)
     {
         ${{ $modelObject }} = {{ $model }}::find($id);
+        $columnLabels =  {{ $model }}::$columnLabels;
 
         if($this->isApi) {
-            return ${{ $modelObject }};
+            return response()->json(${{ $modelObject }});
         } else {
-            return view('{{ $url . '.' . $pages['show']['view'] }}', compact('{{ $modelObject }}'));
+            return view('{{ $url . '.' . $pages->view->view }}', compact('{{ $modelObject }}', 'columnLabels'));
         }
     }
 
@@ -96,19 +98,19 @@ class {{ $name }} extends Controller {
     {
         ${{ $modelObject }} = {{ $model }}::find($id);
 
-        if (Request::isMethod('get')) {
+        if ($request->isMethod('get')) {
             if($this->isApi) {
-                return ${{ $modelObject }};
+                return response()->json(${{ $modelObject }});
             } else {
-                return view('{{ $url . '.' . $pages['edit']['view'] }}', compact('{{ $modelObject }}'));
+                return view('{{ $url . '.' . $pages->update->view }}', compact('{{ $modelObject }}'));
             }
-        } elseif (Request::isMethod('post')) {
+        } elseif ($request->isMethod('post')) {
             ${{ $modelObject }}->fill($request->all());
 
             if($this->isApi) {
-                return ${{ $modelObject }};
+                return response()->json(${{ $modelObject }});
             } else {
-                return redirect(route('{{ $url . '.' . $pages['show']['url'] }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been updated');
+                return redirect(route('{{ $url . '.' . $pages->view->url }}', ['id' => ${{ $modelObject }}->id]))->with('success', '{{ $model }} has been updated');
             }
         }
     }
@@ -125,9 +127,9 @@ class {{ $name }} extends Controller {
         ${{ $modelObject }}->delete();
 
         if($this->isApi) {
-            return true;
+            return response()->json(true);
         } else {
-            return redirect(route('{{ $url . '.' . $pages['index']['url'] }}'))->with('success', '{{ $model }} item has been deleted');
+            return redirect(route('{{ $url . '.' . $pages->index->url }}'))->with('success', '{{ $model }} item has been deleted');
         }
     }
 }
