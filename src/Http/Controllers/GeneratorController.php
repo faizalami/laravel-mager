@@ -42,6 +42,8 @@ class GeneratorController extends Controller
             $generator = Generator::init($generate['type'], $generate['config']);
             $generator->render()->generate();
         }
+
+        return 'success';
     }
 
     private function queueConfig($type, $config) {

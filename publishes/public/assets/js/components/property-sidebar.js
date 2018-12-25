@@ -8,14 +8,13 @@ var loadFiles = [
     'lodash',
     'sweetalert',
     'promise!assets/js/services/component-template',
-    'promise!assets/js/services/view-config',
     'promise!assets/js/services/model-config',
     'jquerymy'
 ];
 
-define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewConfig, ServiceModelConfig) {
+define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceModelConfig) {
 
-    var propertySidebar = (function () {
+    var propertySidebar = function (ServiceViewConfig) {
 
         var componentTemplate= ServiceComponentTemplate.config;
         var viewConfig= ServiceViewConfig.config;
@@ -253,7 +252,7 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceViewCon
             displayProperties: displayProperties,
             saveProperties: saveProperties
         };
-    })();
+    };
 
     return propertySidebar;
 });

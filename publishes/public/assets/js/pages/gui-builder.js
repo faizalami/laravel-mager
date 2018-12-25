@@ -1,14 +1,21 @@
+// todo: dummy
+localStorage.setItem('controller', 'demo');
+localStorage.setItem('model', 'demo');
+localStorage.setItem('view', 'form');
+
 var loadFiles = [
     'jquery',
+    'promise!assets/js/services/view-config',
     'assets/js/components/gui-builder-dragable-config',
     'assets/js/components/gui-builder-sortable-config',
     'assets/js/components/property-sidebar',
     'jqueryui'
 ];
 
-define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
+define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
 
-    var propertySidebar = ComponentPropertySidebar;
+    var propertySidebar = ComponentPropertySidebar(ServiceViewConfig);
+    var savedConfig= ServiceViewConfig.config.components;
 
     var $drawingArea = $('.drawing-area');
 
@@ -25,6 +32,8 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
             $('#save-page-properties').click(function () {
                 propertySidebar.saveProperties();
             });
+
+            guiBuildePage.loadSavedLayout();
         },
         initDrawingArea: function () {
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);
@@ -57,6 +66,87 @@ define(loadFiles, function ($, ComponentDragableConfig, ComponentSortableConfig,
                 propertySidebar.displayProperties(data);
             });
 
+        },
+        loadSavedLayout: function () {
+            var configQueue = _.chain(savedConfig)
+                .sortBy(['level', 'index'])
+                .value();
+
+            // todo: jadikan 1 komponen
+            _.forEach(configQueue, function (config) {
+                var id = _.findKey(savedConfig, ['data-id', config['data-id']]);
+
+                var $component = guiBuildePage.getComponent(config.type, id);
+
+                switch (config.type) {
+                    case 'label':
+                    case 'button':
+                        $component.data('id', config['data-id'])
+                            .find('.component-'+config.type).html(config.text);
+                        break;
+                    case 'textbox':
+                    case 'numberbox':
+                    case 'emailbox':
+                    case 'passwordbox':
+                    case 'textarea':
+                        $component.find('.component-label')
+                            .html(config.label);
+                        var $input = $component.find('.component-input');
+
+                        var attr = {};
+                        _.forEach(config, function (value, key) {
+                            if(key !== 'label') {
+                                attr[key] = value;
+                            }
+                        });
+
+                        $input.attr(attr);
+                        break;
+                    case 'col':
+                        var colSize = {
+                            xs: 6,
+                            sm: 6,
+                            md: 4,
+                            lg: 4
+                        };
+                        _.forEach(colSize, function (size, colName) {
+                            $component.css('border', 'solid 1px #5f5f5f')
+                                .removeClass('col-' + colName + '-' + size)
+                                .addClass('col-' + colName + '-' + config[colName]);
+                        });
+                        break;
+                    default:
+                        console.log(config);
+                        break;
+                }
+
+                if(config.parent === 'page') {
+                    $drawingArea.append($component);
+                } else {
+                    $('#' + config.parent).children('.nested-sortable').append($component);
+                }
+            });
+        },
+        // todo: jadikan 1 komponen
+        getComponent: function (type, id) {
+            var containerType = 'component';
+            if (type === 'row' || type === 'col') {
+                containerType = type;
+            }
+
+            var $component = $($('#template-' + containerType).html());
+            $component.find('.button-property').data('type', type);
+
+            if(containerType === 'component') {
+                $component.children('.component-body').html($('#template-' + type).html());
+            }
+
+            $component.addClass('place-component')
+                .removeClass('drag-component')
+                .data('id', id)
+                .attr('id', id);
+
+            return $component;
         },
         initSidebar: function () {
 

@@ -42,3 +42,15 @@ requirejs.config({
         laravelmager: 'assets/js/components/laravel-mager'
     }
 });
+
+requirejs(['jquery', 'axios', 'sweetalert'], function ($, axios, swal) {
+    $(document).ready(function () {
+        $('#generate-button').click(function () {
+            axios.get('/laravel-mager/generate').then(function () {
+                swal('SUCCESS', 'Files Generated Successfully', 'success');
+            }).catch(function () {
+                swal('ERROR', 'Generate Failed', 'error');
+            })
+        });
+    });
+});

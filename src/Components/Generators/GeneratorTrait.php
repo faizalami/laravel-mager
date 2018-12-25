@@ -34,6 +34,9 @@ trait GeneratorTrait
 
     public function generate() {
         $pathString = '/';
+        if(is_dir('/')) {
+            $pathString = '/';
+        }
 
         foreach(explode('/', $this->outputPath) as $key => $directory) {
             $pathString .= $directory . '/';
