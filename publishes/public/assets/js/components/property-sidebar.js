@@ -7,12 +7,13 @@ var loadFiles = [
     'jquery',
     'lodash',
     'sweetalert',
+    'moment',
     'promise!assets/js/services/component-template',
     'promise!assets/js/services/model-config',
     'jquerymy'
 ];
 
-define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceModelConfig) {
+define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, ServiceModelConfig) {
 
     var propertySidebar = function (ServiceViewConfig) {
 
@@ -205,7 +206,26 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceModelCo
             }
         };
 
+        const deleteProperties = function (id) {
+            var columnName = viewConfig.components[id]['name'];
+
+            delete viewConfig.components[id];
+            delete modelConfig.columns[columnName];
+        };
+
         const saveProperties = function () {
+            var time = moment().format('YYYY_MM_DD_HHmmss');
+            var history = {
+                time: time,
+                table: {}
+            };
+
+            _.forEach(modelConfig.columns, function (config, name) {
+                history.table[name] = {...config};
+            });
+
+            modelConfig.history.push(history);
+
             Promise.all([ServiceViewConfig.update(viewConfig), ServiceModelConfig.update(modelConfig)]).then(function (data) {
                 var status = 'success';
                 var message = '';
@@ -250,7 +270,8 @@ define(loadFiles, function ($, _, swal, ServiceComponentTemplate, ServiceModelCo
 
         return {
             displayProperties: displayProperties,
-            saveProperties: saveProperties
+            saveProperties: saveProperties,
+            deleteProperties: deleteProperties
         };
     };
 
