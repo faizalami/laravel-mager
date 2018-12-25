@@ -1,5 +1,5 @@
-define(['jquery', 'jqueryui'], function ($) {
-    var sortableConfig = function ($sortableComponent = null) {
+define(['jquery', 'lodash', 'jqueryui'], function ($, _) {
+    var sortableConfig = function (savedConfig, $sortableComponent = null) {
         var $nestedSortable = (function () {
             if ($sortableComponent === null) {
                 return $('.nested-sortable');
@@ -9,6 +9,12 @@ define(['jquery', 'jqueryui'], function ($) {
         })();
 
         var defaultIds = [];
+        _.forEach(savedConfig, function (config, id) {
+            var type = id.replace(/[0-9]/g, '');
+            var number = parseInt(id.replace(/[a-zA-Z]/g, ''));
+
+            defaultIds[type] = number;
+        });
 
         var $nestedSortableParent = $nestedSortable.parent();
 

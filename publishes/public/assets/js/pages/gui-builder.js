@@ -23,6 +23,8 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
         init: function() {
             var sidebarItem = '.component-sidebar .sidebar-item';
 
+            guiBuildePage.loadSavedLayout();
+
             guiBuildePage.initDrawingArea();
 
             guiBuildePage.initSidebar();
@@ -32,8 +34,6 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
             $('#save-page-properties').click(function () {
                 propertySidebar.saveProperties();
             });
-
-            guiBuildePage.loadSavedLayout();
         },
         initDrawingArea: function () {
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);
@@ -126,6 +126,11 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
                     $('#' + config.parent).children('.nested-sortable').append($component);
                 }
             });
+
+            $('.nested-sortable').sortable({
+                revert: true,
+                connectWith: '.drawing-area'
+            });
         },
         // todo: jadikan 1 komponen
         getComponent: function (type, id) {
@@ -168,7 +173,7 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
             var $sidebarItem = $(sidebarItem);
 
             $sidebarItem.draggable(ComponentDragableConfig().config);
-            $drawingArea.sortable(ComponentSortableConfig().config);
+            $drawingArea.sortable(ComponentSortableConfig(savedConfig).config);
 
             $sidebarItem.on('dragstop', function (event, comp, data) {
                 propertySidebar.displayProperties(data);
@@ -179,9 +184,11 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
         },
         removeComponent: function () {
             guiBuildePage.hideTooltip();
+            var id = $(this).parent().parent().data('id');
             $(this).parent().parent().slideUp('slow', function () {
                 $(this).remove();
             });
+            propertySidebar.deleteProperties(id);
         },
         containerComponentHover: function(event){
             var $containerComponent = $('.nested-sortable').parent();

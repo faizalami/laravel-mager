@@ -39,6 +39,7 @@ requirejs.config({
         sweetalert: 'plugins/sweetalert/sweetalert.min',
         waitme: 'plugins/waitMe/waitMe.min',
         promise: 'plugins/requirejs-promise/requirejs-promise',
+        moment: 'plugins/moment/moment.min',
         laravelmager: 'assets/js/components/laravel-mager'
     }
 });
