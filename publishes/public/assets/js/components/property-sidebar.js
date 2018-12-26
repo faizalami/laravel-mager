@@ -228,7 +228,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 history.table[name] = {...config};
             });
 
-            if(!_.isEqual(_.last(modelConfig.history).table, modelConfig.columns)) {
+            if(_.last(modelConfig.history) === undefined || !_.isEqual(_.last(modelConfig.history).table, modelConfig.columns)) {
                 modelConfig.history.push(history);
             }
 

@@ -16,7 +16,7 @@
             ],
             "url":"index",
             "params": [],
-            "view":"index"
+            "view":"index-demo"
         },
         "view":{
             "web":true,
@@ -27,7 +27,7 @@
             ],
             "url":"view",
             "params": [ "id" ],
-            "view":"show"
+            "view":"show-demo"
         },
         "create":{
             "web":true,
