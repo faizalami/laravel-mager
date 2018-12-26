@@ -72,9 +72,6 @@ define(['jquery', 'lodash', 'jqueryui'], function ($, _) {
             sort: function () {
                 $nestedSortableParent.css('border', 'solid 1px #5f5f5f');
             },
-            change: function () {
-                console.log('change');
-            },
             stop: function (event, ui) {
                 sortStopConfig(ui);
             },
