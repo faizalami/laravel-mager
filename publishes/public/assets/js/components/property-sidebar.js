@@ -228,7 +228,9 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 history.table[name] = {...config};
             });
 
-            modelConfig.history.push(history);
+            if(!_.isEqual(_.last(modelConfig.history).table, modelConfig.columns)) {
+                modelConfig.history.push(history);
+            }
 
             Promise.all([ServiceViewConfig.update(viewConfig), ServiceModelConfig.update(modelConfig)]).then(function (data) {
                 var status = 'success';
