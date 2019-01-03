@@ -1,8 +1,3 @@
-// todo: dummy
-localStorage.setItem('controller', 'demo');
-localStorage.setItem('model', 'demo');
-localStorage.setItem('view', 'form');
-
 var loadFiles = [
     'jquery',
     'lodash',

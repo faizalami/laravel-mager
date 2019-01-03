@@ -9,15 +9,18 @@
 namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Faizalami\LaravelMager\Components\JsonIO;
-use Illuminate\Http\Request;
+use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
 
 class GuiBuilderController extends Controller
 {
+    use JsonIOControllerTrait;
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function guiBuilder() {
-        return view('mager::pages.pages-manager.gui-builder');
+    public function guiBuilder($controller, $view) {
+        $configView = $this->loadJson('pages/' . $controller . '/view/' . $view . '.json');
+
+        return view('mager::pages.pages-manager.gui-builder', compact('configView'));
     }
 }

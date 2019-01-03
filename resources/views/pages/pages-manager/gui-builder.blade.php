@@ -121,6 +121,10 @@
 
 <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
 <script>
+    localStorage.setItem('controller', '{{ $configView->controller }}');
+    localStorage.setItem('model', '{{ $configView->model }}');
+    localStorage.setItem('view', '{{ $configView->name }}');
+
     require(['main'], function () {
         localStorage.setItem('baseUrl', '{{ url(config('mager.base_url')) }}/');
 

@@ -21,7 +21,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form action="" method="post">
+                    <form method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -34,7 +34,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Base Route URL</label>
-                                    <input type="text" class="form-control" name="url" placeholder="Enter Base Route URL">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">{{ url('/') . '/' }}</div>
+                                        <input type="text" class="form-control" name="url" placeholder="Enter Base Route URL">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Model Name</label>
@@ -50,7 +53,8 @@
                                     </label>
                                     <p class="help-block">This controller will be enabled to be REST API.</p>
                                 </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-warning" href="{{ route('mager.pages.index') }}">Back</a>
                             </div>
                         </div>
                     </form>

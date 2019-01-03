@@ -4,7 +4,7 @@
     "url":"name",
     "defaultPage":"index",
     "model": "modelname",
-    "web":true,
-    "rest":true,
+    "web":false,
+    "rest":false,
     "pages": {}
 }

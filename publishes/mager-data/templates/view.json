@@ -1,7 +1,8 @@
 {
-    "page": "PageName",
+    "controller": "controllerUrl",
     "id": "page-id",
     "name": "ViewName",
     "title": "PageTitle",
+    "model": "ModelName",
     "components": {}
 }

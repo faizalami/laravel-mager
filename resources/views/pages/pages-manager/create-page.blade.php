@@ -9,7 +9,7 @@
 
 @extends('mager::layouts.main', ['breadcrumb' => 'Pages Manager'])
 
-@section('title', 'Create Controller | Pages Manager')
+@section('title', 'Create Page | Pages Manager')
 @section('page-id', 'create-controller')
 
 @section('content')
@@ -21,21 +21,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form action="" method="post">
+                    <form method="post">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Page ID</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Page ID">
-                                </div>
-                                <div class="form-group">
-                                    <label>Page Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Enter Page Title">
-                                </div>
-                                <div class="form-group">
-                                    <label>Page URL</label>
-                                    <input type="text" class="form-control" name="url" placeholder="Enter Page URL">
-                                </div>
                                 <div class="form-group">
                                     <label>Page Type</label>
                                     <select name="resource">
@@ -48,6 +36,18 @@
                                     </select>
                                     <p class="help-block">Choose CRUD type for page.</p>
                                 </div>
+                                <div class="form-group">
+                                    <label>Page Title</label>
+                                    <input type="text" class="form-control" name="title" placeholder="Enter Page Title">
+                                </div>
+                                <div class="form-group">
+                                    <label>Page URL</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">{{ url($configController->url) . '/' }}</div>
+                                        <input type="text" class="form-control" name="url" placeholder="Enter Page URL">
+                                    </div>
+                                </div>
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="web" value="true"> Web Controller
@@ -59,11 +59,29 @@
                                     <p class="help-block">This page will be accessible via REST API.</p>
                                 </div>
                                 <div class="form-group">
+                                    <label>Request Method</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="methods[]" value="get"> GET
+                                        </label> <br>
+                                        <label>
+                                            <input type="checkbox" name="methods[]" value="post"> POST
+                                        </label> <br>
+                                        <label>
+                                            <input type="checkbox" name="methods[]" value="put"> PUT
+                                        </label> <br>
+                                        <label>
+                                            <input type="checkbox" name="methods[]" value="delete"> DELETE
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label>View File Name</label>
-                                    <input type="text" class="form-control" name="url" placeholder="Enter View File Name">
+                                    <input type="text" class="form-control" name="view" placeholder="Enter View File Name">
                                     <p class="help-block">Use existing view file name if needed.</p>
                                 </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a class="btn btn-warning" href="{{ route('mager.pages.index') }}">Back</a>
                             </div>
                         </div>
                     </form>

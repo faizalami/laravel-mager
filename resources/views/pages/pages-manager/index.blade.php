@@ -18,156 +18,50 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">Controller List</h3>
-                    <a class="btn btn-xs btn-primary pull-right btn-new-controller" href="#">New Controller <i class="fas fa-plus-circle"></i></a>
+                    <a class="btn btn-xs btn-primary pull-right btn-new-controller" href="{{ route('mager.pages.create.controller') }}">New Controller <i class="fas fa-plus-circle"></i></a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="box-group box-list-controller" id="accordion">
-                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                        @php($i = 1)
+                        @foreach($controllers as $controller)
                         <div class="panel box box-default">
                             <div class="box-header with-border">
                                 <h4 class="box-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                        Blog
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{ $controller->url }}">
+                                        {{ $controller->name }}
                                     </a>
                                 </h4>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in">
+                            <div id="{{ $controller->url }}" class="panel-collapse collapse @if($i == 1) in @endif">
                                 <ul class="list-group">
+
+                                    @foreach($controller->pages as $id => $page)
                                     <li class="list-group-item">
-                                        Blog List
+                                        {{ $page->title }}
 
                                         <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Detail" href="{{ route('mager.pages.show.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-file-alt"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit View" href="{{ route('mager.pages.gui-builder', ['controller' => $controller->url, 'view' => $page->view]) }}"><i class="fas fa-edit"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
                                         </span>
                                     </li>
-                                    <li class="list-group-item">
-                                        Blog View
+                                    @endforeach
 
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Blog Form <small>(Insert | Update)</small>
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
                                     <li class="list-group-item controller-action">
                                         <b>Controller Action</b>
                                         <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="{{ route('mager.pages.show.controller', ['controller' => $controller->url]) }}"><i class="far fa-eye"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Model Detail" href="#"><i class="fas fa-database"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.create.page', [ 'controller' => $controller->url ]) }}">New Page <i class="far fa-file"></i></a>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="panel box box-default">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        Contact
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        Contact List
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Contact View
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Contact Form <small>(Insert | Update)</small>
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item controller-action">
-                                        <b>Controller Action</b>
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel box box-default">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        Gallery
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        Gallery List
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Gallery View
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Gallery Form <small>(Insert | Update)</small>
-
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Preview" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page" href="#"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
-                                        </span>
-                                    </li>
-                                    <li class="list-group-item controller-action">
-                                        <b>Controller Action</b>
-                                        <span class="pull-right">
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="#"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.gui-builder') }}">New Page <i class="far fa-file"></i></a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        @php($i++)
+                        @endforeach
                     </div>
                 </div>
                 <!-- /.box-body -->

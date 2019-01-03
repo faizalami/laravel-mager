@@ -1,0 +1,10 @@
+{
+    "web":false,
+    "rest":false,
+    "resource": "index",
+    "title": "Page Title",
+    "methods":[],
+    "url":"url",
+    "params": [],
+    "view":"viewName"
+}
