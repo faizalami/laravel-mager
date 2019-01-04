@@ -40,7 +40,7 @@ Route::group([
         Route::match(['get', 'post'],'/create/page/{controller}', 'PagesManagerController@createPage')->name('create.page');
         Route::get('/show/controller/{controller}', 'PagesManagerController@showController')->name('show.controller');
         Route::get('/show/page/{controller}/{page}', 'PagesManagerController@showPage')->name('show.page');
-        Route::get('/edit/view/{controller}/{view}', 'GuiBuilderController@guiBuilder')->name('gui-builder');
+        Route::get('/edit/view/{controller}/{page}', 'GuiBuilderController@guiBuilder')->name('gui-builder');
     });
 
     Route::match(['get', 'post'],'/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');

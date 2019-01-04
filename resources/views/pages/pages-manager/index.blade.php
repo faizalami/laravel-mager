@@ -42,7 +42,7 @@
 
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Detail" href="{{ route('mager.pages.show.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-file-alt"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit View" href="{{ route('mager.pages.gui-builder', ['controller' => $controller->url, 'view' => $page->view]) }}"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit View" href="{{ route('mager.pages.gui-builder', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-edit"></i></a>
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
                                         </span>
                                     </li>
