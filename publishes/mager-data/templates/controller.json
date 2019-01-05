@@ -2,7 +2,7 @@
     "name":"NameController",
     "namespace":"App\\Http\\Controllers",
     "url":"name",
-    "defaultPage":"index",
+    "defaultPage":"",
     "model": "modelname",
     "web":false,
     "rest":false,

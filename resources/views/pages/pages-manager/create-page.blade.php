@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Page Type</label>
-                                    <select name="resource">
+                                    <select name="resource" id="resource">
                                         <option value="" selected>Choose Page Type</option>
                                         <option value="index">Index</option>
                                         <option value="show">Show</option>
@@ -58,22 +58,20 @@
                                     </label>
                                     <p class="help-block">This page will be accessible via REST API.</p>
                                 </div>
-                                <div class="form-group">
-                                    <label>Request Method</label>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="methods[]" value="get"> GET
-                                        </label> <br>
-                                        <label>
-                                            <input type="checkbox" name="methods[]" value="post"> POST
-                                        </label> <br>
-                                        <label>
-                                            <input type="checkbox" name="methods[]" value="put"> PUT
-                                        </label> <br>
-                                        <label>
-                                            <input type="checkbox" name="methods[]" value="delete"> DELETE
-                                        </label>
+                                <div class="checkbox" id="landing">
+                                    <label>
+                                        <input type="checkbox" name="landing" value="true"> Set as Landing Page
+                                    </label>
+                                    <p class="help-block">This page will be controller landing page.</p>
+                                </div>
+                                <div class="form-group" id="redirect">
+                                    <label>Redirect URL</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">{{ url('/') . '/' }}</div>
+                                        <input type="text" class="form-control" name="redirect" placeholder="Enter Redirect URL">
                                     </div>
+                                    <p class="help-block">Redirect URL after create, edit, or destroy.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>View File Name</label>
@@ -95,8 +93,7 @@
     <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
     <script>
         require(['main'], function () {
-            require(['adminlte']);
-            require(['laravelmager']);
+            require(['adminlte', 'laravelmager', 'assets/js/pages/create-page']);
         });
     </script>
 @endsection

@@ -39,11 +39,14 @@
                                     @foreach($controller->pages as $id => $page)
                                     <li class="list-group-item">
                                         {{ $page->title }}
+                                        @if($controller->defaultPage == $page->url)
+                                            <i class="fas fa-home" data-toggle="tooltip" title="Home Page"></i>
+                                        @endif
 
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Detail" href="{{ route('mager.pages.show.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-file-alt"></i></a>
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit View" href="{{ route('mager.pages.gui-builder', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-edit"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="#"><i class="far fa-trash-alt"></i></a>
+                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="{{ route('mager.pages.delete.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="far fa-trash-alt"></i></a>
                                         </span>
                                     </li>
                                     @endforeach
@@ -52,8 +55,8 @@
                                         <b>Controller Action</b>
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="{{ route('mager.pages.show.controller', ['controller' => $controller->url]) }}"><i class="far fa-eye"></i></a>
-                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Model Detail" href="#"><i class="fas fa-database"></i></a>
-                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="#"><i class="far fa-trash-alt"></i></a>
+                                            <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Model Detail" href="{{ route('mager.database.index') }}"><i class="fas fa-database"></i></a>
+                                            <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Controller" href="{{ route('mager.pages.delete.controller', ['controller' => $controller->url]) }}"><i class="far fa-trash-alt"></i></a>
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="New Page" href="{{ route('mager.pages.create.page', [ 'controller' => $controller->url ]) }}">New Page <i class="far fa-file"></i></a>
                                         </span>
                                     </li>

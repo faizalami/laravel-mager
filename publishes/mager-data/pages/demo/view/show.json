@@ -4,5 +4,6 @@
     "id": "demo",
     "name": "show-demo",
     "title": "Demo Show Page",
+    "type": "show",
     "components": {}
 }

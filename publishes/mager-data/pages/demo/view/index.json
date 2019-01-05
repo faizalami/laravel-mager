@@ -4,5 +4,6 @@
     "id": "demo",
     "name": "index-demo",
     "title": "Demo Index Page",
+    "type": "index",
     "components": {}
 }

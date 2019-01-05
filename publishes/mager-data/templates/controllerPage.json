@@ -6,5 +6,6 @@
     "methods":[],
     "url":"url",
     "params": [],
-    "view":"viewName"
+    "view":"viewName",
+    "redirect":""
 }

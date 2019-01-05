@@ -36,23 +36,23 @@
                         <a href="{{ route('mager.pages.index') }}"><i class="fas fa-arrow-left"></i> Back</a>
                     </li>
                     <li>
-                        <a href="#" id="open-component-sidebar"><i class="fas fa-list-alt"></i> Components</a>
+                        <a href="javascript:void(0)" id="open-component-sidebar"><i class="fas fa-list-alt"></i> Components</a>
                     </li>
                     <li>
-                        <a href="#" id="save-page-properties"><i class="fas fa-save"></i> Save</a>
+                        <a href="javascript:void(0)" id="save-page-properties"><i class="fas fa-save"></i> Save</a>
                     </li>
                     <li>
-                        <a href="#" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
+                        <a href="javascript:void(0)" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fas fa-eye"></i> Page Preview</a>
+                        <a href="javascript:void(0)"><i class="fas fa-eye"></i> Page Preview</a>
                     </li>
                 </ul>
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#" id="open-property-sidebar"><i class="fas fa-cogs"></i> Properties</a>
+                            <a href="javascript:void(0)" id="open-property-sidebar"><i class="fas fa-cogs"></i> Properties</a>
                         </li>
                     </ul>
                 </div>

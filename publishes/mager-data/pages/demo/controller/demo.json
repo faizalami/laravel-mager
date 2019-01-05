@@ -2,7 +2,7 @@
     "name":"DemoController",
     "namespace":"App\\Http\\Controllers",
     "url":"demo",
-    "defaultPage":"index",
+    "defaultPage":"",
     "model": "Demo",
     "web":true,
     "rest":true,
@@ -11,59 +11,69 @@
             "web":true,
             "rest":true,
             "resource": "index",
+            "title": "Demo Page",
             "methods":[
                 "get"
             ],
             "url":"index",
             "params": [],
-            "view":"index-demo"
+            "view":"index",
+            "redirect":""
         },
         "view":{
             "web":true,
             "rest":true,
             "resource": "show",
+            "title": "Show Item",
             "methods":[
                 "get"
             ],
             "url":"view",
             "params": [ "id" ],
-            "view":"show-demo"
+            "view":"show",
+            "redirect":""
         },
         "create":{
             "web":true,
             "rest":true,
             "resource": "create",
+            "title": "Create New Item",
             "methods":[
                 "get",
                 "post"
             ],
             "url":"create",
             "params": [],
-            "view":"form"
+            "view":"form",
+            "redirect":"demo/view"
         },
         "update":{
             "web":true,
             "rest":true,
             "resource": "edit",
+            "title": "Update Item",
             "methods":[
                 "get",
                 "post"
             ],
             "url":"update",
             "params": [ "id" ],
-            "view":"form"
+            "view":"form",
+            "redirect":"demo/view"
         },
         "delete":{
             "web":true,
             "rest":true,
             "resource": "destroy",
+            "title": "Delete Item",
             "methods":[
                 "post",
                 "delete"
             ],
             "url":"delete",
             "params": [ "id" ],
-            "view":null
+            "view":null,
+            "redirect":"demo/index"
         }
     }
 }

@@ -68,8 +68,7 @@
     <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
     <script>
         require(['main'], function () {
-            require(['adminlte']);
-            require(['laravelmager']);
+            require(['adminlte', 'laravelmager']);
         });
     </script>
 @endsection

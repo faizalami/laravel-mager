@@ -4,5 +4,6 @@
     "name": "ViewName",
     "title": "PageTitle",
     "model": "ModelName",
+    "type": "viewType",
     "components": {}
 }
