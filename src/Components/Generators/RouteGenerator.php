@@ -7,11 +7,13 @@
  */
 
 namespace Faizalami\LaravelMager\Components\Generators;
-
+use Faizalami\LaravelMager\Components\JsonIO;
 
 class RouteGenerator implements GeneratorInterface
 {
-    use GeneratorTrait;
+    use GeneratorTrait {
+        generate as baseGenerate;
+    }
 
     public function __construct($config)
     {
@@ -28,5 +30,16 @@ class RouteGenerator implements GeneratorInterface
         $this->outputString = $this->renderBlade($template, $this->config);
 
         return $this;
+    }
+
+    public function generate()
+    {
+        $jsonIO = new JsonIO();
+
+        $routeList = $jsonIO->loadJsonFile('configs/routes.json')->toObject();
+        array_push($routeList, $this->config['url']);
+        $jsonIO->setJsonFromObject($routeList, true)->saveJsonFile('configs/routes.json');
+
+        $this->baseGenerate();
     }
 }

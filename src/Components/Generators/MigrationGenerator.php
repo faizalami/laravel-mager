@@ -17,6 +17,8 @@ class MigrationGenerator implements GeneratorInterface
         generate as baseGenerate;
     }
 
+    private $doGenerate = true;
+
     public function __construct($config)
     {
         $this->type = 'migration';
@@ -32,6 +34,11 @@ class MigrationGenerator implements GeneratorInterface
         $latestId = null;
 
         $histories = $this->config['history'];
+
+        if(count($histories) == 0) {
+            $this->doGenerate = false;
+            return $this;
+        }
 
         foreach ($histories as $id => $history) {
             $migration = dir(base_path('database/migrations'));
@@ -83,8 +90,10 @@ class MigrationGenerator implements GeneratorInterface
 
     public function generate()
     {
-        $this->baseGenerate();
+        if($this->doGenerate) {
+            $this->baseGenerate();
 
-        Artisan::call('migrate');
+            Artisan::call('migrate');
+        }
     }
 }

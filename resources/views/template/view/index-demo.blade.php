@@ -15,7 +15,9 @@
 {{ '@' }}section('content')
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {{ '@' }}if(Route::has({{ '\''.$controller.'.create\'' }}))
         <a href="{{ '{'.'{ route(\''.$controller.'.create\') }'.'}' }}" class="btn btn-primary">Create New</a>
+        {{ '@' }}endif
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -31,7 +33,14 @@
                     {{ '@' }}foreach($columnLabels as $column => $label)
                     <td>{{ '{'.'{ $item->{$column} }'.'}' }}</td>
                     {{ '@' }}endforeach
+
+                    {{ '@' }}if(Route::has({{ '\''.$controller.'.update\'' }}))
                     <td><a href="{{ '{'.'{ route(\''.$controller.'.update\', $item->id) }'.'}' }}" class="btn btn-primary">Edit</a></td>
+                    {{ '@' }}else
+                    <td>&nbsp;</td>
+                    {{ '@' }}endif
+
+                    {{ '@' }}if(Route::has({{ '\''.$controller.'.delete\'' }}))
                     <td>
                         <form action="{{ '{'.'{ route(\''.$controller.'.delete\', $item->id) }'.'}' }}" method="post">
                             {{ '@' }}csrf
@@ -39,6 +48,9 @@
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
+                    {{ '@' }}else
+                    <td>&nbsp;</td>
+                    {{ '@' }}endif
                 </tr>
                 {{ '@' }}endforeach
             </tbody>

@@ -7,7 +7,7 @@
  */
 
 namespace Faizalami\LaravelMager\Components\Generators;
-
+use Faizalami\LaravelMager\Components\JsonIO;
 
 class ControllerGenerator implements GeneratorInterface
 {
@@ -25,6 +25,28 @@ class ControllerGenerator implements GeneratorInterface
     public function render()
     {
         $template = 'mager::template.controller';
+
+        foreach ($this->config['pages'] as $pageName => $page) {
+            if($page->redirect != '') {
+                $redirect = explode('/', $page->redirect);
+
+                $jsonIO = new JsonIO();
+                $redirectController = $jsonIO->loadJsonFile('pages/' . $redirect[0] . '/controller/' . $redirect[0] . '.json')
+                    ->toObject();
+
+                if ($redirectController) {
+                    foreach ($redirectController->pages as $redirectPage) {
+                        if ($redirectPage->url == $redirect[1]) {
+                            $this->config['pages']->{$pageName}->redirectRoute = str_replace('/', '.', $page->redirect);
+                            $this->config['pages']->{$pageName}->redirectHasParam = isset($redirectPage->params['id']);
+                        }
+                    }
+                } else {
+                    $this->config['pages']->{$pageName}->redirectRoute = '';
+                    $this->config['pages']->{$pageName}->redirectHasParam = false;
+                }
+            }
+        }
 
         $this->outputString = $this->renderBlade($template, $this->config);
 

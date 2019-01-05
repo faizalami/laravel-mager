@@ -2,7 +2,7 @@
     "name":"DemoController",
     "namespace":"App\\Http\\Controllers",
     "url":"demo",
-    "defaultPage":"",
+    "defaultPage":"index",
     "model": "Demo",
     "web":true,
     "rest":true,

@@ -32,8 +32,8 @@ class ViewGenerator implements GeneratorInterface
 
     public function render()
     {
-        if(strpos($this->config['name'], 'demo') !== false) {
-            $template = 'mager::template.view.'.$this->config['name'];
+        if(in_array($this->config['type'], ['index', 'show'])) {
+            $template = 'mager::template.view.'.$this->config['type'].'-demo';
             $this->outputString = $this->renderBlade($template, $this->config);
         } else {
             $this->queueComponent();
@@ -41,8 +41,13 @@ class ViewGenerator implements GeneratorInterface
 
             $template = 'mager::template.view.page';
 
-            $pageIndex = count($this->renderQueue) - 1;
-            $this->config['content'] = $this->renderQueue[$pageIndex]['page'];
+            if(count($this->renderQueue) > 0) {
+                $pageIndex = count($this->renderQueue) - 1;
+                $this->config['content'] = $this->renderQueue[$pageIndex]['page'];
+            } else {
+                $this->config['content'] = '';
+            }
+
             $this->outputString = $this->renderBlade($template, $this->config);
         }
 

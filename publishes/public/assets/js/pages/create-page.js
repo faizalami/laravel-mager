@@ -3,8 +3,7 @@ define(['jquery'], function ($) {
 
     var resource = {
         create: true,
-        edit: true,
-        destroy: true
+        edit: true
     };
     $('#resource').change(function () {
         $('#landing').hide();

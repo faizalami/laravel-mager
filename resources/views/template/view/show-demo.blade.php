@@ -24,7 +24,13 @@
             </tr>
             {{ '@' }}endforeach
             <tr>
+                {{ '@' }}if(Route::has({{ '\''.$controller.'.update\'' }}))
                 <td colspan="2"><a href="{{ '{'.'{ route(\''.$controller.'.update\', $'.lcfirst($model).'->id) }'.'}' }}" class="btn btn-primary">Edit</a></td>
+                {{ '@' }}else
+                <td>&nbsp;</td>
+                {{ '@' }}endif
+
+                {{ '@' }}if(Route::has({{ '\''.$controller.'.delete\'' }}))
                 <td>
                     <form action="{{ '{'.'{ route(\''.$controller.'.delete\', $'.lcfirst($model).'->id) }'.'}' }}" method="post">
                         {{ '@' }}csrf
@@ -32,6 +38,9 @@
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
+                {{ '@' }}else
+                <td>&nbsp;</td>
+                {{ '@' }}endif
             </tr>
         </table>
     </div>

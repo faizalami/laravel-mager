@@ -71,7 +71,7 @@
                                         <div class="input-group-addon">{{ url('/') . '/' }}</div>
                                         <input type="text" class="form-control" name="redirect" placeholder="Enter Redirect URL">
                                     </div>
-                                    <p class="help-block">Redirect URL after create, edit, or destroy.</p>
+                                    <p class="help-block">Redirect URL after create or edit.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>View File Name</label>
