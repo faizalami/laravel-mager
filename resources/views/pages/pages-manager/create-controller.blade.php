@@ -49,7 +49,7 @@
                                     </label>
                                     <p class="help-block">This controller will be enabled to open web pages based on view layout.</p>
                                     <label>
-                                        <input type="checkbox" name="rest" value="true"> Rest Controller
+                                        <input type="checkbox" name="rest" value="true"> REST Controller
                                     </label>
                                     <p class="help-block">This controller will be enabled to be REST API.</p>
                                 </div>

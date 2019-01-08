@@ -50,11 +50,11 @@
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="web" value="true"> Web Controller
+                                        <input type="checkbox" name="web" value="true"> Web Page
                                     </label>
                                     <p class="help-block">This page will be accessible via a web page.</p>
                                     <label>
-                                        <input type="checkbox" name="rest" value="true"> Rest Controller
+                                        <input type="checkbox" name="rest" value="true"> REST Page
                                     </label>
                                     <p class="help-block">This page will be accessible via REST API.</p>
                                 </div>
