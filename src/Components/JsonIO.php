@@ -47,10 +47,12 @@ class JsonIO
         $path = base_path(config('mager.data').$path);
 
         $explodedPath = explode('/', $path);
-        $pathString = '';
-        if(is_dir('/')) {
-            $pathString = '/';
+        $pathString = '/';
+
+        if(strpos(strtolower(PHP_OS), 'win') !== false) {
+            $pathString = '';
         }
+
         foreach($explodedPath as $key => $directory) {
             if($key != count($explodedPath) - 1) {
                 $pathString .= $directory . '/';
