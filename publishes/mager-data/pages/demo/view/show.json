@@ -2,7 +2,7 @@
     "controller": "demo",
     "model": "Demo",
     "id": "demo",
-    "name": "show-demo",
+    "name": "show",
     "title": "Demo Show Page",
     "type": "show",
     "components": {}
