@@ -34,8 +34,9 @@ trait GeneratorTrait
 
     public function generate() {
         $pathString = '/';
-        if(is_dir('/')) {
-            $pathString = '/';
+
+        if(strpos(strtolower(PHP_OS), 'win') !== false) {
+            $pathString = '';
         }
 
         foreach(explode('/', $this->outputPath) as $key => $directory) {
