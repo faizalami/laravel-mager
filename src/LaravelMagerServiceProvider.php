@@ -9,6 +9,7 @@
 namespace Faizalami\LaravelMager;
 
 
+use Faizalami\LaravelMager\Console\Commands\DatabaseCreateCommand;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,10 @@ class LaravelMagerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'mager');
+
+        $this->commands([
+            DatabaseCreateCommand::class
+        ]);
 
         $this->publishes([
             __DIR__ . '/../publishes/config/laravel-mager.php' => config_path('laravel-mager.php'),

@@ -11,6 +11,7 @@ namespace Faizalami\LaravelMager\Http\Controllers;
 use Faizalami\LaravelMager\Components\JsonIO;
 use Faizalami\LaravelMager\Components\Generator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 
 class GeneratorController extends Controller
 {
@@ -20,6 +21,8 @@ class GeneratorController extends Controller
         $jsonIO = new JsonIO();
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();
+
+        Artisan::call('db:create');
 
         foreach ($pages as $page) {
             $pageConfig = $jsonIO->loadJsonFile('pages/'.$page.'/'.$page.'.json')->toArray();
