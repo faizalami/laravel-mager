@@ -5,17 +5,6 @@
  * Date: 20/09/18
  * Time: 11:43
  */
-
-//$activeMenu = [
-//    'mager.pages.index' => '',
-//    'mager.configuration.theme' => '',
-//    'mager.configuration.navbar' => '',
-//    'mager.configuration.sidebar' => '',
-//    'mager.rest.index' => '',
-//    'mager.database.index' => '',
-//];
-//
-//$activeMenu[Request::route()->getName()] = 'active';
 ?>
 
 @extends('layouts.html-base')
@@ -67,9 +56,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
-                {{--<li class="{{ $activeMenu['mager.database.index'] }}">--}}
-                    {{--<a href="{{ route('mager.database.index') }}"><i class="fas fa-database"></i> <span>Database Manager</span></a>--}}
-                {{--</li>--}}
+                @includeIf('layouts.sidebar')
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -103,7 +90,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('mager::layouts.footer')
+    @include('layouts.footer')
 </div>
 <!-- ./wrapper -->
 @endsection

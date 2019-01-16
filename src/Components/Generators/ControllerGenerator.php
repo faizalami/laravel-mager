@@ -38,7 +38,7 @@ class ControllerGenerator implements GeneratorInterface
                     foreach ($redirectController->pages as $redirectPage) {
                         if ($redirectPage->url == $redirect[1]) {
                             $this->config['pages']->{$pageName}->redirectRoute = str_replace('/', '.', $page->redirect);
-                            $this->config['pages']->{$pageName}->redirectHasParam = isset($redirectPage->params['id']);
+                            $this->config['pages']->{$pageName}->redirectHasParam = in_array('id', $redirectPage->params);
                         }
                     }
                 } else {

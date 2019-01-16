@@ -70,8 +70,12 @@ class JsonIO
         return $this->jsonObject;
     }
 
-    public function toArray() {
-        return (array) $this->jsonObject;
+    public function toArray($recursive = false) {
+        if($recursive) {
+            return json_decode($this->jsonString, true);
+        } else {
+            return (array) $this->jsonObject;
+        }
     }
 
     public function toString() {

@@ -1,0 +1,7 @@
+{
+    "demo": {
+        "title": "Demo Page",
+        "route": "demo.index",
+        "active": ""
+    }
+}

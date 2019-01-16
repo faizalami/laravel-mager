@@ -13,6 +13,7 @@ use Faizalami\LaravelMager\Components\Generators\ControllerGenerator;
 use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
 use Faizalami\LaravelMager\Components\Generators\ModelGenerator;
 use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
+use Faizalami\LaravelMager\Components\Generators\SidebarLayoutGenerator;
 use Faizalami\LaravelMager\Components\Generators\ViewGenerator;
 
 class Generator
@@ -33,6 +34,9 @@ class Generator
                 break;
             case 'view':
                 return new ViewGenerator($config);
+                break;
+            case 'sidebar':
+                return new SidebarLayoutGenerator($config);
                 break;
         }
     }

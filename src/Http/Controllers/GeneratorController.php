@@ -41,6 +41,16 @@ class GeneratorController extends Controller
             }
         }
 
+        $menu = $jsonIO->loadJsonFile('configs/menu.json')->toString();
+        $menu = str_replace('{', '[', $menu);
+        $menu = str_replace('"', '\'', $menu);
+        $menu = str_replace(':', '=>', $menu);
+        $menu = str_replace('}', ']', $menu);
+
+        $this->queueConfig('sidebar', [
+            'menu' => $menu
+        ]);
+
         foreach ($this->generateQueue as $generate) {
             $generator = Generator::init($generate['type'], $generate['config']);
             $generator->render()->generate();

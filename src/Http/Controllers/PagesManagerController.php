@@ -104,6 +104,14 @@ class PagesManagerController extends Controller
                 } else {
                     if($data == 'true') {
                         $configController->defaultPage = $post['url'];
+
+                        $configMenu = $this->loadJson('configs/menu.json');
+                        $configMenuItem = $this->loadJson('templates/menuItem.json');
+                        $configMenuItem->title = $post['title'];
+                        $configMenuItem->route = $configController->url.'.'.$post['url'];
+                        $configMenu->{$configController->url} = $configMenuItem;
+
+                        $this->saveJson($configMenu, 'configs/menu.json');
                     }
                 }
             }

@@ -77,7 +77,7 @@ class {{ $name }} extends Controller {
                 @endif
             @else
                 @if($page->redirect != '')
-                    return response()->redirectTo('{{ $page->redirect }}');
+                    return response()->redirectTo('{{ $url }}/{{ $page->redirect }}');
                 @elseif($page->redirect == '' && $defaultPage != '')
                     return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
                 @else
@@ -143,7 +143,7 @@ class {{ $name }} extends Controller {
                 @endif
             @else
                 @if($page->redirect != '')
-                    return response()->redirectTo('{{ $page->redirect }}');
+                    return response()->redirectTo('{{ $url }}/{{ $page->redirect }}');
                 @elseif($page->redirect == '' && $defaultPage != '')
                     return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
                 @else
