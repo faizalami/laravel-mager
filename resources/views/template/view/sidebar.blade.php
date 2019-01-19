@@ -11,7 +11,10 @@
 
 $menu = {{ $menu }};
 
-$menu[ explode('.', Request::route()->getName())[0] ]['active'] = 'active';
+$routeName = explode('.', Request::route()->getName());
+if(isset($menu[$routeName[0]])) {
+    $menu[$routeName[0]]['active'] = 'active';
+}
 
 {{ '?>' }}
 

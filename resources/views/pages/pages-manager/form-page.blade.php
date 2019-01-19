@@ -27,40 +27,59 @@
                                 <div class="form-group">
                                     <label>Page Type</label>
                                     <select name="resource" id="resource">
+                                    @isset($configControllerPage->resource)
+                                        <option value="">Choose Page Type</option>
+                                        <option value="index" @if($configControllerPage->resource == 'index') selected @endif>Index</option>
+                                        <option value="show" @if($configControllerPage->resource == 'show') selected @endif>Show</option>
+                                        <option value="create" @if($configControllerPage->resource == 'create') selected @endif>Create</option>
+                                        <option value="edit" @if($configControllerPage->resource == 'edit') selected @endif>Edit</option>
+                                        <option value="destroy" @if($configControllerPage->resource == 'destroy') selected @endif>Destroy (Delete)</option>
+                                    @else
                                         <option value="" selected>Choose Page Type</option>
                                         <option value="index">Index</option>
                                         <option value="show">Show</option>
                                         <option value="create">Create</option>
                                         <option value="edit">Edit</option>
-                                        <option value="destroy">Destroy</option>
+                                        <option value="destroy">Destroy (Delete)</option>
+                                    @endisset
                                     </select>
                                     <p class="help-block">Choose CRUD type for page.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Page Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="Enter Page Title">
+                                    <input type="text" class="form-control" name="title" @isset($configControllerPage->title) value="{{ $configControllerPage->title }}" @endisset placeholder="Enter Page Title">
                                 </div>
                                 <div class="form-group">
                                     <label>Page URL</label>
 
                                     <div class="input-group">
                                         <div class="input-group-addon">{{ url($configController->url) . '/' }}</div>
-                                        <input type="text" class="form-control" name="url" placeholder="Enter Page URL">
+                                        <input type="text" class="form-control" name="url" @isset($configControllerPage->url) value="{{ $configControllerPage->url }}" @endisset placeholder="Enter Page URL">
                                     </div>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="web" value="true"> Web Page
+                                    @isset($configControllerPage->web)
+                                        <input type="checkbox" name="web" value="true" @if($configControllerPage->web) checked @endif> Web Page
+                                    @else
+                                        <input type="checkbox" name="web" value="true" checked> Web Page
+                                    @endisset
                                     </label>
                                     <p class="help-block">This page will be accessible via a web page.</p>
                                     <label>
+                                    @isset($configControllerPage->rest)
+                                        <input type="checkbox" name="rest" value="true" @if($configControllerPage->web) checked @endif> REST Page
+                                    @else
                                         <input type="checkbox" name="rest" value="true"> REST Page
+                                    @endisset
                                     </label>
                                     <p class="help-block">This page will be accessible via REST API.</p>
                                 </div>
                                 <div class="checkbox" id="landing">
                                     <label>
+                                    @if($configController->landing == $configControllerPage->url)
                                         <input type="checkbox" name="landing" value="true"> Set as Landing Page
+                                    @endif
                                     </label>
                                     <p class="help-block">This page will be controller landing page.</p>
                                 </div>
@@ -69,13 +88,13 @@
 
                                     <div class="input-group">
                                         <div class="input-group-addon">{{ url('/') . '/' }}</div>
-                                        <input type="text" class="form-control" name="redirect" placeholder="Enter Redirect URL">
+                                        <input type="text" class="form-control" name="redirect" @isset($configControllerPage->redirect) value="{{ $configControllerPage->redirect }}" @endisset placeholder="Enter Redirect URL">
                                     </div>
                                     <p class="help-block">Redirect URL after create or edit.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>View File Name</label>
-                                    <input type="text" class="form-control" name="view" placeholder="Enter View File Name">
+                                    <input type="text" class="form-control" name="view" @isset($configControllerPage->view) value="{{ $configControllerPage->view }}" @endisset placeholder="Enter View File Name">
                                     <p class="help-block">Use existing view file name if needed.</p>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>

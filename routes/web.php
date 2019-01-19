@@ -38,6 +38,8 @@ Route::group([
         Route::get('/', 'PagesManagerController@index')->name('index');
         Route::match(['get', 'post'], '/create/controller', 'PagesManagerController@createController')->name('create.controller');
         Route::match(['get', 'post'],'/create/page/{controller}', 'PagesManagerController@createPage')->name('create.page');
+        Route::match(['get', 'post'], '/edit/controller/{controller}', 'PagesManagerController@editController')->name('edit.controller');
+        Route::match(['get', 'post'], '/edit/page/{controller}/{page}', 'PagesManagerController@editPage')->name('edit.page');
         Route::get('/show/controller/{controller}', 'PagesManagerController@showController')->name('show.controller');
         Route::get('/show/page/{controller}/{page}', 'PagesManagerController@showPage')->name('show.page');
         Route::get('/delete/controller/{controller}', 'PagesManagerController@deleteController')->name('delete.controller');

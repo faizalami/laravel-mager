@@ -26,30 +26,38 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Controller Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Enter Controller Name">
+                                    <input type="text" class="form-control" name="name" @isset($configController->name) value="{{ $configController->name }}" @endisset placeholder="Enter Controller Name">
                                 </div>
                                 <div class="form-group">
                                     <label>Controller Namespace</label>
-                                    <input type="text" class="form-control" name="namespace" value="App\Http\Controllers" placeholder="Enter Controller Namespace">
+                                    <input type="text" class="form-control" name="namespace" @isset($configController->namespace) value="{{ $configController->namespace }}" @else value="App\Http\Controllers" @endisset placeholder="Enter Controller Namespace">
                                 </div>
                                 <div class="form-group">
                                     <label>Base Route URL</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">{{ url('/') . '/' }}</div>
-                                        <input type="text" class="form-control" name="url" placeholder="Enter Base Route URL">
+                                        <input type="text" class="form-control" name="url" @isset($configController->url) value="{{ $configController->url }}" @endisset placeholder="Enter Base Route URL">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Model Name</label>
-                                    <input type="text" class="form-control" name="model" placeholder="Enter Model Name">
+                                    <input type="text" class="form-control" name="model" @isset($configController->model) value="{{ $configController->model }}" @endisset placeholder="Enter Model Name">
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="web" value="true"> Web Controller
+                                    @isset($configController->web)
+                                        <input type="checkbox" name="web" value="true" @if($configController->web) checked @endif> Web Controller
+                                    @else
+                                        <input type="checkbox" name="web" value="true" checked> Web Controller
+                                    @endisset
                                     </label>
                                     <p class="help-block">This controller will be enabled to open web pages based on view layout.</p>
                                     <label>
+                                    @isset($configController->rest)
+                                        <input type="checkbox" name="rest" value="true" @if($configController->web) checked @endif> REST Controller
+                                    @else
                                         <input type="checkbox" name="rest" value="true"> REST Controller
+                                    @endisset
                                     </label>
                                     <p class="help-block">This controller will be enabled to be REST API.</p>
                                 </div>

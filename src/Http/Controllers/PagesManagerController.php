@@ -11,6 +11,7 @@ namespace Faizalami\LaravelMager\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PagesManagerController extends Controller
 {
@@ -30,7 +31,7 @@ class PagesManagerController extends Controller
 
     public function createController(Request $request) {
         if ($request->isMethod('get')) {
-            return view('mager::pages.pages-manager.create-controller');
+            return view('mager::pages.pages-manager.form-controller');
         } elseif ($request->isMethod('post')) {
             $configController = $this->loadJson('templates/controller.json');
             $configPage = $this->loadJson('templates/page.json');
@@ -61,13 +62,15 @@ class PagesManagerController extends Controller
             $this->saveJson($configPageList, 'configs/pages.json');
 
             return response()->redirectToRoute('mager.pages.index');
+        } else {
+            return new NotFoundHttpException();
         }
     }
 
     public function createPage(Request $request, $controller) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         if ($request->isMethod('get')) {
-            return view('mager::pages.pages-manager.create-page', compact('configController'));
+            return view('mager::pages.pages-manager.form-page', compact('configController'));
         } elseif ($request->isMethod('post')) {
             $configControllerPage = $this->loadJson('templates/controllerPage.json');
             $configPage = $this->loadJson('pages/' . $controller . '/' . $controller . '.json');
@@ -136,6 +139,8 @@ class PagesManagerController extends Controller
             $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
 
             return response()->redirectToRoute('mager.pages.index');
+        } else {
+            return new NotFoundHttpException();
         }
     }
 
@@ -150,6 +155,33 @@ class PagesManagerController extends Controller
         $configControllerPage = $configController->pages->{$page};
 
         return view('mager::pages.pages-manager.show-page', compact('configController', 'configControllerPage'));
+    }
+
+    public function editController(Request $request, $controller) {
+        $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
+
+        if ($request->isMethod('get')) {
+            return view('mager::pages.pages-manager.form-controller', compact('configController'));
+        } elseif ($request->isMethod('post'))  {
+            $this->deleteController($controller);
+            return $this->createController($request);
+        } else {
+            return new NotFoundHttpException();
+        }
+    }
+
+    public function editPage(Request $request, $controller, $page) {
+        $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
+        $configControllerPage = $configController->pages->{$page};
+
+        if ($request->isMethod('get')) {
+            return view('mager::pages.pages-manager.form-page', compact('configController', 'configControllerPage'));
+        } elseif ($request->isMethod('post'))  {
+            $this->deletePage($controller, $page);
+            return $this->createPage($request, $controller);
+        } else {
+            return new NotFoundHttpException();
+        }
     }
 
     public function deleteController($controller) {

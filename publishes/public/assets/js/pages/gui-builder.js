@@ -1,5 +1,6 @@
 var loadFiles = [
     'jquery',
+    'lodash',
     'promise!assets/js/services/view-config',
     'assets/js/components/gui-builder-dragable-config',
     'assets/js/components/gui-builder-sortable-config',
@@ -7,7 +8,7 @@ var loadFiles = [
     'jqueryui'
 ];
 
-define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
+define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
 
     var propertySidebar = ComponentPropertySidebar(ServiceViewConfig);
     var savedConfig= ServiceViewConfig.config.components;
@@ -188,10 +189,17 @@ define(loadFiles, function ($, ServiceViewConfig, ComponentDragableConfig, Compo
         removeComponent: function () {
             guiBuildePage.hideTooltip();
             var id = $(this).parent().parent().data('id');
+            var $components = $(this).parent().parent().find('.nested-sortable').children();
+            if($components.length > 0) {
+                _.forEach($components, function (component) {
+                    propertySidebar.deleteProperties($(component).data('id'));
+                })
+            }
+            propertySidebar.deleteProperties(id);
+
             $(this).parent().parent().slideUp('slow', function () {
                 $(this).remove();
             });
-            propertySidebar.deleteProperties(id);
         },
         containerComponentHover: function(event){
             var $containerComponent = $('.nested-sortable').parent();
