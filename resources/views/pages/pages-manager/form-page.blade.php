@@ -5,11 +5,17 @@
  * Date: 02/01/19
  * Time: 8:52
  */
+
+$title = 'Create Page';
+if(Request::route()->getName() == 'mager.pages.edit.page') {
+    $title = 'Edit Page';
+}
+
 ?>
 
 @extends('mager::layouts.main', ['breadcrumb' => 'Pages Manager'])
 
-@section('title', 'Create Page | Pages Manager')
+@section('title', $title.' | Pages Manager')
 @section('page-id', 'create-controller')
 
 @section('content')
@@ -17,7 +23,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create Page</h3>
+                    <h3 class="box-title">{{ $title }}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -77,7 +83,7 @@
                                 </div>
                                 <div class="checkbox" id="landing">
                                     <label>
-                                    @if($configController->landing == $configControllerPage->url)
+                                    @if($configController->defaultPage == $configControllerPage->url)
                                         <input type="checkbox" name="landing" value="true"> Set as Landing Page
                                     @endif
                                     </label>

@@ -41,7 +41,11 @@
                                         @if($controller->defaultPage != $page->url)
                                             {{ $page->title }}
                                         @else
-                                            <a href="{{ url($controller->url . '/' . $controller->defaultPage) }}" target="_blank">{{ $page->title }}</a>
+                                            @if(Route::has($controller->url . '.' . $controller->defaultPage))
+                                            <a href="{{ route($controller->url . '.' . $controller->defaultPage) }}" target="_blank">{{ $page->title }}</a>
+                                            @else
+                                            {{ $page->title }}
+                                            @endif
                                             <i class="fas fa-home" data-toggle="tooltip" title="Home Page"></i>
                                         @endif
 

@@ -37,7 +37,9 @@ class RouteGenerator implements GeneratorInterface
         $jsonIO = new JsonIO();
 
         $routeList = $jsonIO->loadJsonFile('configs/routes.json')->toObject();
-        array_push($routeList, $this->config['url']);
+        if(!in_array($this->config['url'], $routeList)) {
+            array_push($routeList, $this->config['url']);
+        }
         $jsonIO->setJsonFromObject($routeList, true)->saveJsonFile('configs/routes.json');
 
         $this->baseGenerate();

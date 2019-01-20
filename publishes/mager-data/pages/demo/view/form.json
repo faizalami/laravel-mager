@@ -5,5 +5,90 @@
     "name": "form",
     "title": "Demo Form Page",
     "type": "form",
-    "components": {}
+    "components": {
+        "row1": {
+            "data-id": "row1",
+            "type": "row",
+            "parent": "page",
+            "index": 0,
+            "level": 1
+        },
+        "col1": {
+            "data-id": "col1",
+            "xs": "6",
+            "sm": "6",
+            "md": "6",
+            "lg": "6",
+            "type": "col",
+            "parent": "row1",
+            "index": 0,
+            "level": 2
+        },
+        "textbox1": {
+            "data-id": "textbox1",
+            "label": "Name",
+            "placeholder": "Enter Name",
+            "name": "name",
+            "minlength": "0",
+            "maxlength": "255",
+            "type": "textbox",
+            "parent": "col1",
+            "index": 1,
+            "level": 3
+        },
+        "label1": {
+            "data-id": "label1",
+            "text": "Example for Demo Page",
+            "type": "label",
+            "parent": "col1",
+            "index": 0,
+            "level": 3
+        },
+        "emailbox1": {
+            "data-id": "emailbox1",
+            "label": "Email",
+            "placeholder": "Enter Email",
+            "name": "email",
+            "minlength": "0",
+            "maxlength": "255",
+            "type": "emailbox",
+            "parent": "col1",
+            "index": 3,
+            "level": 3
+        },
+        "textarea1": {
+            "data-id": "textarea1",
+            "label": "Address",
+            "placeholder": "Enter Address",
+            "name": "address",
+            "minlength": "0",
+            "maxlength": "255",
+            "rows": "3",
+            "cols": null,
+            "type": "textarea",
+            "parent": "col1",
+            "index": 4,
+            "level": 3
+        },
+        "numberbox1": {
+            "data-id": "numberbox1",
+            "label": "Age",
+            "placeholder": "Enter Age",
+            "name": "age",
+            "minlength": "0",
+            "maxlength": "255",
+            "type": "numberbox",
+            "parent": "col1",
+            "index": 2,
+            "level": 3
+        },
+        "button1": {
+            "data-id": "button1",
+            "text": "Save",
+            "type": "button",
+            "parent": "col1",
+            "index": 5,
+            "level": 3
+        }
+    }
 }

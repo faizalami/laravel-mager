@@ -5,11 +5,17 @@
  * Date: 01/01/19
  * Time: 14:24
  */
+
+$title = 'Create Controller';
+if(Request::route()->getName() == 'mager.pages.edit.controller') {
+    $title = 'Edit Controller';
+}
+
 ?>
 
 @extends('mager::layouts.main', ['breadcrumb' => 'Pages Manager'])
 
-@section('title', 'Create Controller | Pages Manager')
+@section('title', $title.' | Pages Manager')
 @section('page-id', 'create-controller')
 
 @section('content')
@@ -17,7 +23,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create Controller</h3>
+                    <h3 class="box-title">{{ $title }}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
