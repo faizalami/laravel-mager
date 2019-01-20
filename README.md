@@ -24,7 +24,7 @@ $ composer require faizalami/laravel-mager
 
 #### Publish configuration and assets
 ```bash
-$ php artisan vendor:publish --provider="Faizalami\LaravelMager\LaravelMagerServiceProvider"
+$ php artisan vendor:publish --provider="Faizalami\LaravelMager\LaravelMagerServiceProvider" --force
 ```
 
 #### Run the laravel project
