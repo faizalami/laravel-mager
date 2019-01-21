@@ -79,7 +79,7 @@ class MigrationGenerator implements GeneratorInterface
 
                 $this->outputString = $this->renderBlade($template, $config);
             } else {
-                $this->outputString = File::put(base_path('database/migrations/' . $this->outputFile));
+                $this->outputString = File::get(base_path('database/migrations/' . $this->outputFile));
             }
         } else {
             $this->outputFile = $histories[count($histories) - 1]->time . '_create_' . $this->config['table'] . '_table.php';
