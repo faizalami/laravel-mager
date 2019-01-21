@@ -2,6 +2,53 @@
     "name": "Demo",
     "table": "demo",
     "timestamp": true,
-    "columns": {},
-    "history": []
+    "columns": {
+        "name": {
+            "type": "string",
+            "length": 255,
+            "label": "Name"
+        },
+        "email": {
+            "type": "string",
+            "length": 255,
+            "label": "Email"
+        },
+        "age": {
+            "type": "integer",
+            "length": 255,
+            "label": "Age"
+        },
+        "address": {
+            "type": "string",
+            "length": 255,
+            "label": "Address"
+        }
+    },
+    "history": [
+        {
+            "time": "2019_01_01_000000",
+            "table": {
+                "name": {
+                    "type": "string",
+                    "length": 255,
+                    "label": "Name"
+                },
+                "email": {
+                    "type": "string",
+                    "length": 255,
+                    "label": "Email"
+                },
+                "age": {
+                    "type": "integer",
+                    "length": 255,
+                    "label": "Age"
+                },
+                "address": {
+                    "type": "string",
+                    "length": 255,
+                    "label": "Address"
+                }
+            }
+        }
+    ]
 }

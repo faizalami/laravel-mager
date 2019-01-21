@@ -83,9 +83,15 @@ if(Request::route()->getName() == 'mager.pages.edit.page') {
                                 </div>
                                 <div class="checkbox" id="landing">
                                     <label>
-                                    @if($configController->defaultPage == $configControllerPage->url)
+                                    @isset($configControllerPage->url)
+                                        @if($configController->defaultPage == $configControllerPage->url)
+                                        <input type="checkbox" name="landing" value="true" checked> Set as Landing Page
+                                        @else
                                         <input type="checkbox" name="landing" value="true"> Set as Landing Page
-                                    @endif
+                                        @endif
+                                    @else
+                                        <input type="checkbox" name="landing" value="true"> Set as Landing Page
+                                    @endisset
                                     </label>
                                     <p class="help-block">This page will be controller landing page.</p>
                                 </div>

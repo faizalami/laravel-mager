@@ -140,7 +140,7 @@ class PagesManagerController extends Controller
 
             return response()->redirectToRoute('mager.pages.index');
         } else {
-            return new NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
     }
 
@@ -166,7 +166,7 @@ class PagesManagerController extends Controller
             $this->deleteController($controller);
             return $this->createController($request);
         } else {
-            return new NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
     }
 
@@ -180,7 +180,7 @@ class PagesManagerController extends Controller
             $this->deletePage($controller, $page);
             return $this->createPage($request, $controller);
         } else {
-            return new NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
     }
 

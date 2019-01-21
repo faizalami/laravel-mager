@@ -24,6 +24,14 @@
             "index": 0,
             "level": 2
         },
+        "label1": {
+            "data-id": "label1",
+            "text": "Example For Demo Page",
+            "type": "label",
+            "parent": "col1",
+            "index": 0,
+            "level": 3
+        },
         "textbox1": {
             "data-id": "textbox1",
             "label": "Name",
@@ -36,14 +44,6 @@
             "index": 1,
             "level": 3
         },
-        "label1": {
-            "data-id": "label1",
-            "text": "Example for Demo Page",
-            "type": "label",
-            "parent": "col1",
-            "index": 0,
-            "level": 3
-        },
         "emailbox1": {
             "data-id": "emailbox1",
             "label": "Email",
@@ -52,6 +52,18 @@
             "minlength": "0",
             "maxlength": "255",
             "type": "emailbox",
+            "parent": "col1",
+            "index": 2,
+            "level": 3
+        },
+        "numberbox1": {
+            "data-id": "numberbox1",
+            "label": "Age",
+            "placeholder": "Enter Age",
+            "name": "age",
+            "minlength": "0",
+            "maxlength": "255",
+            "type": "numberbox",
             "parent": "col1",
             "index": 3,
             "level": 3
@@ -68,18 +80,6 @@
             "type": "textarea",
             "parent": "col1",
             "index": 4,
-            "level": 3
-        },
-        "numberbox1": {
-            "data-id": "numberbox1",
-            "label": "Age",
-            "placeholder": "Enter Age",
-            "name": "age",
-            "minlength": "0",
-            "maxlength": "255",
-            "type": "numberbox",
-            "parent": "col1",
-            "index": 2,
             "level": 3
         },
         "button1": {

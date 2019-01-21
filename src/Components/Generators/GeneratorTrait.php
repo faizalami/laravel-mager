@@ -8,6 +8,7 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
+use Illuminate\Support\Facades\File;
 
 trait GeneratorTrait
 {
@@ -47,6 +48,6 @@ trait GeneratorTrait
             }
         }
 
-        file_put_contents($pathString . $this->outputFile, $this->outputString);
+        File::put($pathString . $this->outputFile, $this->outputString);
     }
 }

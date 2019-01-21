@@ -10,6 +10,7 @@ namespace Faizalami\LaravelMager\Components\Generators;
 
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class MigrationGenerator implements GeneratorInterface
 {
@@ -78,7 +79,7 @@ class MigrationGenerator implements GeneratorInterface
 
                 $this->outputString = $this->renderBlade($template, $config);
             } else {
-                $this->outputString = file_get_contents(base_path('database/migrations/' . $this->outputFile));
+                $this->outputString = File::put(base_path('database/migrations/' . $this->outputFile));
             }
         } else {
             $this->outputFile = $histories[count($histories) - 1]->time . '_create_' . $this->config['table'] . '_table.php';

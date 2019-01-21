@@ -9,6 +9,8 @@
 namespace Faizalami\LaravelMager\Components;
 
 
+use Illuminate\Support\Facades\File;
+
 class JsonIO
 {
     private $jsonString;
@@ -20,7 +22,7 @@ class JsonIO
      */
     public function loadJsonFile($path) {
         try {
-            $this->jsonString = file_get_contents(base_path(config('mager.data').$path));
+            $this->jsonString = File::get(base_path(config('mager.data').$path));
         } catch (\Exception $e) {
             $this->jsonString = "null";
         }
@@ -63,7 +65,7 @@ class JsonIO
             }
         }
 
-        return file_put_contents($path, $this->jsonString) !== false;
+        return File::put($path, $this->jsonString) !== false;
     }
 
     public function toObject() {
