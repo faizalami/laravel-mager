@@ -15,7 +15,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{ route('mager.dashboard') }}" class="logo">
+        <a href="{{ url('/') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>L</b>M</span>
             <!-- logo for regular state and mobile devices -->
