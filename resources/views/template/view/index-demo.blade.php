@@ -36,6 +36,8 @@
 
                     {{ '@' }}if(Route::has({{ '\''.$controller.'.update\'' }}))
                     <td><a href="{{ '{'.'{ route(\''.$controller.'.update\', $item->id) }'.'}' }}" class="btn btn-primary">Edit</a></td>
+                    {{ '@' }}elseif(Route::has({{ '\''.$controller.'.edit\'' }}))
+                    <td><a href="{{ '{'.'{ route(\''.$controller.'.edit\', $item->id) }'.'}' }}" class="btn btn-primary">Edit</a></td>
                     {{ '@' }}else
                     <td>&nbsp;</td>
                     {{ '@' }}endif
