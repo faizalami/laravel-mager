@@ -91,8 +91,10 @@ class ViewGenerator implements GeneratorInterface
     }
 
     private function generateComponent() {
+        ksort($this->renderQueue);
         foreach ($this->renderQueue as $index => $groups) {
             foreach ($groups as $group => $components) {
+                ksort($components);
                 $groupContent = '';
                 foreach ($components as $component) {
                     if($index > 0 && in_array($component['type'], ['page', 'row', 'col'])) {
