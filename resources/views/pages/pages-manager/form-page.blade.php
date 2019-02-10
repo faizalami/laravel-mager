@@ -32,7 +32,7 @@ if(Request::route()->getName() == 'mager.pages.edit.page') {
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Page Type</label>
-                                    <select name="resource" id="resource">
+                                    <select name="resource" id="resource" class="form-control">
                                     @isset($configControllerPage->resource)
                                         <option value="">Choose Page Type</option>
                                         <option value="index" @if($configControllerPage->resource == 'index') selected @endif>Index</option>
@@ -109,7 +109,7 @@ if(Request::route()->getName() == 'mager.pages.edit.page') {
                                     <input type="text" class="form-control" name="view" @isset($configControllerPage->view) value="{{ $configControllerPage->view }}" @endisset placeholder="Enter View File Name">
                                     <p class="help-block">Use existing view file name if needed.</p>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 <a class="btn btn-warning" href="{{ route('mager.pages.index') }}">Back</a>
                             </div>
                         </div>

@@ -22,6 +22,7 @@ class GeneratorController extends Controller
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();
 
+        Artisan::call('config:clear');
         Artisan::call('db:create');
 
         foreach ($pages as $page) {

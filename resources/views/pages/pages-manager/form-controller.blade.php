@@ -67,7 +67,7 @@ if(Request::route()->getName() == 'mager.pages.edit.controller') {
                                     </label>
                                     <p class="help-block">This controller will be enabled to be REST API.</p>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 <a class="btn btn-warning" href="{{ route('mager.pages.index') }}">Back</a>
                             </div>
                         </div>

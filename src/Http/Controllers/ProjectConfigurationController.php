@@ -9,6 +9,7 @@
 namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProjectConfigurationController extends Controller
 {
@@ -22,5 +23,21 @@ class ProjectConfigurationController extends Controller
 
     public function sidebar() {
         return view('mager::pages.project-configuration.sidebar');
+    }
+
+    public function createNavbar(Request $request) {
+        if ($request->isMethod('get')) {
+            return view('mager::pages.project-configuration.form-menu');
+        } elseif ($request->isMethod('post')) {
+            return null;
+        }
+    }
+
+    public function createSidebar(Request $request) {
+        if ($request->isMethod('get')) {
+            return view('mager::pages.project-configuration.form-menu');
+        } elseif ($request->isMethod('post')) {
+            return null;
+        }
     }
 }

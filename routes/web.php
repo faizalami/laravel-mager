@@ -58,6 +58,8 @@ Route::group([
         Route::get('/theme', 'ProjectConfigurationController@theme')->name('theme');
         Route::get('/navbar', 'ProjectConfigurationController@navbar')->name('navbar');
         Route::get('/sidebar', 'ProjectConfigurationController@sidebar')->name('sidebar');
+        Route::match(['get', 'post'], '/create/navbar', 'ProjectConfigurationController@createNavbar')->name('create.navbar');
+        Route::match(['get', 'post'], '/create/sidebar', 'ProjectConfigurationController@createSidebar')->name('create.sidebar');
     });
 
     Route::group([
@@ -72,6 +74,12 @@ Route::group([
         'as' => 'database.'
     ], function () {
         Route::get('/', 'DatabaseManagerController@index')->name('index');
+        Route::get('/properties/{table}', 'DatabaseManagerController@tableProperties')->name('table.properties');
+        Route::get('/data/{table}', 'DatabaseManagerController@tableData')->name('table.data');
+        Route::match(['get', 'post'], '/create/table', 'DatabaseManagerController@createTable')->name('create.table');
+        Route::match(['get', 'post'], '/create/column/{table}', 'DatabaseManagerController@createColumn')->name('create.column');
+        Route::match(['get', 'post'], '/create/data/{table}', 'DatabaseManagerController@createData')->name('create.data');
+        Route::match(['get', 'post'], '/create/dummy/{table}', 'DatabaseManagerController@createDummy')->name('create.dummy');
     });
 });
 
