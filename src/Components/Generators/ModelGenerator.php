@@ -23,7 +23,7 @@ class ModelGenerator implements GeneratorInterface
 
     public function render()
     {
-        $template = 'mager::template.model';
+        $template = 'mager::template.database.model';
 
         $this->outputString = $this->renderBlade($template, $this->config);
 

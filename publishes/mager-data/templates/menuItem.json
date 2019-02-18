@@ -1,5 +1,6 @@
 {
     "title": "Menu Title",
     "route": "menu.index",
-    "active": ""
+    "active": "",
+    "icon": "fas fa-file"
 }

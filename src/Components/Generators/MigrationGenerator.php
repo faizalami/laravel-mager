@@ -29,7 +29,7 @@ class MigrationGenerator implements GeneratorInterface
 
     public function render()
     {
-        $template = 'mager::template.migration';
+        $template = 'mager::template.database.migration';
         $config = $this->config;
         $latest = null;
         $latestId = null;
@@ -54,7 +54,7 @@ class MigrationGenerator implements GeneratorInterface
 
         if($latest != null) {
             if($latestId != count($histories) - 1) {
-                $template = 'mager::template.migration-update';
+                $template = 'mager::template.database.migration-update';
 
                 $config['version'] = count($histories)-1;
 

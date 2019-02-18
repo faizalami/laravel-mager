@@ -46,7 +46,7 @@
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
 
 <!-- the fixed layout is not compatible with sidebar-mini -->
-<body class="hold-transition skin-{{ isset($skin)?$skin:'blue' }} fixed {{ isset($layout)?$layout:'' }} sidebar-mini @yield('page-id')">
+<body class="hold-transition skin-{{ config('global.main.theme') }} {{ config('global.main.layout') }} sidebar-mini @yield('page-id')">
 
 @yield('body')
 

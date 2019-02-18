@@ -51,6 +51,94 @@ $title = 'Create '.ucfirst($type).' Menu';
                                         <input type="text" class="form-control" name="url" placeholder="Enter URL">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label>Icon</label>
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title">Common Icons</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-home"></i></h1>
+                                                        <p>fas fa-home</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-users"></i></h1>
+                                                        <p>fas fa-users</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-chart-bar"></i></h1>
+                                                        <p>fas fa-chart-bar</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-chart-pie"></i></h1>
+                                                        <p>fas fa-chart-pie</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-file"></i></h1>
+                                                        <p>fas fa-file</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="box box-solid box-default">
+                                                    <div class="box-body text-center">
+                                                        <h1><i class="fas fa-balance-scale"></i></h1>
+                                                        <p>fas fa-balance-scale</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+                                        <h4 class="box-title">Custom Icon</h4>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label>Icon Class</label>
+                                            <input type="text" value="fas fa-certificate" class="form-control" id="icon-class" name="icon-class" placeholder="Enter Icon Class">
+                                            <p class="help-block">Enter Fontawesome icon class based from <a href="https://fontawesome.com/icons?m=free">https://fontawesome.com/icons?m=free</a>.</p>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="box box-solid box-default">
+                                                        <div class="box-body text-center">
+                                                            <h1><i class="fas fa-certificate"></i></h1>
+                                                            <p>fas fa-certificate</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <a class="btn btn-warning" href="{{ route('mager.configuration.'.$type) }}">Back</a>
                             </div>

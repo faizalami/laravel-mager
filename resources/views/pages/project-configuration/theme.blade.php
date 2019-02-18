@@ -13,6 +13,7 @@
 @section('page-id', 'configuration-theme')
 @section('additional-styles')
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/dropzone/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'assets/css/pages/project-configuration/theme.css') }}">
 @endsection
 
 @section('content')
@@ -51,86 +52,98 @@
                                     <label>Page Theme</label>
                                     <ul class="list-unstyled clearfix">
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-blue" class="theme-radio" type="radio" name="theme" value="blue">
+                                            <a href="javascript:void(0)" data-skin="skin-blue" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px; background: #367fa9"></span><span class="bg-light-blue" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Blue</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-black" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-black" class="theme-radio" type="radio" name="theme" value="black">
+                                            <a href="javascript:void(0)" data-skin="skin-black" class="skin-button clearfix full-opacity-hover">
                                                 <div style="box-shadow: 0 0 2px rgba(0,0,0,0.1)" class="clearfix"><span style="display:block; width: 20%; float: left; height: 7px; background: #fefefe"></span><span style="display:block; width: 80%; float: left; height: 7px; background: #fefefe"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Black</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-purple" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-purple" class="theme-radio" type="radio" name="theme" value="purple">
+                                            <a href="javascript:void(0)" data-skin="skin-purple" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-purple-active"></span><span class="bg-purple" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Purple</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-green" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-green" class="theme-radio" type="radio" name="theme" value="green">
+                                            <a href="javascript:void(0)" data-skin="skin-green" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span><span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Green</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-red" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-red" class="theme-radio" type="radio" name="theme" value="red">
+                                            <a href="javascript:void(0)" data-skin="skin-red" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-red-active"></span><span class="bg-red" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Red</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-yellow" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-yellow" class="theme-radio" type="radio" name="theme" value="yellow">
+                                            <a href="javascript:void(0)" data-skin="skin-yellow" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-yellow-active"></span><span class="bg-yellow" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #222d32"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin">Yellow</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-blue-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-blue-light" class="theme-radio" type="radio" name="theme" value="blue-light">
+                                            <a href="javascript:void(0)" data-skin="skin-blue-light" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px; background: #367fa9"></span><span class="bg-light-blue" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Blue Light</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-black-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-black-light" class="theme-radio" type="radio" name="theme" value="black-light">
+                                            <a href="javascript:void(0)" data-skin="skin-black-light" class="skin-button clearfix full-opacity-hover">
                                                 <div style="box-shadow: 0 0 2px rgba(0,0,0,0.1)" class="clearfix"><span style="display:block; width: 20%; float: left; height: 7px; background: #fefefe"></span><span style="display:block; width: 80%; float: left; height: 7px; background: #fefefe"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Black Light</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-purple-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-purple-light" class="theme-radio" type="radio" name="theme" value="purple-light">
+                                            <a href="javascript:void(0)" data-skin="skin-purple-light" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-purple-active"></span><span class="bg-purple" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Purple Light</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-green-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-green-light" class="theme-radio" type="radio" name="theme" value="green-light">
+                                            <a href="javascript:void(0)" data-skin="skin-green-light" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-green-active"></span><span class="bg-green" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Green Light</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-red-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-red-light" class="theme-radio" type="radio" name="theme" value="red-light">
+                                            <a href="javascript:void(0)" data-skin="skin-red-light" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-red-active"></span><span class="bg-red" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Red Light</p>
                                         </li>
                                         <li style="float:left; width: 33.33333%; padding: 5px;">
-                                            <a href="javascript:void(0)" data-skin="skin-yellow-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+                                            <input id="skin-yellow-light" class="theme-radio" type="radio" name="theme" value="yellow-light">
+                                            <a href="javascript:void(0)" data-skin="skin-yellow-light" class="skin-button clearfix full-opacity-hover">
                                                 <div><span style="display:block; width: 20%; float: left; height: 7px;" class="bg-yellow-active"></span><span class="bg-yellow" style="display:block; width: 80%; float: left; height: 7px;"></span></div>
-                                                <div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>
+                                                <div><span style="display:block; width: 20%; float: left; height: 30px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 30px; background: #f4f5f7"></span></div>
                                             </a>
                                             <p class="text-center no-margin" style="font-size: 12px">Yellow Light</p>
                                         </li>
@@ -150,33 +163,41 @@
     <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
     <script>
         require(['main'], function () {
+            var uploadRoute = '{{ route('mager.configuration.logo') }}';
+
             require(['adminlte', 'laravelmager']);
-            require(['dropzone'], function (Dropzone) {
+            require(['jquery', 'dropzone'], function ($, Dropzone) {
+                $('.skin-button').click(function () {
+                    $('.skin-button').removeClass('active');
+                    $('.theme-radio').removeAttr('checked');
+
+                    $(this).addClass('active');
+                    $('#'+$(this).data('skin')).attr('checked', true)
+                });
+
                 Dropzone.options.logo= {
                     dictDefaultMessage: 'Click here or drop image here to upload.',
-                    url: '#',
-                    autoProcessQueue: false,
+                    url: uploadRoute,
+                    autoProcessQueue: true,
                     uploadMultiple: false,
                     parallelUploads: 1,
                     maxFiles: 1,
                     addRemoveLinks: true,
                     acceptedFiles: 'image/*',
-                    init: function() {
-                        dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
-
-                        // for Dropzone to process the queue (instead of default form behavior):
-                        // document.getElementById("submit-all").addEventListener("click", function(e) {
-                        //     // Make sure that the form isn't actually being sent.
-                        //     e.preventDefault();
-                        //     e.stopPropagation();
-                        //     dzClosure.processQueue();
-                        // });
-                        //
-                        // //send all the form data along with the files:
-                        // this.on("sendingmultiple", function(data, xhr, formData) {
-                        //     formData.append("firstname", jQuery("#firstname").val());
-                        //     formData.append("lastname", jQuery("#lastname").val());
-                        // });
+                    accept: function(file, done)
+                    {
+                        var re = /(?:\.([^.]+))?$/;
+                        var ext = re.exec(file.name)[1];
+                        ext = ext.toUpperCase();
+                        if ( ext === "JPG" || ext === "JPEG" || ext === "PNG" ||  ext === "GIF" ||  ext == "BMP")
+                        {
+                            done();
+                        } else {
+                            done("Please select only supported picture files.");
+                        }
+                    },
+                    success: function( file, response ){
+                        console.log(response);
                     }
                 }
             });

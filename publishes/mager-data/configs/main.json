@@ -1,0 +1,6 @@
+{
+    "name": "Demo Application",
+    "logo": "image/logo.png",
+    "layout": "fixed",
+    "theme": "blue"
+}

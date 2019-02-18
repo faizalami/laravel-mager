@@ -9,7 +9,7 @@
 namespace Faizalami\LaravelMager\Components\Generators;
 
 
-class SidebarLayoutGenerator implements GeneratorInterface
+class SidebarMenuGenerator implements GeneratorInterface
 {
     use GeneratorTrait;
 
@@ -17,8 +17,8 @@ class SidebarLayoutGenerator implements GeneratorInterface
     {
         $this->type = 'sidebar';
         $this->config = $config;
-        $this->outputPath = resource_path('views/layouts');
-        $this->outputFile = 'sidebar.blade.php';
+        $this->outputPath = config_path('global');
+        $this->outputFile = 'sidebar.php';
     }
 
     public function render()

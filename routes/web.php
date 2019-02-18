@@ -55,7 +55,8 @@ Route::group([
         'prefix' => 'configuration',
         'as' => 'configuration.'
     ], function () {
-        Route::get('/theme', 'ProjectConfigurationController@theme')->name('theme');
+        Route::match(['get', 'post'], '/theme', 'ProjectConfigurationController@theme')->name('theme');
+        Route::post('/theme/logo', 'ProjectConfigurationController@uploadLogo')->name('logo');
         Route::get('/navbar', 'ProjectConfigurationController@navbar')->name('navbar');
         Route::get('/sidebar', 'ProjectConfigurationController@sidebar')->name('sidebar');
         Route::match(['get', 'post'], '/create/navbar', 'ProjectConfigurationController@createNavbar')->name('create.navbar');

@@ -13,8 +13,17 @@ use Illuminate\Http\Request;
 
 class ProjectConfigurationController extends Controller
 {
-    public function theme() {
-        return view('mager::pages.project-configuration.theme');
+    public function theme(Request $request) {
+        if ($request->isMethod('get')) {
+            return view('mager::pages.project-configuration.theme');
+        } elseif ($request->isMethod('post')) {
+            return $request;
+        }
+    }
+
+    public function uploadLogo(Request $request) {
+        return $request->file('file')
+            ->storeAs('public/images', 'logo.'.$request->file('file')->extension());
     }
 
     public function navbar() {
