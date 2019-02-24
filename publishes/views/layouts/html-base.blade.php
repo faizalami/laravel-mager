@@ -20,6 +20,8 @@
 
     <title>@yield('title') | Laravel Mager</title>
 
+    <link rel="icon" href="{{ asset(config('global.main.logo')) }}">
+
     <!-- STYLES -->
     @foreach(config('mager.css_assets') as $css_file)
         <link rel="stylesheet" href="{{ asset(config('mager.public_path').$css_file) }}">

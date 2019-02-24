@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'logo' => 'image/logo.png',
+    'logo' => 'faizalami/laravel-mager/assets/img/default-logo.png',
     'layout' => 'fixed',
     'theme' => 'blue'
 ];

@@ -7,13 +7,17 @@
  */
 ?>
 
-@extends('layouts.main', ['breadcrumb' => 'Database Manager'])
+@extends('layouts.main')
 
-@section('title', 'PageTitle')
-@section('page-id', 'PageTitle')
+@section('title', 'Dashboard')
+@section('page-id', 'Dashboard')
 
 @section('content')
     <div class="row">
+        <br><br>
+        <div class="col-md-2 col-md-offset-5 col-xs-12">
+            <img class="dashboard-logo" src="{{ asset(config('global.main.logo')) }}" alt="">
+        </div>
         <div class="col-md-12 col-xs-12">
             <h3 class="text-center">Welcome to {{ config('app.name') }}</h3>
         </div>

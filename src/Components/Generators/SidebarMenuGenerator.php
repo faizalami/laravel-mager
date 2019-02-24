@@ -23,9 +23,15 @@ class SidebarMenuGenerator implements GeneratorInterface
 
     public function render()
     {
-        $template = 'mager::template.view.sidebar';
+        $template = 'mager::template.config.sidebar';
 
-        $this->outputString = $this->renderBlade($template, $this->config);
+        $menu = $this->config;
+        $menu = str_replace('{', '[', $menu);
+        $menu = str_replace('"', '\'', $menu);
+        $menu = str_replace(':', '=>', $menu);
+        $menu = str_replace('}', ']', $menu);
+
+        $this->outputString = $this->renderBlade($template, compact('menu'));
 
         return $this;
     }

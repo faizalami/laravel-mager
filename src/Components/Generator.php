@@ -14,6 +14,7 @@ use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
 use Faizalami\LaravelMager\Components\Generators\ModelGenerator;
 use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
 use Faizalami\LaravelMager\Components\Generators\SidebarMenuGenerator;
+use Faizalami\LaravelMager\Components\Generators\ThemeGenerator;
 use Faizalami\LaravelMager\Components\Generators\ViewGenerator;
 
 class Generator
@@ -37,6 +38,9 @@ class Generator
                 break;
             case 'sidebar':
                 return new SidebarMenuGenerator($config);
+                break;
+            case 'theme':
+                return new ThemeGenerator($config);
                 break;
         }
     }
