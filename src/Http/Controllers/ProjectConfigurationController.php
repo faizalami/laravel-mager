@@ -43,18 +43,21 @@ class ProjectConfigurationController extends Controller
     }
 
     public function navbar() {
-        return view('mager::pages.project-configuration.navbar');
+        $configNavbar = (array) $this->loadJson('configs/navbar.json');
+        return view('mager::pages.project-configuration.navbar', compact('configNavbar'));
     }
 
     public function sidebar() {
-        return view('mager::pages.project-configuration.sidebar');
+        $configSidebar = (array) $this->loadJson('configs/sidebar.json');
+        return view('mager::pages.project-configuration.sidebar', compact('configSidebar'));
     }
 
     public function createNavbar(Request $request) {
         if ($request->isMethod('get')) {
             return view('mager::pages.project-configuration.form-menu');
         } elseif ($request->isMethod('post')) {
-            return null;
+            $this->saveConfig($request->all(), 'navbar');
+            return response()->redirectToRoute('mager.configuration.navbar');
         }
     }
 
@@ -62,7 +65,56 @@ class ProjectConfigurationController extends Controller
         if ($request->isMethod('get')) {
             return view('mager::pages.project-configuration.form-menu');
         } elseif ($request->isMethod('post')) {
-            return null;
+            $this->saveConfig($request->all(), 'sidebar');
+            return response()->redirectToRoute('mager.configuration.sidebar');
         }
+    }
+
+    public function editNavbar(Request $request, $id) {
+        if ($request->isMethod('get')) {
+            $configMenu = $this->loadJson('configs/navbar.json')->{$id};
+            return view('mager::pages.project-configuration.form-menu', compact('configMenu'));
+        } elseif ($request->isMethod('post')) {
+            $this->deleteConfig($id, 'navbar');
+            $this->saveConfig($request->all(), 'navbar');
+            return response()->redirectToRoute('mager.configuration.navbar');
+        }
+    }
+
+    public function editSidebar(Request $request, $id) {
+        if ($request->isMethod('get')) {
+            $configMenu = $this->loadJson('configs/sidebar.json')->{$id};
+            return view('mager::pages.project-configuration.form-menu', compact('configMenu'));
+        } elseif ($request->isMethod('post')) {
+            $this->deleteConfig($id, 'sidebar');
+            $this->saveConfig($request->all(), 'sidebar');
+            return response()->redirectToRoute('mager.configuration.sidebar');
+        }
+    }
+
+    public function deleteNavbar($id) {
+        $this->deleteConfig($id, 'navbar');
+        return response()->redirectToRoute('mager.configuration.navbar');
+    }
+
+    public function deleteSidebar($id) {
+        $this->deleteConfig($id, 'sidebar');
+        return response()->redirectToRoute('mager.configuration.sidebar');
+    }
+
+    private function saveConfig($request, $type) {
+        $configMenu = $this->loadJson('configs/'.$type.'.json');
+        $request['route'] = str_replace('/', '.', $request['route']);
+        $baseRoute = explode('/', $request['route'])[0];
+        $configMenu->{$baseRoute} = $request;
+
+        $this->saveJson($configMenu, 'configs/'.$type.'.json');
+    }
+
+    private function deleteConfig($id, $type) {
+        $configMenu = $this->loadJson('configs/'.$type.'.json');
+        unset($configMenu->{$id});
+
+        $this->saveJson($configMenu, 'configs/'.$type.'.json');
     }
 }

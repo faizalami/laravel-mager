@@ -31,61 +31,27 @@
                             <th>URL</th>
                             <th>Action</th>
                         </tr>
+                        @if(count($configSidebar) > 0)
+                            @php($i = 1)
+                            @foreach($configSidebar as $base => $menu)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $menu->title }}</td>
+                                    <td><i class="{{ $menu->icon }}"></i></td>
+                                    <td>{{ url($base) . '/' }}</td>
+                                    <td>{{ url($menu->route) . '/' }}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="{{ route('mager.configuration.edit.sidebar', ['id' => $base]) }}"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="{{ route('mager.configuration.delete.sidebar', ['id' => $base]) }}"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            @php($i++)
+                            @endforeach
+                        @else
                         <tr>
-                            <td>1</td>
-                            <td>Menu 1</td>
-                            <td><i class="fas fa-file"></i></td>
-                            <td>localhost:8000/menu-1</td>
-                            <td>localhost:8000/menu-1/index</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="#"><i class="far fa-trash-alt"></i></a>
-                            </td>
+                            <td colspan="6" class="text-center">No Data!</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Menu 2</td>
-                            <td><i class="fas fa-file"></i></td>
-                            <td>localhost:8000/menu-2</td>
-                            <td>localhost:8000/menu-2/index</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="#"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Menu 3</td>
-                            <td><i class="fas fa-file"></i></td>
-                            <td>localhost:8000/menu-3</td>
-                            <td>localhost:8000/menu-3/index</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="#"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Menu 4</td>
-                            <td><i class="fas fa-file"></i></td>
-                            <td>localhost:8000/menu-4</td>
-                            <td>localhost:8000/menu-4/index</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="#"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Menu 5</td>
-                            <td><i class="fas fa-file"></i></td>
-                            <td>localhost:8000/menu-5</td>
-                            <td>localhost:8000/menu-5/index</td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Menu" href="#"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Menu" href="#"><i class="far fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
+                        @endif
                     </table>
                 </div>
                 <!-- /.box-body -->

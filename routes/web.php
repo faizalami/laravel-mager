@@ -59,6 +59,10 @@ Route::group([
         Route::post('/theme/logo', 'ProjectConfigurationController@uploadLogo')->name('logo');
         Route::get('/navbar', 'ProjectConfigurationController@navbar')->name('navbar');
         Route::get('/sidebar', 'ProjectConfigurationController@sidebar')->name('sidebar');
+        Route::match(['get', 'post'], '/edit/navbar/{id}', 'ProjectConfigurationController@editNavbar')->name('edit.navbar');
+        Route::match(['get', 'post'], '/edit/sidebar/{id}', 'ProjectConfigurationController@editSidebar')->name('edit.sidebar');
+        Route::get('/delete/navbar/{id}', 'ProjectConfigurationController@deleteNavbar')->name('delete.navbar');
+        Route::get('/delete/sidebar/{id}', 'ProjectConfigurationController@deleteSidebar')->name('delete.sidebar');
         Route::match(['get', 'post'], '/create/navbar', 'ProjectConfigurationController@createNavbar')->name('create.navbar');
         Route::match(['get', 'post'], '/create/sidebar', 'ProjectConfigurationController@createSidebar')->name('create.sidebar');
     });

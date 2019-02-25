@@ -111,7 +111,7 @@ class PagesManagerController extends Controller
                         $configSidebar = $this->loadJson('configs/sidebar.json');
                         $configMenuItem = $this->loadJson('templates/menuItem.json');
                         $configMenuItem->title = $post['title'];
-                        $configMenuItem->route = $configController->url.'.'.$post['url'];
+                        $configMenuItem->route = $configController->url.'/'.$post['url'];
                         $configSidebar->{$configController->url} = $configMenuItem;
 
                         $this->saveJson($configSidebar, 'configs/sidebar.json');

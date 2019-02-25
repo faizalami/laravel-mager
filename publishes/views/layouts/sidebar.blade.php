@@ -17,7 +17,7 @@ if(isset($menu[$routeName[0]])) {
 
             @foreach($menu as $id => $item)
             <li class="{{ $menu[$id]['active'] }}">
-                <a href="{{ route($item['route']) }}"><i class="{{ $item['icon'] }}"></i> <span>{{ $item['title'] }}</span></a>
+                <a href="{{ url($item['route']) }}"><i class="{{ $item['icon'] }}"></i> <span>{{ $item['title'] }}</span></a>
             </li>
             @endforeach
         </ul>
