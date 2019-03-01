@@ -12,6 +12,7 @@ namespace Faizalami\LaravelMager\Components;
 use Faizalami\LaravelMager\Components\Generators\ControllerGenerator;
 use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
 use Faizalami\LaravelMager\Components\Generators\ModelGenerator;
+use Faizalami\LaravelMager\Components\Generators\NavbarMenuGenerator;
 use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
 use Faizalami\LaravelMager\Components\Generators\SidebarMenuGenerator;
 use Faizalami\LaravelMager\Components\Generators\ThemeGenerator;
@@ -38,6 +39,9 @@ class Generator
                 break;
             case 'sidebar':
                 return new SidebarMenuGenerator($config);
+                break;
+            case 'navbar':
+                return new NavbarMenuGenerator($config);
                 break;
             case 'theme':
                 return new ThemeGenerator($config);

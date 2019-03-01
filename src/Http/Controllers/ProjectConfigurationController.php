@@ -104,8 +104,8 @@ class ProjectConfigurationController extends Controller
 
     private function saveConfig($request, $type) {
         $configMenu = $this->loadJson('configs/'.$type.'.json');
-        $request['route'] = str_replace('/', '.', $request['route']);
         $baseRoute = explode('/', $request['route'])[0];
+        $request['active'] = '';
         $configMenu->{$baseRoute} = $request;
 
         $this->saveJson($configMenu, 'configs/'.$type.'.json');

@@ -43,6 +43,7 @@ class GeneratorController extends Controller
         }
 
         $this->queueConfig('sidebar', $jsonIO->loadJsonFile('configs/sidebar.json')->toString());
+        $this->queueConfig('navbar', $jsonIO->loadJsonFile('configs/navbar.json')->toString());
         $this->queueConfig('theme', $jsonIO->loadJsonFile('configs/main.json')->toString());
 
         foreach ($this->generateQueue as $generate) {

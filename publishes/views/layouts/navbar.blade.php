@@ -13,6 +13,11 @@ if(count($words) > 1) {
     $acronym = substr($appName, 0, 3);
 }
 
+$routeName = explode('.', Request::route()->getName());
+if(isset($menu[$routeName[0]])) {
+    $menu[$routeName[0]]['active'] = 'active';
+}
+
 ?>
 
 <header class="main-header">
@@ -32,5 +37,16 @@ if(count($words) > 1) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
+
+        <div class="navbar-custom-menu pull-left">
+            <ul class="nav navbar-nav">
+
+                @foreach($menu as $id => $item)
+                <li class="{{ $menu[$id]['active'] }}">
+                    <a href="{{ url(stripslashes($item['route'])) }}"><i class="{{ $item['icon'] }}"></i> <span>{{ $item['title'] }}</span></a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
     </nav>
 </header>
