@@ -10,7 +10,14 @@ if(count($words) > 1) {
         $acronym .= $word[0];
     }
 } else {
-    $acronym = substr($appName, 0, 3);
+    $words = explode('-', $appName);
+    if(count($words) > 1) {
+        foreach ($words as $word) {
+            $acronym .= $word[0];
+        }
+    } else {
+        $acronym = substr($appName, 0, 3);
+    }
 }
 
 $routeName = explode('.', Request::route()->getName());
