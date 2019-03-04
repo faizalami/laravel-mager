@@ -35,7 +35,7 @@ class LaravelMagerServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/../publishes/config/laravel-mager.php' => config_path('laravel-mager.php'),
+            __DIR__ . '/../publishes/config' => config_path('/'),
         ], 'config');
 
         $this->publishes([
