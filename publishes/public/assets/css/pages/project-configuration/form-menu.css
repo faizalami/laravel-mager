@@ -1,0 +1,20 @@
+input[type="radio"] {
+    visibility: hidden;
+    position: absolute;
+}
+
+.box-icon {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.box-icon:hover {
+    opacity: 1;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+
+.box-icon.active {
+    opacity: 1;
+    border: 1px solid #367fa9;
+    box-shadow: 0 0 15px #367fa9;
+}
