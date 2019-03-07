@@ -22,11 +22,8 @@ class GuiBuilderController extends Controller
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
         $configView = $this->loadJson('pages/' . $controller . '/view/' . $configControllerPage->view . '.json');
+        $builderType = $configView->type;
 
-        if($configView->type == 'form') {
-            return view('mager::pages.pages-manager.gui-builder', compact('configView'));
-        } else {
-            return view('mager::pages.pages-manager.page-builder');
-        }
+        return view('mager::pages.pages-manager.gui-builder', compact('configView', 'builderType'));
     }
 }

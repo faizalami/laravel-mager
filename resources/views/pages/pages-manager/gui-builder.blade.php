@@ -44,9 +44,6 @@
                     <li>
                         <a href="javascript:void(0)" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)"><i class="fas fa-eye"></i> Page Preview</a>
-                    </li>
                 </ul>
 
                 <div class="navbar-custom-menu">
@@ -93,15 +90,23 @@
     <!-- .component-sidebar -->
     <aside class="component-sidebar active">
         <h3 class="gui-builder-sidebar-heading">Common Components</h3>
-        <div class="sidebar-item" data-type="label">Label</div>
-        <div class="sidebar-item" data-type="textbox">Textbox</div>
-        <div class="sidebar-item" data-type="numberbox">Numberbox</div>
-        <div class="sidebar-item" data-type="emailbox">Emailbox</div>
-        <div class="sidebar-item" data-type="passwordbox">Passwordbox</div>
-        <div class="sidebar-item" data-type="textarea">Textarea</div>
-        <div class="sidebar-item" data-type="button">Button</div>
-        <div class="sidebar-item" data-type="row">Row Panel</div>
-        <div class="sidebar-item" data-type="col">Column Panel</div>
+        @switch($builderType)
+            @case('form')
+                <div class="sidebar-item" data-type="label">Label</div>
+                <div class="sidebar-item" data-type="textbox">Textbox</div>
+                <div class="sidebar-item" data-type="numberbox">Numberbox</div>
+                <div class="sidebar-item" data-type="emailbox">Emailbox</div>
+                <div class="sidebar-item" data-type="passwordbox">Passwordbox</div>
+                <div class="sidebar-item" data-type="textarea">Textarea</div>
+                <div class="sidebar-item" data-type="button">Button</div>
+                <div class="sidebar-item" data-type="row">Row Panel</div>
+                <div class="sidebar-item" data-type="col">Column Panel</div>
+                @break
+            @case('index')
+                <div class="sidebar-item" data-type="table">Table</div>
+                <div class="sidebar-item" data-type="thumbnail">Thumbnail</div>
+                @break
+        @endswitch
     </aside>
     <!-- /.component-sidebar -->
 

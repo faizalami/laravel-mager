@@ -85,3 +85,52 @@
         <button class="btn btn-default component-button">Button</button>
     </div>
 </template>
+
+<template id="template-table">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Item1</th>
+            <th>Item2</th>
+            <th>Item3</th>
+        </tr>
+        <tr>
+            <td>Table Value</td>
+            <td>Table Value</td>
+            <td>Table Value</td>
+        </tr>
+        <tr>
+            <td>Table Value</td>
+            <td>Table Value</td>
+            <td>Table Value</td>
+        </tr>
+    </table>
+</template>
+
+<template id="template-thumbnail">
+    <div style="width: 300px">
+        <div class="box box-solid">
+            <div class="box-body">
+                <h4>Title1</h4>
+                <p>[Content1] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-body">
+                <h4>Title2</h4>
+                <p>[Content2] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-body">
+                <h4>Title3</h4>
+                <p>[Content3] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-body">
+                <h4>Title4</h4>
+                <p>[Content4] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+            </div>
+        </div>
+    </div>
+</template>
