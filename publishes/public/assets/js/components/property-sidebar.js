@@ -244,20 +244,30 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 case 'thumbnail':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
-                            var colSize = {
-                                xs: 4,
-                                sm: 4,
-                                md: 3,
-                                lg: 3
-                            };
+                            var colSize;
+                            var currentConfig = viewConfig.components[current.id];
+
+                            if(currentConfig === undefined) {
+                                colSize = {
+                                    xs: 4,
+                                    sm: 4,
+                                    md: 3,
+                                    lg: 3
+                                };
+                            } else {
+                                colSize = {
+                                    xs: currentConfig.xs,
+                                    sm: currentConfig.sm,
+                                    md: currentConfig.md,
+                                    lg: currentConfig.lg
+                                };
+                            }
+
                             _.forEach(colSize, function (size, colName) {
                                 setProperties(data);
-
                                 $control.find('.thumbnail-col')
                                     .removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
-
-                                console.log(data);
                             });
                         },
                         watch: ids.join(', ')
@@ -285,18 +295,33 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 case 'col':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
-                            var colSize = {
-                                xs: 6,
-                                sm: 6,
-                                md: 4,
-                                lg: 4
-                            };
+                            var colSize;
+                            var currentConfig = viewConfig.components[current.id];
+
+                            if(currentConfig === undefined) {
+                                colSize = {
+                                    xs: 4,
+                                    sm: 4,
+                                    md: 3,
+                                    lg: 3
+                                };
+                            } else {
+                                colSize = {
+                                    xs: currentConfig.xs,
+                                    sm: currentConfig.sm,
+                                    md: currentConfig.md,
+                                    lg: currentConfig.lg
+                                };
+                            }
+
                             _.forEach(colSize, function (size, colName) {
                                 setProperties(data);
 
                                 $control.css('border', 'solid 1px #5f5f5f')
                                     .removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
+
+                                colSize[colName] = data[colName];
                             });
                         },
                         watch: ids.join(', ')

@@ -16,9 +16,17 @@ requirejs.config({
         adminlte: {
             deps: ['jquery']
         },
+        'datatables.bootstrap': {
+            deps: ['jquery', 'bootstrap', 'datatables']
+        },
         laravelmager: {
             deps: ['jquery']
         },
+    },
+    map: {
+        '*': {
+            'datatables.net': 'datatables',
+        }
     },
     paths: {
         jquery: 'plugins/jquery-3.3.1/jquery-3.3.1.min',
@@ -35,6 +43,8 @@ requirejs.config({
         promise: 'plugins/requirejs-promise/requirejs-promise',
         moment: 'plugins/moment/moment.min',
         dropzone: 'plugins/dropzone/dropzone-amd-module',
+        datatables: 'plugins/DataTables-1.10.18/js/jquery.dataTables.min',
+        'datatables.bootstrap': 'plugins/DataTables-1.10.18/js/dataTables.bootstrap.min',
         laravelmager: 'assets/js/components/laravel-mager'
     }
 });
