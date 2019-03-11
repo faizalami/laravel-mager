@@ -121,49 +121,51 @@
 </template>
 
 <template id="template-table">
-    <div class="component-table">
-        <table class="table table-bordered table-striped component-input">
+    <table class="table table-bordered table-striped dataTable component-table">
+        <thead>
             <tr>
                 <th>Item1</th>
                 <th>Item2</th>
                 <th>Item3</th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
-                <td>Table Value</td>
-                <td>Table Value</td>
-                <td>Table Value</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
             </tr>
             <tr>
-                <td>Table Value</td>
-                <td>Table Value</td>
-                <td>Table Value</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
             </tr>
-        </table>
-    </div>
+        </tbody>
+    </table>
 </template>
 
 <template id="template-table-detail">
-    <div class="component-table">
-        <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped component-table">
+        <tbody>
             <tr>
                 <th>Item1</th>
-                <td>Table Value</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
             </tr>
             <tr>
                 <th>Item2</th>
-                <td>Table Value</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
             </tr>
             <tr>
                 <th>Item3</th>
-                <td>Table Value</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
             </tr>
-        </table>
-    </div>
+        </tbody>
+    </table>
 </template>
 
 <template id="template-thumbnail">
     <div class="component-thumbnail row" style="width: 500px">
-        <div class="col-md-3">
+        <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title1</h4>
@@ -171,7 +173,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title2</h4>
@@ -179,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title3</h4>

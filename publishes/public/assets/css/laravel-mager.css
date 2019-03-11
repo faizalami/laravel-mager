@@ -207,6 +207,7 @@
     right: 20px;
     opacity: 0;
     transition: opacity .3s ease-in-out;
+    z-index: 100;
 }
 
 .component-row>.component-buttons {
@@ -218,7 +219,8 @@
     margin-top: -22px;
 }
 
-.component-thumbnail {
+.component-thumbnail,
+.dataTables_wrapper .row {
     margin: 0;
 }
 

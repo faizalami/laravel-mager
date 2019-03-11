@@ -15,6 +15,7 @@
 @section('additional-styles')
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/waitMe/waitMe.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}">
 @endsection
 
 @section('body')

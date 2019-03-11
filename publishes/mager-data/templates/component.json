@@ -427,5 +427,41 @@
                 "type": "choose-columns"
             }
         }
+    },
+    "thumbnail": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "title": {
+                "label":"Title Column",
+                "type":"textbox"
+            },
+            "content": {
+                "label":"Content Column",
+                "type":"textbox"
+            },
+            "xs":{
+                "label":"Size col-xs",
+                "type":"xs",
+                "value":4
+            },
+            "sm":{
+                "label":"Size col-sm",
+                "type":"sm",
+                "value":4
+            },
+            "md":{
+                "label":"Size col-md",
+                "type":"md",
+                "value":3
+            },
+            "lg":{
+                "label":"Size col-lg",
+                "type":"lg",
+                "value":3
+            }
+        }
     }
 }

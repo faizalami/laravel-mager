@@ -5,7 +5,8 @@ var loadFiles = [
     'moment',
     'promise!assets/js/services/component-template',
     'promise!assets/js/services/model-config',
-    'jquerymy'
+    'jquerymy',
+    'datatables.bootstrap'
 ];
 
 define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, ServiceModelConfig) {
@@ -74,9 +75,25 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 var value = '';
 
                 if(['data-id', 'name'].includes(key)) {
-                    value = item.value !== undefined ? item.value : current.id;
+                    if(item.value) {
+                        _.forEach(item.value.split('-'), function (item, key) {
+                            if(key === 0) {
+                                value += item;
+                            } else {
+                                value += item.charAt(0).toUpperCase() + item.slice(1);
+                            }
+                        })
+                    } else {
+                        _.forEach(current.id.split('-'), function (item, key) {
+                            if(key === 0) {
+                                value += item;
+                            } else {
+                                value += item.charAt(0).toUpperCase() + item.slice(1);
+                            }
+                        })
+                    }
                 } else {
-                    value = item.value !== undefined ? item.value : '';
+                    value = item.value ? item.value : '';
                 }
 
                 current.bind.model[key] = value;
@@ -204,6 +221,67 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                         watch: ids.join(', ')
                     };
                     break;
+                case 'table':
+                    binding['#' + current.id] = {
+                        bind: function (data, value, $control) {
+                            $control.find('.dataTable').DataTable();
+                            setProperties(data);
+
+                            if(data['db-columns'] !== '') {
+                                var tableHeaderContent = '';
+                                var tableBodyContent = '';
+                                _.forEach(data['db-columns'].split(','), function (item) {
+                                    tableHeaderContent += '<th>' + modelConfig.columns[item].label + '</th>\n';
+                                    tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
+                                });
+                                $control.find('.component-table thead tr').html(tableHeaderContent);
+                                $control.find('.component-table tbody tr').html(tableBodyContent);
+                            }
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
+                case 'thumbnail':
+                    binding['#' + current.id] = {
+                        bind: function (data, value, $control) {
+                            var colSize = {
+                                xs: 4,
+                                sm: 4,
+                                md: 3,
+                                lg: 3
+                            };
+                            _.forEach(colSize, function (size, colName) {
+                                setProperties(data);
+
+                                $control.find('.thumbnail-col')
+                                    .removeClass('col-' + colName + '-' + size)
+                                    .addClass('col-' + colName + '-' + data[colName]);
+
+                                console.log(data);
+                            });
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
+                case 'table-detail':
+                    binding['#' + current.id] = {
+                        bind: function (data, value, $control) {
+                            setProperties(data);
+
+                            if(data['db-columns'] !== '') {
+                                var tableContent = '';
+                                _.forEach(data['db-columns'].split(','), function (item) {
+                                    tableContent += '<tr>\n' +
+                                        '    <th>' + modelConfig.columns[item].label + '</th>\n' +
+                                        '    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n' +
+                                        '</tr>';
+                                });
+                                $control.find('.component-table tbody').html(tableContent);
+                            }
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
                 case 'col':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
@@ -247,7 +325,17 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 if(data.label) {
                     modelConfig.columns[data.name]['label'] = data.label;
                 } else if(modelConfig.columns[data.name]['label'] === undefined) {
-                    // modelConfig.columns[data.name]['label'] = '';
+                    var name = data.name;
+
+                    if(name.includes('_')) {
+                        name.replace('_', ' ');
+                    } else {
+                        name.replace(/([A-Z])/g, ' $1').trim();
+                    }
+
+                    name = name.charAt(0).toUpperCase() + name.slice(1);
+
+                    modelConfig.columns[data.name]['label'] = name;
                 }
 
                 modelConfig.columns[data.name]['input'] = current.type;
