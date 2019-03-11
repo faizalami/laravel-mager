@@ -41,6 +41,8 @@ define(['jquery', 'lodash', 'jqueryui'], function ($, _) {
 
         var sortStopConfig = function (ui) {
             ui.item.css('width', '');
+            ui.item.find('.component-thumbnail').css('width', '');
+            ui.item.css('height', '');
             $nestedSortableParent.css('border', '');
 
             var type = ui.item.data('type');

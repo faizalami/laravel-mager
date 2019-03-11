@@ -48,7 +48,11 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             var $template = $($('#template-property-input').html());
             var $input = $($('#template-property-'+item.type).html());
 
-            $input.attr({
+            var formControl = _.find($input, function(input){
+                return $(input).is('.form-control');
+            });
+
+            $(formControl).attr({
                 'id': id,
                 'placeholder': item.label,
                 'value': value
@@ -101,13 +105,40 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                     };
                     break;
                 case 'label':
+                case 'label-data':
+                case 'paragraph':
+                case 'paragraph-data':
+                case 'number':
+                case 'email':
                 case 'button':
                     binding['#' + current.id] = {
                         bind: function (data, value, $control) {
                             setProperties(data);
 
                             $control.data('id', data.id)
-                                .find('.component-'+current.type).html(data.text);
+
+                            var $component = $control.find('.component-'+current.type);
+                            $component.text(data.text);
+
+                            if(current.type === 'email') {
+                                $component.attr('href', 'mailto:' + data.text);
+                            }
+
+                            if(data.name) {
+                                if(modelConfig.columns[$component.data('name')]) {
+                                    delete modelConfig.columns[$component.data('name')];
+                                }
+
+                                $component.data('name', data.name);
+
+                                if(modelConfig.columns[$component.data('name')]) {
+                                    data.label = modelConfig.columns[$component.data('name')].label;
+                                }
+
+                                setColumnModel(data);
+                            }
+
+                            console.log(viewConfig, modelConfig);
                         },
                         watch: ids.join(', ')
                     };
@@ -129,8 +160,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                 delete modelConfig.columns[$input.attr('name')];
                             }
 
-                            modelConfig.columns[data.name] = componentTemplate[current.type].db;
-                            modelConfig.columns[data.name]['label'] = data.label;
+                            setColumnModel(data);
 
                             var attr = {};
                             _.forEach(data, function (value, key) {
@@ -140,6 +170,36 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             });
 
                             $input.attr(attr);
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
+                case 'heading':
+                case 'heading-data':
+                    binding['#' + current.id] = {
+                        bind: function (data, value, $control) {
+                            setProperties(data);
+
+                            var $activeHeading = $control.find('h' + data.size);
+                            var $componentHeading = $control.find('.component-heading');
+
+                            $componentHeading.text(data.text)
+                                .removeClass('active');
+                            $activeHeading.addClass('active');
+
+                            if(data.name) {
+                                if(modelConfig.columns[$componentHeading.data('name')]) {
+                                    delete modelConfig.columns[$componentHeading.data('name')];
+                                }
+
+                                $componentHeading.data('name', data.name);
+
+                                if(modelConfig.columns[$componentHeading.data('name')]) {
+                                    data.label = modelConfig.columns[$component.data('name')].label;
+                                }
+
+                                setColumnModel(data);
+                            }
                         },
                         watch: ids.join(', ')
                     };
@@ -179,6 +239,19 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             var $guiBuilder = $('.gui-builder');
             $guiBuilder.my('remove');
             $guiBuilder.my({ui: binding}, current.bind.model);
+        };
+
+        const setColumnModel = function (data) {
+            if(data.name !== '') {
+                modelConfig.columns[data.name] = componentTemplate[current.type].db;
+                if(data.label) {
+                    modelConfig.columns[data.name]['label'] = data.label;
+                } else if(modelConfig.columns[data.name]['label'] === undefined) {
+                    // modelConfig.columns[data.name]['label'] = '';
+                }
+
+                modelConfig.columns[data.name]['input'] = current.type;
+            }
         };
 
         const setProperties = function (data) {
@@ -268,11 +341,36 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 initBinding();
             }
         };
+        
+        const drawChooseColumns = function () {
+            var rows = '';
+            _.forEach(modelConfig.columns, function (item, name) {
+                rows += '<tr>' +
+                    '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>' +
+                    '   <td>' + name + '</td>' +
+                    '   <td>' + item.label + '</td>' +
+                    '   <td>' + item.type + '</td>' +
+                    '   <td>' + item.input + '</td>' +
+                    '</tr>'
+            });
+
+            $('#table-choose-columns tbody').html(rows);
+        };
+
+        const saveChoosenColumns = function () {
+            var $choosenColumns = $('.input-choose-columns:checked').map(function(){
+                return $(this).val();
+            }).get();
+
+            $('#db-columns').val($choosenColumns.join()).trigger('input');
+        };
 
         return {
             displayProperties: displayProperties,
             saveProperties: saveProperties,
-            deleteProperties: deleteProperties
+            deleteProperties: deleteProperties,
+            drawChooseColumns: drawChooseColumns,
+            saveChoosenColumns: saveChoosenColumns
         };
     };
 

@@ -21,6 +21,40 @@
     <label class="component-label">Label Text</label>
 </template>
 
+<template id="template-heading">
+    <h1 class="component-heading">Heading</h1>
+    <h2 class="component-heading">Heading</h2>
+    <h3 class="component-heading active">Heading</h3>
+    <h4 class="component-heading">Heading</h4>
+    <h5 class="component-heading">Heading</h5>
+    <h6 class="component-heading">Heading</h6>
+</template>
+
+<template id="template-paragraph">
+    <p class="component-paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ea veniam voluptate. Asperiores assumenda commodi harum hic id inventore laboriosam nisi odit, perspiciatis placeat provident repellendus sed, sint suscipit tenetur?
+    </p>
+</template>
+
+<template id="template-label-data">
+    <label class="component-label-data">Label Text</label>
+</template>
+
+<template id="template-heading-data">
+    <h1 class="component-heading">Heading</h1>
+    <h2 class="component-heading">Heading</h2>
+    <h3 class="component-heading active">Heading</h3>
+    <h4 class="component-heading">Heading</h4>
+    <h5 class="component-heading">Heading</h5>
+    <h6 class="component-heading">Heading</h6>
+</template>
+
+<template id="template-paragraph-data">
+    <p class="component-paragraph-data">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ea veniam voluptate. Asperiores assumenda commodi harum hic id inventore laboriosam nisi odit, perspiciatis placeat provident repellendus sed, sint suscipit tenetur?
+    </p>
+</template>
+
 <template id="template-row">
     <div class="drag-component component-row full-width">
         <div class="component-buttons btn-group" role="group">
@@ -87,50 +121,79 @@
 </template>
 
 <template id="template-table">
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Item1</th>
-            <th>Item2</th>
-            <th>Item3</th>
-        </tr>
-        <tr>
-            <td>Table Value</td>
-            <td>Table Value</td>
-            <td>Table Value</td>
-        </tr>
-        <tr>
-            <td>Table Value</td>
-            <td>Table Value</td>
-            <td>Table Value</td>
-        </tr>
-    </table>
+    <div class="component-table">
+        <table class="table table-bordered table-striped component-input">
+            <tr>
+                <th>Item1</th>
+                <th>Item2</th>
+                <th>Item3</th>
+            </tr>
+            <tr>
+                <td>Table Value</td>
+                <td>Table Value</td>
+                <td>Table Value</td>
+            </tr>
+            <tr>
+                <td>Table Value</td>
+                <td>Table Value</td>
+                <td>Table Value</td>
+            </tr>
+        </table>
+    </div>
+</template>
+
+<template id="template-table-detail">
+    <div class="component-table">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Item1</th>
+                <td>Table Value</td>
+            </tr>
+            <tr>
+                <th>Item2</th>
+                <td>Table Value</td>
+            </tr>
+            <tr>
+                <th>Item3</th>
+                <td>Table Value</td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <template id="template-thumbnail">
-    <div style="width: 300px">
-        <div class="box box-solid">
-            <div class="box-body">
-                <h4>Title1</h4>
-                <p>[Content1] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+    <div class="component-thumbnail row" style="width: 500px">
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <h4>Title1</h4>
+                    <p>[Content1] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
             </div>
         </div>
-        <div class="box box-solid">
-            <div class="box-body">
-                <h4>Title2</h4>
-                <p>[Content2] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <h4>Title2</h4>
+                    <p>[Content2] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
             </div>
         </div>
-        <div class="box box-solid">
-            <div class="box-body">
-                <h4>Title3</h4>
-                <p>[Content3] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
-            </div>
-        </div>
-        <div class="box box-solid">
-            <div class="box-body">
-                <h4>Title4</h4>
-                <p>[Content4] Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci blanditiis commodi cum deleniti, dolorum esse, et fugiat illo iure numquam officia, provident quasi quidem reiciendis repellat similique vitae voluptatem voluptates.</p>
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <h4>Title3</h4>
+                    <p>[Content3] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
             </div>
         </div>
     </div>
+</template>
+
+<template id="template-number">
+    <span class="component-number">1234567890</span>
+</template>
+
+<template id="template-email">
+    <a class="component-email" href="mailto:someone@mail.com">someone@mail.com</a>
 </template>

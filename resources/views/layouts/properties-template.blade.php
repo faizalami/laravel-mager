@@ -33,8 +33,25 @@ for ($i = 1; $i <= 12; $i++) {
     <input type="number" class="form-control">
 </template>
 
+<template id="template-property-emailbox">
+    <input type="email" class="form-control">
+</template>
+
 <template id="template-property-textarea">
     <textarea rows="3" class="form-control"></textarea>
+</template>
+
+<template id="template-property-heading-size">
+    <select class="form-control">
+        @for($i = 1; $i <= 6; $i++)
+        <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
+</template>
+
+<template id="template-property-choose-columns">
+    <input type="hidden" class="form-control choose-column-input">
+    <button id="button-choose-column" class="btn btn-primary btn-block">Choose</button>
 </template>
 
 @foreach(['xs', 'sm', 'md', 'lg'] as $col)

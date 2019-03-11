@@ -23,17 +23,16 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="box-group box-list-controller" id="accordion">
-                        @php($i = 1)
                         @foreach($controllers as $controller)
                         <div class="panel box box-default">
                             <div class="box-header with-border">
                                 <h4 class="box-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{ $controller->url }}">
+                                    <a class="button-collapse" data-toggle="collapse" data-parent="#accordion" href="#{{ $controller->url }}">
                                         {{ $controller->name }}
                                     </a>
                                 </h4>
                             </div>
-                            <div id="{{ $controller->url }}" class="panel-collapse collapse @if($i == 1) in @endif">
+                            <div id="{{ $controller->url }}" class="panel-collapse collapse">
                                 <ul class="list-group">
 
                                     @foreach($controller->pages as $id => $page)
@@ -52,7 +51,9 @@
                                         <span class="pull-right">
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Page Detail" href="{{ route('mager.pages.show.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-file-alt"></i></a>
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Page Properties" href="{{ route('mager.pages.edit.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-edit"></i></a>
+                                            @if(in_array($page->resource, ['index', 'create', 'edit', 'show']))
                                             <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit View" href="{{ route('mager.pages.gui-builder', ['controller' => $controller->url, 'page' => $id]) }}"><i class="fas fa-object-group"></i></a>
+                                            @endif
                                             <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Page" href="{{ route('mager.pages.delete.page', ['controller' => $controller->url, 'page' => $id]) }}"><i class="far fa-trash-alt"></i></a>
                                         </span>
                                     </li>
@@ -71,7 +72,6 @@
                                 </ul>
                             </div>
                         </div>
-                        @php($i++)
                         @endforeach
                     </div>
                 </div>
@@ -85,6 +85,21 @@
     <script>
         require(['main'], function () {
             require(['adminlte', 'laravelmager']);
+            require(['jquery'], function($){
+                $(document).ready(function(){
+                    if($(localStorage.getItem('activePage')).length !== 0) {
+                        $(localStorage.getItem('activePage')).addClass('in');
+                    } else {
+                        @if(count($controllers) > 0)
+                        $('#{{ $controllers[0]->url }}').addClass('in');
+                        @endif
+                    }
+
+                    $('.button-collapse').click(function () {
+                        localStorage.setItem('activePage', $(this).attr('href'));
+                    });
+                })
+            });
         });
     </script>
 @endsection

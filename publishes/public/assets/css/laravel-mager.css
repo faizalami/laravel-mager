@@ -155,7 +155,7 @@
 }
 
 .component-container {
-    width: 200px;
+    width: 250px;
     transition: width,opacity .3s ease-in-out;
 }
 
@@ -218,6 +218,10 @@
     margin-top: -22px;
 }
 
+.component-thumbnail {
+    margin: 0;
+}
+
 .place-component:hover .component-buttons {
     opacity: 1;
 }
@@ -228,5 +232,13 @@
 
 .component-body .btn {
     margin-top: 5px;
+}
+
+.component-heading {
+    display: none;
+}
+
+.component-heading.active {
+    display: unset;
 }
 /* END GUI Builder*/

@@ -30,6 +30,21 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
             $('#save-page-properties').click(function () {
                 propertySidebar.saveProperties();
             });
+
+            var $modalChooseColumn = $('#modal-choose-columns');
+
+            if($modalChooseColumn.length === 1) {
+                $('#properties-form').on('click', '#button-choose-column', function (event) {
+                    event.preventDefault();
+                    $modalChooseColumn.modal();
+                });
+                propertySidebar.drawChooseColumns();
+
+                $('#save-choosen-columns').click(function () {
+                    propertySidebar.saveChoosenColumns();
+                    $modalChooseColumn.modal('hide');
+                });
+            }
         },
         initDrawingArea: function () {
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);

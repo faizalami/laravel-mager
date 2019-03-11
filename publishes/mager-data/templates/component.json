@@ -25,6 +25,105 @@
             }
         }
     },
+    "heading": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Text",
+                "type": "textbox",
+                "value": "Heading"
+            },
+            "size": {
+                "label": "Heading",
+                "type": "heading-size",
+                "value": 3
+            }
+        }
+    },
+    "paragraph": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Text",
+                "type": "textarea",
+                "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis enim maxime modi placeat possimus recusandae vero."
+            }
+        }
+    },
+    "label-data":{
+        "property": {
+            "data-id":{
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text":{
+                "label":"Text",
+                "type":"textarea",
+                "value":"Label Text"
+            },
+            "name":{
+                "label":"DB Column",
+                "type":"textbox"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
+    "heading-data": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Default Text",
+                "type": "textbox",
+                "value": "Heading"
+            },
+            "size": {
+                "label": "Heading",
+                "type": "heading-size",
+                "value": 3
+            },
+            "name":{
+                "label":"DB Column",
+                "type":"textbox"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
+    "paragraph-data": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Default Text",
+                "type": "textarea",
+                "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis enim maxime modi placeat possimus recusandae vero."
+            },
+            "name":{
+                "label":"DB Column",
+                "type":"textbox"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
     "textbox":{
         "property": {
             "data-id":{
@@ -260,6 +359,72 @@
                 "label":"Choose col-lg",
                 "type":"lg",
                 "value":4
+            }
+        }
+    },
+    "number": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Default Text",
+                "type": "numberbox",
+                "value": "1234567890"
+            },
+            "name":{
+                "label":"DB Column",
+                "type":"textbox"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
+    "email": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "text": {
+                "label": "Default Text",
+                "type": "emailbox",
+                "value": "someone@mail.com"
+            },
+            "name":{
+                "label":"DB Column",
+                "type":"textbox"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
+    },
+    "table": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "db-columns": {
+                "label": "DB Columns",
+                "type": "choose-columns"
+            }
+        }
+    },
+    "table-detail": {
+        "property": {
+            "data-id": {
+                "label":"ID",
+                "type":"textbox"
+            },
+            "db-columns": {
+                "label": "DB Columns",
+                "type": "choose-columns"
             }
         }
     }

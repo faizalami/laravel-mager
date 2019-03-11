@@ -6,22 +6,26 @@
         "name": {
             "type": "string",
             "length": 255,
-            "label": "Name"
+            "label": "Name",
+            "input": "textbox"
         },
         "email": {
             "type": "string",
             "length": 255,
-            "label": "Email"
+            "label": "Email",
+            "input": "emailbox"
         },
         "age": {
             "type": "integer",
             "length": 255,
-            "label": "Age"
+            "label": "Age",
+            "input": "numberbox"
         },
         "address": {
             "type": "string",
             "length": 255,
-            "label": "Address"
+            "label": "Address",
+            "input": "textarea"
         }
     },
     "history": [
@@ -31,22 +35,26 @@
                 "name": {
                     "type": "string",
                     "length": 255,
-                    "label": "Name"
+                    "label": "Name",
+                    "input": "textbox"
                 },
                 "email": {
                     "type": "string",
                     "length": 255,
-                    "label": "Email"
+                    "label": "Email",
+                    "input": "emailbox"
                 },
                 "age": {
                     "type": "integer",
                     "length": 255,
-                    "label": "Age"
+                    "label": "Age",
+                    "input": "numberbox"
                 },
                 "address": {
                     "type": "string",
                     "length": 255,
-                    "label": "Address"
+                    "label": "Address",
+                    "input": "textarea"
                 }
             }
         }

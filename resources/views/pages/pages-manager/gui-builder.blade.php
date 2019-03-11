@@ -92,7 +92,9 @@
         <h3 class="gui-builder-sidebar-heading">Common Components</h3>
         @switch($builderType)
             @case('form')
+                <div class="sidebar-item" data-type="heading">Heading</div>
                 <div class="sidebar-item" data-type="label">Label</div>
+                <div class="sidebar-item" data-type="paragraph">Paragraph</div>
                 <div class="sidebar-item" data-type="textbox">Textbox</div>
                 <div class="sidebar-item" data-type="numberbox">Numberbox</div>
                 <div class="sidebar-item" data-type="emailbox">Emailbox</div>
@@ -103,8 +105,23 @@
                 <div class="sidebar-item" data-type="col">Column Panel</div>
                 @break
             @case('index')
+                <div class="sidebar-item" data-type="heading">Heading</div>
+                <div class="sidebar-item" data-type="label">Label</div>
+                <div class="sidebar-item" data-type="paragraph">Paragraph</div>
                 <div class="sidebar-item" data-type="table">Table</div>
                 <div class="sidebar-item" data-type="thumbnail">Thumbnail</div>
+                <div class="sidebar-item" data-type="row">Row Panel</div>
+                <div class="sidebar-item" data-type="col">Column Panel</div>
+                @break
+            @case('show')
+                <div class="sidebar-item" data-type="table-detail">Table</div>
+                <div class="sidebar-item" data-type="heading-data">Heading</div>
+                <div class="sidebar-item" data-type="label-data">Label</div>
+                <div class="sidebar-item" data-type="paragraph-data">Paragraph</div>
+                <div class="sidebar-item" data-type="number">Number</div>
+                <div class="sidebar-item" data-type="email">Email</div>
+                <div class="sidebar-item" data-type="row">Row Panel</div>
+                <div class="sidebar-item" data-type="col">Column Panel</div>
                 @break
         @endswitch
     </aside>
@@ -123,6 +140,69 @@
 @include('mager::layouts.component-templates')
 
 @include('mager::layouts.properties-template')
+
+@if(in_array($builderType, ['index', 'show']))
+    <div class="modal fade" id="modal-choose-columns">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Choose Columns</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="table-choose-columns" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Choose</th>
+                                <th>Name</th>
+                                <th>Label</th>
+                                <th>Data Type</th>
+                                <th>Input Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <button id="new-column" class="btn btn-primary btn-block">Add New</button>
+                                </td>
+                                <td>
+                                    <input id="new-name" type="text" class="form-control" placeholder="Column Name">
+                                </td>
+                                <td>
+                                    <input id="new-name" type="text" class="form-control" placeholder="Column Label">
+                                </td>
+                                <td>
+                                    <select id="new-type" class="form-control">
+                                        <option value="" selected disabled>Data Type</option>
+                                        <option value="textbox">textbox</option>
+                                        <option value="emailbox">emailbox</option>
+                                        <option value="numberbox">numberbox</option>
+                                        <option value="passwordbox">passwordbox</option>
+                                        <option value="textarea">textarea</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input id="new-input" type="text" class="form-control" placeholder="Input Type">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" id="save-choosen-columns" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+@endif
 
 <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
 <script>
