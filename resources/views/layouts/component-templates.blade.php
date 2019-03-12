@@ -168,24 +168,24 @@
         <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
-                    <h4>Title1</h4>
-                    <p>[Content1] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h4>Title</h4>
+                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>
         <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
-                    <h4>Title2</h4>
-                    <p>[Content2] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h4>Title</h4>
+                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>
         <div class="thumbnail-col col-md-3">
             <div class="box box-solid">
                 <div class="box-body">
-                    <h4>Title3</h4>
-                    <p>[Content3] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <h4>Title</h4>
+                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>

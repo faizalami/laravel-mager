@@ -300,10 +300,10 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
                             if(currentConfig === undefined) {
                                 colSize = {
-                                    xs: 4,
-                                    sm: 4,
-                                    md: 3,
-                                    lg: 3
+                                    xs: 6,
+                                    sm: 6,
+                                    md: 4,
+                                    lg: 4
                                 };
                             } else {
                                 colSize = {
@@ -483,7 +483,8 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             saveProperties: saveProperties,
             deleteProperties: deleteProperties,
             drawChooseColumns: drawChooseColumns,
-            saveChoosenColumns: saveChoosenColumns
+            saveChoosenColumns: saveChoosenColumns,
+            model: modelConfig
         };
     };
 

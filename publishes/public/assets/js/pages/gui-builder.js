@@ -91,6 +91,11 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
 
                 switch (config.type) {
                     case 'label':
+                    case 'label-data':
+                    case 'paragraph':
+                    case 'paragraph-data':
+                    case 'number':
+                    case 'email':
                     case 'button':
                         $component.data({
                             'id': config['data-id'],
@@ -115,6 +120,47 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                         });
 
                         $input.attr(attr);
+                        break;
+                    case 'heading':
+                    case 'heading-data':
+                        var $activeHeading = $component.find('h' + data.size);
+                        var $componentHeading = $component.find('.component-heading');
+
+                        $componentHeading.text(config.text)
+                            .removeClass('active');
+                        $activeHeading.addClass('active');
+
+                        if(config.name) {
+                            $componentHeading.data('name', config.name);
+                        }
+                        break;
+                    case 'table':
+                        $component.find('.dataTable').DataTable();
+                        if(config['db-columns'] !== '') {
+                            var tableHeaderContent = '';
+                            var tableBodyContent = '';
+                            _.forEach(config['db-columns'].split(','), function (item) {
+                                tableHeaderContent += '<th>' + propertySidebar.model.columns[item].label + '</th>\n';
+                                tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
+                            });
+                            $component.find('.component-table thead tr').html(tableHeaderContent);
+                            $component.find('.component-table tbody tr').html(tableBodyContent);
+                        }
+                        break;
+                    case 'thumbnail':
+                        console.log($component);
+                        break;
+                    case 'table-detail':
+                        if(config['db-columns'] !== '') {
+                            var tableContent = '';
+                            _.forEach(config['db-columns'].split(','), function (item) {
+                                tableContent += '<tr>\n' +
+                                    '    <th>' + propertySidebar.model.columns[item].label + '</th>\n' +
+                                    '    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n' +
+                                    '</tr>';
+                            });
+                            $component.find('.component-table tbody').html(tableContent);
+                        }
                         break;
                     case 'col':
                         $component.data('type', config.type);
