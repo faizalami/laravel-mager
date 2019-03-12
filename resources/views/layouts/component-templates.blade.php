@@ -127,6 +127,7 @@
                 <th>Item1</th>
                 <th>Item2</th>
                 <th>Item3</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -134,11 +135,21 @@
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>
+                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Item Detail" href="#"><i class="far fa-eye"></i></a>
+                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Item" href="#"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a>
+                </td>
             </tr>
             <tr>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
+                <td>
+                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Item Detail" href="#"><i class="far fa-eye"></i></a>
+                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Item" href="#"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -169,7 +180,8 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title</h4>
-                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p><span>[Content]</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <button class="btn btn-primary btn-block" type="button">Detail</button>
                 </div>
             </div>
         </div>
@@ -177,7 +189,8 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title</h4>
-                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p><span>[Content]</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <button class="btn btn-primary btn-block" type="button">Detail</button>
                 </div>
             </div>
         </div>
@@ -185,7 +198,8 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h4>Title</h4>
-                    <p>[Content] Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p><span>[Content]</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <button class="btn btn-primary btn-block" type="button">Detail</button>
                 </div>
             </div>
         </div>

@@ -36,9 +36,9 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
             if($modalChooseColumn.length === 1) {
                 $('#properties-form').on('click', '#button-choose-column', function (event) {
                     event.preventDefault();
+                    propertySidebar.drawChooseColumns();
                     $modalChooseColumn.modal();
                 });
-                propertySidebar.drawChooseColumns();
 
                 $('#save-choosen-columns').click(function () {
                     propertySidebar.saveChoosenColumns();
@@ -123,7 +123,7 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                         break;
                     case 'heading':
                     case 'heading-data':
-                        var $activeHeading = $component.find('h' + data.size);
+                        var $activeHeading = $component.find('h' + config.size);
                         var $componentHeading = $component.find('.component-heading');
 
                         $componentHeading.text(config.text)
@@ -143,12 +143,54 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                                 tableHeaderContent += '<th>' + propertySidebar.model.columns[item].label + '</th>\n';
                                 tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
                             });
+                            tableHeaderContent += '<th>Action</th>';
+                            tableBodyContent += '<td>\n' +
+                                '    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Item Detail" href="#"><i class="far fa-eye"></i></a>\n' +
+                                '    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Item" href="#"><i class="fas fa-edit"></i></a>\n' +
+                                '    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a>\n' +
+                                '</td>';
+
                             $component.find('.component-table thead tr').html(tableHeaderContent);
                             $component.find('.component-table tbody tr').html(tableBodyContent);
                         }
                         break;
                     case 'thumbnail':
-                        console.log($component);
+                        $component.find('.component-thumbnail').css('width', '');
+                        colSize = {
+                            xs: 4,
+                            sm: 4,
+                            md: 3,
+                            lg: 3
+                        };
+
+                        var $thumbnailCol = $component.find('.thumbnail-col');
+
+                        if(config.title !== '') {
+                            var thumbnailTitle = propertySidebar.model.columns[config.title];
+                            if(thumbnailTitle) {
+                                $thumbnailCol.find('h4')
+                                    .text(thumbnailTitle.label);
+                            } else {
+                                $thumbnailCol.find('h4')
+                                    .text('[Unknown Column!]');
+                            }
+                        }
+
+                        if(config.content !== '') {
+                            var thumbnailContent = propertySidebar.model.columns[config.content];
+                            if(thumbnailContent) {
+                                $thumbnailCol.find('span')
+                                    .text('[' + thumbnailContent.label + ']');
+                            } else {
+                                $thumbnailCol.find('span')
+                                    .text('[Unknown Column!]');
+                            }
+                        }
+
+                        _.forEach(colSize, function (size, colName) {
+                            $thumbnailCol.removeClass('col-' + colName + '-' + size)
+                                .addClass('col-' + colName + '-' + config[colName]);
+                        });
                         break;
                     case 'table-detail':
                         if(config['db-columns'] !== '') {

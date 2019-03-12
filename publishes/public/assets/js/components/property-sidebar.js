@@ -234,6 +234,13 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                     tableHeaderContent += '<th>' + modelConfig.columns[item].label + '</th>\n';
                                     tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
                                 });
+                                tableHeaderContent += '<th>Action</th>';
+                                tableBodyContent += '<td>\n' +
+                                    '    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Item Detail" href="#"><i class="far fa-eye"></i></a>\n' +
+                                    '    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Item" href="#"><i class="fas fa-edit"></i></a>\n' +
+                                    '    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a>\n' +
+                                    '</td>';
+
                                 $control.find('.component-table thead tr').html(tableHeaderContent);
                                 $control.find('.component-table tbody tr').html(tableBodyContent);
                             }
@@ -263,12 +270,36 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                 };
                             }
 
+                            var $thumbnailCol = $control.find('.thumbnail-col');
+
+                            if(data.title !== '') {
+                                var thumbnailTitle = modelConfig.columns[data.title];
+                                if(thumbnailTitle) {
+                                    $thumbnailCol.find('h4')
+                                        .text(thumbnailTitle.label);
+                                } else {
+                                    $thumbnailCol.find('h4')
+                                        .text('[Unknown Column!]');
+                                }
+                            }
+
+                            if(data.content !== '') {
+                                var thumbnailContent = modelConfig.columns[data.content];
+                                if(thumbnailContent) {
+                                    $thumbnailCol.find('span')
+                                        .text('[' + thumbnailContent.label + ']');
+                                } else {
+                                    $thumbnailCol.find('span')
+                                        .text('[Unknown Column!]');
+                                }
+                            }
+
                             _.forEach(colSize, function (size, colName) {
                                 setProperties(data);
-                                $control.find('.thumbnail-col')
-                                    .removeClass('col-' + colName + '-' + size)
+                                $thumbnailCol.removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
                             });
+                            console.log(viewConfig, modelConfig);
                         },
                         watch: ids.join(', ')
                     };
@@ -457,6 +488,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
         
         const drawChooseColumns = function () {
             var rows = '';
+            var $tableBody = $('#table-choose-columns tbody');
             _.forEach(modelConfig.columns, function (item, name) {
                 rows += '<tr>' +
                     '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>' +
@@ -467,7 +499,11 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                     '</tr>'
             });
 
-            $('#table-choose-columns tbody').html(rows);
+            $tableBody.html(rows);
+
+            _.forEach($('#db-columns').val().split(','), function (item) {
+                $('[value="' + item + '"]').attr('checked', 'true');
+            });
         };
 
         const saveChoosenColumns = function () {
