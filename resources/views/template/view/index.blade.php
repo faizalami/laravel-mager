@@ -21,6 +21,7 @@
 
     .thumbnail-index {
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        border: 1px solid #f0f0f0 !important;
     }
 </style>
 {{ '@' }}endsection
