@@ -136,10 +136,10 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                         break;
                     case 'table':
                         $component.find('.dataTable').DataTable();
-                        if(config['db-columns'] !== '') {
+                        if(config['columns'] !== '') {
                             var tableHeaderContent = '';
                             var tableBodyContent = '';
-                            _.forEach(config['db-columns'].split(','), function (item) {
+                            _.forEach(config['columns'].split(','), function (item) {
                                 tableHeaderContent += '<th>' + propertySidebar.model.columns[item].label + '</th>\n';
                                 tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
                             });
@@ -193,9 +193,9 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                         });
                         break;
                     case 'table-detail':
-                        if(config['db-columns'] !== '') {
+                        if(config['columns'] !== '') {
                             var tableContent = '';
-                            _.forEach(config['db-columns'].split(','), function (item) {
+                            _.forEach(config['columns'].split(','), function (item) {
                                 tableContent += '<tr>\n' +
                                     '    <th>' + propertySidebar.model.columns[item].label + '</th>\n' +
                                     '    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n' +

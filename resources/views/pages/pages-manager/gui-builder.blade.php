@@ -177,17 +177,17 @@
                                     <input id="new-name" type="text" class="form-control" placeholder="Column Label">
                                 </td>
                                 <td>
+                                    <input id="new-input" type="text" class="form-control" placeholder="Data Type">
+                                </td>
+                                <td>
                                     <select id="new-type" class="form-control">
-                                        <option value="" selected disabled>Data Type</option>
+                                        <option value="" selected disabled>Input Type</option>
                                         <option value="textbox">textbox</option>
                                         <option value="emailbox">emailbox</option>
                                         <option value="numberbox">numberbox</option>
                                         <option value="passwordbox">passwordbox</option>
                                         <option value="textarea">textarea</option>
                                     </select>
-                                </td>
-                                <td>
-                                    <input id="new-input" type="text" class="form-control" placeholder="Input Type">
                                 </td>
                             </tr>
                         </tfoot>

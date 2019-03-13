@@ -37,8 +37,23 @@ class GeneratorController extends Controller
             $this->queueConfig('model', $modelConfig);
 
             foreach ($pageConfig['viewConfig'] as $view) {
+                $links = [
+                    'show' => null,
+                    'create' => null,
+                    'edit' => null,
+                    'destroy' => null
+                ];
+
+                foreach (array_keys($links) as $resource) {
+                    $key = array_search($resource, array_column((array) $controllerConfig['pages'], 'resource'));
+
+                    if($key !== false) {
+                        $links[$resource] = array_column((array) $controllerConfig['pages'], 'url')[$key];
+                    }
+                }
+
                 $viewConfig = $jsonIO->loadJsonFile('pages/'.$page.'/view/'.$view->config.'.json')->toArray();
-                $this->queueConfig('view', $viewConfig);
+                $this->queueConfig('view', ['view' => $viewConfig, 'links' => $links, 'model' => $modelConfig['columns']]);
             }
         }
 

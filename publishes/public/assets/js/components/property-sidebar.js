@@ -132,7 +132,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                         bind: function (data, value, $control) {
                             setProperties(data);
 
-                            $control.data('id', data.id)
+                            $control.data('id', data.id);
 
                             var $component = $control.find('.component-'+current.type);
                             $component.text(data.text);
@@ -150,12 +150,11 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
                                 if(modelConfig.columns[$component.data('name')]) {
                                     data.label = modelConfig.columns[$component.data('name')].label;
+                                    data.input = modelConfig.columns[$component.data('name')].input;
                                 }
 
                                 setColumnModel(data);
                             }
-
-                            console.log(viewConfig, modelConfig);
                         },
                         watch: ids.join(', ')
                     };
@@ -177,8 +176,6 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                 delete modelConfig.columns[$input.attr('name')];
                             }
 
-                            setColumnModel(data);
-
                             var attr = {};
                             _.forEach(data, function (value, key) {
                                 if(key !== 'label') {
@@ -187,6 +184,9 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             });
 
                             $input.attr(attr);
+
+                            data.input = current.type;
+                            setColumnModel(data);
                         },
                         watch: ids.join(', ')
                     };
@@ -212,7 +212,8 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                 $componentHeading.data('name', data.name);
 
                                 if(modelConfig.columns[$componentHeading.data('name')]) {
-                                    data.label = modelConfig.columns[$component.data('name')].label;
+                                    data.label = modelConfig.columns[$componentHeading.data('name')].label;
+                                    data.input = modelConfig.columns[$componentHeading.data('name')].input;
                                 }
 
                                 setColumnModel(data);
@@ -227,10 +228,10 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             $control.find('.dataTable').DataTable();
                             setProperties(data);
 
-                            if(data['db-columns'] !== '') {
+                            if(data['columns'] !== '') {
                                 var tableHeaderContent = '';
                                 var tableBodyContent = '';
-                                _.forEach(data['db-columns'].split(','), function (item) {
+                                _.forEach(data['columns'].split(','), function (item) {
                                     tableHeaderContent += '<th>' + modelConfig.columns[item].label + '</th>\n';
                                     tableBodyContent += '<td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n';
                                 });
@@ -299,7 +300,6 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                                 $thumbnailCol.removeClass('col-' + colName + '-' + size)
                                     .addClass('col-' + colName + '-' + data[colName]);
                             });
-                            console.log(viewConfig, modelConfig);
                         },
                         watch: ids.join(', ')
                     };
@@ -309,9 +309,9 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                         bind: function (data, value, $control) {
                             setProperties(data);
 
-                            if(data['db-columns'] !== '') {
+                            if(data['columns'] !== '') {
                                 var tableContent = '';
-                                _.forEach(data['db-columns'].split(','), function (item) {
+                                _.forEach(data['columns'].split(','), function (item) {
                                     tableContent += '<tr>\n' +
                                         '    <th>' + modelConfig.columns[item].label + '</th>\n' +
                                         '    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>\n' +
@@ -380,21 +380,23 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 modelConfig.columns[data.name] = componentTemplate[current.type].db;
                 if(data.label) {
                     modelConfig.columns[data.name]['label'] = data.label;
-                } else if(modelConfig.columns[data.name]['label'] === undefined) {
-                    var name = data.name;
+                } else {
+                    if(modelConfig.columns[data.name]['label'] === undefined) {
+                        var name = data.name;
 
-                    if(name.includes('_')) {
-                        name.replace('_', ' ');
-                    } else {
-                        name.replace(/([A-Z])/g, ' $1').trim();
+                        if(name.includes('_')) {
+                            name.replace('_', ' ');
+                        } else {
+                            name.replace(/([A-Z])/g, ' $1').trim();
+                        }
+
+                        name = name.charAt(0).toUpperCase() + name.slice(1);
+
+                        modelConfig.columns[data.name]['label'] = name;
                     }
-
-                    name = name.charAt(0).toUpperCase() + name.slice(1);
-
-                    modelConfig.columns[data.name]['label'] = name;
                 }
 
-                modelConfig.columns[data.name]['input'] = current.type;
+                modelConfig.columns[data.name]['input'] = data.input;
             }
         };
 
@@ -501,7 +503,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
             $tableBody.html(rows);
 
-            _.forEach($('#db-columns').val().split(','), function (item) {
+            _.forEach($('#columns').val().split(','), function (item) {
                 $('[value="' + item + '"]').attr('checked', 'true');
             });
         };
@@ -511,7 +513,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 return $(this).val();
             }).get();
 
-            $('#db-columns').val($choosenColumns.join()).trigger('input');
+            $('#columns').val($choosenColumns.join()).trigger('input');
         };
 
         return {
