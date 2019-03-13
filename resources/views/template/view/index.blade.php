@@ -32,7 +32,9 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">{{ $title }}</h3>
-                <a class="btn btn-primary btn-xs pull-right" href="#">Create New</a>
+                {{ '@' }}if(Route::has({{ '\''.$controller.'.'.$links['edit'].'\'' }}))
+                <a class="btn btn-xs btn-primary pull-right" href="{{ '{'.'{ route(\''.$controller.'.'.$links['create'].'\') }'.'}' }}">Create New</a>
+                {{ '@' }}endif
             </div>
             <!-- /.box-header -->
             <div class="box-body">
