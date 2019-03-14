@@ -69,7 +69,7 @@
             },
             "name":{
                 "label":"DB Column",
-                "type":"textbox"
+                "type":"choose-column"
             }
         },
         "db": {
@@ -95,7 +95,7 @@
             },
             "name":{
                 "label":"DB Column",
-                "type":"textbox"
+                "type":"choose-column"
             }
         },
         "db": {
@@ -116,7 +116,7 @@
             },
             "name":{
                 "label":"DB Column",
-                "type":"textbox"
+                "type":"choose-column"
             }
         },
         "db": {

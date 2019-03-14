@@ -148,18 +148,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             }
 
                             if(data.name) {
-                                if(modelConfig.columns[$component.data('name')]) {
-                                    delete modelConfig.columns[$component.data('name')];
-                                }
-
                                 $component.data('name', data.name);
-
-                                if(modelConfig.columns[$component.data('name')]) {
-                                    data.label = modelConfig.columns[$component.data('name')].label;
-                                    data.input = modelConfig.columns[$component.data('name')].input;
-                                }
-
-                                setColumnModel(data);
                             }
                         },
                         watch: ids.join(', ')
@@ -211,18 +200,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             $activeHeading.addClass('active');
 
                             if(data.name) {
-                                if(modelConfig.columns[$componentHeading.data('name')]) {
-                                    delete modelConfig.columns[$componentHeading.data('name')];
-                                }
-
                                 $componentHeading.data('name', data.name);
-
-                                if(modelConfig.columns[$componentHeading.data('name')]) {
-                                    data.label = modelConfig.columns[$componentHeading.data('name')].label;
-                                    data.input = modelConfig.columns[$componentHeading.data('name')].input;
-                                }
-
-                                setColumnModel(data);
                             }
                         },
                         watch: ids.join(', ')
@@ -491,7 +469,6 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                     'type': current.type
                 }).html('');
 
-
                 initComponent();
 
                 initBinding();
@@ -506,7 +483,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
                 if(current.type === 'table' || current.type === 'table-detail') {
                     chooseInput = '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>';
-                } else if(current.type === 'thumbnail') {
+                } else if(current.type === 'thumbnail' || current.type === 'heading-data' || current.type === 'label-data' || current.type === 'paragraph-data') {
                     chooseInput = '   <td><input type="radio" name="choose-column" class="input-choose-columns" value="' + name + '"></td>';
                 } else {
                     chooseInput = '';
