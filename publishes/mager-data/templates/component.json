@@ -436,11 +436,11 @@
             },
             "title": {
                 "label":"Title Column",
-                "type":"textbox"
+                "type":"choose-column"
             },
             "content": {
                 "label":"Content Column",
-                "type":"textbox"
+                "type":"choose-column"
             },
             "xs":{
                 "label":"Size col-xs",

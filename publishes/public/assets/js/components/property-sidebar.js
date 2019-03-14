@@ -53,6 +53,12 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 return $(input).is('.form-control');
             });
 
+            var buttonModal = _.find($input, function(input){
+                return $(input).is('button');
+            });
+
+            $(buttonModal).data('id', id);
+
             $(formControl).attr({
                 'id': id,
                 'placeholder': item.label,
@@ -401,6 +407,10 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
         };
 
         const setProperties = function (data) {
+            if(viewConfig.components.length === 0) {
+                viewConfig.components = {};
+            }
+
             if(viewConfig.components[current.id] === undefined) {
                 viewConfig.components[current.id] = {};
             }
@@ -488,39 +498,55 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             }
         };
         
-        const drawChooseColumns = function () {
+        const drawModelColumns = function (choose = false, id = null) {
             var rows = '';
-            var $tableBody = $('#table-choose-columns tbody');
+
             _.forEach(modelConfig.columns, function (item, name) {
+                var chooseInput = '';
+
+                if(current.type === 'table' || current.type === 'table-detail') {
+                    chooseInput = '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>';
+                } else if(current.type === 'thumbnail') {
+                    chooseInput = '   <td><input type="radio" name="choose-column" class="input-choose-columns" value="' + name + '"></td>';
+                } else {
+                    chooseInput = '';
+                }
+
                 rows += '<tr>' +
-                    '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>' +
+                    chooseInput +
                     '   <td>' + name + '</td>' +
                     '   <td>' + item.label + '</td>' +
                     '   <td>' + item.type + '</td>' +
                     '   <td>' + item.input + '</td>' +
+                    '   <td><a class="btn btn-xs btn-danger" data-name="' + name + '" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a></td>' +
                     '</tr>'
             });
 
-            $tableBody.html(rows);
+            if(choose) {
+                $('#table-choose-columns tbody').html(rows);
 
-            _.forEach($('#columns').val().split(','), function (item) {
-                $('[value="' + item + '"]').attr('checked', 'true');
-            });
+                _.forEach($('#'+id).val().split(','), function (item) {
+                    $('[value="' + item + '"]').attr('checked', 'true');
+                });
+            } else {
+                $('#table-model-columns tbody').html(rows);
+
+            }
         };
 
-        const saveChoosenColumns = function () {
+        const saveChoosenColumns = function (id) {
             var $choosenColumns = $('.input-choose-columns:checked').map(function(){
                 return $(this).val();
             }).get();
 
-            $('#columns').val($choosenColumns.join()).trigger('input');
+            $('#'+id).val($choosenColumns.join()).trigger('input');
         };
 
         return {
             displayProperties: displayProperties,
             saveProperties: saveProperties,
             deleteProperties: deleteProperties,
-            drawChooseColumns: drawChooseColumns,
+            drawModelColumns: drawModelColumns,
             saveChoosenColumns: saveChoosenColumns,
             model: modelConfig
         };

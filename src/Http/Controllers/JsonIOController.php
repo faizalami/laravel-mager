@@ -64,33 +64,36 @@ class JsonIOController extends Controller
 
     private function writeJson($type, array $param) {
         $jsonIO = new JsonIO();
-        $jsonObject = $jsonIO->setJsonFromObject($this->request->all(), true);
+        $status = false;
         $message = '';
 
         switch ($type) {
             case 'page':
                 switch ($param[0]) {
                     case 'controller':
-                        $jsonObject = $jsonIO->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[1].'.json');
+                        $status = $jsonIO->setJsonFromObject($this->request->all(), true)
+                            ->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[1].'.json');
                         break;
                     case 'model':
-                    case 'view':
-                        $jsonObject = $jsonIO->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[2].'.json');
+                    case 'view' :
+                        $status = $jsonIO->setJsonFromObject($this->request->all(), true)
+                            ->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[2].'.json');
                         break;
                     default:
-                        $jsonObject = null;
+                        $status = false;
                         break;
                 }
                 break;
             case 'config':
-                $jsonObject = $jsonIO->saveJsonFile($type.'s/'.$param[0].'.json');
+                $status = $jsonIO->setJsonFromObject($this->request->all(), true)
+                    ->saveJsonFile($type.'s/'.$param[0].'.json');
                 break;
             default:
-                $jsonObject = null;
+                $status = false;
                 break;
         }
 
-        if($jsonObject) {
+        if($status) {
             return [
                 'status' => true,
                 'message' => 'Save ' . $type . ' ' . $param[0] . ' success.'

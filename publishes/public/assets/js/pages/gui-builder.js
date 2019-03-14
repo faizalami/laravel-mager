@@ -31,17 +31,23 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                 propertySidebar.saveProperties();
             });
 
+            $('#show-model').click(function () {
+                propertySidebar.drawModelColumns();
+                $('#modal-model-columns').modal();
+            });
+
             var $modalChooseColumn = $('#modal-choose-columns');
 
             if($modalChooseColumn.length === 1) {
-                $('#properties-form').on('click', '#button-choose-column', function (event) {
+                $('#properties-form').on('click', '.button-choose-column', function (event) {
                     event.preventDefault();
-                    propertySidebar.drawChooseColumns();
+                    propertySidebar.drawModelColumns(true, $(this).data('id'));
+                    $('#save-choosen-columns').data('id', $(this).data('id'));
                     $modalChooseColumn.modal();
                 });
 
                 $('#save-choosen-columns').click(function () {
-                    propertySidebar.saveChoosenColumns();
+                    propertySidebar.saveChoosenColumns($(this).data('id'));
                     $modalChooseColumn.modal('hide');
                 });
             }

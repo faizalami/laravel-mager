@@ -49,9 +49,14 @@ for ($i = 1; $i <= 12; $i++) {
     </select>
 </template>
 
+<template id="template-property-choose-column">
+    <input type="hidden" class="form-control choose-column-input">
+    <button class="btn btn-primary btn-block button-choose-column">Choose</button>
+</template>
+
 <template id="template-property-choose-columns">
     <input type="hidden" class="form-control choose-column-input">
-    <button id="button-choose-column" class="btn btn-primary btn-block">Choose</button>
+    <button class="btn btn-primary btn-block button-choose-column">Choose</button>
 </template>
 
 @foreach(['xs', 'sm', 'md', 'lg'] as $col)

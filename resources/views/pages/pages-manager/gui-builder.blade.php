@@ -45,6 +45,9 @@
                     <li>
                         <a href="javascript:void(0)" id="show-page-properties"><i class="fas fa-wrench"></i> Page Properties</a>
                     </li>
+                    <li>
+                        <a href="javascript:void(0)" id="show-model"><i class="fas fa-database"></i> Show Model</a>
+                    </li>
                 </ul>
 
                 <div class="navbar-custom-menu">
@@ -142,6 +145,65 @@
 
 @include('mager::layouts.properties-template')
 
+<div class="modal fade" id="modal-model-columns">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Model {{ $configView->model }}</h4>
+            </div>
+            <div class="modal-body">
+                <table id="table-model-columns" class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Label</th>
+                        <th>Data Type</th>
+                        <th>Input Type</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot id="choose-column-add">
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control new-name" placeholder="Column Name">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control new-label" placeholder="Column Label">
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <select class="form-control new-type">
+                                <option value="" selected disabled>Input Type</option>
+                                <option value="textbox">textbox</option>
+                                <option value="emailbox">emailbox</option>
+                                <option value="numberbox">numberbox</option>
+                                <option value="passwordbox">passwordbox</option>
+                                <option value="textarea">textarea</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-block new-column">Add New</button>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @if(in_array($builderType, ['index', 'show']))
     <div class="modal fade" id="modal-choose-columns">
         <div class="modal-dialog">
@@ -160,27 +222,28 @@
                                 <th>Label</th>
                                 <th>Data Type</th>
                                 <th>Input Type</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         
                         </tbody>
-                        <tfoot>
+                        <tfoot id="choose-column-add">
                             <tr>
                                 <td>
-                                    <button id="new-column" class="btn btn-primary btn-block">Add New</button>
+                                    &nbsp;
                                 </td>
                                 <td>
-                                    <input id="new-name" type="text" class="form-control" placeholder="Column Name">
+                                    <input type="text" class="form-control new-name" placeholder="Column Name">
                                 </td>
                                 <td>
-                                    <input id="new-name" type="text" class="form-control" placeholder="Column Label">
+                                    <input type="text" class="form-control new-label" placeholder="Column Label">
                                 </td>
                                 <td>
-                                    <input id="new-input" type="text" class="form-control" placeholder="Data Type">
+                                    &nbsp;
                                 </td>
                                 <td>
-                                    <select id="new-type" class="form-control">
+                                    <select class="form-control new-type">
                                         <option value="" selected disabled>Input Type</option>
                                         <option value="textbox">textbox</option>
                                         <option value="emailbox">emailbox</option>
@@ -188,6 +251,9 @@
                                         <option value="passwordbox">passwordbox</option>
                                         <option value="textarea">textarea</option>
                                     </select>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-block new-column">Add New</button>
                                 </td>
                             </tr>
                         </tfoot>
