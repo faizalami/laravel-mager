@@ -80,7 +80,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             _.forEach(components, function (item, key) {
                 var value = '';
 
-                if(['data-id', 'name'].includes(key)) {
+                if(key === 'data-id') {
                     if(item.value) {
                         _.forEach(item.value.split('-'), function (item, key) {
                             if(key === 0) {
@@ -98,6 +98,8 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             }
                         })
                     }
+                } else if(key === 'name' && current.db !== undefined) {
+                    value = '';
                 } else {
                     value = item.value ? item.value : '';
                 }
@@ -361,7 +363,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
         const setColumnModel = function (data) {
             if(data.name !== '') {
-                modelConfig.columns[data.name] = componentTemplate[current.type].db;
+                modelConfig.columns[data.name] = current.db;
                 if(data.label) {
                     modelConfig.columns[data.name]['label'] = data.label;
                 } else {
@@ -382,6 +384,24 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
                 modelConfig.columns[data.name]['input'] = data.input;
             }
+        };
+
+        const deleteColumnModel = function (name) {
+            var component = _.find(viewConfig.components, ['name', name]);
+            if(component) {
+                component.name = '';
+            }
+            delete modelConfig.columns[name];
+        };
+
+        const addColumnModel = function ($table) {
+            var name = $table.find('.new-name').val();
+            var label = $table.find('.new-label').val();
+            var input = $table.find('.new-input').val();
+
+            modelConfig.columns[name] = componentTemplate[input].db;
+            modelConfig.columns[name].label = label;
+            modelConfig.columns[name].input = input;
         };
 
         const setProperties = function (data) {
@@ -416,7 +436,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             var columnName = viewConfig.components[id]['name'];
 
             delete viewConfig.components[id];
-            delete modelConfig.columns[columnName];
+            deleteColumnModel(columnName);
         };
 
         const saveProperties = function () {
@@ -463,6 +483,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                     model: {},
                     binding: {}
                 };
+                current.db = componentTemplate[current.type].db;
 
                 $propertiesForm.data({
                     'component': current.id,
@@ -495,7 +516,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                     '   <td>' + item.label + '</td>' +
                     '   <td>' + item.type + '</td>' +
                     '   <td>' + item.input + '</td>' +
-                    '   <td><a class="btn btn-xs btn-danger" data-name="' + name + '" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a></td>' +
+                    '   <td><a class="btn btn-xs btn-danger button-delete" data-name="' + name + '" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a></td>' +
                     '</tr>'
             });
 
@@ -525,6 +546,8 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             deleteProperties: deleteProperties,
             drawModelColumns: drawModelColumns,
             saveChoosenColumns: saveChoosenColumns,
+            deleteColumnModel: deleteColumnModel,
+            addColumnModel: addColumnModel,
             model: modelConfig
         };
     };

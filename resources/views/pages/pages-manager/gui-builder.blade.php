@@ -167,7 +167,7 @@
                     <tbody>
 
                     </tbody>
-                    <tfoot id="choose-column-add">
+                    <tfoot>
                     <tr>
                         <td>
                             <input type="text" class="form-control new-name" placeholder="Column Name">
@@ -179,13 +179,13 @@
                             &nbsp;
                         </td>
                         <td>
-                            <select class="form-control new-type">
+                            <select class="form-control new-input">
                                 <option value="" selected disabled>Input Type</option>
-                                <option value="textbox">textbox</option>
-                                <option value="emailbox">emailbox</option>
-                                <option value="numberbox">numberbox</option>
-                                <option value="passwordbox">passwordbox</option>
-                                <option value="textarea">textarea</option>
+                                <option value="textbox">Textbox</option>
+                                <option value="emailbox">Emailbox</option>
+                                <option value="numberbox">Numberbox</option>
+                                <option value="passwordbox">Passwordbox</option>
+                                <option value="textarea">Textarea</option>
                             </select>
                         </td>
                         <td>
@@ -228,7 +228,7 @@
                         <tbody>
                         
                         </tbody>
-                        <tfoot id="choose-column-add">
+                        <tfoot>
                             <tr>
                                 <td>
                                     &nbsp;
@@ -243,13 +243,13 @@
                                     &nbsp;
                                 </td>
                                 <td>
-                                    <select class="form-control new-type">
+                                    <select class="form-control new-input">
                                         <option value="" selected disabled>Input Type</option>
-                                        <option value="textbox">textbox</option>
-                                        <option value="emailbox">emailbox</option>
-                                        <option value="numberbox">numberbox</option>
-                                        <option value="passwordbox">passwordbox</option>
-                                        <option value="textarea">textarea</option>
+                                        <option value="textbox">Textbox</option>
+                                        <option value="emailbox">Emailbox</option>
+                                        <option value="numberbox">Numberbox</option>
+                                        <option value="passwordbox">Passwordbox</option>
+                                        <option value="textarea">Textarea</option>
                                     </select>
                                 </td>
                                 <td>

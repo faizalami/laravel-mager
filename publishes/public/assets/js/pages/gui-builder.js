@@ -31,12 +31,25 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                 propertySidebar.saveProperties();
             });
 
+            guiBuildePage.initModel();
+        },
+        initModel: function() {
             $('#show-model').click(function () {
                 propertySidebar.drawModelColumns();
                 $('#modal-model-columns').modal();
             });
 
             var $modalChooseColumn = $('#modal-choose-columns');
+
+            $('#table-model-columns, #table-choose-columns').on('click', '.button-delete', function () {
+                propertySidebar.deleteColumnModel($(this).data('name'));
+                propertySidebar.drawModelColumns();
+            });
+
+            $('.new-column').click(function () {
+                propertySidebar.addColumnModel($(this).parents('table'));
+                propertySidebar.drawModelColumns();
+            });
 
             if($modalChooseColumn.length === 1) {
                 $('#properties-form').on('click', '.button-choose-column', function (event) {
