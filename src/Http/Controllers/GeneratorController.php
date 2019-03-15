@@ -18,6 +18,7 @@ class GeneratorController extends Controller
     private $generateQueue = [];
 
     public function generate() {
+        date_default_timezone_set('Asia/Jakarta');
         $jsonIO = new JsonIO();
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();
@@ -36,6 +37,14 @@ class GeneratorController extends Controller
             $this->queueConfig('migration', $modelConfig);
             $this->queueConfig('model', $modelConfig);
 
+            $controllerConfig['generatedAt'] = date('Y_m_d_His');
+            $jsonIO->setJsonFromObject($controllerConfig, true)
+                ->saveJsonFile('pages/'.$page.'/controller/'.$pageConfig['controllerConfig'].'.json');
+
+            $modelConfig['generatedAt'] = date('Y_m_d_His');
+            $jsonIO->setJsonFromObject($modelConfig, true)
+                ->saveJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json');
+
             foreach ($pageConfig['viewConfig'] as $view) {
                 $links = [
                     'show' => null,
@@ -53,6 +62,11 @@ class GeneratorController extends Controller
                 }
 
                 $viewConfig = $jsonIO->loadJsonFile('pages/'.$page.'/view/'.$view->config.'.json')->toArray();
+
+                $viewConfig['generatedAt'] = date('Y_m_d_His');
+                $jsonIO->setJsonFromObject($viewConfig, true)
+                    ->saveJsonFile('pages/'.$page.'/view/'.$view->config.'.json');
+
                 $this->queueConfig('view', ['view' => $viewConfig, 'links' => $links, 'model' => $modelConfig['columns']]);
             }
         }
@@ -65,6 +79,8 @@ class GeneratorController extends Controller
             $generator = Generator::init($generate['type'], $generate['config']);
             $generator->render()->generate();
         }
+
+        Artisan::call('config:clear');
 
         return 'success';
     }

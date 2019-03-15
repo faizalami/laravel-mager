@@ -1,4 +1,6 @@
 {
+    "generatedAt": null,
+    "controller": "controllerUrl",
     "name": "ModelName",
     "table": "tableName",
     "timestamp": true,

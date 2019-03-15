@@ -10,7 +10,7 @@
 
 @extends('mager::layouts.main', ['breadcrumb' => 'Database Manager'])
 
-@section('title', 'New Data - table1 | Database Manager')
+@section('title', 'New Data - ' . $configModel->name . ' | Database Manager')
 @section('page-id', 'database-manager')
 
 @section('content')
@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">New Data - table1</h3>
+                    <h3 class="box-title">New Data - {{ $configModel->name }}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

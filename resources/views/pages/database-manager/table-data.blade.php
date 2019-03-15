@@ -9,7 +9,7 @@
 
 @extends('mager::layouts.main', ['breadcrumb' => 'Database Manager'])
 
-@section('title', 'table1 | Database Manager')
+@section('title', $configModel->name.' | Database Manager')
 @section('page-id', 'database-manager')
 
 @section('content')
@@ -17,63 +17,33 @@
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li><a href="{{ route('mager.database.table.properties', ['table' => 'table1']) }}">Table Properties</a></li>
-                    <li class="active"><a href="{{ route('mager.database.table.data', ['table' => 'table1']) }}">Table Data</a></li>
+                    <li><a href="{{ route('mager.database.table.properties', ['controller' => $configModel->controller]) }}">Table Properties</a></li>
+                    <li class="active"><a href="javascript:void(0)">Table Data</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active">
                         <p>
-                            <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.data', ['table' => 'table1']) }}">New Data <i class="fas fa-plus-circle"></i></a>
+                            <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.data', ['controller' => $configModel->controller]) }}">New Data <i class="fas fa-plus-circle"></i></a>
                             <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.dummy', ['table' => 'table1']) }}">Generate Dummy Data <i class="fas fa-database"></i></a>
                         </p>
                         <table class="table table-bordered table-striped">
                             <tr>
-                                <th>id</th>
-                                <th>column1</th>
-                                <th>column2</th>
-                                <th>column3</th>
+                                @foreach($columns as $column)
+                                <th>{{ $column->label }}</th>
+                                @endforeach
                                 <th>Action</th>
                             </tr>
+                            @foreach($data as $item)
                             <tr>
-                                <td>1</td>
-                                <td>data1</td>
-                                <td>15</td>
-                                <td>value1</td>
+                                @foreach(array_keys($columns) as $name)
+                                <th>{{ $item->{name} }}</th>
+                                @endforeach
                                 <td>
                                     <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
                                     <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="#"><i class="far fa-trash-alt"></i></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>data2</td>
-                                <td>25</td>
-                                <td>value2</td>
-                                <td>
-                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="#"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>data3</td>
-                                <td>35</td>
-                                <td>value3</td>
-                                <td>
-                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="#"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>data4</td>
-                                <td>45</td>
-                                <td>value4</td>
-                                <td>
-                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="#"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </table>
                     </div>
                     <!-- /.tab-pane -->

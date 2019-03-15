@@ -43,6 +43,7 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
 
             $('#table-model-columns, #table-choose-columns').on('click', '.button-delete', function () {
                 propertySidebar.deleteColumnModel($(this).data('name'));
+                guiBuildePage.hideTooltip();
                 propertySidebar.drawModelColumns();
             });
 

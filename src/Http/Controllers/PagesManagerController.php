@@ -50,6 +50,7 @@ class PagesManagerController extends Controller
 
             $configModel->name = $configController->model;
             $configModel->table = lcfirst($configController->model);
+            $configModel->controller = $configController->url;
 
             $configPage->controllerConfig = $configController->url;
             $configPage->modelConfig = $configController->model;
