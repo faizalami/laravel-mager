@@ -29,53 +29,45 @@
                                     <thead>
                                     <tr>
                                         <th>Column Name</th>
-                                        <th>Data Type</th>
-                                        <th>Size</th>
+                                        <th>Column Label</th>
+                                        <th>Input Type</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="name" value="column1" placeholder="Enter Column Name">
-                                            </div>
+                                            <input type="text" class="form-control new-name" placeholder="Column Name">
                                         </td>
                                         <td>
-                                            <div class="form-group">
-                                                <select name="type" id="type" class="form-control">
-                                                    <option value="">Choose Data Type</option>
-                                                    <option value="string" selected>string</option>
-                                                    <option value="integer">integer</option>
-                                                    <option value="float">float</option>
-                                                </select>
-                                            </div>
+                                            <input type="text" class="form-control new-label" placeholder="Column Label">
                                         </td>
                                         <td>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" name="size" value="255" placeholder="Enter Column Size">
-                                            </div>
+                                            <select class="form-control new-input">
+                                                <option value="" selected disabled>Input Type</option>
+                                                <option value="textbox">Textbox</option>
+                                                <option value="emailbox">Emailbox</option>
+                                                <option value="numberbox">Numberbox</option>
+                                                <option value="passwordbox">Passwordbox</option>
+                                                <option value="textarea">Textarea</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" name="name" placeholder="Enter Column Name">
-                                            </div>
+                                            <input type="text" class="form-control new-name" placeholder="Column Name">
                                         </td>
                                         <td>
-                                            <div class="form-group">
-                                                <select name="type" id="type" class="form-control">
-                                                    <option value="" selected>Choose Data Type</option>
-                                                    <option value="string">string</option>
-                                                    <option value="integer">integer</option>
-                                                    <option value="float">float</option>
-                                                </select>
-                                            </div>
+                                            <input type="text" class="form-control new-label" placeholder="Column Label">
                                         </td>
                                         <td>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" name="size" placeholder="Enter Column Size">
-                                            </div>
+                                            <select class="form-control new-input">
+                                                <option value="" selected disabled>Input Type</option>
+                                                <option value="textbox">Textbox</option>
+                                                <option value="emailbox">Emailbox</option>
+                                                <option value="numberbox">Numberbox</option>
+                                                <option value="passwordbox">Passwordbox</option>
+                                                <option value="textarea">Textarea</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     </tbody>

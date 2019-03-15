@@ -35,8 +35,8 @@
                             </tr>
                             @foreach($data as $item)
                             <tr>
-                                @foreach(array_keys($columns) as $name)
-                                <th>{{ $item->{name} }}</th>
+                                @foreach(array_keys((array) $columns) as $name)
+                                <td>{{ $item->{$name} }}</td>
                                 @endforeach
                                 <td>
                                     <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
