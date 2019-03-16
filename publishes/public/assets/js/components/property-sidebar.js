@@ -80,7 +80,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             _.forEach(components, function (item, key) {
                 var value = '';
 
-                if(key === 'data-id') {
+                if(key === 'data-id' || key === 'name') {
                     if(item.value) {
                         _.forEach(item.value.split('-'), function (item, key) {
                             if(key === 0) {
@@ -98,8 +98,10 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                             }
                         })
                     }
-                } else if(key === 'name' && current.db !== undefined) {
-                    value = '';
+
+                    if(key === 'name' && current.db !== undefined) {
+                        value = '';
+                    }
                 } else {
                     value = item.value ? item.value : '';
                 }
