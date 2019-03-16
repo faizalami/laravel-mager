@@ -74,10 +74,26 @@ class DatabaseManagerController extends Controller
         $this->initModel($controller);
         $columns = $this->columns;
         $configModel = $this->configModel;
+        $configComponent = $this->loadJson('templates/component.json');
         if ($request->isMethod('get')) {
             return view('mager::pages.database-manager.form-column', compact('columns', 'configModel'));
         } elseif ($request->isMethod('post')) {
-            return null;
+            $columns = $request->all()['columns'];
+            foreach ($columns as $key => $column) {
+                if($column['name'] != null) {
+                    $configModel->columns->{$column['name']} = $configComponent->{$column['input']}->db;
+                    $configModel->columns->{$column['name']}->label = $column['label'];
+                    $configModel->columns->{$column['name']}->input = $column['input'];
+                }
+            }
+            $configModel->history[] = [
+                'time' => date('Y_m_d_His'),
+                'table' => $configModel->columns
+            ];
+
+            $this->saveJson($configModel, 'pages/'.$controller.'/model/'.$this->configPage->modelConfig.'.json');
+
+            return response()->redirectToRoute('mager.database.table.properties', ['controller' => $controller]);
         }
     }
 

@@ -440,7 +440,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
         };
 
         const saveProperties = function () {
-            var time = moment().format('YYYY_MM_DD_HHmmss');
+            var time = moment().utcOffset(0).format('YYYY_MM_DD_HHmmss');
             var history = {
                 time: time,
                 table: {}
@@ -495,7 +495,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                 initBinding();
             }
         };
-        
+
         const drawModelColumns = function (choose = false, id = null) {
             var rows = '';
 

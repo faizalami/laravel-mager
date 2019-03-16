@@ -18,7 +18,6 @@ class GeneratorController extends Controller
     private $generateQueue = [];
 
     public function generate() {
-        date_default_timezone_set('Asia/Jakarta');
         $jsonIO = new JsonIO();
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();

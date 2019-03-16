@@ -24,8 +24,7 @@
                     <form method="post">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Column List:</h4>
-                                <table class="table table-bordered table-striped">
+                                <table id="table-new-column" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
                                         <th>Column Name</th>
@@ -34,46 +33,28 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control new-name" placeholder="Column Name">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control new-label" placeholder="Column Label">
-                                        </td>
-                                        <td>
-                                            <select class="form-control new-input">
-                                                <option value="" selected disabled>Input Type</option>
-                                                <option value="textbox">Textbox</option>
-                                                <option value="emailbox">Emailbox</option>
-                                                <option value="numberbox">Numberbox</option>
-                                                <option value="passwordbox">Passwordbox</option>
-                                                <option value="textarea">Textarea</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control new-name" placeholder="Column Name">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control new-label" placeholder="Column Label">
-                                        </td>
-                                        <td>
-                                            <select class="form-control new-input">
-                                                <option value="" selected disabled>Input Type</option>
-                                                <option value="textbox">Textbox</option>
-                                                <option value="emailbox">Emailbox</option>
-                                                <option value="numberbox">Numberbox</option>
-                                                <option value="passwordbox">Passwordbox</option>
-                                                <option value="textarea">Textarea</option>
-                                            </select>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <input name="columns[0][name]" type="text" class="form-control" placeholder="Column Name">
+                                            </td>
+                                            <td>
+                                                <input name="columns[0][label]" type="text" class="form-control" placeholder="Column Label">
+                                            </td>
+                                            <td>
+                                                <select name="columns[0][input]" class="form-control">
+                                                    <option value="" selected disabled>Input Type</option>
+                                                    <option value="textbox">Textbox</option>
+                                                    <option value="emailbox">Emailbox</option>
+                                                    <option value="numberbox">Numberbox</option>
+                                                    <option value="passwordbox">Passwordbox</option>
+                                                    <option value="textarea">Textarea</option>
+                                                </select>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="3"><a class="btn btn-primary btn-xs pull-right" href="javascript:void(0)">Add New Column <i class="fas fa-plus-circle"></i></a></td>
+                                        <td colspan="3"><a id="button-add-column" class="btn btn-primary btn-xs pull-right" href="javascript:void(0)">Add New Column <i class="fas fa-plus-circle"></i></a></td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -93,6 +74,31 @@
     <script>
         require(['main'], function () {
             require(['adminlte', 'laravelmager']);
+            require(['jquery'], function ($) {
+                var i = 1;
+
+                $('#button-add-column').click(function (event) {
+                    $('#table-new-column tbody').append('<tr>\n' +
+                        '    <td>\n' +
+                        '        <input name="columns['+i+'][name]" type="text" class="form-control" placeholder="Column Name">\n' +
+                        '    </td>\n' +
+                        '    <td>\n' +
+                        '        <input name="columns['+i+'][label]" type="text" class="form-control" placeholder="Column Label">\n' +
+                        '    </td>\n' +
+                        '    <td>\n' +
+                        '        <select name="columns['+i+'][input]" class="form-control">\n' +
+                        '            <option value="" selected disabled>Input Type</option>\n' +
+                        '            <option value="textbox">Textbox</option>\n' +
+                        '            <option value="emailbox">Emailbox</option>\n' +
+                        '            <option value="numberbox">Numberbox</option>\n' +
+                        '            <option value="passwordbox">Passwordbox</option>\n' +
+                        '            <option value="textarea">Textarea</option>\n' +
+                        '        </select>\n' +
+                        '    </td>\n' +
+                        '</tr>')
+                    i++;
+                });
+            })
         });
     </script>
 @endsection

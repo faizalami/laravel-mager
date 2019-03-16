@@ -1,4 +1,5 @@
 {
+    "generatedAt": null,
     "name":"DemoController",
     "namespace":"App\\Http\\Controllers",
     "url":"demo",
