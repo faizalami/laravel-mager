@@ -6,5 +6,14 @@
     "name": "index",
     "title": "Demo Index Page",
     "type": "index",
-    "components": {}
+    "components": {
+        "table1": {
+            "data-id": "table1",
+            "columns": "name,email,age,address",
+            "type": "table",
+            "parent": "page",
+            "index": 0,
+            "level": 1
+        }
+    }
 }
