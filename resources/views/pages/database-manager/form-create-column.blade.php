@@ -59,7 +59,7 @@
                                     </tfoot>
                                 </table>
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <a class="btn btn-warning" href="{{ route('mager.database.table.properties', ['table' => 'table1']) }}">Back</a>
+                                <a class="btn btn-warning" href="{{ route('mager.database.table.properties', ['controller' => $configModel->controller]) }}">Back</a>
                             </div>
                         </div>
                     </form>

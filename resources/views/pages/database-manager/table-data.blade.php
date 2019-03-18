@@ -12,6 +12,10 @@
 @section('title', $configModel->name.' | Database Manager')
 @section('page-id', 'database-manager')
 
+@section('additional-styles')
+<link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}">
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -26,24 +30,33 @@
                             <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.data', ['controller' => $configModel->controller]) }}">New Data <i class="fas fa-plus-circle"></i></a>
                             <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.dummy', ['table' => 'table1']) }}">Generate Dummy Data <i class="fas fa-database"></i></a>
                         </p>
-                        <table class="table table-bordered table-striped">
-                            <tr>
-                                @foreach($columns as $column)
-                                <th>{{ $column->label }}</th>
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fas fa-exclamation-triangle"></i> Alert!</h4>
+                            This page is only displaying generated columns.
+                        </div>
+                        <table class="table table-bordered table-striped" id="table-data">
+                            <thead>
+                                <tr>
+                                    @foreach($columns as $column)
+                                    <th>{{ $column->label }}</th>
+                                    @endforeach
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data as $item)
+                                <tr>
+                                    @foreach(array_keys((array) $columns) as $name)
+                                    <td>{{ $item->{$name} }}</td>
+                                    @endforeach
+                                    <td>
+                                        <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="{{ route('mager.database.edit.data', ['controller' => $configModel->controller, 'id' => $item->id]) }}"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="{{ route('mager.database.delete.data', ['controller' => $configModel->controller, 'id' => $item->id]) }}"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
                                 @endforeach
-                                <th>Action</th>
-                            </tr>
-                            @foreach($data as $item)
-                            <tr>
-                                @foreach(array_keys((array) $columns) as $name)
-                                <td>{{ $item->{$name} }}</td>
-                                @endforeach
-                                <td>
-                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Data" href="#"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Data" href="#"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.tab-pane -->
@@ -57,6 +70,10 @@
     <script>
         require(['main'], function () {
             require(['adminlte', 'laravelmager']);
+
+            require(['jquery', 'datatables.bootstrap'], function ($) {
+                $('#table-data').DataTable();
+            });
         });
     </script>
 @endsection

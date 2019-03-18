@@ -1,4 +1,8 @@
 /* Global */
+body {
+    overflow-y: unset !important;
+}
+
 .main-header .sidebar-toggle:before {
     display: inline-block;
     font-style: normal;

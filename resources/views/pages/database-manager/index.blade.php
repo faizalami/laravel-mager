@@ -34,13 +34,11 @@
                         <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $model->table }}</td>
-                            <td>@if($model->generatedAt != null) Yes @else No @endif</td>
+                            <td>@if($model->generatedAt != null) <span class="text-green">Yes</span> @else <span class="text-orange">No</span> @endif</td>
                             <td>{{ $model->name }}</td>
                             <td>
-                                @if($model->generatedAt != null)
                                 <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Table Detail" href="{{ route('mager.database.table.properties', ['controller' => $model->controller]) }}"><i class="fas fa-database"></i></a>
                                 <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Table" href="#"><i class="far fa-trash-alt"></i></a>
-                                @endif
                             </td>
                         </tr>
                         @php($i++)

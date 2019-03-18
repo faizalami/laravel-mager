@@ -1,5 +1,6 @@
 {
     "generatedAt": null,
+    "controller": "demo",
     "name": "Demo",
     "table": "demo",
     "timestamp": true,

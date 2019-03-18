@@ -33,10 +33,11 @@
                                 <th>Data Type</th>
                                 <th>Size</th>
                                 <th>Input</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             @php($i = 1)
-                            @foreach($columns as $name => $column)
+                            @foreach($generatedColumns as $name => $column)
                             <tr>
                                 <td>{{ $i }}</td>
                                 <td>{{ $name }}</td>
@@ -45,8 +46,33 @@
                                 <td>{{ $column->length }}</td>
                                 <td>{{ $column->input }}</td>
                                 <td>
-                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Column" href="#"><i class="fas fa-edit"></i></a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Column" href="#"><i class="far fa-trash-alt"></i></a>
+                                    @if(in_array($name, $deletedColumns))
+                                    <span class="text-red">Deleted (Not Generated)</span>
+                                    @else
+                                    <span class="text-green">Generated</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Column" href="{{ route('mager.database.edit.column', ['controller' => $configModel->controller, 'column' => $name]) }}"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Column" href="{{ route('mager.database.delete.column', ['controller' => $configModel->controller, 'column' => $name]) }}"><i class="far fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            @php($i++)
+                            @endforeach
+                            @foreach($notGeneratedColumns as $name => $column)
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $name }}</td>
+                                <td>{{ $column->label }}</td>
+                                <td>{{ $column->type }}</td>
+                                <td>{{ $column->length }}</td>
+                                <td>{{ $column->input }}</td>
+                                <td>
+                                    <span class="text-orange">Not Generated</span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Column" href="{{ route('mager.database.edit.column', ['controller' => $configModel->controller, 'column' => $name]) }}"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Column" href="{{ route('mager.database.delete.column', ['controller' => $configModel->controller, 'column' => $name]) }}"><i class="far fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                             @php($i++)

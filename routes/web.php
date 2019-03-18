@@ -82,7 +82,11 @@ Route::group([
         Route::get('/properties/{controller}', 'DatabaseManagerController@tableProperties')->name('table.properties');
         Route::get('/data/{controller}', 'DatabaseManagerController@tableData')->name('table.data');
         Route::match(['get', 'post'], '/create/column/{controller}', 'DatabaseManagerController@createColumn')->name('create.column');
-        Route::match(['get', 'post'], '/create/data/{table}', 'DatabaseManagerController@createData')->name('create.data');
+        Route::match(['get', 'post'], '/edit/column/{controller}/{column}', 'DatabaseManagerController@editColumn')->name('edit.column');
+        Route::get('/delete/column/{controller}/{column}', 'DatabaseManagerController@deleteColumn')->name('delete.column');
+        Route::match(['get', 'post'], '/create/data/{controller}', 'DatabaseManagerController@createData')->name('create.data');
+        Route::match(['get', 'post'], '/edit/data/{controller}/{id}', 'DatabaseManagerController@editData')->name('edit.data');
+        Route::get('/delete/data/{controller}/{id}', 'DatabaseManagerController@deleteData')->name('delete.data');
         Route::match(['get', 'post'], '/create/dummy/{table}', 'DatabaseManagerController@createDummy')->name('create.dummy');
     });
 });
