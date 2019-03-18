@@ -396,14 +396,26 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             delete modelConfig.columns[name];
         };
 
-        const addColumnModel = function ($table) {
+        const addColumnModel = function ($table, edit = false) {
             var name = $table.find('.new-name').val();
             var label = $table.find('.new-label').val();
             var input = $table.find('.new-input').val();
 
+            if(edit) {
+                name = $table.find('tr.active .edit-name').val();
+                label = $table.find('tr.active .edit-label').val();
+                input = $table.find('tr.active .edit-input').val();
+            }
+
             modelConfig.columns[name] = componentTemplate[input].db;
             modelConfig.columns[name].label = label;
             modelConfig.columns[name].input = input;
+        };
+
+        const editColumnModel = function ($table, edit) {
+            deleteColumnModel(edit);
+
+            addColumnModel($table, true);
         };
 
         const setProperties = function (data) {
@@ -514,11 +526,33 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
 
                 rows += '<tr>' +
                     chooseInput +
-                    '   <td>' + name + '</td>' +
-                    '   <td>' + item.label + '</td>' +
-                    '   <td>' + item.type + '</td>' +
-                    '   <td>' + item.input + '</td>' +
-                    '   <td><a class="btn btn-xs btn-danger button-delete" data-name="' + name + '" data-toggle="tooltip" title="Delete Item" href="#"><i class="far fa-trash-alt"></i></a></td>' +
+                    '   <td>' +
+                    '       <span>' + name + '</span>' +
+                    '       <input type="text" class="form-control edit-column edit-name" value="' + name + '" placeholder="Column Name">' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <span>' + item.label + '</span>' +
+                    '       <input type="text" class="form-control edit-column edit-label" value="' + item.label + '" placeholder="Column Label">' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <span>' + item.type + '</span>' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <span>' + item.input + '</span>' +
+                    '       <select class="form-control edit-column edit-input">\n' +
+                    '           <option value="" disabled>Input Type</option>\n' +
+                    '           <option value="textbox" ' + (item.input === 'textbox' ? 'selected' : '') + '>Textbox</option>\n' +
+                    '           <option value="emailbox" ' + (item.input === 'emailbox' ? 'selected' : '') + '>Emailbox</option>\n' +
+                    '           <option value="numberbox" ' + (item.input === 'numberbox' ? 'selected' : '') + '>Numberbox</option>n' +
+                    '           <option value="passwordbox" ' + (item.input === 'passwordbox' ? 'selected' : '') + '>Passwordbox</option>n' +
+                    '           <option value="textarea" ' + (item.input === 'textarea' ? 'selected' : '') + '>Textarea</option>\n' +
+                    '       </select>' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <a class="btn btn-xs btn-primary button-edit" data-name="' + name + '" data-toggle="tooltip" title="Edit Column" href="javascript:void(0)"><i class="fas fa-edit"></i></a>' +
+                    '       <a class="btn btn-xs btn-primary button-save-edit" data-name="' + name + '" data-toggle="tooltip" title="Save Edit Column" href="javascript:void(0)"><i class="fas fa-save"></i></a>' +
+                    '       <a class="btn btn-xs btn-danger button-delete" data-name="' + name + '" data-toggle="tooltip" title="Delete Item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>' +
+                    '   </td>' +
                     '</tr>'
             });
 
@@ -550,6 +584,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             saveChoosenColumns: saveChoosenColumns,
             deleteColumnModel: deleteColumnModel,
             addColumnModel: addColumnModel,
+            editColumnModel: editColumnModel,
             model: modelConfig
         };
     };

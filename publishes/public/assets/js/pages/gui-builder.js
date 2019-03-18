@@ -41,8 +41,21 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
 
             var $modalChooseColumn = $('#modal-choose-columns');
 
-            $('#table-model-columns, #table-choose-columns').on('click', '.button-delete', function () {
+            $('.modal-model').on('click', '.button-delete', function () {
                 propertySidebar.deleteColumnModel($(this).data('name'));
+                guiBuildePage.hideTooltip();
+                propertySidebar.drawModelColumns();
+            });
+
+            $('.modal-model').on('click', '.button-edit', function () {
+                $('.modal-model tr').removeClass('active');
+                $(this).parents('tr').addClass('active');
+                guiBuildePage.hideTooltip();
+            });
+
+            $('.modal-model').on('click', '.button-save-edit', function () {
+                propertySidebar.editColumnModel($(this).parents('table'), $(this).data('name'));
+                $('.modal-model tr').removeClass('active');
                 guiBuildePage.hideTooltip();
                 propertySidebar.drawModelColumns();
             });

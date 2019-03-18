@@ -247,4 +247,30 @@ body {
 .component-heading.active {
     display: unset;
 }
+
+.modal-model tr .edit-column,
+.modal-model tr .button-save-edit
+{
+    display: none;
+}
+
+.modal-model tr.active .edit-column,
+.modal-model tr.active .button-save-edit
+{
+    display: inline-block;
+}
+
+.modal-model tr.active span,
+.modal-model tr.active .button-edit,
+.modal-model tr.active .input-choose-columns
+{
+    display: none;
+}
+
+.modal-model tr span,
+.modal-model tr .button-edit,
+.modal-model tr .input-choose-columns
+{
+    display: inline-block;
+}
 /* END GUI Builder*/

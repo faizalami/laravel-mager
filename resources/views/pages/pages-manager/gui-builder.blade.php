@@ -145,7 +145,7 @@
 
 @include('mager::layouts.properties-template')
 
-<div class="modal fade" id="modal-model-columns">
+<div class="modal fade modal-model" id="modal-model-columns">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -205,7 +205,7 @@
 </div>
 <!-- /.modal -->
 @if(in_array($builderType, ['index', 'show']))
-    <div class="modal fade" id="modal-choose-columns">
+    <div class="modal fade modal-model" id="modal-choose-columns">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
