@@ -87,7 +87,7 @@ Route::group([
         Route::match(['get', 'post'], '/create/data/{controller}', 'DatabaseManagerController@createData')->name('create.data');
         Route::match(['get', 'post'], '/edit/data/{controller}/{id}', 'DatabaseManagerController@editData')->name('edit.data');
         Route::get('/delete/data/{controller}/{id}', 'DatabaseManagerController@deleteData')->name('delete.data');
-        Route::match(['get', 'post'], '/create/dummy/{table}', 'DatabaseManagerController@createDummy')->name('create.dummy');
+        Route::match(['get', 'post'], '/create/dummy/{controller}', 'DatabaseManagerController@createDummy')->name('create.dummy');
     });
 });
 

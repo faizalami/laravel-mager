@@ -183,8 +183,11 @@ class DatabaseManagerController extends Controller
     }
 
     public function createDummy(Request $request, $controller) {
+        $this->initModel($controller);
+        $columns = $this->generatedColumns;
+        $configModel = $this->configModel;
         if ($request->isMethod('get')) {
-            return view('mager::pages.database-manager.form-dummy');
+            return view('mager::pages.database-manager.form-dummy', compact('columns', 'configModel'));
         } elseif ($request->isMethod('post')) {
             return null;
         }

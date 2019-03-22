@@ -28,7 +28,7 @@
                     <div class="tab-pane active">
                         <p>
                             <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.data', ['controller' => $configModel->controller]) }}">New Data <i class="fas fa-plus-circle"></i></a>
-                            <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.dummy', ['table' => 'table1']) }}">Generate Dummy Data <i class="fas fa-database"></i></a>
+                            <a class="btn btn-xs btn-primary btn-new-controller" href="{{ route('mager.database.create.dummy', ['controller' => $configModel->controller]) }}">Generate Dummy Data <i class="fas fa-database"></i></a>
                         </p>
                         <div class="alert alert-warning alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
