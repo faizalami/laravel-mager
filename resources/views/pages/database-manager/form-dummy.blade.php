@@ -46,7 +46,7 @@
                                                         <option value="" selected>Choose Dummy Type</option>
                                                         <option value="number">Random Number</option>
                                                         <option value="name">Name</option>
-                                                        <option value="phone-number">Phone Number</option>
+                                                        <option value="phone">Phone Number</option>
                                                         <option value="address">Address</option>
                                                         <option value="email">Email</option>
                                                         <option value="domain">Website</option>
@@ -88,13 +88,65 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">Min</div>
-                    <input type="number" name="dummy[{{ $i }}][option][min]" class="form-control">
+                    <input type="number" name="dummy[x][option][min]" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">Max</div>
-                    <input type="number" name="dummy[{{ $i }}][option][max]" class="form-control">
+                    <input type="number" name="dummy[x][option][max]" class="form-control">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-name">
+        <div class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Type</div>
+                    <select name="dummy[x][option][type]" id="" class="form-control">
+                        <option value="full-name">Full Name</option>
+                        <option value="first-name">First Name</option>
+                        <option value="last-name">Last Name</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Gender</div>
+                    <select name="dummy[x][option][gender]" id="" class="form-control">
+                        <option value="both">Both Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-phone">
+        No Option
+    </template>
+
+    <template id="template-address">
+        No Option
+    </template>
+
+    <template id="template-email">
+        No Option
+    </template>
+
+    <template id="template-domain">
+        No Option
+    </template>
+
+    <template id="template-sentence">
+        <div class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Words</div>
+                    <input type="number" name="dummy[x][option][word]" class="form-control">
                 </div>
             </div>
         </div>
