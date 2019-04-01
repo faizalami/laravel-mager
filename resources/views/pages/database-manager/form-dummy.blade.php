@@ -35,21 +35,22 @@
                                     <tbody>
                                     @php($i = 0)
                                     @foreach($columns as $name => $column)
-                                        <tr id="row-{{ $name }}">
+                                        <tr id="row-{{ $i }}">
                                             <td>
                                                 {{ $column->label }}
                                                 <input type="hidden" name="dummy[{{ $i }}][name]" value="{{ $name }}">
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <select name="type" id="dummy[{{ $i }}][type]" class="form-control">
-                                                        <option value="" selected>Choose Dummy Type</option>
+                                                    <select name="type" id="dummy[{{ $i }}][type]" data-row="{{ $i }}" class="form-control select-dummy-type">
+                                                        <option value="" selected disabled>Choose Dummy Type</option>
                                                         <option value="number">Random Number</option>
                                                         <option value="name">Name</option>
                                                         <option value="phone">Phone Number</option>
                                                         <option value="address">Address</option>
                                                         <option value="email">Email</option>
                                                         <option value="domain">Website</option>
+                                                        <option value="jobTitle">Job Title</option>
                                                         <option value="sentence">Sentence</option>
                                                     </select>
                                                 </div>
@@ -58,6 +59,7 @@
 
                                             </td>
                                         </tr>
+                                        @php($i++)
                                     @endforeach
                                     </tbody>
                                     <tfoot>
@@ -130,7 +132,21 @@
     </template>
 
     <template id="template-address">
-        No Option
+        <div class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">Type</div>
+                    <select name="dummy[x][option][type]" id="" class="form-control">
+                        <option value="address">Full Address</option>
+                        <option value="city">City</option>
+                        <option value="country">Country</option>
+                        <option value="postcode">Post Code</option>
+                        <option value="latitude">Latitude</option>
+                        <option value="longitude">Longitude</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </template>
 
     <template id="template-email">
@@ -141,11 +157,15 @@
         No Option
     </template>
 
+    <template id="template-jobTitle">
+        No Option
+    </template>
+
     <template id="template-sentence">
         <div class="form-inline">
             <div class="form-group">
                 <div class="input-group">
-                    <div class="input-group-addon">Words</div>
+                    <div class="input-group-addon">Word Amount</div>
                     <input type="number" name="dummy[x][option][word]" class="form-control">
                 </div>
             </div>
@@ -156,6 +176,15 @@
     <script>
         require(['main'], function () {
             require(['adminlte', 'laravelmager']);
+            require(['jquery'], function ($) {
+                $('.select-dummy-type').change(function () {
+                    var i = $(this).data('row');
+                    var $row = $('#row-'+i+' .column-option');
+                    var template = $('#template-'+$(this).val()).html().replace(/\[x]/g, '['+(i).toString()+']');
+
+                    $row.html(template);
+                });
+            })
         });
     </script>
 @endsection
