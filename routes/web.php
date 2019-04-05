@@ -72,6 +72,9 @@ Route::group([
         'as' => 'rest.'
     ], function () {
         Route::get('/', 'RestManagerController@index')->name('index');
+        Route::get('/show/controller/{controller}', 'RestManagerController@showController')->name('show.controller');
+        Route::match(['get', 'post'], '/desc/controller/{controller}', 'RestManagerController@editDesc')->name('desc.controller');
+        Route::match(['get', 'post'], '/desc/page/{controller}/{page}', 'RestManagerController@editDesc')->name('desc.page');
     });
 
     Route::group([

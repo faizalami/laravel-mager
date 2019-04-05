@@ -19,48 +19,45 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="javascript:void(0)">REST Controllers</a></li>
-                    <li><a href="#">Response Format</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active">
-                        <table class="table table-bordered table-striped" id="table-data">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Request List - {{ $configController->name }}</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered table-striped" id="table-data">
                             <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
-                                <th>Namespace</th>
-                                <th>Model</th>
-                                <th>Base URL</th>
+                                <th>Title</th>
+                                <th>Page Type</th>
+                                <th>URL</th>
+                                <th>Params</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @php($i = 1)
-                            @foreach($controllers as $controller)
+                            @foreach($configController->pages as $name => $page)
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $controller->name }}</td>
-                                    <td>{{ $controller->namespace }}</td>
-                                    <td>{{ $controller->model }}</td>
-                                    <td>{{ url($controller->url) }}/</td>
-                                    <td>{{ isset($controller->restDesc)?$controller->restDesc:'' }}</td>
+                                    <td>{{ $name }}</td>
+                                    <td>{{ $page->title }}</td>
+                                    <td>{{ $page->resource }}</td>
+                                    <td>{{ url($configController->url . '/' . $page->url) }}/</td>
+                                    <td>{{ implode(', ', $page->params) }}</td>
+                                    <td>{{ isset($page->restDesc)?$page->restDesc:'' }}</td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit REST Description" href="{{ route('mager.rest.desc.controller', ['controller' => $controller->url]) }}"><i class="fas fa-comment-alt"></i></a>
-                                        <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Controller Detail" href="{{ route('mager.rest.show.controller', ['controller' => $controller->url]) }}"><i class="far fa-eye"></i></a>
+                                        <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit REST Description" href="{{ route('mager.rest.desc.page', ['controller' => $configController->url, 'page' => $name]) }}"><i class="fas fa-comment-alt"></i></a>
                                     </td>
                                 </tr>
-                            @php($i++)
+                                @php($i++)
                             @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <!-- /.tab-pane -->
                 </div>
-                <!-- /.tab-content -->
             </div>
         </div>
     </div>

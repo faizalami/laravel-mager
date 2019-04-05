@@ -10,6 +10,7 @@ namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
+use Illuminate\Http\Request;
 
 class RestManagerController extends Controller
 {
@@ -31,5 +32,46 @@ class RestManagerController extends Controller
 
     public function format() {
         return view('mager::pages.rest-manager.index');
+    }
+
+    public function showController($controller) {
+        $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
+
+        foreach ($configController->pages as $name => $page) {
+            if(!$page->rest) {
+                unset($configController->pages->{$name});
+            }
+        }
+
+        return view('mager::pages.rest-manager.show-controller', compact('configController'));
+    }
+
+    public function editDesc(Request $request, $controller, $page = null) {
+        $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
+
+        if ($request->isMethod('get')) {
+            if($page == null) {
+                $config = $configController;
+                $config->isPage = false;
+                return view('mager::pages.rest-manager.edit-rest-desc', compact('config'));
+            } else {
+                $config = $configController->pages->{$page};
+                $config->name = $page;
+                $config->isPage = true;
+                $config->controller = $controller;
+                return view('mager::pages.rest-manager.edit-rest-desc', compact('config'));
+            }
+        } elseif ($request->isMethod('post')) {
+            $restDesc = $request->all()['restDesc'];
+            if($page == null) {
+                $configController->restDesc = $restDesc;
+                $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');
+                return response()->redirectToRoute('mager.rest.index');
+            } else {
+                $configController->pages->{$page}->restDesc = $restDesc;
+                $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');
+                return response()->redirectToRoute('mager.rest.show.controller', ['controller' => $controller]);
+            }
+        }
     }
 }

@@ -7,10 +7,12 @@
     "model": "Demo",
     "web":true,
     "rest":true,
+    "restDesc":"Demo API simple CRUD",
     "pages":{
         "index":{
             "web":true,
             "rest":true,
+            "restDesc": "Get All Data",
             "resource": "index",
             "title": "Demo Page",
             "methods":[
@@ -24,6 +26,7 @@
         "view":{
             "web":true,
             "rest":true,
+            "restDesc": "Get an Item",
             "resource": "show",
             "title": "Show Item",
             "methods":[
@@ -37,6 +40,7 @@
         "create":{
             "web":true,
             "rest":true,
+            "restDesc": "Create new Item",
             "resource": "create",
             "title": "Create New Item",
             "methods":[
@@ -51,6 +55,7 @@
         "update":{
             "web":true,
             "rest":true,
+            "restDesc": "Update an Item",
             "resource": "edit",
             "title": "Update Item",
             "methods":[
@@ -65,6 +70,7 @@
         "delete":{
             "web":true,
             "rest":true,
+            "restDesc": "Delete an Item",
             "resource": "destroy",
             "title": "Delete Item",
             "methods":[
