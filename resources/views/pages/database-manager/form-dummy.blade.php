@@ -29,7 +29,7 @@
                                     <tr>
                                         <th>Column Name</th>
                                         <th>Dummy Type</th>
-                                        <th>Options</th>
+                                        <th style="width: 40%">Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -42,7 +42,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <select name="type" id="dummy[{{ $i }}][type]" data-row="{{ $i }}" class="form-control select-dummy-type">
+                                                    <select id="type" name="dummy[{{ $i }}][type]" data-row="{{ $i }}" class="form-control select-dummy-type">
                                                         <option value="" selected disabled>Choose Dummy Type</option>
                                                         <option value="number">Random Number</option>
                                                         <option value="name">Name</option>
@@ -64,12 +64,13 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="3">
-                                            <div class="form-group">
+                                        <td colspan="2">
+                                            <div class="form-group col-md-3">
                                                 <label>Amount of Data</label>
                                                 <input type="number" class="form-control" name="amount" placeholder="Enter Amount of Data">
                                             </div>
                                         </td>
+                                        <td>&nbsp;</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -166,7 +167,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon">Word Amount</div>
-                    <input type="number" name="dummy[x][option][word]" class="form-control">
+                    <input type="number" name="dummy[x][option][amount]" class="form-control">
                 </div>
             </div>
         </div>

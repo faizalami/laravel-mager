@@ -9,6 +9,7 @@
 namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Faizalami\LaravelMager\Components\Generators\ModelFactoryGenerator;
 use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
 use Illuminate\Http\Request;
 
@@ -189,7 +190,18 @@ class DatabaseManagerController extends Controller
         if ($request->isMethod('get')) {
             return view('mager::pages.database-manager.form-dummy', compact('columns', 'configModel'));
         } elseif ($request->isMethod('post')) {
-            return null;
+            $configFactory = $request->all();
+            $configFactory['model'] = $this->configPage->modelConfig;
+            $configFactory['name'] = $this->configPage->modelConfig . 'Factory';
+            $this->saveJson($configFactory, 'pages/' . $controller . '/model/' . $configFactory['name'] . '.json');
+
+            $modelFactoryGenerator = new ModelFactoryGenerator($configFactory);
+
+            $modelFactoryGenerator->render()->generate();
+
+            factory('App\\Models\\' . $this->configPage->modelConfig, (int)$configFactory['amount'])->create();
+
+            return response()->redirectToRoute('mager.database.table.data', ['controller' => $controller]);
         }
     }
 
