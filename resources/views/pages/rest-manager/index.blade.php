@@ -22,7 +22,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="javascript:void(0)">REST Controllers</a></li>
-                    <li><a href="#">Response Format</a></li>
+                    <li><a href="{{ route('mager.rest.format') }}">Response Format</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active">

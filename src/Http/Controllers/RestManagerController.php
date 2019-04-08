@@ -31,7 +31,7 @@ class RestManagerController extends Controller
     }
 
     public function format() {
-        return view('mager::pages.rest-manager.index');
+        return view('mager::pages.rest-manager.format');
     }
 
     public function showController($controller) {
