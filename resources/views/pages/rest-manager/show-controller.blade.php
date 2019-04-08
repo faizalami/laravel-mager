@@ -46,7 +46,7 @@
                                     <td>{{ $name }}</td>
                                     <td>{{ $page->title }}</td>
                                     <td>{{ $page->resource }}</td>
-                                    <td>{{ url($configController->url . '/' . $page->url) }}/</td>
+                                    <td>{{ url('api/' . $configController->url . '/' . $page->url) }}/</td>
                                     <td>{{ implode(', ', $page->params) }}</td>
                                     <td>{{ isset($page->restDesc)?$page->restDesc:'' }}</td>
                                     <td>
