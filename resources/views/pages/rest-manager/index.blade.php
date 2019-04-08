@@ -46,7 +46,7 @@
                                     <td>{{ $controller->name }}</td>
                                     <td>{{ $controller->namespace }}</td>
                                     <td>{{ $controller->model }}</td>
-                                    <td>{{ url($controller->url) }}/</td>
+                                    <td>{{ url('api/' . $controller->url) }}/</td>
                                     <td>{{ isset($controller->restDesc)?$controller->restDesc:'' }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit REST Description" href="{{ route('mager.rest.desc.controller', ['controller' => $controller->url]) }}"><i class="fas fa-comment-alt"></i></a>

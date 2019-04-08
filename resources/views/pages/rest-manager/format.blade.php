@@ -38,7 +38,7 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input type="checkbox" name="status" value="true"> Status
+                                                        <input class="input-format" type="checkbox" name="status" value="true" checked> Status
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -47,7 +47,7 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input type="checkbox" name="message" value="true"> Message
+                                                        <input class="input-format" type="checkbox" name="message" value="true" checked> Message
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -56,7 +56,7 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input type="checkbox" name="length" value="true"> Length
+                                                        <input class="input-format" type="checkbox" name="length" value="true" checked> Length
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -65,7 +65,7 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input type="checkbox" value="true" disabled> Data
+                                                        <input type="checkbox" value="true" disabled checked> Data
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -87,19 +87,19 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                            <tr id="status-wrapper">
+                                            <tr id="status-wrapper" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"status"</td>
                                                 <td>:</td>
                                                 <td colspan="4">true,</td>
                                             </tr>
-                                            <tr id="message-wrapper">
+                                            <tr id="message-wrapper" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"message"</td>
                                                 <td>:</td>
                                                 <td colspan="4">"get member data success",</td>
                                             </tr>
-                                            <tr id="length-wrapper">
+                                            <tr id="length-wrapper" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"length"</td>
                                                 <td>:</td>
@@ -343,6 +343,9 @@
                                             </tr>
                                         </table>
                                     </div>
+
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -373,6 +376,17 @@
                     } else {
                         $('#wrapper-form, #wrapped-example').show();
                         $('#unwrapped-example').hide();
+                    }
+                });
+
+                $('.input-format').prop('checked', true);
+                $('.format-wrapper').show();
+
+                $('.input-format').on('input', function() {
+                    if($(this).prop('checked') === false) {
+                        $('#' + $(this).prop('name') + '-wrapper').hide();
+                    } else {
+                        $('#' + $(this).prop('name') + '-wrapper').show();
                     }
                 });
             });
