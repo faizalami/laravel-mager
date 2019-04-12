@@ -99,7 +99,7 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                         })
                     }
 
-                    if(key === 'name' && current.db !== undefined) {
+                    if(key === 'name' && current.db === undefined) {
                         value = '';
                     }
                 } else {

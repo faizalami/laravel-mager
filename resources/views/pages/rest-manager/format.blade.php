@@ -26,8 +26,12 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <h4><label>
-                                        <input type="checkbox" id="wrap" name="wrap" value="true" checked> Wrap Response
-                                    </label></h4>
+                                        @isset($configRest->wrap)
+                                        <input type="checkbox" id="wrap" name="wrap" value="true" @if($configRest->wrap) checked @endif> Wrap Response
+                                        @else
+                                        <input type="checkbox" id="wrap" name="wrap" value="true"> Wrap Response
+                                        @endif
+                                        </label></h4>
                                 </div>
                             </div>
                             <div class="row">
@@ -38,7 +42,11 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input class="input-format" type="checkbox" name="status" value="true" checked> Status
+                                                        @isset($configRest->status)
+                                                        <input class="input-format" id="input-status" type="checkbox" name="status" value="true" @if($configRest->status) checked @endif> Status
+                                                        @else
+                                                        <input class="input-format" id="input-status" type="checkbox" name="status" value="true"> Status
+                                                        @endisset
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -47,7 +55,11 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input class="input-format" type="checkbox" name="message" value="true" checked> Message
+                                                        @isset($configRest->message)
+                                                        <input class="input-format" id="input-message" type="checkbox" name="message" value="true" @if($configRest->message) checked @endif> Message
+                                                        @else
+                                                        <input class="input-format" id="input-message" type="checkbox" name="message" value="true"> Message
+                                                        @endisset
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -56,7 +68,11 @@
                                             <tr>
                                                 <th>
                                                     <label>
-                                                        <input class="input-format" type="checkbox" name="length" value="true" checked> Length
+                                                        @isset($configRest->length)
+                                                        <input class="input-format" id="input-length" type="checkbox" name="length" value="true" @if($configRest->length) checked @endif> Length
+                                                        @else
+                                                        <input class="input-format" id="input-length" type="checkbox" name="length" value="true"> Length
+                                                        @endisset
                                                     </label>
                                                 </th>
                                                 <td>:</td>
@@ -87,19 +103,19 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                            <tr id="status-wrapper" class="format-wrapper">
+                                            <tr id="status-wrapper" data-wrap="status" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"status"</td>
                                                 <td>:</td>
                                                 <td colspan="4">true,</td>
                                             </tr>
-                                            <tr id="message-wrapper" class="format-wrapper">
+                                            <tr id="message-wrapper" data-wrap="message" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"message"</td>
                                                 <td>:</td>
                                                 <td colspan="4">"get member data success",</td>
                                             </tr>
-                                            <tr id="length-wrapper" class="format-wrapper">
+                                            <tr id="length-wrapper" data-wrap="length" class="format-wrapper">
                                                 <td>&nbsp;</td>
                                                 <td>"length"</td>
                                                 <td>:</td>
@@ -362,7 +378,7 @@
         require(['main'], function () {
             require(['adminlte', 'laravelmager']);
 
-            require(['jquery'], function($) {
+            require(['jquery', 'lodash'], function($, _) {
                 $('#unwrapped-example').hide();
                 if($('#wrap').prop('checked') === false) {
                     $('#wrapper-form, #wrapped-example').hide();
@@ -370,7 +386,7 @@
                 }
 
                 $('#wrap').on('input', function () {
-                    if($('#wrap').prop('checked') === false) {
+                    if($(this).prop('checked') === false) {
                         $('#wrapper-form, #wrapped-example').hide();
                         $('#unwrapped-example').show();
                     } else {
@@ -379,8 +395,13 @@
                     }
                 });
 
-                $('.input-format').prop('checked', true);
-                $('.format-wrapper').show();
+                _.forEach($('.format-wrapper'), function(wrapper) {
+                    if($('#input-'+$(wrapper).data('wrap')).prop('checked') === false) {
+                        $(wrapper).hide();
+                    } else {
+                        $(wrapper).show();
+                    }
+                });
 
                 $('.input-format').on('input', function() {
                     if($(this).prop('checked') === false) {

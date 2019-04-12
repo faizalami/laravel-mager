@@ -30,8 +30,29 @@ class RestManagerController extends Controller
         return view('mager::pages.rest-manager.index', compact('controllers'));
     }
 
-    public function format() {
-        return view('mager::pages.rest-manager.format');
+    public function format(Request $request) {
+        $configRest = $this->loadJson('configs/restFormat.json');
+        if ($request->isMethod('get')) {
+            return view('mager::pages.rest-manager.format', compact('configRest'));
+        } elseif ($request->isMethod('post')) {
+            $data = $request->all();
+
+            $configRest = [];
+            if(isset($data['wrap'])) {
+                $configRest = [
+                    'wrap' => true,
+                    'status' => isset($data['status']),
+                    'message' => isset($data['message']),
+                    'length' => isset($data['length']),
+                ];
+            } else {
+                $configRest['wrap'] = false;
+            }
+
+            $this->saveJson($configRest, 'configs/restFormat.json');
+
+            return response()->redirectToRoute('mager.rest.format');
+        }
     }
 
     public function showController($controller) {

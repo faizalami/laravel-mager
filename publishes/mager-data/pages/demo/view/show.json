@@ -1,5 +1,5 @@
 {
-    "generatedAt": null,
+    "generatedAt": "2019_04_09_020726",
     "controller": "demo",
     "model": "Demo",
     "id": "demo",
@@ -9,7 +9,7 @@
     "components": {
         "heading-data1": {
             "data-id": "headingData1",
-            "text": "Heading",
+            "text": "Name",
             "size": "3",
             "name": "name",
             "type": "heading-data",
