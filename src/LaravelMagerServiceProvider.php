@@ -49,6 +49,10 @@ class LaravelMagerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../publishes/mager-data' => base_path('mager-data'),
         ], 'vendor-data');
+
+        $this->publishes([
+            __DIR__ . '/../publishes/swagger' => public_path(),
+        ], 'swagger');
     }
 
     /**
