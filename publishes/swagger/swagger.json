@@ -1,28 +1,15 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-        "version": "1.0.0",
         "title": "Swagger Petstore",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "email": "apiteam@swagger.io"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        }
+        "version": ""
     },
-    "host": "petstore.swagger.io",
-    "basePath": "/v2",
+    "host": "jsonplaceholder.typicode.com",
+    "basePath": "/",
     "tags": [
         {
-            "name": "pet",
-            "description": "Everything about your Pets",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
+            "name": "posts",
+            "description": "Posts data"
         }
     ],
     "schemes": [
@@ -30,7 +17,31 @@
         "http"
     ],
     "paths": {
-        "/pet": {
+        "/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get All Posts",
+                "description": "Get All Posts",
+                "operationId": "postIndex",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Posts"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post": {
             "post": {
                 "tags": [
                     "pet"
@@ -420,6 +431,32 @@
         }
     },
     "definitions": {
+        "Posts": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID"
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "User ID"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Posts Title"
+                },
+                "body": {
+                    "type": "string",
+                    "description": "Posts Body"
+                }
+            },
+            "xml": {
+                "name": "Order"
+            }
+        },
         "Order": {
             "type": "object",
             "properties": {

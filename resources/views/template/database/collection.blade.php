@@ -13,9 +13,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class DemoCollection extends ResourceCollection
+class {{ $name }}Collection extends ResourceCollection
 {
-    public $collects = 'App\Http\Resources\DemoResource';
+    public $collects = 'App\Http\Resources\{{ $name }}Resource';
 
     /**
     * Transform the resource collection into an array.
