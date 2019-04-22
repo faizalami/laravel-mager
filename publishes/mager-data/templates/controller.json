@@ -7,5 +7,6 @@
     "model": "modelname",
     "web":false,
     "rest":false,
+    "restDesc":"",
     "pages": {}
 }

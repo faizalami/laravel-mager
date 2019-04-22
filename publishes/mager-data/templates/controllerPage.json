@@ -7,5 +7,6 @@
     "url":"url",
     "params": [],
     "view":"viewName",
-    "redirect":""
+    "redirect":"",
+    "restDesc":""
 }

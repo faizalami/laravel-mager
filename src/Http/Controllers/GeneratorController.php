@@ -28,11 +28,32 @@ class GeneratorController extends Controller
         $restConfig = $jsonIO->loadJsonFile('configs/restFormat.json')->toArray();
         $this->queueConfig('restConfig', $restConfig);
 
+        $swaggerConfig = $restConfig;
+        $swaggerConfig['pages'] = [];
+
         foreach ($pages as $page) {
             $pageConfig = $jsonIO->loadJsonFile('pages/'.$page.'/'.$page.'.json')->toArray();
 
             $controllerConfig = $jsonIO->loadJsonFile('pages/'.$page.'/controller/'.$pageConfig['controllerConfig'].'.json')->toArray();
             $modelConfig = $jsonIO->loadJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json')->toArray();
+
+            $generatedModel = [];
+            if($modelConfig['generatedAt'] != null) {
+                $generatedAt = \DateTime::createFromFormat('Y_m_d_His', $modelConfig['generatedAt']);
+                foreach (array_reverse($modelConfig['history']) as $history) {
+                    $modelTime = \DateTime::createFromFormat('Y_m_d_His', $history->time);
+
+                    if ($generatedAt >= $modelTime) {
+                        $generatedModel = $history->table;
+                        break;
+                    }
+                }
+            }
+
+            $swaggerConfig['pages'][] = [
+                'controller' => $controllerConfig,
+                'model' => $generatedModel,
+            ];
 
             $this->queueConfig('controller', $controllerConfig);
             $this->queueConfig('route', $controllerConfig);
@@ -82,6 +103,7 @@ class GeneratorController extends Controller
         $this->queueConfig('sidebar', $jsonIO->loadJsonFile('configs/sidebar.json')->toString());
         $this->queueConfig('navbar', $jsonIO->loadJsonFile('configs/navbar.json')->toString());
         $this->queueConfig('theme', $jsonIO->loadJsonFile('configs/main.json')->toString());
+        $this->queueConfig('swaggerJson', $swaggerConfig);
 
         foreach ($this->generateQueue as $generate) {
             $generator = Generator::init($generate['type'], $generate['config']);

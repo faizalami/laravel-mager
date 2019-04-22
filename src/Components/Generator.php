@@ -18,6 +18,7 @@ use Faizalami\LaravelMager\Components\Generators\ResourceGenerator;
 use Faizalami\LaravelMager\Components\Generators\RestConfigGenerator;
 use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
 use Faizalami\LaravelMager\Components\Generators\SidebarMenuGenerator;
+use Faizalami\LaravelMager\Components\Generators\SwaggerJsonGenerator;
 use Faizalami\LaravelMager\Components\Generators\ThemeGenerator;
 use Faizalami\LaravelMager\Components\Generators\ViewGenerator;
 
@@ -48,6 +49,9 @@ class Generator
                 break;
             case 'restConfig':
                 return new RestConfigGenerator($config);
+                break;
+            case 'swaggerJson':
+                return new SwaggerJsonGenerator($config);
                 break;
             case 'sidebar':
                 return new SidebarMenuGenerator($config);

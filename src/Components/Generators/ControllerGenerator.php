@@ -41,6 +41,11 @@ class ControllerGenerator implements GeneratorInterface
                             $this->config['pages']->{$pageName}->redirectHasParam = in_array('id', $redirectPage->params);
                         }
                     }
+
+                    if(!isset($this->config['pages']->{$pageName}->redirectRoute)) {
+                        $this->config['pages']->{$pageName}->redirectRoute = '';
+                        $this->config['pages']->{$pageName}->redirectHasParam = false;
+                    }
                 } else {
                     $this->config['pages']->{$pageName}->redirectRoute = '';
                     $this->config['pages']->{$pageName}->redirectHasParam = false;
