@@ -31,6 +31,10 @@ if(Request::route()->getName() == 'mager.pages.edit.controller') {
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label>Page Name</label>
+                                    <input type="text" class="form-control" name="pageName" @isset($configController->pageName) value="{{ $configController->pageName }}" @endisset placeholder="Enter Page Name">
+                                </div>
+                                <div class="form-group">
                                     <label>Controller Name</label>
                                     <input type="text" class="form-control" name="name" @isset($configController->name) value="{{ $configController->name }}" @endisset placeholder="Enter Controller Name">
                                 </div>

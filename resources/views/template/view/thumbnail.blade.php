@@ -8,7 +8,7 @@
 ?>
 
 <div id="{{ $id }}" class="row">
-    {{ '@' }}foreach(${{ lcfirst($model) }} as $item)
+    {{ '@' }}foreach($data as $item)
     <div class="col-xs-{{ $xs }} col-sm-{{ $sm }} col-md-{{ $md }} col-lg-{{ $lg }}">
         <div class="thumbnail-index box box-solid">
             <div class="box-body">

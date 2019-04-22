@@ -28,11 +28,11 @@
                 <h3 class="box-title">{{ $title }}</h3>
                 <span class="pull-right">
                     {{ '@' }}if(Route::has({{ '\''.$controller.'.'.$links['edit'].'\'' }}))
-                    <a class="btn btn-xs btn-primary" href="{{ '{'.'{ route(\''.$controller.'.'.$links['edit'].'\', $'.lcfirst($model).'->id) }'.'}' }}">Edit</a>
+                    <a class="btn btn-xs btn-primary" href="{{ '{'.'{ route(\''.$controller.'.'.$links['edit'].'\', $data->id) }'.'}' }}">Edit</a>
                     {{ '@' }}endif
 
                     {{ '@' }}if(Route::has({{ '\''.$controller.'.'.$links['destroy'].'\'' }}))
-                    <form class="delete-form" action="{{ '{'.'{ route(\''.$controller.'.'.$links['destroy'].'\', $'.lcfirst($model).'->id) }'.'}' }}" method="post">
+                    <form class="delete-form" action="{{ '{'.'{ route(\''.$controller.'.'.$links['destroy'].'\', $data->id) }'.'}' }}" method="post">
                         {{ '@' }}csrf
                         {{ '@' }}method('DELETE')
                         <button class="btn btn-xs btn-danger" type="submit">Delete</button>

@@ -28,7 +28,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">
                                     <a class="button-collapse" data-toggle="collapse" data-parent="#accordion" href="#{{ $controller->url }}">
-                                        {{ $controller->name }}
+                                        {{ $controller->pageName }}
                                     </a>
                                 </h4>
                             </div>

@@ -5,8 +5,6 @@
  * Date: 21/12/18
  * Time: 16:33
  */
-
-$modelObject = lcfirst($model);
 ?>
 
 {{ '<?'.'php' }}
@@ -15,168 +13,151 @@ namespace {{ $namespace }};
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\{{ $model }};
+use App\Http\Controllers\Base\BaseController;
 
 class {{ $name }} extends Controller {
-    private $isApi = false;
+
+    private $controller;
 
     public function __construct(Request $request)
     {
+        @if($web == true && $rest == true)
+        $requestType = 'web';
         if ($request->is('api/*')) {
-            $this->isApi = true;
+            $requestType = 'rest';
         }
+        @elseif($web == true && $rest == false)
+        $requestType = 'web';
+        @elseif($web == false && $rest == true)
+        $requestType = 'web';
+        @endif
+        $this->controller = (new BaseController())->getController($requestType, '{{ $model }}', '{{ $pageName }}');
     }
 
-@foreach($pages as $pageName => $page)
+@foreach($pages as $requestName => $page)
     @switch($page->resource)
 
     @case('index')
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function {{ $pageName }}()
+     * Display a listing of the resource.
+     *
+     * @return  \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}()
     {
-        ${{ $modelObject }} = {{ $model }}::all();
-        $columnLabels =  {{ $model }}::$columnLabels;
-
-        if($this->isApi) {
-            return response()->json(${{ $modelObject }});
-        } else {
-            return view('{{ $url . '.' . $page->view }}', compact('{{ $modelObject }}', 'columnLabels'));
-        }
+        return $this->controller->index('{{ $url . '.' . $page->view }}');
     }
     @break
 
     @case('create')
     /**
-    * Show the form for creating a new resource.
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function {{ $pageName }}(Request $request)
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}Form()
     {
-        if ($request->isMethod('get')) {
-            ${{ $modelObject }} = new {{ $model }}();
-            return view('{{ $url . '.' . $page->view }}', compact('{{ $modelObject }}'));
-        } elseif ($request->isMethod('post')) {
-            ${{ $modelObject }} = new {{ $model }}($request->all());
-            ${{ $modelObject }}->save();
+        return $this->controller->create('{{ $url . '.' . $page->view }}');
+    }
 
-            if($this->isApi) {
-                return response()->json(${{ $modelObject }});
-            } else {
-            @if($page->redirectRoute != '')
-                @if($page->redirectHasParam)
-                    return response()->redirectToRoute('{{ $page->redirectRoute }}', ['id' => ${{ $modelObject }}->id]);
-                @else
-                    return response()->redirectToRoute('{{ $page->redirectRoute }}');
-                @endif
-            @else
-                @if($page->redirect != '')
-                    return response()->redirectTo('{{ $page->redirect }}');
-                @elseif($page->redirect == '' && $defaultPage != '')
-                    return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
-                @else
-                    return response()->redirectTo('/');
-                @endif
-            @endif
-            }
-        }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}Store(Request $request)
+    {
+        return $this->controller->store($request, function ($id) {
+    @if($page->redirectRoute != '')
+        @if($page->redirectHasParam)
+            return response()->redirectToRoute('{{ $page->redirectRoute }}', ['id' => $id]);
+        @else
+            return response()->redirectToRoute('{{ $page->redirectRoute }}');
+        @endif
+    @else
+        @if($page->redirect != '')
+            return response()->redirectTo('{{ $page->redirect }}');
+        @elseif($page->redirect == '' && $defaultPage != '')
+            return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
+        @else
+            return response()->redirectTo('/');
+        @endif
+    @endif
+        });
     }
     @break
 
     @case('show')
     /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function {{ $pageName }}($id)
+     * Display the specified resource.
+     *
+     * @param    int  $id
+     * @return  \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}($id)
     {
-        ${{ $modelObject }} = {{ $model }}::find($id);
-        $columnLabels =  {{ $model }}::$columnLabels;
-
-        if($this->isApi) {
-            return response()->json(${{ $modelObject }});
-        } else {
-            return view('{{ $url . '.' . $page->view }}', compact('{{ $modelObject }}', 'columnLabels'));
-        }
+        return $this->controller->show($id, '{{ $url . '.' . $page->view }}');
     }
     @break
 
     @case('edit')
     /**
-    * Show the form for editing the specified resource.
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function {{ $pageName }}(Request $request, $id)
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}Form($id)
     {
-        ${{ $modelObject }} = {{ $model }}::find($id);
+        return $this->controller->edit($id, '{{ $url . '.' . $page->view }}');
+    }
 
-        if ($request->isMethod('get')) {
-            if($this->isApi) {
-                return response()->json(${{ $modelObject }});
-            } else {
-                return view('{{ $url . '.' . $page->view }}', compact('{{ $modelObject }}'));
-            }
-        } elseif ($request->isMethod('post')) {
-            ${{ $modelObject }}->fill($request->all());
-            ${{ $modelObject }}->save();
-
-            if($this->isApi) {
-                return response()->json(${{ $modelObject }});
-            } else {
-            @if($page->redirectRoute != '')
-                @if($page->redirectHasParam)
-                    return response()->redirectToRoute('{{ $page->redirectRoute }}', ['id' => ${{ $modelObject }}->id]);
-                @else
-                    return response()->redirectToRoute('{{ $page->redirectRoute }}');
-                @endif
-            @else
-                @if($page->redirect != '')
-                    return response()->redirectTo('{{ $page->redirect }}');
-                @elseif($page->redirect == '' && $defaultPage != '')
-                    return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
-                @else
-                    return response()->redirectTo('/');
-                @endif
-            @endif
-            }
-        }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}Update(Request $request, $id)
+    {
+        return $this->controller->update($request, $id, function ($id) {
+    @if($page->redirectRoute != '')
+        @if($page->redirectHasParam)
+            return response()->redirectToRoute('{{ $page->redirectRoute }}', ['id' => $id]);
+        @else
+            return response()->redirectToRoute('{{ $page->redirectRoute }}');
+        @endif
+    @else
+        @if($page->redirect != '')
+            return response()->redirectTo('{{ $page->redirect }}');
+        @elseif($page->redirect == '' && $defaultPage != '')
+            return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
+        @else
+            return response()->redirectTo('/');
+        @endif
+    @endif
+        });
     }
     @break
 
     @case('destroy')
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function {{ $pageName }}($id)
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function {{ $requestName }}($id)
     {
-        ${{ $modelObject }} = {{ $model }}::find($id);
-        ${{ $modelObject }}->delete();
-
-        if($this->isApi) {
-            return response()->json(true);
-        } else {
-            @if($defaultPage != '')
+        return $this->controller->destroy($id, function ($id) {
+        @if($defaultPage != '')
             return response()->redirectTo('{{ $url }}/{{ $defaultPage }}');
-            @else
+        @else
             return response()->redirectTo('/');
-            @endif
-        }
-
+        @endif
+        });
     }
     @break
 

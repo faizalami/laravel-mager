@@ -1,5 +1,6 @@
 {
     "generatedAt": null,
+    "pageName": "Demo",
     "name":"DemoController",
     "namespace":"App\\Http\\Controllers",
     "url":"demo",
@@ -60,7 +61,8 @@
             "title": "Update Item",
             "methods":[
                 "get",
-                "post"
+                "put",
+                "patch"
             ],
             "url":"update",
             "params": [ "id" ],

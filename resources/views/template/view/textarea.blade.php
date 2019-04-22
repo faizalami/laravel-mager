@@ -14,5 +14,5 @@
               minlength="{{ $minlength }}"
               maxlength="{{ $maxlength }}"
               rows="{{ $rows }}"
-              cols="{{ $cols }}">{{ '{{$' . $model . '->' . $name . '}' . '}' }}</textarea>
+              cols="{{ $cols }}">{{ '{{$data->' . $name . '}' . '}' }}</textarea>
 </div>

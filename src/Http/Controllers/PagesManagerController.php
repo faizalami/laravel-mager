@@ -98,7 +98,7 @@ class PagesManagerController extends Controller
                                 break;
                             case 'edit':
                                 $configView->type = 'form';
-                                $configControllerPage->methods = [ 'get', 'post' ];
+                                $configControllerPage->methods = [ 'get', 'put', 'patch' ];
                                 break;
                             case 'destroy':
                                 $configControllerPage->methods = [ 'delete' ];

@@ -29,12 +29,26 @@ Route::group([
         'prefix' => '{{ $url }}',
         'as' => '{{ $url }}.'
     ], function () {
-    @foreach($pages as $pageName => $page)
+    @foreach($pages as $requestName => $page)
+    @if($page->web)
         @if(count($page->methods) > 1)
-        Route::match({{ str_replace('"', '\'', json_encode($page->methods)) }}, '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $pageName }}')->name('{{ $page->url }}');
+            @switch($page->resource)
+                @case('create')
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+                @case('edit')
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+                @case('destroy')
+        Route::match(['post', 'delete'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+            @endswitch
         @else
-        Route::{{ $page->methods[0] }}('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $pageName }}')->name('{{ $page->url }}');
+        Route::{{ $page->methods[0] }}('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
         @endif
+    @endif
     @endforeach
     });
 
@@ -43,12 +57,26 @@ Route::group([
         'prefix' => 'api/{{ $url }}',
         'as' => '{{ $url }}.api.'
     ], function () {
-    @foreach($pages as $pageName => $page)
+    @foreach($pages as $requestName => $page)
+    @if($page->rest)
         @if(count($page->methods) > 1)
-        Route::match({{ str_replace('"', '\'', json_encode($page->methods)) }}, '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $pageName }}')->name('{{ $page->url }}');
+            @switch($page->resource)
+                @case('create')
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+                @case('edit')
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+                @case('destroy')
+        Route::match(['post', 'delete'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+                @break
+            @endswitch
         @else
-        Route::{{ $page->methods[0] }}('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $pageName }}')->name('{{ $page->url }}');
+        Route::{{ $page->methods[0] }}('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
         @endif
+    @endif
     @endforeach
     });
 });

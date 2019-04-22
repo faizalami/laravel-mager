@@ -7,4 +7,4 @@
  */
 ?>
 
-<label id="{{ $id }}">{{ '{'.'{ $'.lcfirst($model).'->'.$name.' }'.'}' }}</label>
+<label id="{{ $id }}">{{ '{'.'{ $data->'.$name.' }'.'}' }}</label>

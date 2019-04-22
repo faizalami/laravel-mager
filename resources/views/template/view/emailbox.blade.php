@@ -10,7 +10,7 @@
 <div class="form-group">
     <label>{{ $label }}</label>
     <input type="email" class="form-control" id="{{ $id }}" name="{{ $name }}"
-           value="{{ '{{$' . $model . '->' . $name . '}' . '}' }}"
+           value="{{ '{{$data->' . $name . '}' . '}' }}"
            placeholder="{{ $placeholder }}"
            minlength="{{ $minlength }}"
            maxlength="{{ $maxlength }}">

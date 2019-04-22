@@ -12,7 +12,7 @@
     @foreach(explode(',', $columns) as $column)
         <tr>
             <th>{{ $modelColumns->{$column}->label }}</th>
-            <td>{{ '{'.'{ $'.lcfirst($model).'->'.$column.' }'.'}' }}</td>
+            <td>{{ '{'.'{ $data->'.$column.' }'.'}' }}</td>
         </tr>
     @endforeach
     </tbody>

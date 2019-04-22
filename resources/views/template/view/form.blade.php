@@ -23,6 +23,9 @@
             <div class="box-body">
                 <form method="post">
                     {{ '@' }}csrf
+                    {{ '@' }}if($isEdit)
+                        {{ '@' }}method('PUT')
+                    {{ '@' }}endif
                     {{ $content }}
                 </form>
             </div>

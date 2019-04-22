@@ -35,6 +35,10 @@ class LaravelMagerServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
+            __DIR__ . '/../publishes/base-controller' => app_path('Http/Controllers/Base'),
+        ], 'base-controller');
+
+        $this->publishes([
             __DIR__ . '/../publishes/config' => config_path('/'),
         ], 'config');
 

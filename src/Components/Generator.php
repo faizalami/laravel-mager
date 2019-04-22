@@ -9,10 +9,13 @@
 namespace Faizalami\LaravelMager\Components;
 
 
+use Faizalami\LaravelMager\Components\Generators\CollectionGenerator;
 use Faizalami\LaravelMager\Components\Generators\ControllerGenerator;
 use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
 use Faizalami\LaravelMager\Components\Generators\ModelGenerator;
 use Faizalami\LaravelMager\Components\Generators\NavbarMenuGenerator;
+use Faizalami\LaravelMager\Components\Generators\ResourceGenerator;
+use Faizalami\LaravelMager\Components\Generators\RestConfigGenerator;
 use Faizalami\LaravelMager\Components\Generators\RouteGenerator;
 use Faizalami\LaravelMager\Components\Generators\SidebarMenuGenerator;
 use Faizalami\LaravelMager\Components\Generators\ThemeGenerator;
@@ -36,6 +39,15 @@ class Generator
                 break;
             case 'view':
                 return new ViewGenerator($config);
+                break;
+            case 'resource':
+                return new ResourceGenerator($config);
+                break;
+            case 'collection':
+                return new CollectionGenerator($config);
+                break;
+            case 'restConfig':
+                return new RestConfigGenerator($config);
                 break;
             case 'sidebar':
                 return new SidebarMenuGenerator($config);

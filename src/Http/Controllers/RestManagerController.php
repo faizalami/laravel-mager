@@ -9,6 +9,7 @@
 namespace Faizalami\LaravelMager\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Faizalami\LaravelMager\Components\Generators\RestConfigGenerator;
 use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,9 @@ class RestManagerController extends Controller
             }
 
             $this->saveJson($configRest, 'configs/restFormat.json');
+
+            $restConfigGenerator = new RestConfigGenerator($configRest);
+            $restConfigGenerator->render()->generate();
 
             return response()->redirectToRoute('mager.rest.format');
         }

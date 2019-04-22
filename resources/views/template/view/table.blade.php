@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    {{ '@' }}foreach(${{ lcfirst($model) }} as $item)
+    {{ '@' }}foreach($data as $item)
     <tr>
         @foreach(explode(',', $columns) as $column)
             <td>{{ '{'.'{ $item->'.$column.' }'.'}' }}</td>

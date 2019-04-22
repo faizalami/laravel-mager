@@ -25,6 +25,9 @@ class GeneratorController extends Controller
         Artisan::call('config:clear');
         Artisan::call('db:create');
 
+        $restConfig = $jsonIO->loadJsonFile('configs/restFormat.json')->toArray();
+        $this->queueConfig('restConfig', $restConfig);
+
         foreach ($pages as $page) {
             $pageConfig = $jsonIO->loadJsonFile('pages/'.$page.'/'.$page.'.json')->toArray();
 
@@ -35,6 +38,12 @@ class GeneratorController extends Controller
             $this->queueConfig('route', $controllerConfig);
             $this->queueConfig('migration', $modelConfig);
             $this->queueConfig('model', $modelConfig);
+
+            if($restConfig['wrap']) {
+                $restConfig['name'] = $modelConfig['name'];
+                $this->queueConfig('resource', $restConfig);
+                $this->queueConfig('collection', $restConfig);
+            }
 
             $controllerConfig['generatedAt'] = date('Y_m_d_His');
             $jsonIO->setJsonFromObject($controllerConfig, true)
