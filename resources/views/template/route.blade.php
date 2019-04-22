@@ -34,12 +34,12 @@ Route::group([
         @if(count($page->methods) > 1)
             @switch($page->resource)
                 @case('create')
-        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
-        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Form')->name('{{ $page->url }}');
+        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Store')->name('{{ $page->url }}');
                 @break
                 @case('edit')
-        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
-        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Form')->name('{{ $page->url }}');
+        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Update')->name('{{ $page->url }}');
                 @break
                 @case('destroy')
         Route::match(['post', 'delete'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
@@ -62,12 +62,12 @@ Route::group([
         @if(count($page->methods) > 1)
             @switch($page->resource)
                 @case('create')
-        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
-        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Form')->name('{{ $page->url }}');
+        Route::post('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Store')->name('{{ $page->url }}');
                 @break
                 @case('edit')
-        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
-        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
+        Route::get('/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Form')->name('{{ $page->url }}');
+        Route::match(['put', 'patch'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}Update')->name('{{ $page->url }}');
                 @break
                 @case('destroy')
         Route::match(['post', 'delete'], '/{{ renderPageUrl($page->url, $page->params) }}', '{{ $name . '@' . $requestName }}')->name('{{ $page->url }}');
