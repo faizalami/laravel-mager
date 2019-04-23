@@ -13,7 +13,7 @@
         "title": "{{ config('app.name') }}",
         "version": ""
     },
-    "host": "localhost:8000/",
+    "host": "{{ str_replace('https://', '', str_replace('http://', '', url('/'))) }}/",
     "basePath": "api/",
     "tags": [
     @php($i = 1)
@@ -51,7 +51,14 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Collection"
+                            @else
+                            type: "array",
+                            items: {
+                                $ref: "#/definitions/{{ $page['controller']['model'] }}"
+                            }
+                            @endif
                         }
                     }
                 }
@@ -84,7 +91,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -107,7 +118,11 @@
                         "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -136,7 +151,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -169,7 +188,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -206,7 +229,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -239,7 +266,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
+                            @if($wrap)
                             "$ref": "#/definitions/{{ $page['controller']['model'] }}Resource"
+                            @else
+                            "$ref": "#/definitions/{{ $page['controller']['model'] }}"
+                            @endif
                         }
                     }
                 }
@@ -260,22 +291,29 @@
     "definitions": {
     @php($i = 1)
     @foreach($pages as $page)
+        @if($wrap)
         "{{ $page['controller']['model'] }}Resource": {
             "type": "object",
             "properties": {
+                @if($status)
                 "status": {
                     "type": "boolean",
                     "description": "Response Status"
                 },
+                @endif
+                @if($message)
                 "message": {
                     "type": "string",
                     "description": "Response Message"
                 },
+                @endif
+                @if($length)
                 "length": {
                     "type": "integer",
                     "format": "int64",
                     "description": "Response Data Length"
                 },
+                @endif
                 "data": {
                     "type": "object",
                     "$ref": "#/definitions/{{ $page['controller']['model'] }}",
@@ -286,19 +324,25 @@
         "{{ $page['controller']['model'] }}Collection": {
             "type": "object",
             "properties": {
+                @if($status)
                 "status": {
                     "type": "boolean",
                     "description": "Response Status"
                 },
+                @endif
+                @if($message)
                 "message": {
                     "type": "string",
                     "description": "Response Message"
                 },
+                @endif
+                @if($length)
                 "length": {
                     "type": "integer",
                     "format": "int64",
                     "description": "Response Data Length"
                 },
+                @endif
                 "data": {
                     "type": "array",
                     "items": {
@@ -308,6 +352,7 @@
                 }
             }
         },
+        @endif
         "{{ $page['controller']['model'] }}": {
             "type": "object",
             "properties": {

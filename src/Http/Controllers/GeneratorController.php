@@ -12,6 +12,7 @@ use Faizalami\LaravelMager\Components\JsonIO;
 use Faizalami\LaravelMager\Components\Generator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class GeneratorController extends Controller
 {
@@ -24,6 +25,8 @@ class GeneratorController extends Controller
 
         Artisan::call('config:clear');
         Artisan::call('db:create');
+
+        $this->setUrl();
 
         $restConfig = $jsonIO->loadJsonFile('configs/restFormat.json')->toArray();
         $this->queueConfig('restConfig', $restConfig);
@@ -113,6 +116,31 @@ class GeneratorController extends Controller
         Artisan::call('config:clear');
 
         return 'success';
+    }
+
+    private function setUrl() {
+        Artisan::call('config:clear');
+
+        $envPath = base_path('.env');
+
+        if(File::exists($envPath)) {
+            $envFile = File::get($envPath);
+            $urlConfig = 'APP_URL=\''.config('app.url').'\'';
+            if(strpos($envFile, $urlConfig) === false) {
+                $urlConfig = 'APP_URL='.config('app.url');
+            }
+
+            $newUrl = url('/');
+
+            File::put($envPath, str_replace(
+                $urlConfig,
+                'APP_URL=\''.$newUrl.'\'',
+                $envFile
+            ));
+        }
+        putenv('APP_NAME='.$newUrl);
+
+        Artisan::call('config:cache');
     }
 
     private function queueConfig($type, $config) {
