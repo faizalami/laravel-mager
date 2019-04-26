@@ -199,11 +199,20 @@ body {
     min-height: 75px;
     padding-bottom: 10px;
     margin: 0px;
+    background-image: url(../img/row.png);
 }
 
 .component-col .col-container {
     min-height: 75px;
     padding-bottom: 10px;
+    background-image: url(../img/col.png);
+    background-color: rgba(0, 0, 0, 0.1);
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.component-col {
+    padding: 0 !important;
 }
 
 .component-buttons {
