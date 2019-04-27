@@ -76,6 +76,15 @@ body {
     z-index: 500;
 }
 
+span.gui-icon {
+    font-size: 30px;
+    vertical-align: middle;
+}
+
+span.component-item{
+    vertical-align: middle;
+}
+
 .component-sidebar {
     left: -230px;
     transition: left .3s ease-in-out;

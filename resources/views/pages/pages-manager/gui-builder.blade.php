@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/waitMe/waitMe.min.css') }}">
     <link rel="stylesheet" href="{{ asset(config('mager.public_path').'plugins/DataTables-1.10.18/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset(config('mager.public_path').'assets/css/gui-builder-icons/gui-builder-icons.css') }}">
 @endsection
 
 @section('body')
@@ -96,36 +97,36 @@
         <h3 class="gui-builder-sidebar-heading">Common Components</h3>
         @switch($builderType)
             @case('form')
-                <div class="sidebar-item" data-type="heading">Heading</div>
-                <div class="sidebar-item" data-type="label">Label</div>
-                <div class="sidebar-item" data-type="paragraph">Paragraph</div>
-                <div class="sidebar-item" data-type="textbox">Textbox</div>
-                <div class="sidebar-item" data-type="numberbox">Numberbox</div>
-                <div class="sidebar-item" data-type="emailbox">Emailbox</div>
-                <div class="sidebar-item" data-type="passwordbox">Passwordbox</div>
-                <div class="sidebar-item" data-type="textarea">Textarea</div>
-                <div class="sidebar-item" data-type="button">Button</div>
-                <div class="sidebar-item" data-type="row">Row Panel</div>
-                <div class="sidebar-item" data-type="col">Column Panel</div>
+                <div class="sidebar-item" data-type="heading"><span class="gui-icon icon-heading"></span> <span class="component-item">Heading</span></div>
+                <div class="sidebar-item" data-type="label"><span class="gui-icon icon-label"></span> <span class="component-item">Label</span></div>
+                <div class="sidebar-item" data-type="paragraph"><span class="gui-icon icon-paragraph"></span> <span class="component-item">Paragraph</span></div>
+                <div class="sidebar-item" data-type="textbox"><span class="gui-icon icon-textbox"></span> <span class="component-item">Textbox</span></div>
+                <div class="sidebar-item" data-type="numberbox"><span class="gui-icon icon-numberbox"></span> <span class="component-item">Numberbox</span></div>
+                <div class="sidebar-item" data-type="emailbox"><span class="gui-icon icon-emailbox"></span> <span class="component-item">Emailbox</span></div>
+                <div class="sidebar-item" data-type="passwordbox"><span class="gui-icon icon-passwordbox"></span> <span class="component-item">Passwordbox</span></div>
+                <div class="sidebar-item" data-type="textarea"><span class="gui-icon icon-textarea"></span> <span class="component-item">Textarea</span></div>
+                <div class="sidebar-item" data-type="button"><span class="gui-icon icon-button"></span> <span class="component-item">Button</span></div>
+                <div class="sidebar-item" data-type="row"><span class="gui-icon icon-row"></span> <span class="component-item">Row Panel</span></div>
+                <div class="sidebar-item" data-type="col"><span class="gui-icon icon-col"></span> <span class="component-item">Column Panel</span></div>
                 @break
             @case('index')
-                <div class="sidebar-item" data-type="heading">Heading</div>
-                <div class="sidebar-item" data-type="label">Label</div>
-                <div class="sidebar-item" data-type="paragraph">Paragraph</div>
-                <div class="sidebar-item" data-type="table">Table</div>
-                <div class="sidebar-item" data-type="thumbnail">Thumbnail</div>
-                <div class="sidebar-item" data-type="row">Row Panel</div>
-                <div class="sidebar-item" data-type="col">Column Panel</div>
+                <div class="sidebar-item" data-type="heading"><span class="gui-icon icon-heading"></span> <span class="component-item">Heading</span></div>
+                <div class="sidebar-item" data-type="label"><span class="gui-icon icon-label"></span> <span class="component-item">Label</span></div>
+                <div class="sidebar-item" data-type="paragraph"><span class="gui-icon icon-paragraph"></span> <span class="component-item">Paragraph</span></div>
+                <div class="sidebar-item" data-type="table"><span class="gui-icon icon-table"></span> <span class="component-item">Table</span></div>
+                <div class="sidebar-item" data-type="thumbnail"><span class="gui-icon icon-thumbnail"></span> <span class="component-item">Thumbnail</span></div>
+                <div class="sidebar-item" data-type="row"><span class="gui-icon icon-row"></span> <span class="component-item">Row Panel</span></div>
+                <div class="sidebar-item" data-type="col"><span class="gui-icon icon-col"></span> <span class="component-item">Column Panel</span></div>
                 @break
             @case('show')
-                <div class="sidebar-item" data-type="table-detail">Table</div>
-                <div class="sidebar-item" data-type="heading-data">Heading</div>
-                <div class="sidebar-item" data-type="label-data">Label</div>
-                <div class="sidebar-item" data-type="paragraph-data">Paragraph</div>
-                <div class="sidebar-item" data-type="number">Number</div>
-                <div class="sidebar-item" data-type="email">Email</div>
-                <div class="sidebar-item" data-type="row">Row Panel</div>
-                <div class="sidebar-item" data-type="col">Column Panel</div>
+                <div class="sidebar-item" data-type="table-detail"><span class="gui-icon icon-table"></span> <span class="component-item">Table</span></div>
+                <div class="sidebar-item" data-type="heading-data"><span class="gui-icon icon-heading"></span> <span class="component-item">Heading</span></div>
+                <div class="sidebar-item" data-type="label-data"><span class="gui-icon icon-label"></span> <span class="component-item">Label</span></div>
+                <div class="sidebar-item" data-type="paragraph-data"><span class="gui-icon icon-paragraph"></span> <span class="component-item">Paragraph</span></div>
+                <div class="sidebar-item" data-type="number"><span class="gui-icon icon-number"></span> <span class="component-item">Number</span></div>
+                <div class="sidebar-item" data-type="email"><span class="gui-icon icon-email"></span> <span class="component-item">Email</span></div>
+                <div class="sidebar-item" data-type="row"><span class="gui-icon icon-row"></span> <span class="component-item">Row Panel</span></div>
+                <div class="sidebar-item" data-type="col"><span class="gui-icon icon-col"></span> <span class="component-item">Column Panel</span></div>
                 @break
         @endswitch
     </aside>
