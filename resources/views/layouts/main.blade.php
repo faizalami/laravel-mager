@@ -53,9 +53,6 @@ $activeMenu[Request::route()->getName()] = 'active';
                     <li>
                         <a href="javascript:void(0)" id="generate-button"><i class="fas fa-file-download"></i> Generate Project</a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)"><i class="fab fa-android"></i> Export Android Project</a>
-                    </li>
                 </ul>
             </div>
         </nav>
