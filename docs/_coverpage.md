@@ -11,6 +11,11 @@
 [GitHub](https://github.com/faizalami/laravel-mager)
 [Getting Started](installation.md)
 
+
+<!-- background image -->
+
+![](#)
+
 <!-- background color -->
 
 ![color](#333333)
