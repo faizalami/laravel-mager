@@ -51,7 +51,7 @@ $ php artisan vendor:publish --provider="Faizalami\LaravelMager\LaravelMagerServ
 ```
 
 ## Run the laravel project
-Try to run the Laravel project application
+Try to run the Laravel project application using `artisan` command
 ```bash
 $ php artisan serve
 ```
