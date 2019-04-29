@@ -8,13 +8,10 @@
 
 > Laravel package for design and generate a ready to use application.
 
+- Drag and Drop GUI Builder, Choose Theme, REST API Response Designer, Database Manager
+
 [GitHub](https://github.com/faizalami/laravel-mager)
-[Getting Started](installation.md)
-
-
-<!-- background image -->
-
-![](#)
+[Getting Started](introduction.md)
 
 <!-- background color -->
 
