@@ -46,6 +46,7 @@ Publish configurations and assets to use Laravel-Mager, configurations and asset
 * Base Classes
 * Swagger-UI REST Documentation assets
 * Base layout views
+
 ```bash
 $ php artisan vendor:publish --provider="Faizalami\LaravelMager\LaravelMagerServiceProvider" --force
 ```
