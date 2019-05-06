@@ -23,3 +23,9 @@
  Database Manager will substitute common database manager application like PHPMyAdmin or Adminer. It will produce `Eloquent` model, model factory, seeder, and migration. You also can generate dummy data automatically using `faker` dependency without writing any code.
  
  ![](_images/pages/introduction/db-manager.png)
+ 
+ # Development
+ **`Laravel-Mager is still under development`** as a prototype for student final project at PENS (Politeknik Elektronika Negeri Surabaya). 
+ Finished features only handle basic CRUD operation for independent database table without any relation also without validation.
+ GUI Builder also only provides some simple html and form components such as textbox, numberbox, emailbox, passwordbox, textarea, heading, data table, and simple thumbnail view.
+ Laravel-Mager is using AdminLTE for layout view and can be easily customized. 

@@ -8,6 +8,9 @@
 - _**Features**_
     - Pages Manager
         - [Introduction](_features/pages_manager/introduction.md "Pages Manager - Introduction | Laravel-Mager")
+        - [Controller Management](_features/pages_manager/controller.md "Pages Manager - Controller Management | Laravel-Mager")
+        - [Page Management](_features/pages_manager/page.md "Pages Manager - Page Management | Laravel-Mager")
+        - [GUI Builder](_features/pages_manager/gui_builder.md "Pages Manager - GUI Builder | Laravel-Mager")
     - Project Configuration
     - REST Manager
     - Database Manager
