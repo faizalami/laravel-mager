@@ -11,6 +11,7 @@
         - [Controller Management](_features/pages_manager/controller.md "Pages Manager - Controller Management | Laravel-Mager")
         - [Page Management](_features/pages_manager/page.md "Pages Manager - Page Management | Laravel-Mager")
         - [GUI Builder](_features/pages_manager/gui_builder.md "Pages Manager - GUI Builder | Laravel-Mager")
+        - [Generate](_features/pages_manager/generate.md "Pages Manager - Generate | Laravel-Mager")
     - Project Configuration
     - REST Manager
     - Database Manager

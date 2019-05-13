@@ -12,3 +12,4 @@ Using the `GUI Builder`, a view page can be easily designed without write any co
 * [Controller Management](_features/pages_manager/controller.md)
 * [Page Management](_features/pages_manager/page.md)
 * [GUI Builder](_features/pages_manager/gui_builder.md)
+* [Generate](_features/pages_manager/generate.md)

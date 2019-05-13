@@ -22,4 +22,16 @@ No. | Input | Example | Explaination
 
 ## Edit Existing Controller
 
+### Click `Edit Controller Properties` Button
+
+ ![](../../_images/pages/pages_manager/edit_controller.png)
+
+### Edit The Controller Properties
+
+After the `Edit Controller Properties` button clicked, Edit Controller form will appeared. Edit form inputs are similar with Create New form inputs.
+
 ## Delete Controller
+
+Use `Delete Controller` button to delete the controller properties.
+
+ ![](../../_images/pages/pages_manager/delete_controller.png)
