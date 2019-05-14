@@ -29,14 +29,19 @@ class PagesManagerController extends Controller
         return view('mager::pages.pages-manager.index', compact('controllers'));
     }
 
-    public function createController(Request $request) {
+    public function createController(Request $request, $configController = null) {
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-controller');
         } elseif ($request->isMethod('post')) {
-            $configController = $this->loadJson('templates/controller.json');
             $configPage = $this->loadJson('templates/page.json');
             $configPageList = $this->loadJson('configs/pages.json');
             $configModel = $this->loadJson('templates/model.json');
+
+            if($configController == null) {
+                $configController = $this->loadJson('templates/controller.json');
+            } else {
+                $configModel = $this->loadJson('pages/' . $configController->url . '/model/' . $configController->model . '.json');
+            }
 
             foreach ($request->all() as $key => $req) {
                 $configController->{$key} = $req;
@@ -68,14 +73,19 @@ class PagesManagerController extends Controller
         }
     }
 
-    public function createPage(Request $request, $controller) {
+    public function createPage(Request $request, $controller, $configControllerPage = null) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-page', compact('configController'));
         } elseif ($request->isMethod('post')) {
-            $configControllerPage = $this->loadJson('templates/controllerPage.json');
             $configPage = $this->loadJson('pages/' . $controller . '/' . $controller . '.json');
             $configView = $this->loadJson('templates/view.json');
+
+            if($configControllerPage != null) {
+                $configView = $this->loadJson('pages/' . $controller . '/view/' . $configControllerPage->view . '.json');
+            } else {
+                $configControllerPage = $this->loadJson('templates/controllerPage.json');
+            }
 
             $post = $request->all();
             foreach ($post as $key => $data) {
@@ -131,7 +141,9 @@ class PagesManagerController extends Controller
 
             $configView->controller = $configController->url;
             $configView->model = $configController->model;
+            $configView->id = 'page-'.$configControllerPage->view;
             $configView->name = $configControllerPage->view;
+            $configView->title = $configControllerPage->title;
 
             array_push($configPage->viewConfig, ['config' => $configControllerPage->view]);
 
@@ -154,6 +166,7 @@ class PagesManagerController extends Controller
     public function showPage($controller, $page) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
+        dd($configControllerPage);
 
         return view('mager::pages.pages-manager.show-page', compact('configController', 'configControllerPage'));
     }
@@ -165,7 +178,7 @@ class PagesManagerController extends Controller
             return view('mager::pages.pages-manager.form-controller', compact('configController'));
         } elseif ($request->isMethod('post'))  {
             $this->deleteController($controller);
-            return $this->createController($request);
+            return $this->createController($request, $configController);
         } else {
             throw new NotFoundHttpException();
         }
@@ -179,7 +192,7 @@ class PagesManagerController extends Controller
             return view('mager::pages.pages-manager.form-page', compact('configController', 'configControllerPage'));
         } elseif ($request->isMethod('post'))  {
             $this->deletePage($controller, $page);
-            return $this->createPage($request, $controller);
+            return $this->createPage($request, $controller, $configControllerPage);
         } else {
             throw new NotFoundHttpException();
         }
@@ -190,10 +203,7 @@ class PagesManagerController extends Controller
 
         unset($configPages[array_search($controller, $configPages)]);
 
-        $this->saveJson($configPages, 'configs/pages.json');
-
-        $removeConfig = base_path(config('mager.data').'pages/' . $controller);
-        $this->rrmdir($removeConfig);
+        $this->saveJson(array_values($configPages), 'configs/pages.json');
 
         return response()->redirectToRoute('mager.pages.index');
     }
@@ -204,25 +214,5 @@ class PagesManagerController extends Controller
         $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');
 
         return response()->redirectToRoute('mager.pages.index');
-    }
-
-    private function rrmdir($path) {
-        if(is_dir($path)) {
-            $dir = opendir($path);
-            while(false !== ( $file = readdir($dir)) ) {
-                if (( $file != '.' ) && ( $file != '..' )) {
-                    $fullPath = $path . '/' . $file;
-                    if ( is_dir($fullPath) ) {
-                        $this->rrmdir($fullPath);
-                    }
-                    else {
-                        unlink($fullPath);
-                    }
-                }
-            }
-            closedir($dir);
-            return rmdir($path);
-        }
-        else return false;
     }
 }

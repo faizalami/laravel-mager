@@ -516,11 +516,15 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             _.forEach(modelConfig.columns, function (item, name) {
                 var chooseInput = '';
 
-                if(current.type === 'table' || current.type === 'table-detail') {
+                if(['table', 'table-detail'].indexOf(current.type) !== -1) {
                     chooseInput = '   <td><input type="checkbox" name="choose-column[]" class="input-choose-columns" value="' + name + '"></td>';
-                } else if(current.type === 'thumbnail' || current.type === 'heading-data' || current.type === 'label-data' || current.type === 'paragraph-data') {
+                } else if(['thumbnail', 'heading-data', 'label-data', 'paragraph-data'].indexOf(current.type) !== -1) {
                     chooseInput = '   <td><input type="radio" name="choose-column" class="input-choose-columns" value="' + name + '"></td>';
                 } else {
+                    chooseInput = '';
+                }
+
+                if(!choose) {
                     chooseInput = '';
                 }
 

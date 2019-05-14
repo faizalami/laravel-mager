@@ -205,7 +205,6 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-@if(in_array($builderType, ['index', 'show']))
     <div class="modal fade modal-model" id="modal-choose-columns">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -229,6 +228,7 @@
                         <tbody>
                         
                         </tbody>
+                        @if(in_array($builderType, ['index', 'show']))
                         <tfoot>
                             <tr>
                                 <td>
@@ -258,6 +258,7 @@
                                 </td>
                             </tr>
                         </tfoot>
+                        @endif
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -270,7 +271,6 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-@endif
 
 <script data-main="/faizalami/laravel-mager/assets/js/main" src="{{ asset(config('mager.public_path').'plugins/requirejs/require.min.js') }}"></script>
 <script>
