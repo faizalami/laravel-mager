@@ -7,3 +7,10 @@ Click `Generate Project` button to generate entire project files based from Page
  
 ## Result
 
+## Generated Form
+
+ ![](../../_images/pages/pages_manager/new_item.png) 
+
+## Generated Index Page
+
+ ![](../../_images/pages/pages_manager/list.png) 
