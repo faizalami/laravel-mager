@@ -8,7 +8,7 @@
 ### Fill the `create new` form
 The example for create inventory controller with the following scenarios:
 
-No. | Input | Example | Explaination
+No. | Input | Example | Description
 --- | --- | --- | ---
 1. | **Page Name** | Inventory | The entity / object / feature that formed to be controller
 2. | **Controller Name** | InventoryController | The controller class name

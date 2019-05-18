@@ -8,7 +8,7 @@
 ### Fill the `create new` form
 The example for create inventory list page that will show the inventory items list with the following scenarios:
 
-No. | Input | Example | Explaination
+No. | Input | Example | Description
 --- | --- | --- | ---
 1. | **Page Type** | index | Page type based on Laravel resource controller (index, show, create, edit, destroy)
 2. | **Page Title** | Inventory List | The page title that will be shown in the browser's title bar and will be shown as page heading
