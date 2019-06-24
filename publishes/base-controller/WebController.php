@@ -11,15 +11,25 @@ namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 
-class WebController implements BaseControllerInterface
+/**
+ * Class WebController
+ * @package App\Http\Controllers\Base
+ */
+class WebController implements BaseController
 {
-    public $model;
-    public $pageName;
+    /**
+     * @var string
+     */
+    private $model;
 
-    public function __construct($model, $pageName)
+    /**
+     * WebController constructor.
+     * @param $model
+     * @param $pageName
+     */
+    public function __construct($model)
     {
         $this->model = '\\App\\Models\\' . $model;
-        $this->pageName = $pageName;
     }
 
     /**

@@ -22,11 +22,4 @@ class {{ $name }} extends Model
         '{{ $columnName }}',
         @endforeach
     ];
-
-    public static $columnLabels = [
-        'id' => 'ID',
-        @foreach($columns as $columnName => $column)
-        '{{ $columnName }}' => '{{ $column->label }}',
-        @endforeach
-    ];
 }

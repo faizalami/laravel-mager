@@ -13,10 +13,17 @@ use Faizalami\LaravelMager\Components\JsonIOControllerTrait;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class PagesManagerController
+ * @package Faizalami\LaravelMager\Http\Controllers
+ */
 class PagesManagerController extends Controller
 {
     use JsonIOControllerTrait;
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         $pages = $this->loadJson('configs/pages.json');
 
@@ -29,6 +36,11 @@ class PagesManagerController extends Controller
         return view('mager::pages.pages-manager.index', compact('controllers'));
     }
 
+    /**
+     * @param Request $request
+     * @param null $configController
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View|NotFoundHttpException
+     */
     public function createController(Request $request, $configController = null) {
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-controller');
@@ -73,6 +85,12 @@ class PagesManagerController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $controller
+     * @param null $configControllerPage
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function createPage(Request $request, $controller, $configControllerPage = null) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         if ($request->isMethod('get')) {
@@ -112,6 +130,7 @@ class PagesManagerController extends Controller
                                 break;
                             case 'destroy':
                                 $configControllerPage->methods = [ 'delete' ];
+                                $configControllerPage->view = null;
                                 break;
                         }
                     }
@@ -149,7 +168,10 @@ class PagesManagerController extends Controller
 
             $this->saveJson($configController, 'pages/' . $configController->url . '/controller/' . $configController->url . '.json');
             $this->saveJson($configPage, 'pages/' . $configController->url . '/' . $configController->url . '.json');
-            $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
+
+            if($configControllerPage->view != null) {
+                $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
+            }
 
             return response()->redirectToRoute('mager.pages.index');
         } else {
@@ -157,20 +179,33 @@ class PagesManagerController extends Controller
         }
     }
 
+    /**
+     * @param $controller
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showController($controller) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
         return view('mager::pages.pages-manager.show-controller', compact('configController'));
     }
 
+    /**
+     * @param $controller
+     * @param $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showPage($controller, $page) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
-        dd($configControllerPage);
 
         return view('mager::pages.pages-manager.show-page', compact('configController', 'configControllerPage'));
     }
 
+    /**
+     * @param Request $request
+     * @param $controller
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View|NotFoundHttpException
+     */
     public function editController(Request $request, $controller) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
@@ -184,6 +219,12 @@ class PagesManagerController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $controller
+     * @param $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function editPage(Request $request, $controller, $page) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
@@ -198,6 +239,10 @@ class PagesManagerController extends Controller
         }
     }
 
+    /**
+     * @param $controller
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteController($controller) {
         $configPages = $this->loadJson('configs/pages.json');
 
@@ -208,6 +253,11 @@ class PagesManagerController extends Controller
         return response()->redirectToRoute('mager.pages.index');
     }
 
+    /**
+     * @param $controller
+     * @param $page
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deletePage($controller, $page) {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         unset($configController->pages->{$page});

@@ -11,9 +11,19 @@ namespace Faizalami\LaravelMager\Components;
 
 use Illuminate\Support\Facades\File;
 
+/**
+ * Class JsonIO
+ * @package Faizalami\LaravelMager\Components
+ */
 class JsonIO
 {
+    /**
+     * @var
+     */
     private $jsonString;
+    /**
+     * @var
+     */
     private $jsonObject;
 
     /**
@@ -31,6 +41,11 @@ class JsonIO
         return $this;
     }
 
+    /**
+     * @param $jsonString
+     * @param bool $prettify
+     * @return $this
+     */
     public function setJsonFromString($jsonString, $prettify = false) {
         $this->jsonObject =  json_decode($jsonString);
         $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
@@ -38,6 +53,11 @@ class JsonIO
         return $this;
     }
 
+    /**
+     * @param $jsonObject
+     * @param bool $prettify
+     * @return $this
+     */
     public function setJsonFromObject($jsonObject, $prettify = false) {
         $this->jsonObject = $jsonObject;
         $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
@@ -45,6 +65,10 @@ class JsonIO
         return $this;
     }
 
+    /**
+     * @param $path
+     * @return bool
+     */
     public function saveJsonFile($path) {
         $path = base_path(config('mager.data').$path);
 
@@ -68,10 +92,17 @@ class JsonIO
         return File::put($path, $this->jsonString) !== false;
     }
 
+    /**
+     * @return mixed
+     */
     public function toObject() {
         return $this->jsonObject;
     }
 
+    /**
+     * @param bool $recursive
+     * @return array|mixed
+     */
     public function toArray($recursive = false) {
         if($recursive) {
             return json_decode($this->jsonString, true);
@@ -80,10 +111,16 @@ class JsonIO
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function toString() {
         return $this->jsonString;
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString() {
         return $this->jsonString;
     }

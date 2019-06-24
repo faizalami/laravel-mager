@@ -12,8 +12,7 @@
 namespace {{ $namespace }};
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Base\BaseController;
+use App\Http\Controllers\Base\Controller as BaseController;
 
 class {{ $name }} extends Controller {
 

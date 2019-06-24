@@ -22,8 +22,17 @@ use Faizalami\LaravelMager\Components\Generators\SwaggerJsonGenerator;
 use Faizalami\LaravelMager\Components\Generators\ThemeGenerator;
 use Faizalami\LaravelMager\Components\Generators\ViewGenerator;
 
+/**
+ * Class Generator
+ * @package Faizalami\LaravelMager\Components
+ */
 class Generator
 {
+    /**
+     * @param $type
+     * @param $config
+     * @return CollectionGenerator|ControllerGenerator|MigrationGenerator|ModelGenerator|NavbarMenuGenerator|ResourceGenerator|RestConfigGenerator|RouteGenerator|SidebarMenuGenerator|SwaggerJsonGenerator|ThemeGenerator|ViewGenerator
+     */
     public static function init($type, $config) {
         switch ($type) {
             case 'migration':

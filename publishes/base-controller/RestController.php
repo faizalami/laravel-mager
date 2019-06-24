@@ -11,24 +11,35 @@ namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 
-class RestController implements BaseControllerInterface
+/**
+ * Class RestController
+ * @package App\Http\Controllers\Base
+ */
+class RestController implements BaseController
 {
-    public $model;
-    public $resource;
-    public $collection;
-    public $pageName;
+    /**
+     * @var string
+     */
+    private $model;
+    /**
+     * @var string
+     */
+    private $resource;
+    /**
+     * @var string
+     */
+    private $collection;
 
     /**
      * BaseControllerInterface constructor.
      * @param $model
      * @param $pageName
      */
-    public function __construct($model, $pageName)
+    public function __construct($model)
     {
         $this->model = '\\App\\Models\\' . $model;
         $this->resource = '\\App\\Http\\Resources\\' . $model . 'Resource';
         $this->collection = '\\App\\Http\\Resources\\' . $model . 'Collection';
-        $this->pageName = $pageName;
     }
 
     /**
@@ -41,17 +52,7 @@ class RestController implements BaseControllerInterface
     {
         $data = $this->model::all();
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'Get ' . $this->pageName . ' Data Success!'
-                ];
-            }
-            return (new $this->collection($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'Get ' . $this->pageName . ' Data Success!', 'collection');
     }
 
     /**
@@ -65,17 +66,7 @@ class RestController implements BaseControllerInterface
     {
         $data = $this->model::find($id);
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'Get ' . $this->pageName . ' Item Success!'
-                ];
-            }
-            return (new $this->resource($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'Get ' . $this->pageName . ' Item Success!');
     }
 
     /**
@@ -88,17 +79,7 @@ class RestController implements BaseControllerInterface
     {
         $data = new $this->model();
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'New ' . $this->pageName . ' Item.'
-                ];
-            }
-            return (new $this->resource($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'New ' . $this->pageName . ' Item.');
     }
 
     /**
@@ -113,17 +94,7 @@ class RestController implements BaseControllerInterface
         $data = new $this->model($request->all());
         $data->save();
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'Create New ' . $this->pageName . ' Item Success!'
-                ];
-            }
-            return (new $this->resource($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'Create New ' . $this->pageName . ' Item Success!');
     }
 
     /**
@@ -137,17 +108,7 @@ class RestController implements BaseControllerInterface
     {
         $data = $this->model::find($id);
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'Edit ' . $this->pageName . ' Item.'
-                ];
-            }
-            return (new $this->resource($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'Edit ' . $this->pageName . ' Item.');
     }
 
     /**
@@ -164,17 +125,7 @@ class RestController implements BaseControllerInterface
         $data->fill($request->all());
         $data->save();
 
-        if(config('global.rest.wrap')) {
-            $additional = [];
-            if(config('global.rest.message')) {
-                $additional = [
-                    'message' => 'Update ' . $this->pageName . ' Item Success!'
-                ];
-            }
-            return (new $this->resource($data))->additional($additional);
-        } else {
-            return response()->json($data);
-        }
+        return $this->jsonResponse($data, 'Update ' . $this->pageName . ' Item Success!');
     }
 
     /**
@@ -191,14 +142,24 @@ class RestController implements BaseControllerInterface
 
         $data = new $this->model();
 
+        return $this->jsonResponse($data, 'Delete ' . $this->pageName . ' Item Success!');
+    }
+
+    /**
+     * @param $data
+     * @param $message
+     * @param string $type
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function jsonResponse($data, $message, $type = 'resource') {
         if(config('global.rest.wrap')) {
             $additional = [];
             if(config('global.rest.message')) {
                 $additional = [
-                    'message' => 'Delete ' . $this->pageName . ' Item Success!'
+                    'message' => $message
                 ];
             }
-            return (new $this->resource($data))->additional($additional);
+            return (new $this->{$type}($data))->additional($additional);
         } else {
             return response()->json(new class{});
         }

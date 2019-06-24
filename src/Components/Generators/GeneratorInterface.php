@@ -9,9 +9,20 @@
 namespace Faizalami\LaravelMager\Components\Generators;
 
 
+/**
+ * Interface GeneratorInterface
+ * @package Faizalami\LaravelMager\Components\Generators
+ */
 interface GeneratorInterface
 {
+    /**
+     * GeneratorInterface constructor.
+     * @param $config
+     */
     public function __construct($config);
 
+    /**
+     * @return mixed
+     */
     public function render();
 }

@@ -1,18 +1,19 @@
 define(['jquery'], function ($) {
     $('#landing, #redirect').hide();
+    $('#view').show();
 
-    var resource = {
-        create: true,
-        edit: true
-    };
     $('#resource').change(function () {
-        $('#landing').hide();
-        $('#redirect').val('').hide();
+        $('#landing, #redirect').hide();
+        $('#view').show();
+
+        $('#redirect, #view').find('input').val('');
 
         if($(this).val() === 'index') {
             $('#landing').show();
-        } else if(resource[$(this).val()]) {
+        } else if(['create', 'edit'].contains($(this).val())) {
             $('#redirect').show();
+        } else if($(this).val() === 'delete') {
+            $('#view').hide();
         }
     });
 });

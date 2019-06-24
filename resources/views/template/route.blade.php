@@ -24,6 +24,7 @@ if (!function_exists('renderPageUrl')) {
 Route::group([
     'namespace' => '{{ $namespace }}'
 ], function () {
+@if($web)
     Route::group([
         'middleware' => 'web',
         'prefix' => '{{ $url }}',
@@ -51,7 +52,9 @@ Route::group([
     @endif
     @endforeach
     });
+@endif
 
+@if($rest)
     Route::group([
         'middleware' => 'api',
         'prefix' => 'api/{{ $url }}',
@@ -79,4 +82,5 @@ Route::group([
     @endif
     @endforeach
     });
+@endif
 });
