@@ -26,13 +26,13 @@ class {{ $name }}Collection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            @if($status)
-            'status' => true,
-            @endif
-            @if($length)
-            'length' => $this->collection->count(),
-            @endif
-            'data' => $this->collection,
+@if($status)
+'status' => true,
+@endif
+@if($length)
+'length' => $this->collection->count(),
+@endif
+'data' => $this->collection,
         ];
     }
 }

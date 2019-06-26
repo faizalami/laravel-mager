@@ -24,12 +24,12 @@ class {{ $name }}Resource extends JsonResource
     public function with($request)
     {
         return [
-            @if($status)
-            'status' => true,
-            @endif
-            @if($length)
-            'length' => 1,
-            @endif
+@if($status)
+'status' => true,
+@endif
+@if($length)
+'length' => 1,
+@endif
         ];
     }
 }
