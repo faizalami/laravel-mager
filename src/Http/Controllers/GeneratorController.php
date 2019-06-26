@@ -114,7 +114,7 @@ class GeneratorController extends Controller
             $generator->render()->generate();
         }
 
-        shell_exec('php '.base_path('vendor/bin/php-cs-fixer').' fix ./');
+        shell_exec("php '".base_path('vendor/bin/php-cs-fixer')."' fix '".base_path('/')."'");
 
         Artisan::call('config:clear');
 
