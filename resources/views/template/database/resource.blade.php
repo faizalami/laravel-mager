@@ -25,10 +25,10 @@ class {{ $name }}Resource extends JsonResource
     {
         return [
 @if($status)
-'status' => true,
+            'status' => true,
 @endif
 @if($length)
-'length' => 1,
+            'length' => 1,
 @endif
         ];
     }

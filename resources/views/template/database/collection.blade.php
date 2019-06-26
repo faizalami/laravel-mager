@@ -27,12 +27,12 @@ class {{ $name }}Collection extends ResourceCollection
     {
         return [
 @if($status)
-'status' => true,
+            'status' => true,
 @endif
 @if($length)
-'length' => $this->collection->count(),
+            'length' => $this->collection->count(),
 @endif
-'data' => $this->collection,
+            'data' => $this->collection,
         ];
     }
 }
