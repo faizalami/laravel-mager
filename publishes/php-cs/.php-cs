@@ -1,7 +1,7 @@
 <?php
 
 $rules = [
-    '@PSR2' => true,
+    '@Symfony' => true,
     'array_syntax' => ['syntax' => 'short'],
     'no_multiline_whitespace_before_semicolons' => true,
     'no_short_echo_tag' => true,
@@ -24,6 +24,7 @@ $rules = [
     'ternary_operator_spaces' => true,
     'trailing_comma_in_multiline_array' => true,
     'trim_array_spaces' => true,
+    'linebreak_after_opening_tag' => true,
 ];
 
 $excludes = [
