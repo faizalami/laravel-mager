@@ -25,7 +25,7 @@ class {{ $name }}Collection extends ResourceCollection
     */
     public function toArray($request)
     {
-        return [
+        $rules = [
 @if($status)
             'status' => true,
 @endif
@@ -34,5 +34,7 @@ class {{ $name }}Collection extends ResourceCollection
 @endif
             'data' => $this->collection,
         ];
+
+        return $rules;
     }
 }

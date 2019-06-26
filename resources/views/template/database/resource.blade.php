@@ -23,7 +23,7 @@ class {{ $name }}Resource extends JsonResource
     */
     public function with($request)
     {
-        return [
+        $rules = [
 @if($status)
             'status' => true,
 @endif
@@ -31,5 +31,7 @@ class {{ $name }}Resource extends JsonResource
             'length' => 1,
 @endif
         ];
+
+        return $rules;
     }
 }
