@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class ResourceGenerator implements GeneratorInterface
 {
     use GeneratorTrait;

@@ -18,7 +18,8 @@ class GuiBuilderController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function guiBuilder($controller, $page) {
+    public function guiBuilder($controller, $page)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
         $configView = $this->loadJson('pages/' . $controller . '/view/' . $configControllerPage->view . '.json');

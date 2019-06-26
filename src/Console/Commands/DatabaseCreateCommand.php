@@ -74,7 +74,8 @@ class DatabaseCreateCommand extends Command
         }
     }
 
-    public function connect($driver, $host, $port, $username, $password) {
+    public function connect($driver, $host, $port, $username, $password)
+    {
         return new PDO(sprintf('%s:host=%s;port=%d;', $driver, $host, $port), $username, $password);
     }
 }

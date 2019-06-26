@@ -23,7 +23,8 @@ class DatabaseManagerController extends Controller
     private $configPage;
     private $configModel;
 
-    public function index() {
+    public function index()
+    {
         $pageNames = $this->loadJson('configs/pages.json');
         $models = [];
         foreach ($pageNames as $pageName) {
@@ -36,12 +37,13 @@ class DatabaseManagerController extends Controller
         return view('mager::pages.database-manager.index', compact('models'));
     }
 
-    private function initModel($controller) {
+    private function initModel($controller)
+    {
         $this->generatedColumns = [];
         $this->configPage = $this->loadJson('pages/'.$controller.'/'.$controller.'.json');
         $this->configModel = $this->loadJson('pages/'.$controller.'/model/'.$this->configPage->modelConfig.'.json');
 
-        if($this->configModel->generatedAt != null) {
+        if ($this->configModel->generatedAt != null) {
             $generatedAt = \DateTime::createFromFormat('Y_m_d_His', $this->configModel->generatedAt);
             foreach (array_reverse($this->configModel->history) as $history) {
                 $modelTime = \DateTime::createFromFormat('Y_m_d_His', $history->time);
@@ -58,12 +60,13 @@ class DatabaseManagerController extends Controller
 
         $this->deletedColumns = array_diff($generatedColumns, $newestColumns);
         $this->notGeneratedColumns = [];
-        foreach(array_diff($newestColumns, $generatedColumns) as $column) {
+        foreach (array_diff($newestColumns, $generatedColumns) as $column) {
             $this->notGeneratedColumns[$column] = $this->configModel->columns->{$column};
         }
     }
 
-    public function tableProperties($controller) {
+    public function tableProperties($controller)
+    {
         $this->initModel($controller);
         $generatedColumns = $this->generatedColumns;
         $notGeneratedColumns = $this->notGeneratedColumns;
@@ -73,7 +76,8 @@ class DatabaseManagerController extends Controller
         return view('mager::pages.database-manager.table-properties', compact('generatedColumns', 'notGeneratedColumns', 'deletedColumns', 'configModel'));
     }
 
-    public function tableData($controller) {
+    public function tableData($controller)
+    {
         $this->initModel($controller);
         $columns = $this->generatedColumns;
         $configPage = $this->configPage;
@@ -84,7 +88,8 @@ class DatabaseManagerController extends Controller
         return view('mager::pages.database-manager.table-data', compact('columns', 'data', 'configModel'));
     }
 
-    public function createColumn(Request $request, $controller) {
+    public function createColumn(Request $request, $controller)
+    {
         $this->initModel($controller);
         $columns = $this->generatedColumns;
         $configModel = $this->configModel;
@@ -94,7 +99,7 @@ class DatabaseManagerController extends Controller
         } elseif ($request->isMethod('post')) {
             $columns = $request->all()['columns'];
             foreach ($columns as $key => $column) {
-                if($column['name'] != null) {
+                if ($column['name'] != null) {
                     $configModel->columns->{$column['name']} = $configComponent->{$column['input']}->db;
                     $configModel->columns->{$column['name']}->label = $column['label'];
                     $configModel->columns->{$column['name']}->input = $column['input'];
@@ -111,18 +116,19 @@ class DatabaseManagerController extends Controller
         }
     }
 
-    public function editColumn(Request $request, $controller, $column) {
+    public function editColumn(Request $request, $controller, $column)
+    {
         $this->initModel($controller);
         $configModel = $this->configModel;
         $editColumn = $configModel->columns->{$column};
         $configComponent = $this->loadJson('templates/component.json');
         if ($request->isMethod('get')) {
-            return view('mager::pages.database-manager.form-edit-column', compact('column','editColumn', 'configModel'));
+            return view('mager::pages.database-manager.form-edit-column', compact('column', 'editColumn', 'configModel'));
         } elseif ($request->isMethod('post')) {
             unset($configModel->columns->{$column});
 
             $editedColumn = $request->all();
-            if($editedColumn['name'] != null) {
+            if ($editedColumn['name'] != null) {
                 $configModel->columns->{$editedColumn['name']} = $configComponent->{$editedColumn['input']}->db;
                 $configModel->columns->{$editedColumn['name']}->label = $editedColumn['label'];
                 $configModel->columns->{$editedColumn['name']}->input = $editedColumn['input'];
@@ -139,7 +145,8 @@ class DatabaseManagerController extends Controller
         }
     }
 
-    public function createData(Request $request, $controller) {
+    public function createData(Request $request, $controller)
+    {
         $this->initModel($controller);
         $columns = $this->generatedColumns;
         $configModel = $this->configModel;
@@ -156,7 +163,8 @@ class DatabaseManagerController extends Controller
         }
     }
 
-    public function editData(Request $request, $controller, $id) {
+    public function editData(Request $request, $controller, $id)
+    {
         $this->initModel($controller);
         $columns = $this->generatedColumns;
         $configModel = $this->configModel;
@@ -173,7 +181,8 @@ class DatabaseManagerController extends Controller
         }
     }
 
-    public function deleteData($controller, $id) {
+    public function deleteData($controller, $id)
+    {
         $this->initModel($controller);
         $configPage = $this->configPage;
         $model = '\\App\\Models\\'.$configPage->modelConfig;
@@ -183,7 +192,8 @@ class DatabaseManagerController extends Controller
         return response()->redirectToRoute('mager.database.table.data', ['controller' => $controller]);
     }
 
-    public function createDummy(Request $request, $controller) {
+    public function createDummy(Request $request, $controller)
+    {
         $this->initModel($controller);
         $columns = $this->generatedColumns;
         $configModel = $this->configModel;
@@ -205,7 +215,8 @@ class DatabaseManagerController extends Controller
         }
     }
 
-    public function deleteColumn($controller, $column) {
+    public function deleteColumn($controller, $column)
+    {
         $this->initModel($controller);
         $configModel = $this->configModel;
         unset($configModel->columns->{$column});

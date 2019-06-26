@@ -16,7 +16,7 @@ $jsonIO = new JsonIO();
 $routes = $jsonIO->loadJsonFile('configs/routes.json')->toArray();
 foreach ($routes as $route) {
     $routeFile = base_path('routes/app/' . $route . '.php');
-    if(file_exists($routeFile)) {
+    if (file_exists($routeFile)) {
         Route::prefix('/')
             ->group($routeFile);
     }
@@ -28,7 +28,6 @@ Route::group([
     'prefix' => config('mager.base_url'),
     'as' => 'mager.'
 ], function () {
-
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::group([
@@ -37,7 +36,7 @@ Route::group([
     ], function () {
         Route::get('/', 'PagesManagerController@index')->name('index');
         Route::match(['get', 'post'], '/create/controller', 'PagesManagerController@createController')->name('create.controller');
-        Route::match(['get', 'post'],'/create/page/{controller}', 'PagesManagerController@createPage')->name('create.page');
+        Route::match(['get', 'post'], '/create/page/{controller}', 'PagesManagerController@createPage')->name('create.page');
         Route::match(['get', 'post'], '/edit/controller/{controller}', 'PagesManagerController@editController')->name('edit.controller');
         Route::match(['get', 'post'], '/edit/page/{controller}/{page}', 'PagesManagerController@editPage')->name('edit.page');
         Route::get('/show/controller/{controller}', 'PagesManagerController@showController')->name('show.controller');
@@ -47,7 +46,7 @@ Route::group([
         Route::get('/edit/view/{controller}/{page}', 'GuiBuilderController@guiBuilder')->name('gui-builder');
     });
 
-    Route::match(['get', 'post'],'/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');
+    Route::match(['get', 'post'], '/json/{type}/{param1}/{param2?}/{param3?}', 'JsonIOController@processJson');
 
     Route::get('/generate', 'GeneratorController@generate');
 
@@ -94,4 +93,3 @@ Route::group([
         Route::match(['get', 'post'], '/create/dummy/{controller}', 'DatabaseManagerController@createDummy')->name('create.dummy');
     });
 });
-

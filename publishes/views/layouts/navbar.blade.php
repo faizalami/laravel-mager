@@ -5,13 +5,13 @@ $appName = config('app.name');
 $words = explode(' ', $appName);
 $acronym = '';
 
-if(count($words) > 1) {
+if (count($words) > 1) {
     foreach ($words as $word) {
         $acronym .= $word[0];
     }
 } else {
     $words = explode('-', $appName);
-    if(count($words) > 1) {
+    if (count($words) > 1) {
         foreach ($words as $word) {
             $acronym .= $word[0];
         }
@@ -21,7 +21,7 @@ if(count($words) > 1) {
 }
 
 $routeName = explode('.', Request::route()->getName());
-if(isset($menu[$routeName[0]])) {
+if (isset($menu[$routeName[0]])) {
     $menu[$routeName[0]]['active'] = 'active';
 }
 

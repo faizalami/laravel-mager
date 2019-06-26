@@ -1,0 +1,30 @@
+<?php
+
+use PhpCsFixer\Finder;
+use PhpCsFixer\Config;
+
+$finder = Finder::create()
+    ->notPath('bootstrap')
+    ->notPath('storage')
+    ->notPath('vendor')
+    ->in(getcwd())
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
+
+$rules = [
+    '@Symfony' => true,
+    'binary_operator_spaces' => ['align_double_arrow' => false],
+    'array_syntax' => ['syntax' => 'short'],
+    'array_indentation' => true,
+    'linebreak_after_opening_tag' => true,
+    'not_operator_with_successor_space' => true,
+    'ordered_imports' => true,
+    'phpdoc_order' => true,
+];
+
+return Config::create()
+    ->setFinder($finder)
+    ->setRules($rules)
+    ->setUsingCache(true);

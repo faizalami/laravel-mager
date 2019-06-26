@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager;
 
-
 use Faizalami\LaravelMager\Console\Commands\DatabaseCreateCommand;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -23,7 +22,8 @@ class LaravelMagerServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function boot() {
+    public function boot()
+    {
         Schema::defaultStringLength(191);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
@@ -40,6 +40,7 @@ class LaravelMagerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../publishes/config' => config_path('/'),
+            __DIR__ . '/../publishes/php-cs/.php-cs' => base_path('.php-cs'),
         ], 'config');
 
         $this->publishes([
@@ -62,10 +63,11 @@ class LaravelMagerServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    public function register() {
+    public function register()
+    {
         $this->mergeConfigFrom(
-            __DIR__.'/../publishes/config/laravel-mager.php', 'mager'
+            __DIR__.'/../publishes/config/laravel-mager.php',
+            'mager'
         );
     }
-
 }

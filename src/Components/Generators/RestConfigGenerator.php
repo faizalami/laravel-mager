@@ -3,7 +3,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class RestConfigGenerator implements GeneratorInterface
 {
     use GeneratorTrait;

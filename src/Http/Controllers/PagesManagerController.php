@@ -24,7 +24,8 @@ class PagesManagerController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index() {
+    public function index()
+    {
         $pages = $this->loadJson('configs/pages.json');
 
         $controllers = [];
@@ -41,7 +42,8 @@ class PagesManagerController extends Controller
      * @param null $configController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View|NotFoundHttpException
      */
-    public function createController(Request $request, $configController = null) {
+    public function createController(Request $request, $configController = null)
+    {
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-controller');
         } elseif ($request->isMethod('post')) {
@@ -49,7 +51,7 @@ class PagesManagerController extends Controller
             $configPageList = $this->loadJson('configs/pages.json');
             $configModel = $this->loadJson('templates/model.json');
 
-            if($configController == null) {
+            if ($configController == null) {
                 $configController = $this->loadJson('templates/controller.json');
             } else {
                 $configModel = $this->loadJson('pages/' . $configController->url . '/model/' . $configController->model . '.json');
@@ -58,8 +60,8 @@ class PagesManagerController extends Controller
             foreach ($request->all() as $key => $req) {
                 $configController->{$key} = $req;
 
-                if($key == 'web' || $key == 'rest') {
-                    if($req === 'true') {
+                if ($key == 'web' || $key == 'rest') {
+                    if ($req === 'true') {
                         $configController->{$key} = true;
                     }
                 }
@@ -91,7 +93,8 @@ class PagesManagerController extends Controller
      * @param null $configControllerPage
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function createPage(Request $request, $controller, $configControllerPage = null) {
+    public function createPage(Request $request, $controller, $configControllerPage = null)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-page', compact('configController'));
@@ -99,7 +102,7 @@ class PagesManagerController extends Controller
             $configPage = $this->loadJson('pages/' . $controller . '/' . $controller . '.json');
             $configView = $this->loadJson('templates/view.json');
 
-            if($configControllerPage != null) {
+            if ($configControllerPage != null) {
                 $configView = $this->loadJson('pages/' . $controller . '/view/' . $configControllerPage->view . '.json');
             } else {
                 $configControllerPage = $this->loadJson('templates/controllerPage.json');
@@ -107,10 +110,10 @@ class PagesManagerController extends Controller
 
             $post = $request->all();
             foreach ($post as $key => $data) {
-                if($key != 'landing') {
+                if ($key != 'landing') {
                     $configControllerPage->{$key} = $data;
 
-                    if($key == 'resource') {
+                    if ($key == 'resource') {
                         switch ($data) {
                             case 'index':
                                 $configView->type = 'index';
@@ -135,7 +138,7 @@ class PagesManagerController extends Controller
                         }
                     }
                 } else {
-                    if($data == 'true') {
+                    if ($data == 'true') {
                         $configController->defaultPage = $post['url'];
 
                         $configSidebar = $this->loadJson('configs/sidebar.json');
@@ -149,7 +152,7 @@ class PagesManagerController extends Controller
                 }
             }
 
-            if(in_array($configControllerPage->resource, ['show', 'edit', 'destroy'])) {
+            if (in_array($configControllerPage->resource, ['show', 'edit', 'destroy'])) {
                 $configControllerPage->params = ['id'];
             }
 
@@ -169,7 +172,7 @@ class PagesManagerController extends Controller
             $this->saveJson($configController, 'pages/' . $configController->url . '/controller/' . $configController->url . '.json');
             $this->saveJson($configPage, 'pages/' . $configController->url . '/' . $configController->url . '.json');
 
-            if($configControllerPage->view != null) {
+            if ($configControllerPage->view != null) {
                 $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
             }
 
@@ -183,7 +186,8 @@ class PagesManagerController extends Controller
      * @param $controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showController($controller) {
+    public function showController($controller)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
         return view('mager::pages.pages-manager.show-controller', compact('configController'));
@@ -194,7 +198,8 @@ class PagesManagerController extends Controller
      * @param $page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showPage($controller, $page) {
+    public function showPage($controller, $page)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
 
@@ -206,12 +211,13 @@ class PagesManagerController extends Controller
      * @param $controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View|NotFoundHttpException
      */
-    public function editController(Request $request, $controller) {
+    public function editController(Request $request, $controller)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-controller', compact('configController'));
-        } elseif ($request->isMethod('post'))  {
+        } elseif ($request->isMethod('post')) {
             $this->deleteController($controller);
             return $this->createController($request, $configController);
         } else {
@@ -225,13 +231,14 @@ class PagesManagerController extends Controller
      * @param $page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function editPage(Request $request, $controller, $page) {
+    public function editPage(Request $request, $controller, $page)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         $configControllerPage = $configController->pages->{$page};
 
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-page', compact('configController', 'configControllerPage'));
-        } elseif ($request->isMethod('post'))  {
+        } elseif ($request->isMethod('post')) {
             $this->deletePage($controller, $page);
             return $this->createPage($request, $controller, $configControllerPage);
         } else {
@@ -243,7 +250,8 @@ class PagesManagerController extends Controller
      * @param $controller
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteController($controller) {
+    public function deleteController($controller)
+    {
         $configPages = $this->loadJson('configs/pages.json');
 
         unset($configPages[array_search($controller, $configPages)]);
@@ -258,7 +266,8 @@ class PagesManagerController extends Controller
      * @param $page
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deletePage($controller, $page) {
+    public function deletePage($controller, $page)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
         unset($configController->pages->{$page});
         $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');

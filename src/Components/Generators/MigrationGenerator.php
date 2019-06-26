@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
@@ -36,7 +35,7 @@ class MigrationGenerator implements GeneratorInterface
 
         $histories = $this->config['history'];
 
-        if(count($histories) == 0) {
+        if (count($histories) == 0) {
             $this->doGenerate = false;
             return $this;
         }
@@ -44,7 +43,7 @@ class MigrationGenerator implements GeneratorInterface
         foreach ($histories as $id => $history) {
             $migration = dir(base_path('database/migrations'));
             while (false !== ($migrationFile = $migration->read())) {
-                if(strpos($migrationFile, $history->time) !== false && strpos($migrationFile, $this->config['table']) !== false) {
+                if (strpos($migrationFile, $history->time) !== false && strpos($migrationFile, $this->config['table']) !== false) {
                     $this->outputFile = $migrationFile;
                     $latest = $history;
                     $latestId = $id;
@@ -52,8 +51,8 @@ class MigrationGenerator implements GeneratorInterface
             }
         }
 
-        if($latest != null) {
-            if($latestId != count($histories) - 1) {
+        if ($latest != null) {
+            if ($latestId != count($histories) - 1) {
                 $template = 'mager::template.database.migration-update';
 
                 $config['version'] = count($histories)-1;
@@ -68,7 +67,7 @@ class MigrationGenerator implements GeneratorInterface
 
                 foreach ($old as $column => $item) {
                     foreach ($new as $newColumn => $newValue) {
-                        if($column == $newColumn) {
+                        if ($column == $newColumn) {
                             unset($created[$column]);
                             unset($deleted[$column]);
                         }
@@ -91,7 +90,7 @@ class MigrationGenerator implements GeneratorInterface
 
     public function generate()
     {
-        if($this->doGenerate) {
+        if ($this->doGenerate) {
             $this->baseGenerate();
 
             Artisan::call('migrate');

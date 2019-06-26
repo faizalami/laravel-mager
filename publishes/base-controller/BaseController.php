@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Base;
 
-
 use Illuminate\Http\Request;
 
 /**

@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Base;
 
-
 use Illuminate\Http\Request;
 
 /**
@@ -151,17 +150,19 @@ class RestController implements BaseController
      * @param string $type
      * @return \Illuminate\Http\JsonResponse
      */
-    private function jsonResponse($data, $message, $type = 'resource') {
-        if(config('global.rest.wrap')) {
+    private function jsonResponse($data, $message, $type = 'resource')
+    {
+        if (config('global.rest.wrap')) {
             $additional = [];
-            if(config('global.rest.message')) {
+            if (config('global.rest.message')) {
                 $additional = [
                     'message' => $message
                 ];
             }
             return (new $this->{$type}($data))->additional($additional);
         } else {
-            return response()->json(new class{});
+            return response()->json(new class {
+            });
         }
     }
 }

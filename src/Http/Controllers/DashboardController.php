@@ -12,7 +12,8 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('mager::pages.dashboard');
     }
 }

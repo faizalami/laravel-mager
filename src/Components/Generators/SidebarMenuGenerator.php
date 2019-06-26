@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class SidebarMenuGenerator implements GeneratorInterface
 {
     use GeneratorTrait;

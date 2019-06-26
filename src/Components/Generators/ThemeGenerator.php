@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
@@ -41,10 +40,10 @@ class ThemeGenerator implements GeneratorInterface
 
         $envPath = base_path('.env');
 
-        if(File::exists($envPath)) {
+        if (File::exists($envPath)) {
             $envFile = File::get($envPath);
             $appNameConfig = 'APP_NAME=\''.config('app.name').'\'';
-            if(strpos($envFile, $appNameConfig) === false) {
+            if (strpos($envFile, $appNameConfig) === false) {
                 $appNameConfig = 'APP_NAME='.config('app.name');
             }
 

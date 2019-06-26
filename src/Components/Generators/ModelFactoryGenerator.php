@@ -3,7 +3,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class ModelFactoryGenerator implements GeneratorInterface
 {
     use GeneratorTrait;
@@ -29,14 +28,14 @@ class ModelFactoryGenerator implements GeneratorInterface
                 case 'name':
                     switch ($column['option']['type']) {
                         case 'full-name':
-                            if($column['option']['gender'] == 'both') {
+                            if ($column['option']['gender'] == 'both') {
                                 $fakerString = '$faker->name(),';
                             } else {
                                 $fakerString = '$faker->name(' . $column['option']['gender'] . '),';
                             }
                             break;
                         case 'first-name':
-                            if($column['option']['gender'] == 'both') {
+                            if ($column['option']['gender'] == 'both') {
                                 $fakerString = '$faker->firstName(),';
                             } else {
                                 $fakerString = '$faker->firstName(' . $column['option']['gender'] . '),';
@@ -51,7 +50,7 @@ class ModelFactoryGenerator implements GeneratorInterface
                     $fakerString = '$faker->phoneNumber,';
                     break;
                 case 'address':
-                    if(in_array($column['option']['type'], ['latitude', 'longitude'])) {
+                    if (in_array($column['option']['type'], ['latitude', 'longitude'])) {
                         $fakerString = '$faker->' . $column['option']['type'] . '(),';
                     } else {
                         $fakerString = '$faker->' . $column['option']['type'] . ',';
@@ -72,11 +71,10 @@ class ModelFactoryGenerator implements GeneratorInterface
             }
 
             $this->config['dummy'][$key]['faker'] = $fakerString;
-         }
+        }
 
         $this->outputString = $this->renderBlade($template, $this->config);
 
         return $this;
     }
-
 }

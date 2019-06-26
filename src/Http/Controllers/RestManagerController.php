@@ -17,13 +17,14 @@ class RestManagerController extends Controller
 {
     use JsonIOControllerTrait;
 
-    public function index() {
+    public function index()
+    {
         $pages = $this->loadJson('configs/pages.json');
 
         $controllers = [];
         foreach ($pages as $page) {
             $controller = $this->loadJson('pages/' . $page . '/controller/' . $page . '.json');
-            if($controller->rest) {
+            if ($controller->rest) {
                 array_push($controllers, $controller);
             }
         }
@@ -31,7 +32,8 @@ class RestManagerController extends Controller
         return view('mager::pages.rest-manager.index', compact('controllers'));
     }
 
-    public function format(Request $request) {
+    public function format(Request $request)
+    {
         $configRest = $this->loadJson('configs/restFormat.json');
         if ($request->isMethod('get')) {
             return view('mager::pages.rest-manager.format', compact('configRest'));
@@ -39,7 +41,7 @@ class RestManagerController extends Controller
             $data = $request->all();
 
             $configRest = [];
-            if(isset($data['wrap'])) {
+            if (isset($data['wrap'])) {
                 $configRest = [
                     'wrap' => true,
                     'status' => isset($data['status']),
@@ -59,11 +61,12 @@ class RestManagerController extends Controller
         }
     }
 
-    public function showController($controller) {
+    public function showController($controller)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
         foreach ($configController->pages as $name => $page) {
-            if(!$page->rest) {
+            if (!$page->rest) {
                 unset($configController->pages->{$name});
             }
         }
@@ -71,11 +74,12 @@ class RestManagerController extends Controller
         return view('mager::pages.rest-manager.show-controller', compact('configController'));
     }
 
-    public function editDesc(Request $request, $controller, $page = null) {
+    public function editDesc(Request $request, $controller, $page = null)
+    {
         $configController = $this->loadJson('pages/' . $controller . '/controller/' . $controller . '.json');
 
         if ($request->isMethod('get')) {
-            if($page == null) {
+            if ($page == null) {
                 $config = $configController;
                 $config->isPage = false;
                 return view('mager::pages.rest-manager.edit-rest-desc', compact('config'));
@@ -88,7 +92,7 @@ class RestManagerController extends Controller
             }
         } elseif ($request->isMethod('post')) {
             $restDesc = $request->all()['restDesc'];
-            if($page == null) {
+            if ($page == null) {
                 $configController->restDesc = $restDesc;
                 $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');
                 return response()->redirectToRoute('mager.rest.index');

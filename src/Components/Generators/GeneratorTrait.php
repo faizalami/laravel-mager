@@ -18,12 +18,14 @@ trait GeneratorTrait
     private $outputFile;
     private $outputString = '';
 
-    private function renderBlade($template, $config) {
+    private function renderBlade($template, $config)
+    {
         // todo: buat try catch
         return html_entity_decode(view($template, $config)->render(), ENT_QUOTES, 'utf-8');
     }
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return [
             'type' => $this->type,
             'config' => $this->config,
@@ -33,14 +35,15 @@ trait GeneratorTrait
         ];
     }
 
-    public function generate() {
+    public function generate()
+    {
         $pathString = '/';
 
-        if(strpos(strtolower(PHP_OS), 'win') !== false) {
+        if (strpos(strtolower(PHP_OS), 'win') !== false) {
             $pathString = '';
         }
 
-        foreach(explode('/', $this->outputPath) as $key => $directory) {
+        foreach (explode('/', $this->outputPath) as $key => $directory) {
             $pathString .= $directory . '/';
 
             if (!is_dir($pathString)) {

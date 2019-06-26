@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class SwaggerJsonGenerator implements GeneratorInterface
 {
     use GeneratorTrait;

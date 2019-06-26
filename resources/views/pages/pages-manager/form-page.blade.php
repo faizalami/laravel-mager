@@ -7,7 +7,7 @@
  */
 
 $title = 'Create Page';
-if(Request::route()->getName() == 'mager.pages.edit.page') {
+if (Request::route()->getName() == 'mager.pages.edit.page') {
     $title = 'Edit Page';
 }
 

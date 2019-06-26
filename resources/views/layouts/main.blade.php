@@ -17,7 +17,7 @@ $activeMenu = [
 
 $activeTree = '';
 
-if(strpos(Request::route()->getName(), 'mager.configuration.') !== false) {
+if (strpos(Request::route()->getName(), 'mager.configuration.') !== false) {
     $activeTree = 'active menu-open';
 }
 

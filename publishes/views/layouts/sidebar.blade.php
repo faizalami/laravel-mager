@@ -3,7 +3,7 @@
 $menu = config('global.sidebar.menu');
 
 $routeName = explode('.', Request::route()->getName());
-if(isset($menu[$routeName[0]])) {
+if (isset($menu[$routeName[0]])) {
     $menu[$routeName[0]]['active'] = 'active';
 }
 

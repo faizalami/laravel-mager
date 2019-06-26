@@ -32,7 +32,8 @@ class JsonIOController extends Controller
         }
     }
 
-    private function loadJson($type, array $param) {
+    private function loadJson($type, array $param)
+    {
         $jsonIO = new JsonIO();
         $jsonString = '';
         switch ($type) {
@@ -62,7 +63,8 @@ class JsonIOController extends Controller
         return $jsonString;
     }
 
-    private function writeJson($type, array $param) {
+    private function writeJson($type, array $param)
+    {
         $jsonIO = new JsonIO();
         $status = false;
         $message = '';
@@ -75,7 +77,7 @@ class JsonIOController extends Controller
                             ->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[1].'.json');
                         break;
                     case 'model':
-                    case 'view' :
+                    case 'view':
                         $status = $jsonIO->setJsonFromObject($this->request->all(), true)
                             ->saveJsonFile('pages/'.$param[1].'/'.$param[0].'/'.$param[2].'.json');
                         break;
@@ -93,7 +95,7 @@ class JsonIOController extends Controller
                 break;
         }
 
-        if($status) {
+        if ($status) {
             return [
                 'status' => true,
                 'message' => 'Save ' . $type . ' ' . $param[0] . ' success.'

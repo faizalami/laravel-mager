@@ -7,8 +7,9 @@
  */
 
 if (!function_exists('renderPageUrl')) {
-    function renderPageUrl($pageUrl, $params) {
-        if(count($params) > 0) {
+    function renderPageUrl($pageUrl, $params)
+    {
+        if (count($params) > 0) {
             foreach ($params as $param) {
                 $pageUrl .= '/{' . $param . '}';
             }

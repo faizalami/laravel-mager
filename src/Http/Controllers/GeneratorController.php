@@ -18,7 +18,8 @@ class GeneratorController extends Controller
 {
     private $generateQueue = [];
 
-    public function generate() {
+    public function generate()
+    {
         $jsonIO = new JsonIO();
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();
@@ -41,7 +42,7 @@ class GeneratorController extends Controller
             $modelConfig = $jsonIO->loadJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json')->toArray();
 
             $generatedModel = [];
-            if($modelConfig['generatedAt'] != null) {
+            if ($modelConfig['generatedAt'] != null) {
                 $generatedAt = \DateTime::createFromFormat('Y_m_d_His', $modelConfig['generatedAt']);
                 foreach (array_reverse($modelConfig['history']) as $history) {
                     $modelTime = \DateTime::createFromFormat('Y_m_d_His', $history->time);
@@ -63,7 +64,7 @@ class GeneratorController extends Controller
             $this->queueConfig('migration', $modelConfig);
             $this->queueConfig('model', $modelConfig);
 
-            if($restConfig['wrap']) {
+            if ($restConfig['wrap']) {
                 $restConfig['name'] = $modelConfig['name'];
                 $this->queueConfig('resource', $restConfig);
                 $this->queueConfig('collection', $restConfig);
@@ -88,7 +89,7 @@ class GeneratorController extends Controller
                 foreach (array_keys($links) as $resource) {
                     $key = array_search($resource, array_column((array) $controllerConfig['pages'], 'resource'));
 
-                    if($key !== false) {
+                    if ($key !== false) {
                         $links[$resource] = array_column((array) $controllerConfig['pages'], 'url')[$key];
                     }
                 }
@@ -113,20 +114,23 @@ class GeneratorController extends Controller
             $generator->render()->generate();
         }
 
+        shell_exec('php '.base_path('vendor/bin/php-cs-fixer').' fix ./');
+
         Artisan::call('config:clear');
 
         return 'success';
     }
 
-    private function setUrl() {
+    private function setUrl()
+    {
         Artisan::call('config:clear');
 
         $envPath = base_path('.env');
 
-        if(File::exists($envPath)) {
+        if (File::exists($envPath)) {
             $envFile = File::get($envPath);
             $urlConfig = 'APP_URL=\''.config('app.url').'\'';
-            if(strpos($envFile, $urlConfig) === false) {
+            if (strpos($envFile, $urlConfig) === false) {
                 $urlConfig = 'APP_URL='.config('app.url');
             }
 
@@ -143,7 +147,8 @@ class GeneratorController extends Controller
         Artisan::call('config:cache');
     }
 
-    private function queueConfig($type, $config) {
+    private function queueConfig($type, $config)
+    {
         array_push($this->generateQueue, [
             'type' => $type,
             'config' => $config

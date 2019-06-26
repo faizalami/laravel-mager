@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class ViewGenerator implements GeneratorInterface
 {
     use GeneratorTrait;
@@ -38,7 +37,7 @@ class ViewGenerator implements GeneratorInterface
         $template = 'mager::template.view.'.$this->config['view']['type'];
 
         $this->config['view']['links'] = $this->config['links'];
-        if(count($this->renderQueue) > 0) {
+        if (count($this->renderQueue) > 0) {
             $pageIndex = count($this->renderQueue) - 1;
             $this->config['view']['content'] = $this->renderQueue[$pageIndex]['page'];
         } else {
@@ -50,23 +49,24 @@ class ViewGenerator implements GeneratorInterface
         return $this;
     }
 
-    private function queueComponent() {
+    private function queueComponent()
+    {
         $maxLevel = 0;
         foreach ($this->config['view']['components'] as $id => $component) {
             $component = (array) $component;
-            if($component['level'] > $maxLevel) {
+            if ($component['level'] > $maxLevel) {
                 $maxLevel = $component['level'];
             }
         }
 
         $index = 0;
-        for($i = $maxLevel; $i > 0; $i--) {
+        for ($i = $maxLevel; $i > 0; $i--) {
             foreach ($this->config['view']['components'] as $id => $component) {
                 $component = (array) $component;
                 $component['id_component'] = $id;
-                if($component['level'] == $i) {
-                    if(isset($this->renderQueue[$index])) {
-                        if(isset($this->renderQueue[$index][$component['parent']])) {
+                if ($component['level'] == $i) {
+                    if (isset($this->renderQueue[$index])) {
+                        if (isset($this->renderQueue[$index][$component['parent']])) {
                             $this->renderQueue[$index][$component['parent']][$component['index']] = $component;
                         } else {
                             $this->renderQueue[$index][$component['parent']] = [
@@ -86,20 +86,21 @@ class ViewGenerator implements GeneratorInterface
         }
     }
 
-    private function generateComponent() {
+    private function generateComponent()
+    {
         ksort($this->renderQueue);
         foreach ($this->renderQueue as $index => $groups) {
             foreach ($groups as $group => $components) {
                 ksort($components);
                 $groupContent = '';
                 foreach ($components as $component) {
-                    if($index > 0 && in_array($component['type'], ['page', 'row', 'col'])) {
+                    if ($index > 0 && in_array($component['type'], ['page', 'row', 'col'])) {
                         $component['content'] = $this->renderQueue[$index-1][$component['id_component']];
                     }
                     $component['model'] = lcfirst($this->config['view']['model']);
                     $template = 'mager::template.view.' . $component['type'];
 
-                    if(in_array($component['type'], ['table', 'table-detail', 'thumbnail'])) {
+                    if (in_array($component['type'], ['table', 'table-detail', 'thumbnail'])) {
                         $component['modelColumns'] = $this->config['model'];
                         $component['controller'] = $this->config['view']['controller'];
                         $component['links'] = $this->config['links'];

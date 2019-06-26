@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 class CollectionGenerator implements GeneratorInterface
 {
     use GeneratorTrait;

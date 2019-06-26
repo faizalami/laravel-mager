@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components;
 
-
 use Illuminate\Support\Facades\File;
 
 /**
@@ -30,7 +29,8 @@ class JsonIO
      * @param $path
      * @return $this
      */
-    public function loadJsonFile($path) {
+    public function loadJsonFile($path)
+    {
         try {
             $this->jsonString = File::get(base_path(config('mager.data').$path));
         } catch (\Exception $e) {
@@ -46,7 +46,8 @@ class JsonIO
      * @param bool $prettify
      * @return $this
      */
-    public function setJsonFromString($jsonString, $prettify = false) {
+    public function setJsonFromString($jsonString, $prettify = false)
+    {
         $this->jsonObject =  json_decode($jsonString);
         $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
 
@@ -58,7 +59,8 @@ class JsonIO
      * @param bool $prettify
      * @return $this
      */
-    public function setJsonFromObject($jsonObject, $prettify = false) {
+    public function setJsonFromObject($jsonObject, $prettify = false)
+    {
         $this->jsonObject = $jsonObject;
         $this->jsonString = $prettify ? json_encode($this->jsonObject, JSON_PRETTY_PRINT) : json_encode($this->jsonObject);
 
@@ -69,18 +71,19 @@ class JsonIO
      * @param $path
      * @return bool
      */
-    public function saveJsonFile($path) {
+    public function saveJsonFile($path)
+    {
         $path = base_path(config('mager.data').$path);
 
         $explodedPath = explode('/', $path);
         $pathString = '/';
 
-        if(strpos(strtolower(PHP_OS), 'win') !== false) {
+        if (strpos(strtolower(PHP_OS), 'win') !== false) {
             $pathString = '';
         }
 
-        foreach($explodedPath as $key => $directory) {
-            if($key != count($explodedPath) - 1) {
+        foreach ($explodedPath as $key => $directory) {
+            if ($key != count($explodedPath) - 1) {
                 $pathString .= $directory . '/';
 
                 if (!is_dir($pathString)) {
@@ -95,7 +98,8 @@ class JsonIO
     /**
      * @return mixed
      */
-    public function toObject() {
+    public function toObject()
+    {
         return $this->jsonObject;
     }
 
@@ -103,8 +107,9 @@ class JsonIO
      * @param bool $recursive
      * @return array|mixed
      */
-    public function toArray($recursive = false) {
-        if($recursive) {
+    public function toArray($recursive = false)
+    {
+        if ($recursive) {
             return json_decode($this->jsonString, true);
         } else {
             return (array) $this->jsonObject;
@@ -114,16 +119,16 @@ class JsonIO
     /**
      * @return mixed
      */
-    public function toString() {
+    public function toString()
+    {
         return $this->jsonString;
     }
 
     /**
      * @return mixed
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->jsonString;
     }
-
-
 }

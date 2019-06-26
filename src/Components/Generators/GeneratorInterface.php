@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components\Generators;
 
-
 /**
  * Interface GeneratorInterface
  * @package Faizalami\LaravelMager\Components\Generators

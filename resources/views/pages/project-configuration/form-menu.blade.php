@@ -25,8 +25,8 @@ $commonIcons = [
 
 $updateIcon = '';
 
-if(isset($configMenu->icon)) {
-    if(in_array($configMenu->icon, $commonIcons)) {
+if (isset($configMenu->icon)) {
+    if (in_array($configMenu->icon, $commonIcons)) {
         $updateIcon = 'common';
     } else {
         $updateIcon = 'custom';

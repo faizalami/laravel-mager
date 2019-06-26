@@ -7,6 +7,7 @@
  */
 
 namespace Faizalami\LaravelMager\Components\Generators;
+
 use Faizalami\LaravelMager\Components\JsonIO;
 
 class RouteGenerator implements GeneratorInterface
@@ -37,7 +38,7 @@ class RouteGenerator implements GeneratorInterface
         $jsonIO = new JsonIO();
 
         $routeList = $jsonIO->loadJsonFile('configs/routes.json')->toObject();
-        if(!in_array($this->config['url'], $routeList)) {
+        if (!in_array($this->config['url'], $routeList)) {
             array_push($routeList, $this->config['url']);
         }
         $jsonIO->setJsonFromObject($routeList, true)->saveJsonFile('configs/routes.json');

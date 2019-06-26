@@ -7,7 +7,7 @@
  */
 
 $title = 'Create Controller';
-if(Request::route()->getName() == 'mager.pages.edit.controller') {
+if (Request::route()->getName() == 'mager.pages.edit.controller') {
     $title = 'Edit Controller';
 }
 

@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Base;
 
-
 /**
  * Class BaseController
  * @package App\Http\Controllers\Base

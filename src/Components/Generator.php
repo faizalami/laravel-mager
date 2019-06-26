@@ -8,7 +8,6 @@
 
 namespace Faizalami\LaravelMager\Components;
 
-
 use Faizalami\LaravelMager\Components\Generators\CollectionGenerator;
 use Faizalami\LaravelMager\Components\Generators\ControllerGenerator;
 use Faizalami\LaravelMager\Components\Generators\MigrationGenerator;
@@ -33,7 +32,8 @@ class Generator
      * @param $config
      * @return CollectionGenerator|ControllerGenerator|MigrationGenerator|ModelGenerator|NavbarMenuGenerator|ResourceGenerator|RestConfigGenerator|RouteGenerator|SidebarMenuGenerator|SwaggerJsonGenerator|ThemeGenerator|ViewGenerator
      */
-    public static function init($type, $config) {
+    public static function init($type, $config)
+    {
         switch ($type) {
             case 'migration':
                 return new MigrationGenerator($config);

@@ -8,10 +8,8 @@
 
 namespace Faizalami\LaravelMager\Components;
 
-
 trait JsonIOControllerTrait
 {
-
     public $jsonIO = null;
 
     public function __construct()
@@ -19,11 +17,13 @@ trait JsonIOControllerTrait
         $this->jsonIO = new JsonIO();
     }
 
-    private function loadJson($path) {
+    private function loadJson($path)
+    {
         return $this->jsonIO->loadJsonFile($path)->toObject();
     }
 
-    private function saveJson($data, $path) {
+    private function saveJson($data, $path)
+    {
         $this->jsonIO
             ->setJsonFromObject($data, true)
             ->saveJsonFile($path);
