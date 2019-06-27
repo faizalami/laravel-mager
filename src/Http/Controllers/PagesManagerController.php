@@ -259,7 +259,7 @@ class PagesManagerController extends Controller
 
         $this->saveJson(array_values($configPages), 'configs/pages.json');
 
-        if($removeDir) {
+        if ($removeDir) {
             $removeConfig = base_path(config('mager.data').'pages/' . $controller);
             $this->rrmdir($removeConfig);
         }
@@ -281,23 +281,24 @@ class PagesManagerController extends Controller
         return response()->redirectToRoute('mager.pages.index');
     }
 
-    private function rrmdir($path) {
-        if(is_dir($path)) {
+    private function rrmdir($path)
+    {
+        if (is_dir($path)) {
             $dir = opendir($path);
-            while(false !== ( $file = readdir($dir)) ) {
-                if (( $file != '.' ) && ( $file != '..' )) {
+            while (false !== ($file = readdir($dir))) {
+                if (($file != '.') && ($file != '..')) {
                     $fullPath = $path . '/' . $file;
-                    if ( is_dir($fullPath) ) {
+                    if (is_dir($fullPath)) {
                         $this->rrmdir($fullPath);
-                    }
-                    else {
+                    } else {
                         unlink($fullPath);
                     }
                 }
             }
             closedir($dir);
             return rmdir($path);
+        } else {
+            return false;
         }
-        else return false;
     }
 }
