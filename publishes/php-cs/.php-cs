@@ -1,8 +1,9 @@
 <?php
 
 $rules = [
-    '@Symfony' => true,
+    '@PhpCsFixer' => true,
     'array_syntax' => ['syntax' => 'short'],
+    'array_indentation' => true,
     'no_multiline_whitespace_before_semicolons' => true,
     'no_short_echo_tag' => true,
     'no_unused_imports' => true,
