@@ -218,7 +218,7 @@ class PagesManagerController extends Controller
         if ($request->isMethod('get')) {
             return view('mager::pages.pages-manager.form-controller', compact('configController'));
         } elseif ($request->isMethod('post')) {
-            $this->deleteController($controller);
+            $this->deleteController($controller, false);
             return $this->createController($request, $configController);
         } else {
             throw new NotFoundHttpException();
@@ -250,13 +250,18 @@ class PagesManagerController extends Controller
      * @param $controller
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteController($controller)
+    public function deleteController($controller, $removeDir = true)
     {
         $configPages = $this->loadJson('configs/pages.json');
 
         unset($configPages[array_search($controller, $configPages)]);
 
         $this->saveJson(array_values($configPages), 'configs/pages.json');
+
+        if($removeDir) {
+            $removeConfig = base_path(config('mager.data').'pages/' . $controller);
+            $this->rrmdir($removeConfig);
+        }
 
         return response()->redirectToRoute('mager.pages.index');
     }
@@ -273,5 +278,25 @@ class PagesManagerController extends Controller
         $this->saveJson($configController, 'pages/' . $controller . '/controller/' . $controller . '.json');
 
         return response()->redirectToRoute('mager.pages.index');
+    }
+
+    private function rrmdir($path) {
+        if(is_dir($path)) {
+            $dir = opendir($path);
+            while(false !== ( $file = readdir($dir)) ) {
+                if (( $file != '.' ) && ( $file != '..' )) {
+                    $fullPath = $path . '/' . $file;
+                    if ( is_dir($fullPath) ) {
+                        $this->rrmdir($fullPath);
+                    }
+                    else {
+                        unlink($fullPath);
+                    }
+                }
+            }
+            closedir($dir);
+            return rmdir($path);
+        }
+        else return false;
     }
 }

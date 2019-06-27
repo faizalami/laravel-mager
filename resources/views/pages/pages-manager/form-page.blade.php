@@ -104,7 +104,7 @@ if (Request::route()->getName() == 'mager.pages.edit.page') {
                                     </div>
                                     <p class="help-block">Redirect URL after create or edit.</p>
                                 </div>
-                                <div class="form-group" id="view">
+                                <div class="form-group" id="view-name">
                                     <label>View File Name</label>
                                     <input type="text" class="form-control" name="view" @isset($configControllerPage->view) value="{{ $configControllerPage->view }}" @endisset placeholder="Enter View File Name">
                                     <p class="help-block">Use existing view file name if needed.</p>
