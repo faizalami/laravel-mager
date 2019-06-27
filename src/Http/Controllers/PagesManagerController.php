@@ -167,14 +167,15 @@ class PagesManagerController extends Controller
             $configView->name = $configControllerPage->view;
             $configView->title = $configControllerPage->title;
 
-            array_push($configPage->viewConfig, ['config' => $configControllerPage->view]);
 
+
+            if ($configControllerPage->view != null) {
+                array_push($configPage->viewConfig, ['config' => $configControllerPage->view]);
+                $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
+            }
             $this->saveJson($configController, 'pages/' . $configController->url . '/controller/' . $configController->url . '.json');
             $this->saveJson($configPage, 'pages/' . $configController->url . '/' . $configController->url . '.json');
 
-            if ($configControllerPage->view != null) {
-                $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
-            }
 
             return response()->redirectToRoute('mager.pages.index');
         } else {
