@@ -5,7 +5,8 @@ var loadFiles = [
     'assets/js/components/gui-builder-dragable-config',
     'assets/js/components/gui-builder-sortable-config',
     'assets/js/components/property-sidebar',
-    'jqueryui'
+    'jqueryui',
+    'waitme'
 ];
 
 define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, ComponentSortableConfig, ComponentPropertySidebar) {
@@ -271,6 +272,8 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                     ComponentSortableConfig(savedConfig).sortStopConfig(ui);
                 }
             });
+
+            $('.drawing-area').waitMe('hide');
         },
         // todo: jadikan 1 komponen
         getComponent: function (type, id) {

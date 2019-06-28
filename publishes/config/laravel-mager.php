@@ -16,6 +16,7 @@ return [
         'adminlte' => 'plugins/adminLTE-2.4.5/css/AdminLTE.min.css',
         'adminlte-skin' => 'plugins/adminLTE-2.4.5/css/skins/_all-skins.min.css',
         'fontawesome' => 'plugins/fontawesome-free-5.3.1-web/css/all.css',
+        'waitme' => 'plugins/waitMe/waitMe.min.css',
         'laravel-mager' => 'assets/css/laravel-mager.css',
     ],
     'js_assets' => [

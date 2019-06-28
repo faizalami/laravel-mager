@@ -281,7 +281,15 @@
     require(['main'], function () {
         localStorage.setItem('baseUrl', '{{ url(config('mager.base_url')) }}/');
 
-        require(['adminlte', 'laravelmager', 'assets/js/pages/gui-builder']);
+        require(['jquery', 'waitme'], function ($) {
+            $('.drawing-area').waitMe({
+                effect: 'roundBounce',
+                text: 'Components Loading...',
+                bg: 'rgba(255,255,255,0.90)',
+                color: '#555'
+            });
+            require(['adminlte', 'laravelmager', 'assets/js/pages/gui-builder']);
+        });
     });
 </script>
 

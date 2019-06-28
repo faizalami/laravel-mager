@@ -49,12 +49,21 @@ requirejs.config({
     }
 });
 
-requirejs(['jquery', 'axios', 'sweetalert'], function ($, axios, swal) {
+requirejs(['jquery', 'axios', 'sweetalert', 'waitme'], function ($, axios, swal) {
     $(document).ready(function () {
         $('#generate-button').click(function () {
+            $('body').waitMe({
+                effect: 'roundBounce',
+                text: 'Loading...',
+                bg: 'rgba(255,255,255,0.90)',
+                color: '#555'
+            });
+
             axios.get('/laravel-mager/generate').then(function () {
+                $('body').waitMe('hide');
                 swal('SUCCESS', 'Files Generated Successfully', 'success');
             }).catch(function () {
+                $('body').waitMe('hide');
                 swal('ERROR', 'Generate Failed', 'error');
             })
         });
