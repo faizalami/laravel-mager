@@ -22,7 +22,7 @@ interface BaseController
      * @param $model
      * @param $pageName
      */
-    public function __construct($model);
+    public function __construct($model, $pageName);
 
     /**
      * Display a listing of the resource.

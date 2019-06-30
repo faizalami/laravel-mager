@@ -28,17 +28,22 @@ class RestController implements BaseController
      * @var string
      */
     private $collection;
+    /**
+     * @var
+     */
+    private $pageName;
 
     /**
      * BaseControllerInterface constructor.
      * @param $model
      * @param $pageName
      */
-    public function __construct($model)
+    public function __construct($model, $pageName)
     {
         $this->model = '\\App\\Models\\' . $model;
         $this->resource = '\\App\\Http\\Resources\\' . $model . 'Resource';
         $this->collection = '\\App\\Http\\Resources\\' . $model . 'Collection';
+        $this->pageName = $pageName;
     }
 
     /**

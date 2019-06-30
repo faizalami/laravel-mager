@@ -26,7 +26,7 @@ class WebController implements BaseController
      * @param $model
      * @param $pageName
      */
-    public function __construct($model)
+    public function __construct($model, $pageName)
     {
         $this->model = '\\App\\Models\\' . $model;
     }
