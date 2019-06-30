@@ -256,10 +256,10 @@ class PagesManagerController extends Controller
         $configSidebar = $this->loadJson('configs/sidebar.json');
 
         unset($configPages[array_search($controller, $configPages)]);
-        unset($configSidebar[$controller]);
+        unset($configSidebar->{$controller});
 
         $this->saveJson(array_values($configPages), 'configs/pages.json');
-        $this->saveJson(array_values($configSidebar), 'configs/sidebar.json');
+        $this->saveJson(array_values((array)$configSidebar), 'configs/sidebar.json');
 
         if ($removeDir) {
             $removeConfig = base_path(config('mager.data').'pages/' . $controller);
