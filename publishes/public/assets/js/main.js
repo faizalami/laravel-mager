@@ -59,9 +59,13 @@ requirejs(['jquery', 'axios', 'sweetalert', 'waitme'], function ($, axios, swal)
                 color: '#555'
             });
 
-            axios.get('/laravel-mager/generate').then(function () {
+            axios.get('/laravel-mager/generate').then(function (response) {
                 $('body').waitMe('hide');
-                swal('SUCCESS', 'Files Generated Successfully', 'success');
+                if(response.data === 'success') {
+                    swal('SUCCESS', 'Files Generated Successfully', 'success');
+                } else {
+                    swal('ERROR', 'Generate Failed', 'error');
+                }
             }).catch(function () {
                 $('body').waitMe('hide');
                 swal('ERROR', 'Generate Failed', 'error');
