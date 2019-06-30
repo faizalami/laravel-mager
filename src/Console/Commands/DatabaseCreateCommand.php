@@ -9,7 +9,8 @@
 namespace Faizalami\LaravelMager\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use PDO;
 use PDOException;
 
@@ -43,6 +44,7 @@ class DatabaseCreateCommand extends Command
      */
     public function handle()
     {
+        $print = new ConsoleOutput();
         $driver = config('database.default');
         $databaseConfig = config('database.connections');
         $database = $databaseConfig[$driver]['database'];
@@ -53,8 +55,12 @@ class DatabaseCreateCommand extends Command
         $charset = $databaseConfig[$driver]['charset'];
         $collation = $databaseConfig[$driver]['collation'];
 
+        $print->writeln('Executing database : ' . $database);
+        Log::debug('Executing database : ' . $database);
+
         if (! $database) {
-            $this->info('Skipping creation of database as env(DB_DATABASE) is empty');
+            $print->writeln('Skipping creation of database as env(DB_DATABASE) is empty');
+            Log::debug('Skipping creation of database as env(DB_DATABASE) is empty');
             return;
         }
 
@@ -68,9 +74,11 @@ class DatabaseCreateCommand extends Command
                 $collation
             ));
 
-            $this->info(sprintf('Successfully created %s database', $database));
+            $print->writeln(sprintf('Successfully created %s database', $database));
+            Log::debug(sprintf('Successfully created %s database', $database));
         } catch (PDOException $exception) {
-            $this->error(sprintf('Failed to create %s database, %s', $database, $exception->getMessage()));
+            $print->writeln(sprintf('Failed to create %s database, %s', $database, $exception->getMessage()));
+            Log::debug(sprintf('Failed to create %s database, %s', $database, $exception->getMessage()));
         }
     }
 

@@ -24,7 +24,7 @@ class GeneratorController extends Controller
 
         $pages = $jsonIO->loadJsonFile('configs/pages.json')->toArray();
 
-        Artisan::call('config:clear');
+        Artisan::call('optimize:clear');
         Artisan::call('db:create');
 
         $this->setUrl();
@@ -116,14 +116,14 @@ class GeneratorController extends Controller
 
         shell_exec("php '".base_path('vendor/bin/php-cs-fixer')."' fix '".base_path('/')."'");
 
-        Artisan::call('config:clear');
+        Artisan::call('optimize:clear');
 
         return 'success';
     }
 
     private function setUrl()
     {
-        Artisan::call('config:clear');
+        Artisan::call('optimize:clear');
 
         $envPath = base_path('.env');
 

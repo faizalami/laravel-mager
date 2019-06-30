@@ -167,12 +167,11 @@ class PagesManagerController extends Controller
             $configView->name = $configControllerPage->view;
             $configView->title = $configControllerPage->title;
 
-
-
             if ($configControllerPage->view != null) {
                 array_push($configPage->viewConfig, ['config' => $configControllerPage->view]);
                 $this->saveJson($configView, 'pages/' . $configController->url . '/view/' . $configControllerPage->view . '.json');
             }
+
             $this->saveJson($configController, 'pages/' . $configController->url . '/controller/' . $configController->url . '.json');
             $this->saveJson($configPage, 'pages/' . $configController->url . '/' . $configController->url . '.json');
 
@@ -254,10 +253,13 @@ class PagesManagerController extends Controller
     public function deleteController($controller, $removeDir = true)
     {
         $configPages = $this->loadJson('configs/pages.json');
+        $configSidebar = $this->loadJson('configs/sidebar.json');
 
         unset($configPages[array_search($controller, $configPages)]);
+        unset($configSidebar[$controller]);
 
         $this->saveJson(array_values($configPages), 'configs/pages.json');
+        $this->saveJson(array_values($configSidebar), 'configs/sidebar.json');
 
         if ($removeDir) {
             $removeConfig = base_path(config('mager.data').'pages/' . $controller);
