@@ -177,7 +177,7 @@
                     $('#'+$(this).data('skin')).attr('checked', true);
                 });
 
-                Dropzone.options.logo= {
+                new Dropzone('#logo', {
                     dictDefaultMessage: 'Click here or drop image here to upload.',
                     url: uploadRoute,
                     autoProcessQueue: true,
@@ -210,7 +210,7 @@
                     success: function( file, response ){
                         $('#logo-input').val(response.name);
                     }
-                }
+                });
             });
         });
     </script>
