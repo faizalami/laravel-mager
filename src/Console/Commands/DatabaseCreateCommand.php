@@ -72,7 +72,7 @@ class DatabaseCreateCommand extends Command
                 $database,
                 $charset,
                 $collation
-            )) or dd(json_encode($pdo->errorInfo()));
+            )) or $print->writeln(json_encode($pdo->errorInfo()));
 
             $print->writeln(sprintf('Successfully created %s database', $database));
             Log::debug(sprintf('Successfully created %s database', $database));

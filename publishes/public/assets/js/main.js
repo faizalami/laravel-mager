@@ -64,6 +64,7 @@ requirejs(['jquery', 'axios', 'sweetalert', 'waitme'], function ($, axios, swal)
                 if(response.data === 'success') {
                     swal('SUCCESS', 'Files Generated Successfully', 'success');
                 } else {
+                    console.log(response.data);
                     swal('ERROR', 'Generate Failed', 'error');
                 }
             }).catch(function () {
