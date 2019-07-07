@@ -13,6 +13,10 @@ body {
     font-weight: 900;
     content: "\f0c9";
 }
+
+.fixed .wrapper {
+    overflow: auto !important;
+}
 /* END Global*/
 
 /* Dashboard and Coming Soon */
