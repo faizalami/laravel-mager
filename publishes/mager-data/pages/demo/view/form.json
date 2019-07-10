@@ -89,7 +89,8 @@
             "type": "button",
             "parent": "col1",
             "index": 5,
-            "level": 3
+            "level": 3,
+            "buttontype": "submit"
         }
     }
 }

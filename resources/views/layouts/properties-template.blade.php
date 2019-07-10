@@ -49,6 +49,13 @@ for ($i = 1; $i <= 12; $i++) {
     </select>
 </template>
 
+<template id="template-property-button-type">
+    <select class="form-control">
+        <option value="submit">Submit</option>
+        <option value="reset">Reset</option>
+    </select>
+</template>
+
 <template id="template-property-choose-column">
     <input type="hidden" class="form-control choose-column-input">
     <button class="btn btn-primary btn-block button-choose-column">Choose</button>

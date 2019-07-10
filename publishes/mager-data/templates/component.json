@@ -323,6 +323,11 @@
                 "label":"Text",
                 "type":"textbox",
                 "value":"Button"
+            },
+            "buttontype": {
+                "label":"Type",
+                "type":"button-type",
+                "value":"submit"
             }
         }
     },
