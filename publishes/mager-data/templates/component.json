@@ -468,5 +468,35 @@
                 "value":3
             }
         }
+    },
+    "select":{
+        "property": {
+            "data-id":{
+                "label":"ID",
+                "type":"textbox"
+            },
+            "label":{
+                "label":"Label",
+                "type":"textbox",
+                "value":"Select Label"
+            },
+            "placeholder":{
+                "label":"Placeholder",
+                "type":"textbox",
+                "value":"Select"
+            },
+            "name":{
+                "label":"Name",
+                "type":"textbox"
+            },
+            "option":{
+                "label":"Option",
+                "type":"option"
+            }
+        },
+        "db": {
+            "type": "string",
+            "length": 255
+        }
     }
 }

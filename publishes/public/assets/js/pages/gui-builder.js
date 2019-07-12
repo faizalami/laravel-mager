@@ -48,6 +48,12 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                 propertySidebar.drawModelColumns();
             });
 
+            $('#table-options').on('click', '.button-delete-option', function () {
+                propertySidebar.deleteOption($(this).data('index'));
+                guiBuildePage.hideTooltip();
+                propertySidebar.drawOptionColumns();
+            });
+
             $('.modal-model').on('click', '.button-edit', function () {
                 $('.modal-model tr').removeClass('active');
                 $(this).parents('tr').addClass('active');
@@ -79,6 +85,18 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                     $modalChooseColumn.modal('hide');
                 });
             }
+
+            $('.new-option').click(function () {
+                propertySidebar.addOption();
+                propertySidebar.drawOptionColumns();
+            });
+
+            $('#properties-form').on('click', '.button-choose-option', function (event) {
+                event.preventDefault();
+                $('#table-options').data('id', $(this).data('id'));
+                propertySidebar.drawOptionColumns();
+                $('#modal-option').modal();
+            });
         },
         initDrawingArea: function () {
             $drawingArea.on('click', '.button-remove', guiBuildePage.removeComponent);
@@ -150,6 +168,22 @@ define(loadFiles, function ($, _, ServiceViewConfig, ComponentDragableConfig, Co
                         _.forEach(config, function (value, key) {
                             if(key !== 'label') {
                                 attr[key] = value;
+                            }
+                        });
+
+                        $input.attr(attr);
+                        break;
+                    case 'select':
+                        $component.find('.component-label')
+                            .html(config.label);
+                        var $input = $component.find('.component-input');
+
+                        var attr = {};
+                        _.forEach(config, function (value, key) {
+                            if(key !== 'label' && key !== 'placeholder' && key !== 'option') {
+                                attr[key] = value;
+                            } else if(key === 'placeholder') {
+                                $component.find('.option-placeholder').html(value);
                             }
                         });
 

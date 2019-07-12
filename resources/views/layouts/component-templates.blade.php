@@ -213,3 +213,12 @@
 <template id="template-email">
     <a class="component-email" href="mailto:someone@mail.com">someone@mail.com</a>
 </template>
+
+<template id="template-select">
+    <div class="form-group">
+        <label class="component-label">Select Label</label>
+        <select class="form-control component-input">
+            <option class="option-placeholder" disabled selected>Select Placeholder</option>
+        </select>
+    </div>
+</template>

@@ -190,6 +190,36 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
                         watch: ids.join(', ')
                     };
                     break;
+                case 'select':
+                    binding['#' + current.id] = {
+                        bind: function (data, value, $control) {
+                            setProperties(data);
+
+                            $control.find('.component-label')
+                                .html(data.label);
+                            var $input = $control.find('.component-input');
+
+                            if(modelConfig.columns[$input.attr('name')]) {
+                                delete modelConfig.columns[$input.attr('name')];
+                            }
+
+                            var attr = {};
+                            _.forEach(data, function (value, key) {
+                                if(key !== 'label' && key !== 'placeholder' && key !== 'option') {
+                                    attr[key] = value;
+                                } else if(key === 'placeholder') {
+                                    $control.find('.option-placeholder').html(value);
+                                }
+                            });
+
+                            $input.attr(attr);
+
+                            data.input = current.type;
+                            setColumnModel(data);
+                        },
+                        watch: ids.join(', ')
+                    };
+                    break;
                 case 'heading':
                 case 'heading-data':
                     binding['#' + current.id] = {
@@ -396,6 +426,19 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             delete modelConfig.columns[name];
         };
 
+        const deleteOption = function (index) {
+            var existingOption = [];
+            if($propertiesForm.find('#option').val() !== '') {
+                existingOption = JSON.parse($propertiesForm.find('#option').val());
+            }
+
+            _.remove(existingOption, function (o, i) {
+                return i === index;
+            });
+
+            $propertiesForm.find('#option').val(JSON.stringify(existingOption));
+        };
+
         const addColumnModel = function ($table, edit = false) {
             var name = $table.find('.new-name').val();
             var label = $table.find('.new-label').val();
@@ -410,6 +453,27 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             modelConfig.columns[name] = componentTemplate[input].db;
             modelConfig.columns[name].label = label;
             modelConfig.columns[name].input = input;
+        };
+
+        const addOption = function () {
+            var $table = $('#table-options');
+            var display = $table.find('.new-option-display').val();
+            var value = $table.find('.new-option-value').val();
+
+            var existingOption = [];
+            if($propertiesForm.find('#option').val() !== '') {
+                existingOption = JSON.parse($propertiesForm.find('#option').val());
+            }
+
+            existingOption.push({
+                value: value,
+                display: display
+            });
+
+            $propertiesForm.find('#option').val(JSON.stringify(existingOption)).trigger('input');
+
+            $table.find('.new-option-display').val('');
+            $table.find('.new-option-value').val('');
         };
 
         const editColumnModel = function ($table, edit) {
@@ -572,6 +636,33 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             }
         };
 
+        const drawOptionColumns = function () {
+            var existingOption = [];
+            if($propertiesForm.find('#option').val() !== '') {
+                existingOption = JSON.parse($propertiesForm.find('#option').val());
+            }
+
+            var rows = '';
+
+            _.forEach(existingOption, function (item, index) {
+                rows += '<tr>' +
+                    '   <td>' +
+                    '       <span>' + item.display + '</span>' +
+                    '       <input type="text" class="form-control edit-column edit-option-value" value="' + item.display + '" placeholder="Option Value">' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <span>' + item.value + '</span>' +
+                    '       <input type="text" class="form-control edit-column edit-option-display" value="' + item.value + '" placeholder="Option Display">' +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <a class="btn btn-xs btn-danger button-delete-option" data-index="' + index + '" data-toggle="tooltip" title="Delete Item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>' +
+                    '   </td>' +
+                    '</tr>'
+            });
+
+            $('#table-options tbody').html(rows);
+        };
+
         const saveChoosenColumns = function (id) {
             var $choosenColumns = $('.input-choose-columns:checked').map(function(){
                 return $(this).val();
@@ -588,6 +679,9 @@ define(loadFiles, function ($, _, swal, moment, ServiceComponentTemplate, Servic
             saveChoosenColumns: saveChoosenColumns,
             deleteColumnModel: deleteColumnModel,
             addColumnModel: addColumnModel,
+            addOption: addOption,
+            deleteOption: deleteOption,
+            drawOptionColumns: drawOptionColumns,
             editColumnModel: editColumnModel,
             model: modelConfig
         };
