@@ -142,7 +142,7 @@ class GeneratorController extends Controller
                 $envFile
             ));
         }
-        putenv('APP_NAME='.$newUrl);
+        putenv('APP_URL='.$newUrl);
 
         Artisan::call('config:cache');
     }

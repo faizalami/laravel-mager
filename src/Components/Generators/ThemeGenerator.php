@@ -40,6 +40,7 @@ class ThemeGenerator implements GeneratorInterface
 
         $envPath = base_path('.env');
 
+        Artisan::call('optimize:clear');
         if (File::exists($envPath)) {
             $envFile = File::get($envPath);
             $appNameConfig = 'APP_NAME=\''.config('app.name').'\'';
