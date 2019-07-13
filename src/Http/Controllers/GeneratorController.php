@@ -41,11 +41,6 @@ class GeneratorController extends Controller
             $controllerConfig = $jsonIO->loadJsonFile('pages/'.$page.'/controller/'.$pageConfig['controllerConfig'].'.json')->toArray();
             $modelConfig = $jsonIO->loadJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json')->toArray();
 
-            $swaggerConfig['pages'][] = [
-                'controller' => $controllerConfig,
-                'model' => $modelConfig['columns'],
-            ];
-
             $this->queueConfig('controller', $controllerConfig);
             $this->queueConfig('route', $controllerConfig);
             $this->queueConfig('migration', $modelConfig);
@@ -64,6 +59,11 @@ class GeneratorController extends Controller
             $modelConfig['generatedAt'] = date('Y_m_d_His');
             $jsonIO->setJsonFromObject($modelConfig, true)
                 ->saveJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json');
+
+            $swaggerConfig['pages'][] = [
+                'controller' => $controllerConfig,
+                'model' => $modelConfig['columns'],
+            ];
 
             foreach ($pageConfig['viewConfig'] as $view) {
                 $links = [
