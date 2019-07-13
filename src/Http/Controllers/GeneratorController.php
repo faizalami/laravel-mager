@@ -41,22 +41,9 @@ class GeneratorController extends Controller
             $controllerConfig = $jsonIO->loadJsonFile('pages/'.$page.'/controller/'.$pageConfig['controllerConfig'].'.json')->toArray();
             $modelConfig = $jsonIO->loadJsonFile('pages/'.$page.'/model/'.$pageConfig['modelConfig'].'.json')->toArray();
 
-            $generatedModel = [];
-            if ($modelConfig['generatedAt'] != null) {
-                $generatedAt = \DateTime::createFromFormat('Y_m_d_His', $modelConfig['generatedAt']);
-                foreach (array_reverse($modelConfig['history']) as $history) {
-                    $modelTime = \DateTime::createFromFormat('Y_m_d_His', $history->time);
-
-                    if ($generatedAt >= $modelTime) {
-                        $generatedModel = $history->table;
-                        break;
-                    }
-                }
-            }
-
             $swaggerConfig['pages'][] = [
                 'controller' => $controllerConfig,
-                'model' => $generatedModel,
+                'model' => $modelConfig['columns'],
             ];
 
             $this->queueConfig('controller', $controllerConfig);

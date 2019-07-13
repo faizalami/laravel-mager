@@ -14,7 +14,7 @@ class SwaggerJsonGenerator implements GeneratorInterface
 
     public function __construct($config)
     {
-        $this->type = 'model';
+        $this->type = 'swaggerJson';
         $this->config = $config;
         $this->outputPath = public_path('swagger');
         $this->outputFile = 'swagger.json';
