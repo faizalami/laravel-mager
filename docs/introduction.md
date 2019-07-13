@@ -4,7 +4,7 @@
  
  Laravel package for design and generate a ready to use application. **Laravel-Mager** provides some features to generate Laravel framework codes without writing any code. The features are:
  
- [![Laravel-Mager : Laravel Package for design and generate a ready to use application (demonstration)](_images/youtube-cover.png)](https://www.youtube.com/watch?v=https:URUWZ1qPG7U "Laravel-Mager : Laravel Package for design and generate a ready to use application (demonstration)")
+ [![Laravel-Mager : Laravel Package for design and generate a ready to use application (demonstration)](_images/youtube-cover.png)](https://www.youtube.com/watch?v=URUWZ1qPG7U "Laravel-Mager : Laravel Package for design and generate a ready to use application (demonstration)")
  
  ## Pages Manager
  Pages Manager provides drag and drop GUI Builder similar to common IDE like Visual Studio and Netbeans. You don't need to write `blade` view files, just design a layout by drag and drop html component in GUI Builder.
