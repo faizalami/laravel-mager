@@ -8,7 +8,7 @@ Create a new Laravel project application to be built, for example you will creat
 $ laravel new inventory
 ```
 
-or using composer create-project
+or using `composer create-project`
 
 ```bash
 $ composer create-project --prefer-dist laravel/laravel inventory
