@@ -8,6 +8,14 @@ Create a new Laravel project application to be built, for example you will creat
 $ laravel new inventory
 ```
 
+or using composer create-project
+
+```bash
+$ composer create-project --prefer-dist laravel/laravel inventory
+```
+
+
+
 ## Configure .env file
 Adjust the configurations in .env files, the important one is database configurations
 ```env
