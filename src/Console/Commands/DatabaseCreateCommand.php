@@ -55,6 +55,13 @@ class DatabaseCreateCommand extends Command
         $charset = $databaseConfig[$driver]['charset'];
         $collation = $databaseConfig[$driver]['collation'];
 
+        if (!ctype_alnum(str_replace('_', '', $database))) {
+            $print->writeln('error database naming convention, use only letters, numbers, and underscores: ' . $database);
+            Log::debug('error database naming convention, use only letters, numbers, and underscores: ' . $database);
+            die('error database naming convention, use only letters, numbers, and underscores: ' . $database);
+        }
+
+
         $print->writeln('Executing database : ' . $database);
         Log::debug('Executing database : ' . $database);
 

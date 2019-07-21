@@ -18,6 +18,8 @@ $ composer create-project --prefer-dist laravel/laravel inventory
 
 ## Configure .env file
 Adjust the configurations in .env files, the important one is database configurations
+attention: use [SQL naming conventions](https://www.sqlstyle.guide/) for database name to avoid errors while creating the database
+
 ```env
 ...
 DB_CONNECTION=mysql
